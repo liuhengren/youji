@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <ImageButton
+        android:src="@drawable/ic_login_cancel"
+        android:layout_marginTop="31dp"
+        android:layout_marginLeft="28dp"
+        android:background="#00ffffff"
+        android:id="@+id/btn_cancel"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+    <TextView
+        android:id="@+id/tv_contact_author"
+        android:layout_marginTop="31dp"
+        android:layout_marginLeft="286dp"
+        android:text="联系作者"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="93dp"
+        android:text="游迹"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="@string/log_show_tips"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="217dp"
+        android:src="@drawable/ic_login_username_on" />
+
+    <EditText
+        android:id="@+id/et_logup_userPhone"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="217dp"
+        android:hint="请输入手机号"
+        android:textSize="14sp" />
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_logup_code"
+        android:layout_marginLeft="83dp"
+        android:layout_marginTop="259dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp" />
+    <EditText
+        android:id="@+id/et_logup_code"
+        android:inputType="textPassword"
+        android:hint="请输入验证码"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="259dp"
+        android:textSize="14sp"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_get_code"
+        android:background="@drawable/get_code_btn"
+        android:layout_marginLeft="238dp"
+        android:layout_marginTop="269dp"
+        android:text="获取验证码"
+        android:layout_width="65dp"
+        android:layout_height="25dp"
+        android:textSize="10sp"/>
+    <ImageView
+        android:src="@drawable/ic_login_password_on"
+        android:layout_marginTop="299dp"
+        android:layout_marginLeft="83dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp" />
+    <EditText
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="299dp"
+        android:layout_width="186dp"
+        android:layout_height="38dp" />
+    <Button
+        android:id="@+id/btn_logup"
+        android:text="注册"
+        android:background="@drawable/login_btn_ban"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="367dp"
+        android:layout_width="215dp"
+        android:layout_height="38dp" />
+    <TextView
+        android:id="@+id/tv_logup"
+        android:layout_marginLeft="91dp"
+        android:layout_marginTop="429dp"
+        android:text="用户登录"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_find_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="429dp"
+        android:text="找回密码"
+        android:textSize="14sp" />
+    <View
+        android:layout_marginTop="604dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="#000000" />
+
+    <TextView
+        android:textColor="@android:color/white"
+        android:id="@+id/tv_user_agreement"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_marginTop="604dp"
+        android:text="用户协议"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
