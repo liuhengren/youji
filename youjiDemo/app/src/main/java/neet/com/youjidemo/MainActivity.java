@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec2,Food_Fragment.class,null);
 
         //初始化选项卡
-        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tab2")
-                .setIndicator(getTabSpec(R.drawable.anotherhome,"社区","tab2"));
+        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tab3")
+                .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
         //添加选项卡(后来补充)
         fragmentTabHost.addTab(tabSpec3,Food_Fragment.class,null);
 
