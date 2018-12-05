@@ -6,17 +6,17 @@ public class User {
 
     public String getUserphone() {
         return userphone;
-    }
+                }
 
-    public void setUserphone(String userphone) {
+public void setUserphone(String userphone) {
         this.userphone = userphone;
-    }
+        }
 
-    public String getPsssword() {
+public String getPsssword() {
         return psssword;
-    }
+        }
 
-    public void setPsssword(String psssword) {
+public void setPsssword(String psssword) {
         this.psssword = psssword;
-    }
-}
+        }
+        }

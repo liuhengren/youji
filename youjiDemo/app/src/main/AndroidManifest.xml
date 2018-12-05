@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".LogupActivity">
+        <activity android:name=".view.LoginActivity"></activity>
+        <activity android:name=".view.LogupActivity">
         </activity>
         <activity android:name=".PersonalDataEditorActivity"/>
         <activity android:name=".MainActivity">
