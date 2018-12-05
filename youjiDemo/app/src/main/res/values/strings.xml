@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">youjiDemo</string>
+    <string name="log_show_tips">开启你的旅程</string>
 </resources>
