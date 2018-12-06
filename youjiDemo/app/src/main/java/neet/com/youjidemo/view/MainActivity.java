@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         textViewTab5.setTextColor(getResources().getColor(R.color.lightgray));
                     }
                     if (tabId.equals("tab3")){
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(MainActivity.this,ShareActivity.class);
                         startActivity(intent);
                     }
                     if (tabId.equals("tab4")){
