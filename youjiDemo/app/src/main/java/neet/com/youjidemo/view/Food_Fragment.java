@@ -1,4 +1,4 @@
-package neet.com.youjidemo;
+package neet.com.youjidemo.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +12,9 @@ import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import neet.com.youjidemo.adapter.IndexListViewAdapter;
+import neet.com.youjidemo.R;
 
 
 /*
