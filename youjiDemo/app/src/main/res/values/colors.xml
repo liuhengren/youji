@@ -3,13 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="transparent">#00ffffff</color>
-
     <color name="gray">#F5F5F5</color>
     <color name="lightgray">#B1B1B1</color>
     <color name="tabWidgetColor">#e6e6e6</color>
     <color name="view_background">#ffffff</color>
-    
-    <color name="trans">#00000000</color>
 </resources>
