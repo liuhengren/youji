@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.adapter.IndexListViewAdapter;
 import neet.com.youjidemo.R;
 
@@ -75,6 +78,14 @@ public class Food_Fragment extends Fragment {
         list1.add(5);
         IndexListViewAdapter adapter1 = new IndexListViewAdapter(getContext(),list,R.layout.recommend_tabspec_item);
         listView1.setAdapter(adapter1);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }
