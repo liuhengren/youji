@@ -12,16 +12,21 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.LogupActivity" />
         <activity android:name=".PersonalDataEditorActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        
         <activity android:name=".FoodActivity" />
         <activity android:name=".view.ShareActivity" />
         <activity android:name=".view.DetailActivity"></activity>
+
+        <activity android:name=".FoodActivity">
+        </activity>
+        <activity android:name=".OthersActivity">
+
+        </activity>
+        <activity android:name=".MainActivity">
+        
+        </activity>
+
     </application>
 
 </manifest>
