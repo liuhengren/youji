@@ -1,4 +1,5 @@
-package neet.com.youjidemo.bean;
+package neet.com.youjidemo.biz;
+
 
 public interface IUserLog {
     public void login(String userphone,String password);
