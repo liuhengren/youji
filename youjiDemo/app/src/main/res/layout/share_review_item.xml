@@ -67,7 +67,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
             android:layout_toRightOf="@+id/image_review_user_header"
-            android:background="#00000"
+            android:background="@color/trans"
             android:text="回复"
             android:textColor="@color/lightgray" />
 

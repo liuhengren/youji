@@ -20,7 +20,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
-        LinearLayout linearLayout= findViewById(R.id.ll_birthday);
+
 
     }
 }
