@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTabHost.addTab(tabSpec5,Food_Fragment.class,null);
 
 
+        
+
     }
 
     private View getTabSpec(int imageId,String tagName,String tag){
