@@ -1,4 +1,4 @@
-package neet.com.youjidemo;
+package neet.com.youjidemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,18 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class IndexListViewAdapter extends BaseAdapter {
+public class ContentAdapter extends BaseAdapter {
     private Context context;
-    private List<Object> list = new ArrayList<>();
-    private int layout_item_id;
+    private List list;
+    private int itemLayout;
 
-    public IndexListViewAdapter(Context context, List<Object> list, int layout_item_id) {
+    public ContentAdapter(Context context, List list, int itemLayout) {
         this.context = context;
         this.list = list;
-        this.layout_item_id = layout_item_id;
+        this.itemLayout = itemLayout;
     }
 
     @Override
@@ -38,8 +37,8 @@ public class IndexListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
-            convertView = layoutInflater.inflate(layout_item_id, null);
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(itemLayout, null);
         }
         return convertView;
     }

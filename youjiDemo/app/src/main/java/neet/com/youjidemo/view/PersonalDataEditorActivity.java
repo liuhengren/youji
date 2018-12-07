@@ -1,4 +1,4 @@
-package neet.com.youjidemo;
+package neet.com.youjidemo.view;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
+
+import neet.com.youjidemo.R;
 
 public class PersonalDataEditorActivity extends AppCompatActivity {
 
@@ -18,7 +20,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
-
+        LinearLayout linearLayout= findViewById(R.id.ll_birthday);
 
     }
 }

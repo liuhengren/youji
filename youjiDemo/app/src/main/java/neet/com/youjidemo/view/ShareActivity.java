@@ -5,12 +5,11 @@ import android.os.Bundle;
 
 import neet.com.youjidemo.R;
 
-public class LogupActivity extends AppCompatActivity {
+public class ShareActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.logup_activity);
-        //getActionBar().hide();
+        setContentView(R.layout.activity_share2);
     }
 }
