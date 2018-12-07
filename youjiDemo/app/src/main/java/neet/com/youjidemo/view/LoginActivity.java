@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import neet.com.youjidemo.Presenter.UserLoginPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.User;
 
@@ -17,11 +19,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
     private Button mBtnLogin;
     private TextView mTvLogup,mTvFindPassword;
     private ImageButton mIBCancel,mIbLogByqq,mIBLogbyWxChat;
+    private UserLoginPresenter userLoginPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
+        initview();
     }
     private void initview(){
         mEtUserPhone=findViewById(R.id.et_name);
@@ -32,16 +35,17 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         mIBCancel=findViewById(R.id.btn_cancel);
         mIbLogByqq=findViewById(R.id.btn_login_qq);
         mIBLogbyWxChat=findViewById(R.id.btn_login_wechat);
+        userLoginPresenter=new UserLoginPresenter(LoginActivity.this);
     }
 
     @Override
     public String getUserPhone() {
-        return null;
+        return mEtUserPhone.getText().toString();
     }
 
     @Override
     public String getUserPassword() {
-        return null;
+        return mEtPassword.getText().toString();
     }
 
     @Override
@@ -56,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void toMainActivity(User user) {
+        Intent mainIntent = new Intent();
 
     }
 
@@ -66,7 +71,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void clearUser() {
-
+        mEtUserPhone.setText("");
+        mEtPassword.setText("");
     }
 
     @Override
@@ -76,12 +82,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void toLogupActivity() {
-
+        Intent LogupIntent = new Intent();
+        LogupIntent.setClass(LoginActivity.this,LogupActivity.class);
+        startActivity(LogupIntent);
     }
 
     @Override
     public void forgetPasswordActivity() {
-
+        Intent forgetIntent = new Intent();
     }
 
 }

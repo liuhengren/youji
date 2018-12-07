@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rl_part1">
-        //1.头像
+        <!--//1.头像-->
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="47dp"
@@ -17,24 +17,24 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/b8"
             android:id="@+id/iv_headphoto"/>
-        //2.姓名，时间,"分享"
+        <!--//2.姓名，时间,"分享"-->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_headphoto"
             android:layout_marginTop="10dp">
-            //姓名，时间
+            <!--//姓名，时间-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                //姓名
+                <!--//姓名-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="慕斯的酸辣粉"/>
-                //时间
+                <!--//时间-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                     android:layout_alignParentRight="true"
                     android:text="2012-10-5"/>
             </RelativeLayout>
-            //"分享"
+            <!--//"分享"-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,19 +83,19 @@
         android:id="@+id/rl_part4"
         android:padding="10dp">
 
-        //1.收藏
+        <!--//1.收藏-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical">
-            //收藏图片
+            <!--//收藏图片-->
             <ImageView
-                android:layout_width="20dp"
+                android:layout_width="24dp"
                 android:layout_height="20dp"
-                android:src="@drawable/collect"/>
-            //被收藏数量
+                android:src="@drawable/collect2"/>
+            <!--//被收藏数量-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,19 +105,19 @@
 
         </LinearLayout>
 
-        //2.评论
+        <!--//2.评论-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
            android:layout_centerHorizontal="true"
             android:gravity="center_vertical">
-            //评论图片
+            <!--//评论图片-->
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/message"/>
-            //被评论数量
+            <!--//被评论数量-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,19 +127,20 @@
 
         </LinearLayout>
 
-        //3.点赞
+        <!--//3.点赞-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical">
-            //点赞图片
+            <!--点赞图片-->
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/like"/>
-            //被点赞数量
+
+            <!--//被点赞数量-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
