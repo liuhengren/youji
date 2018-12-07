@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.LogupActivity"></activity>
+        <activity android:name=".view.LogupActivity" />
         <activity android:name=".PersonalDataEditorActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FoodActivity"></activity>
-        <activity android:name=".view.ShareActivity"></activity>
+        <activity android:name=".FoodActivity" />
+        <activity android:name=".view.ShareActivity" />
+        <activity android:name=".view.DetailActivity"></activity>
     </application>
 
 </manifest>
