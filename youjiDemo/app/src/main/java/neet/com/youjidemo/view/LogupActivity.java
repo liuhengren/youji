@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.mob.MobSDK;
 
 import cn.smssdk.SMSSDK;
-import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLogupPresenter;
 import neet.com.youjidemo.R;
 
