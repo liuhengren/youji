@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import neet.com.youjidemo.view.Food_Fragment;
+
 public class MainActivity extends AppCompatActivity {
     private HashMap<String,View> tabSpecMap = new HashMap<String,View>();
     private HashMap<String,ImageView> imageViewMap = new HashMap<String, ImageView>();

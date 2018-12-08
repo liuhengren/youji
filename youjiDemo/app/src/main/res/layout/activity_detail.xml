@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@color/tabWidgetColor">
+
+                <ImageButton
+                    android:id="@+id/ib_share_back"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#00000000"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/bt_share_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:background="#00000000"
+                    android:src="@drawable/collect" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!--用户头像，用户名-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_user_header"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/scenery" />
+
+            <TextView
+                android:id="@+id/tv_detail_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/image_user_header"
+                android:text="北极熊怀里的企鹅" />
+
+            <TextView
+                android:id="@+id/tv_have_published"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detail_username"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@id/image_user_header"
+                android:text="发表了：" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/lightgray" />
+
+        <!--发表内容（文字+图片）-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="与你一起到过的地方"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/image_detail"
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                android:layout_below="@+id/tv_detail_text"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/scenery" />
+
+            <ImageView
+                android:id="@+id/image_detail_location"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/image_detail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image_detail"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="30dp"
+                android:layout_toRightOf="@+id/image_detail_location"
+                android:text="天津/Tientsin"
+                android:textAlignment="center"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image_detail_location"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="2018/12/06"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightgray" />
+
+        <ListView
+            android:id="@+id/lv_detail_review"
+            android:layout_width="match_parent"
+            android:layout_height="275dp" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:text="点击发表你的评论"
+        android:background="#bfbfbf"/>
+</RelativeLayout>
