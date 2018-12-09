@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         initview();
     }
     private void initview(){
-        mEtUserPhone=findViewById(R.id.et_name);
+        mEtUserPhone=findViewById(R.id.et_userPhone);
         mEtPassword=findViewById(R.id.et_user_password);
         mBtnLogin=findViewById(R.id.btn_login);
         mTvLogup=findViewById(R.id.btn_logup);
