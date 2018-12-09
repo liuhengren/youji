@@ -13,13 +13,15 @@
         <activity android:name=".view.LogupActivity">
 
         </activity>
-        <activity android:name=".view.PersonalDataEditorActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.PersonalDataEditorActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
         <activity android:name=".view.FoodActivity"></activity>
         <activity android:name=".view.OthersActivity">
