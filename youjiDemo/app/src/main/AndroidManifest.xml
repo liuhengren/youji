@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.FoodActivity" />
+        <activity android:name=".view.OthersActivity"></activity>
+        <activity android:name=".view.ShareActivity" />
+        <activity android:name=".view.PersonalCenterActivity">
         <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".view.LogupActivity">
-
         </activity>
         <activity android:name=".view.PersonalDataEditorActivity" >
             <intent-filter>
@@ -20,14 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".view.FoodActivity"></activity>
         <activity android:name=".view.OthersActivity">
-
         </activity>
-
     </application>
 
 </manifest>
