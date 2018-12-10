@@ -22,10 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/iv_headphoto"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp">
             //姓名，时间
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 //姓名
                 <TextView
@@ -34,23 +35,23 @@
                     android:textSize="14dp"
                     android:textStyle="bold"
                     android:text="慕斯的酸辣粉"/>
-                //时间
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:layout_alignParentRight="true"
-                    android:text="2012-10-5"/>
+
             </RelativeLayout>
             //"分享"
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分享："
+                android:text="2012-05-08"
                 android:textSize="14dp"
                 android:layout_marginTop="26dp" />
         </RelativeLayout>
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="关注"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
     <!--二.内容-->

@@ -98,6 +98,7 @@
     </RelativeLayout>
 
     <!--三.用户发表的动态-->
+    
     <ListView
         android:id="@+id/lv_dynamic"
         android:layout_width="match_parent"

@@ -1,158 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <!--一.Banner-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl_part1">
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!--一.Banner-->
+        android:layout_height="283dp">
 
         <RelativeLayout
-            android:id="@+id/rl_part1"
             android:layout_width="match_parent"
-            android:layout_height="283dp">
+            android:layout_height="283dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/background">
+            //返回
 
-            <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/left" />
+            //名字
 
-                <android.support.design.widget.CollapsingToolbarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="283dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:background="@drawable/background">
-                        //返回
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="14dp"
-                            android:src="@drawable/left" />
-                        //名字
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="17dp"
-                            android:text="慕思的酸辣粉"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-                </android.support.design.widget.CollapsingToolbarLayout>
-            </android.support.design.widget.AppBarLayout>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                android:text="慕思的酸辣粉"
+                android:textSize="15dp" />
         </RelativeLayout>
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <!--二。左半边 作品，关注，粉丝-->
-        <RelativeLayout
-            android:id="@+id/rl_part2"
-            android:layout_width="85dp"
-            android:layout_height="357dp"
-            android:layout_below="@id/rl_part1">
-            //1.关注按钮
+    </RelativeLayout>
+    </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <!--二。左半边 作品，关注，粉丝-->
+    <RelativeLayout
+        android:layout_width="85dp"
+        android:layout_height="357dp"
+        android:layout_below="@id/rl_part1"
+        android:id="@+id/rl_part2">
+        //1.关注按钮
 
-            <Button
-                android:layout_width="70dp"
-                android:layout_height="45dp"
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:text="关注"
+            android:textSize="16dp" />
+        //2.作品+数量
+
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:layout_height="85dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_productions"
+                android:layout_centerHorizontal="true"
+                android:text="300"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_productions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:text="关注"
-                android:textSize="16dp" />
-            //2.作品+数量
-
-            <RelativeLayout
-                android:layout_width="85dp"
-                android:layout_height="85dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/tv_productions"
-                    android:layout_centerHorizontal="true"
-                    android:text="300"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/tv_productions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="关注"
-                    android:textSize="15dp" />
-            </RelativeLayout>
-            //3.关注+数量
-
-            <RelativeLayout
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_centerVertical="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/tv_attentions"
-                    android:layout_centerHorizontal="true"
-                    android:text="300"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/tv_attentions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="作品"
-                    android:textSize="15dp" />
-            </RelativeLayout>
-            //4.粉丝+数量
-
-            <RelativeLayout
-                android:layout_width="85dp"
-                android:layout_height="85dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="83dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/tv_fans"
-                    android:layout_centerHorizontal="true"
-                    android:text="300"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/tv_fans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:text="粉丝"
-                    android:textSize="15dp" />
-            </RelativeLayout>
-
+                android:textSize="15dp" />
         </RelativeLayout>
-        <!--右半边  详情-->
-        <ListView
-            android:id="@+id/lv_others"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rl_part1"
-            android:layout_toRightOf="@id/rl_part2">
+        //3.关注+数量
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_centerVertical="true">
 
-        </ListView>
-        </android.support.v4.widget.NestedScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_attentions"
+                android:layout_centerHorizontal="true"
+                android:text="300"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_attentions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="作品"
+                android:textSize="15dp" />
+        </RelativeLayout>
+        //4.粉丝+数量
+        <RelativeLayout
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="83dp"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_fans"
+                android:layout_centerHorizontal="true"
+                android:text="300"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/tv_fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="粉丝"
+                android:textSize="15dp" />
+        </RelativeLayout>
+
     </RelativeLayout>
+    <!--右半边  详情-->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/rl_part2"
+        android:layout_below="@id/rl_part1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-</android.support.design.widget.CoordinatorLayout>
+        android:id="@+id/lv_others">
 
+    </ListView>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
