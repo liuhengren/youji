@@ -13,7 +13,7 @@
         <activity android:name=".view.FoodActivity" />
         <activity android:name=".view.OthersActivity"></activity>
         <activity android:name=".view.ShareActivity" />
-        <activity android:name=".view.PersonalCenterActivity">
+        <activity android:name=".view.PersonalCenterActivity" />
         <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".view.LogupActivity">
         </activity>
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        
+
     </application>
 
 </manifest>
