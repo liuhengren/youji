@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".bean.UserDateApplication">
+        android:name=".bean.UserDateApplication"
+        android:theme="@style/AppTheme">
         <activity android:name=".view.FoodActivity" />
         <activity android:name=".view.OthersActivity"></activity>
         <activity android:name=".view.ShareActivity" />
@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-
     </application>
 
 </manifest>
