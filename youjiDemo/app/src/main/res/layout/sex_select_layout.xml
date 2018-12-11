@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#553b3a3a"
+    tools:context=".MainActivity"
+    android:id="@+id/pde_rl_root">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/pde_rg_sex"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-49dp"
+        android:background="#EEEEEE">
+
+        <TextView
+            android:id="@+id/pdepp_tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:padding="8dp"
+            android:text="取消"
+            android:textColor="#24AD9D"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/pdepp_tv_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17dp"
+            android:padding="8dp"
+            android:text="完成"
+            android:textColor="#24AD9D"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/pde_rg_sex"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/pde_rb_man"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:text="男"
+            android:textColor="@color/lightgray" />
+
+        <RadioButton
+            android:id="@+id/pde_rb_women"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="200dp"
+            android:background="@color/transparent"
+            android:button="@null"
+            android:gravity="center"
+            android:text="女"
+            android:textColor="@color/lightgray" />
+    </RadioGroup>
+
+</RelativeLayout>
