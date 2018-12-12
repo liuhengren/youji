@@ -1,15 +1,28 @@
 package neet.com.youjidemo.view;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.os.IBinder;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,12 +41,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import neet.com.youjidemo.Presenter.PerDateEditPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.JsonBean;
+import neet.com.youjidemo.bean.UserDateApplication;
+import neet.com.youjidemo.bean.UserDetail;
 import neet.com.youjidemo.command.GetJsonDataUtil;
 
 public class PersonalDataEditorActivity extends AppCompatActivity implements IPerDateEditorView{
-    private LinearLayout mLltouxiang,mLlIntroduction,mLlName,mLlBirthday,mLlSex;
+    private LinearLayout pdeLlRoot;
+    private LinearLayout mLltouxiang,mLlSex;
     private RelativeLayout mRlHometown;
     private EditText mEtIntroduction,mEtName;
     private TextView mTvBirthday,mTvSex,mTvHometown;
@@ -41,6 +58,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private Thread thread;
+    private PopupWindow pdePwSexSelect;
+    private PerDateEditPresenter perDateEditPresenter;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +67,15 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         setContentView(R.layout.personal_data_editor_activity);
         Toolbar toolbar=(Toolbar)findViewById(R.id.tb_pde);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         initview();
         openTimePicker();
+        setOnLinster();
     }
     private void initview(){
+        pdeLlRoot=findViewById(R.id.pde_root);
         mLltouxiang=findViewById(R.id.pde_ll_touxiang);
-        mLlIntroduction=findViewById(R.id.pde_ll_introduction);
-        mLlName=findViewById(R.id.pde_ll_name);
-        mLlBirthday=findViewById(R.id.pde_ll_birthday);
         mLlSex=findViewById(R.id.pde_ll_sex);
         mRlHometown=findViewById(R.id.pde_rl_hometown);
         mEtIntroduction=findViewById(R.id.pde_et_introduction);
@@ -65,6 +83,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         mTvBirthday=findViewById(R.id.pde_tv_birthday);
         mTvHometown=findViewById(R.id.pde_tv_hometown);
         mTvSex=findViewById(R.id.pde_tv_sex);
+        pdePwSexSelect=new PopupWindow(PersonalDataEditorActivity.this);
+        //初始化地点选择器数据
         if (thread == null) {//如果已创建就不再重新创建子线程了
             thread = new Thread(new Runnable() {
                 @Override
@@ -75,24 +95,44 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
             });
             thread.start();
         }
+        perDateEditPresenter=new PerDateEditPresenter(PersonalDataEditorActivity.this);
     }
-    public void openTimePicker(){
-        final TimePickerView tpv=new TimePickerBuilder(this, new OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                mTvBirthday.setText(getTime(date));
-            }
-        }).build();
-        mTvBirthday.setOnClickListener(new View.OnClickListener() {
+
+    /**
+     * 设置所有事件监听器
+     */
+    private void setOnLinster(){
+        mOnFocusChangeListener mOnFocusChangeListener = new mOnFocusChangeListener();
+        mLlSex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tpv.show();
+                initPupupWindow();
             }
         });
         mRlHometown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPickerView();
+            }
+        });
+        mEtIntroduction.setOnFocusChangeListener(mOnFocusChangeListener);
+        mEtName.setOnFocusChangeListener(mOnFocusChangeListener);
+    }
+    /**
+
+     * 初始化时间选择器
+     */
+    public void openTimePicker(){
+        final TimePickerView tpv=new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {
+
+            }
+        }).build();
+        mTvBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tpv.show();
             }
         });
     }
@@ -120,7 +160,6 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
     }
 
     private void initJsonData() {//解析数据
-
         /**
          * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
          * 关键逻辑在于循环体
@@ -182,12 +221,81 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         }
         return detail;
     }
+
+    /**
+     * 解析时间为字符串
+     * @param date
+     * @return
+     */
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        Log.d("getTime()", "choice date millis: " + date.getTime());
+        //Log.d("getTime()", "choice date millis: " + date.getTime());
         SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
         return format.format(date);
     }
 
+    /**
+     * 初始化性别选择器
+     */
+    private void initPupupWindow(){
+        final View view=LayoutInflater.from(PersonalDataEditorActivity.this).inflate(R.layout.sex_select_layout,null,false);
+        RadioGroup rg_sex=view.findViewById(R.id.pde_rg_sex);
+        final RadioButton man=view.findViewById(R.id.pde_rb_man);
+        final RadioButton woman=view.findViewById(R.id.pde_rb_women);
+        final RelativeLayout pdeRlRoot=view.findViewById(R.id.pde_rl_root);
+        final String[] tmpSex = new String[1];
+        TextView pdeTvCancel=view.findViewById(R.id.pdepp_tv_cancel);
+        TextView pdeTvFinish=view.findViewById(R.id.pdepp_tv_finish);
+        pdeTvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pdePwSexSelect.dismiss();
+            }
+        });
+        pdeRlRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pdePwSexSelect.dismiss();
+            }
+        });
+        pdeTvFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pdePwSexSelect.dismiss();
+            }
+        });
+        pdePwSexSelect.setBackgroundDrawable(new BitmapDrawable());
+        pdePwSexSelect.setWidth(ConstraintLayout.LayoutParams.MATCH_PARENT);
+        pdePwSexSelect.setAnimationStyle(R.style.popwin_anim_style);
+        pdePwSexSelect.setContentView(view);
+
+        rg_sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                ViewCompat.animate(view.findViewById(checkedId))
+                        .setDuration(200)
+                        .scaleX(2f)
+                        .scaleY(2f)
+                        .start();
+                tmpSex[0] =((RadioButton)view.findViewById(checkedId)).getText().toString();
+                if(R.id.pde_rb_man==checkedId){
+                    ViewCompat.animate(woman)
+                            .setDuration(100)
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .start();
+                }else{
+                    ViewCompat.animate(man)
+                            .setDuration(100)
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .start();
+                }
+            }
+
+        });
+        pdePwSexSelect.showAtLocation(pdeLlRoot, Gravity.NO_GRAVITY,0,0);
+
+    }
     @Override
     public String getUserName() {
         return mEtName.getText().toString();
@@ -236,5 +344,71 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
     @Override
     public void setUserHometown(String userHometown) {
         mTvHometown.setText(userHometown);
+    }
+
+    /**
+     * EditText失去焦点操作
+     */
+    public class mOnFocusChangeListener implements View.OnFocusChangeListener{
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            if(!hasFocus){
+                String s = ((EditText) v).getText().toString();
+                //根据ID更新信息
+                switch (v.getId()){
+                    case R.id.pde_et_name:
+                        perDateEditPresenter.update("username",s);
+                        break;
+                    case R.id.pde_et_introduction:
+                        break;
+                }
+            }
+        }
+    }
+
+    /**
+     * 点击空白处使EditText失去焦点
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(ev.getAction()==MotionEvent.ACTION_DOWN){
+            View view =getCurrentFocus();
+            if(isHideInput(view,ev)){
+                HideSoftInput(view.getWindowToken());
+                view.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    public boolean isHideInput(View v, MotionEvent ev){
+        if (v != null && (v instanceof EditText)) {
+            int[] l = {0, 0};
+            v.getLocationInWindow(l);
+            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left + v.getWidth();
+            if (ev.getX() > left && ev.getX() < right && ev.getY() > top && ev.getY() < bottom) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void HideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

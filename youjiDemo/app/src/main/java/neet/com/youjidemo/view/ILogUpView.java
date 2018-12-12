@@ -6,8 +6,9 @@ public interface ILogUpView {
     String getUserPhone();
     String getRequestCode();
     String getUserPassword();
-    void showFailedError();
+    void showFailedError(String msg);
     void showLoading();
+    void hideLoading();
     void clearUser();
     void toLoginActivity();
     void toForgetPasswordActivity();

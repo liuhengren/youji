@@ -9,7 +9,6 @@ import neet.com.youjidemo.view.ILoginView;
 public class UserLoginPresenter {
     private IUserLog userLog;
     private ILoginView loginView;
-    private Handler mHandler =new Handler();
     public UserLoginPresenter(ILoginView loginView){
         this.loginView=loginView;
         this.userLog=new Userbiz();
