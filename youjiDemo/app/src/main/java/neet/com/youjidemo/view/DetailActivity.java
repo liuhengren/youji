@@ -30,6 +30,6 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_detail_review);
         DetailViewAdapter adapter = new DetailViewAdapter(list);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-        
+
     }
 }
