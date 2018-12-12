@@ -8,38 +8,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".bean.UserDateApplication">
-        <activity android:name=".view.FoodActivity" ></activity>
-        <activity android:name=".view.OthersActivity"></activity>
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".view.ShareActivity" />
-        <activity android:name=".view.PersonalCenterActivity"></activity>
-        <activity android:name=".view.LogupActivity">
-        </activity>
-        <activity android:name=".view.PersonalDataEditorActivity"></activity>
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".MainActivity">
-
-
-        <activity android:name=".view.ShareActivity" ></activity>
-        <activity android:name=".view.PersonalCenterActivity" ></activity>
-        <activity android:name=".view.LogupActivity">
+        <activity android:name=".view.LogupActivity"></activity>
+        <activity android:name=".view.PersonalDataEditorActivity" >
         </activity>
-        <activity android:name=".view.PersonalDataEditorActivity" ></activity>
-        <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".view.FoodActivity"></activity>
+        <activity android:name=".view.ShareActivity"></activity>
+        <activity android:name=".view.OthersActivity"></activity>
         <activity android:name=".view.DetailActivity"></activity>
-        
-
+        <activity android:name=".view.PersonalCenterActivity"></activity>
     </application>
 
 </manifest>
