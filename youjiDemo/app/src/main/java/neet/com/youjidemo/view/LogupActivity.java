@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mob.MobSDK;
 
@@ -21,6 +25,11 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
     private Button mBtLogup,mBtgetCode;
     private TextView mTvToLogin,mTvForgetPassword;
     private UserLogupPresenter userLogupPresenter;
+
+
+    private ProgressBar progressBar;
+    private ImageButton lpIbcancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +49,10 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
         mTvForgetPassword=findViewById(R.id.tv_logup_find_password);
         mBtgetCode=findViewById(R.id.btn_get_code);
         userLogupPresenter=new UserLogupPresenter(LogupActivity.this);
+
+        progressBar=findViewById(R.id.logup_spin_kit);
+        lpIbcancel=findViewById(R.id.btn_logup_cancel);
+
     }
     private void initClickListenrt(){
         mBtgetCode.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +66,12 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
             @Override
             public void onClick(View v) {
                 userLogupPresenter.logup();
+            }
+        });
+        lpIbcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -72,7 +91,11 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
     }
 
     @Override
+
     public void showFailedError() {
+
+    public void showFailedError(String msg) {
+        Toast.makeText(LogupActivity.this,msg,Toast.LENGTH_SHORT).show();
 
     }
 

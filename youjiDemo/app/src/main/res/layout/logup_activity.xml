@@ -3,13 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
+
+
+    
     <ImageButton
         android:src="@drawable/ic_login_cancel"
         android:layout_marginTop="31dp"
         android:layout_marginLeft="28dp"
         android:background="#00ffffff"
-        android:id="@+id/btn_cancel"
+        android:id="@+id/btn_logup_cancel"
         android:layout_width="24dp"
         android:layout_height="24dp" />
     <TextView
