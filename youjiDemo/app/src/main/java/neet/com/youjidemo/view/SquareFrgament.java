@@ -10,8 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ListView;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ScrollDirectionListener;
@@ -21,8 +19,7 @@ import java.util.List;
 
 import neet.com.youjidemo.ContentAdapter;
 import neet.com.youjidemo.R;
-import neet.com.youjidemo.SquareAdapter;
-import neet.com.youjidemo.SquareItemAdapter;
+import neet.com.youjidemo.adapter.SquareItemAdapter;
 
 /*
 * 具体的美食，游玩，游记，推荐和广场
