@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
         mEtUserPhone=findViewById(R.id.et_userPhone);
         mEtPassword=findViewById(R.id.et_user_password);
         mBtnLogin=findViewById(R.id.btn_login);
-        mTvLogup=findViewById(R.id.btn_logup);
+        mTvLogup=findViewById(R.id.tv_logup);
         mTvFindPassword=findViewById(R.id.tv_find_password);
         mIBCancel=findViewById(R.id.btn_cancel);
         mIbLogByqq=findViewById(R.id.btn_login_qq);
