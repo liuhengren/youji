@@ -135,7 +135,7 @@
         android:layout_height="wrap_content" />
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/logup_spin_kit"
-        style="@style/SpinKitView.Large.FoldingCube"
+        style="@style/SpinKitView.FoldingCube"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:SpinKit_Color="@color/colorAccent"
