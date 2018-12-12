@@ -1,7 +1,10 @@
 package neet.com.youjidemo.view;
 
+import android.net.LinkAddress;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,8 +27,9 @@ public class DetailActivity extends AppCompatActivity {
         list.add(1);
         list.add(1);
         list.add(1);
-        ListView listView = findViewById(R.id.lv_detail_review);
-        DetailViewAdapter adapter = new DetailViewAdapter(this,list,R.layout.share_review_item);
-        listView.setAdapter(adapter);
+        RecyclerView recyclerView = findViewById(R.id.rv_detail_review);
+        DetailViewAdapter adapter = new DetailViewAdapter(list);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        
     }
 }

@@ -25,7 +25,7 @@ public class AttentionPagerAdapter extends RecyclerView.Adapter<AttentionPagerAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.collect_layout_item,null);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personal_center_production_item,null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

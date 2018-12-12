@@ -45,14 +45,14 @@ public class PersonalCenterActivity extends AppCompatActivity {
         FansFragment fansFragment = new FansFragment();
         AttentionFragment attentionFragment = new AttentionFragment();
         list.add(productionFragment);
-        list.add(fansFragment);
         list.add(attentionFragment);
+        list.add(fansFragment);
         ProductionFragmentPagerAdapter adapter = new ProductionFragmentPagerAdapter(getSupportFragmentManager(),list);
         mViewPager.setAdapter(adapter);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("作品"));
-        tabLayout.addTab(tabLayout.newTab().setText("关注"));
+        tabLayout.addTab(tabLayout.newTab().setText("收藏"));
         tabLayout.addTab(tabLayout.newTab().setText("粉丝"));
         tabLayout.setupWithViewPager(mViewPager);
     }

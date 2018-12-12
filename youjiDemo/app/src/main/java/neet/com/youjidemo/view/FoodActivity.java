@@ -31,7 +31,6 @@ public class FoodActivity extends AppCompatActivity {
     }
     private  void findViews(){
         listView=findViewById(R.id.lv_dynamic);
-
     }
 
 
