@@ -1,4 +1,4 @@
-package neet.com.youjidemo.adapter;
+package neet.com.youjidemo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,12 +8,12 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-public class PersonalContentAdapter extends BaseAdapter {
+public class ContentAdapter extends BaseAdapter{
     private Context context;
     private List list;
     private int itemLayout;
 
-    public PersonalContentAdapter(Context context, List list, int itemLayout) {
+    public ContentAdapter(Context context, List list, int itemLayout) {
         this.context = context;
         this.list = list;
         this.itemLayout = itemLayout;
@@ -36,9 +36,10 @@ public class PersonalContentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        convertView = LayoutInflater.from(context).inflate(itemLayout,null);
-
+        if (convertView == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            convertView = inflater.inflate(itemLayout, null);
+        }
         return convertView;
     }
 }

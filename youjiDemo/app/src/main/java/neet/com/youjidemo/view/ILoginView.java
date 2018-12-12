@@ -11,7 +11,7 @@ public interface ILoginView {
         void showLoading();
         void hideLoading();
         void toMainActivity(User user);
-        void showFailedError(String msg);
+        void showFailedError();
         void clearUser();
         //第三方登录
         void toThirdPartyLogin();

@@ -1,4 +1,4 @@
-package neet.com.youjidemo.adapter;
+package neet.com.youjidemo;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

@@ -11,22 +11,23 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".view.LogupActivity">
+
+        </activity>
+        <activity android:name=".PersonalDataEditorActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".FoodActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PersonalDataEditorActivity"/>
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".FoodActivity">
-        </activity>
         <activity android:name=".OthersActivity">
 
         </activity>
-      
+
+
+
     </application>
 
 </manifest>

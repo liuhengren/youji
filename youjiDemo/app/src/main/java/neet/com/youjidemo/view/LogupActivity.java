@@ -1,18 +1,12 @@
 package neet.com.youjidemo.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mob.MobSDK;
@@ -27,11 +21,11 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
     private Button mBtLogup,mBtgetCode;
     private TextView mTvToLogin,mTvForgetPassword;
     private UserLogupPresenter userLogupPresenter;
-    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logup_activity);
+        //getActionBar().hide();
         MobSDK.init(this);
         initview();
         initClickListenrt();
@@ -46,7 +40,6 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
         mTvForgetPassword=findViewById(R.id.tv_logup_find_password);
         mBtgetCode=findViewById(R.id.btn_get_code);
         userLogupPresenter=new UserLogupPresenter(LogupActivity.this);
-        progressBar=findViewById(R.id.logup_spin_kit);
     }
     private void initClickListenrt(){
         mBtgetCode.setOnClickListener(new View.OnClickListener() {
@@ -79,18 +72,13 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
     }
 
     @Override
-    public void showFailedError(String msg) {
+    public void showFailedError() {
 
     }
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -149,50 +137,5 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView{
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterAllEventHandler();
-    }
-    /**
-     * 点击空白处使EditText失去焦点
-     * @param ev
-     * @return
-     */
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if(ev.getAction()==MotionEvent.ACTION_DOWN){
-            View view =getCurrentFocus();
-            if(isHideInput(view,ev)){
-                HideSoftInput(view.getWindowToken());
-                view.clearFocus();
-            }
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-    public boolean isHideInput(View v, MotionEvent ev){
-        if (v != null && (v instanceof EditText)) {
-            int[] l = {0, 0};
-            v.getLocationInWindow(l);
-            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left + v.getWidth();
-            if (ev.getX() > left && ev.getX() < right && ev.getY() > top && ev.getY() < bottom) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
-    private void HideSoftInput(IBinder token) {
-        if (token != null) {
-            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            manager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

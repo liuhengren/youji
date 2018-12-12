@@ -8,15 +8,15 @@ public class User {
         return userphone;
                 }
 
-    public void setUserphone(String userphone) {
-            this.userphone = userphone;
-            }
+public void setUserphone(String userphone) {
+        this.userphone = userphone;
+        }
 
-    public String getPsssword() {
-            return psssword;
-            }
+public String getPsssword() {
+        return psssword;
+        }
 
-    public void setPsssword(String psssword) {
-            this.psssword = psssword;
-            }
-}
+public void setPsssword(String psssword) {
+        this.psssword = psssword;
+        }
+        }

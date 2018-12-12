@@ -32,7 +32,7 @@ public class UserLogupPresenter {
             SMSSDK.getVerificationCode("86", mPhone);//申请验证码，结果都在EventHandler监听返回
             logUpView.showTimedown();//开始倒计时
         }else {
-            logUpView.showFailedError("请输入正确的手机号");
+            Log.e("1","请输入正确的手机号码");
         }
     }
     public void logup(){
@@ -40,8 +40,6 @@ public class UserLogupPresenter {
         //判断手机号和验证码都不为空
         if(!TextUtils.isEmpty(mCode) && !TextUtils.isEmpty(logUpView.getUserPhone())) {
             SMSSDK.submitVerificationCode("86",logUpView.getUserPhone(),mCode);//提交验证信息，结果都在EventHandler监听返回
-        }else{
-            logUpView.showFailedError("请输入手机号和验证码");
         }
     }
     private void initSMSSDK() {
@@ -79,7 +77,6 @@ public class UserLogupPresenter {
             switch (msg.what) {
                 case GET_SUCCESS :
                     Log.e("获取验证码成功","成功");
-                    logUpView.showFailedError("获取验证码成功");
                     break;
                 case SUBMIT_SUCCESS ://验证成功处理
                     // Logger.d("验证成功");
@@ -89,7 +86,6 @@ public class UserLogupPresenter {
                     break;
                 case CHECK_FAILE://服务器返回错误处理
                     Throwable data = (Throwable) msg.obj;
-                    logUpView.showFailedError("发生了我不知道的问题,请再试一次吧");
                     //Logger.d(data.getMessage());
                     break;
                 default:
@@ -112,7 +108,7 @@ public class UserLogupPresenter {
             logUpView.toMainActivity();
         }
         else{
-            logUpView.showFailedError("失败了,你可以再试一试");
+            logUpView.showFailedError();
         }
     }
 }

@@ -10,7 +10,4 @@
     <color name="lightgray">#B1B1B1</color>
     <color name="tabWidgetColor">#e6e6e6</color>
     <color name="view_background">#ffffff</color>
-    
-    <color name="trans">#00000000</color>
-    <color name="personal_username">#808080</color>
 </resources>
