@@ -1,46 +1,52 @@
 package neet.com.youjidemo.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
+
+import neet.com.youjidemo.R;
+
 /**
  *desc:详情页的适配器
  * author:梁启文
  * time：2018/12/8
  */
-public class DetailViewAdapter extends BaseAdapter {
-    private Context context;
-    private List list;
-    private int itemLayoutId;
+public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewAdapter.ViewHolder> {
 
-    public DetailViewAdapter(Context context, List list, int itemLayoutId) {
-        this.context = context;
-        this.list = list;
-        this.itemLayoutId = itemLayoutId;
+    private List mDataSet;
+
+    public DetailViewAdapter(List mDataSet) {
+        this.mDataSet = mDataSet;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.share_review_item,null);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public int getCount() {
-        return list.size();
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
     }
 
     @Override
-    public Object getItem(int position) {
-        return list.get(position);
+    public int getItemCount() {
+        return mDataSet.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+    class ViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(itemLayoutId,null);
-        return convertView;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 }

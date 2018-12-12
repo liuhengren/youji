@@ -2,60 +2,35 @@ package neet.com.youjidemo.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.R;
-import neet.com.youjidemo.adapter.SquareAdapter;
-
+import neet.com.youjidemo.adapter.ContentAdapter;
 
 public class FoodActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private List fragmentList=new ArrayList();
-
-
+    private List list;
+    private ListView listView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.food_activity);
         findViews();
-        inits();
-//        setFloatingActionButton();
+        list=new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add(2);
+        list.add(2);
+        list.add(2);
 
-        Toolbar toolbar=findViewById(R.id.tb_back);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        ContentAdapter contentAdapter=new ContentAdapter(this,list,R.layout.square_list_item);
+        listView.setAdapter(contentAdapter);
     }
-
-    private void findViews() {
-        tabLayout = findViewById(R.id.tl_recommend);
-        viewPager=findViewById(R.id.vp_dynamic);
-
-    }
-
-
-    private  void  inits(){
-
-        //创建广场和推荐 对应的Fragment
-        SquareFrgament squareFregament=new SquareFrgament();
-        SquareFrgament squareFregament1=new SquareFrgament();
-        fragmentList.add(squareFregament);
-        fragmentList.add(squareFregament1);
-
-
-        viewPager.setAdapter(new SquareAdapter(getSupportFragmentManager(),fragmentList));
-        tabLayout.setupWithViewPager(viewPager);
+    private  void findViews(){
+        listView=findViewById(R.id.lv_dynamic);
 
     }
 

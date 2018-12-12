@@ -26,7 +26,7 @@ public class AttentionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.attention_view_pager_layout,null);
+        View view = inflater.inflate(R.layout.production_viewpager_layout,null);
         List list = new ArrayList();
         list.add(1);
         list.add(1);
@@ -36,7 +36,7 @@ public class AttentionFragment extends Fragment {
         list.add(1);
         list.add(1);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rv_attention);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_production);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         AttentionPagerAdapter adapter = new AttentionPagerAdapter(list);

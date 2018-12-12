@@ -76,7 +76,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@id/image_user_header"
-                android:text="发表了：" />
+                android:text="2018/12/05" />
 
         </RelativeLayout>
 
@@ -133,14 +133,6 @@
                 android:textAlignment="center"
                 android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/image_detail_location"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:text="2018/12/06"
-                android:textSize="14dp" />
         </RelativeLayout>
 
         <View
@@ -148,8 +140,8 @@
             android:layout_height="1dp"
             android:background="@color/lightgray" />
 
-        <ListView
-            android:id="@+id/lv_detail_review"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_detail_review"
             android:layout_width="match_parent"
             android:layout_height="275dp" />
 

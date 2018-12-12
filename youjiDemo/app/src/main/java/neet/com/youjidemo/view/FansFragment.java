@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.adapter.FansPagerAdapter;
 
 /**
  * desc:个人中心粉丝页Fragment
@@ -38,7 +39,8 @@ public class FansFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rv_fans);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-
+        FansPagerAdapter adapter = new FansPagerAdapter(list);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 }
