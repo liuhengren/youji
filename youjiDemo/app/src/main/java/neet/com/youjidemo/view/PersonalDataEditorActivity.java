@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -66,7 +67,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         setContentView(R.layout.personal_data_editor_activity);
         Toolbar toolbar=(Toolbar)findViewById(R.id.tb_pde);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         initview();
         openTimePicker();
@@ -117,15 +118,15 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         mEtIntroduction.setOnFocusChangeListener(mOnFocusChangeListener);
         mEtName.setOnFocusChangeListener(mOnFocusChangeListener);
     }
-
     /**
+
      * 初始化时间选择器
      */
     public void openTimePicker(){
         final TimePickerView tpv=new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-                mTvBirthday.setText(getTime(date));
+
             }
         }).build();
         mTvBirthday.setOnClickListener(new View.OnClickListener() {
@@ -356,6 +357,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
                 //根据ID更新信息
                 switch (v.getId()){
                     case R.id.pde_et_name:
+                        perDateEditPresenter.update("username",s);
                         break;
                     case R.id.pde_et_introduction:
                         break;
@@ -398,5 +400,15 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
             InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             manager.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
