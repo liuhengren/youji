@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
+
     <ImageButton
         android:src="@drawable/ic_login_cancel"
         android:layout_marginTop="31dp"
@@ -130,4 +131,13 @@
         android:text="用户协议"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/logup_spin_kit"
+        style="@style/SpinKitView.Large.FoldingCube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:SpinKit_Color="@color/colorAccent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 </RelativeLayout>

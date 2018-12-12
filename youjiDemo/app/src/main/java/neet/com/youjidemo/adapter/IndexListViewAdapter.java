@@ -1,4 +1,4 @@
-package neet.com.youjidemo;
+package neet.com.youjidemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
