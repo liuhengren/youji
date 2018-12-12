@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
     <ImageButton
@@ -115,12 +116,21 @@
         android:background="#000000" />
 
     <TextView
-        android:textColor="@android:color/white"
         android:id="@+id/tv_user_agreement"
-        android:gravity="center"
-        android:textSize="14sp"
-        android:layout_marginTop="604dp"
-        android:text="用户协议"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="610dp"
+        android:gravity="center"
+        android:text="用户协议"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        android:layout_centerInParent="true"
+        style="@style/SpinKitView.Large.FoldingCube"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:SpinKit_Color="@color/colorAccent"
+        android:visibility="gone"
+        />
 </RelativeLayout>
