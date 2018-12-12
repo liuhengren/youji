@@ -16,7 +16,6 @@
         app:title="">
 
         <TextView
-            
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,9 +26,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
 <LinearLayout
-    android:id="@+id/ll_touxiang"
+    android:id="@+id/pde_ll_touxiang"
     android:paddingLeft="10dp"
     android:layout_width="match_parent"
     android:layout_height="65dp"
@@ -52,13 +51,15 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
     <LinearLayout
-        android:id="@+id/ll_introduction"
+        android:id="@+id/pde_ll_introduction"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <TextView
             android:textColor="@android:color/black"
             android:gravity="center_vertical"
@@ -67,10 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/et_ll_introduction"
+            android:id="@+id/pde_et_introduction"
             android:background="@color/transparent"
             android:layout_marginLeft="20dp"
-            android:hint="123456789"
+            android:hint="@string/pde_inter_default"
             android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -78,13 +79,15 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
     <LinearLayout
-        android:id="@+id/ll_name"
+        android:id="@+id/pde_ll_name"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <TextView
             android:textColor="@android:color/black"
             android:gravity="center_vertical"
@@ -93,10 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <EditText
-            android:id="@+id/et_name"
+            android:id="@+id/pde_et_name"
             android:background="@color/transparent"
             android:layout_marginLeft="20dp"
-            android:hint="123456789"
             android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -104,9 +106,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
     <LinearLayout
-        android:id="@+id/ll_birthday"
+        android:id="@+id/pde_ll_birthday"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -119,9 +121,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
-            android:text="1321231"
             android:gravity="center_vertical"
-            android:id="@+id/tv_birthday"
+            android:id="@+id/pde_tv_birthday"
             android:background="@color/transparent"
             android:layout_marginLeft="20dp"
             android:textSize="15sp"
@@ -131,9 +132,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
     <LinearLayout
-        android:id="@+id/ll_sex"
+        android:id="@+id/pde_ll_sex"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -146,9 +147,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
-            android:text="1321231"
             android:gravity="center_vertical"
-            android:id="@+id/tv_sex"
+            android:id="@+id/pde_tv_sex"
             android:background="@color/transparent"
             android:layout_marginLeft="20dp"
             android:textSize="15sp"
@@ -158,13 +158,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
-    <LinearLayout
-        android:id="@+id/ll_hometown"
+        android:background="@color/lightgray" />
+    <RelativeLayout
+        android:id="@+id/pde_rl_hometown"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:orientation="horizontal">
+        >
         <TextView
             android:textColor="@android:color/black"
             android:gravity="center_vertical"
@@ -173,24 +173,25 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
         <TextView
-            android:text="1321231"
+
             android:gravity="center_vertical"
-            android:id="@+id/tv_hometown"
+            android:id="@+id/pde_tv_hometown"
             android:background="@color/transparent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="50dp"
             android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
+
         <ImageView
-            android:layout_marginLeft="235dp"
-            android:src="@drawable/ic_front"
-            android:layout_gravity="center_vertical"
-            android:scaleType="fitXY"
             android:layout_width="20dp"
-            android:layout_height="20dp" />
-    </LinearLayout>
+            android:layout_height="20dp"
+            android:layout_marginLeft="352dp"
+            android:layout_marginTop="22.5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_front" />
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dip"
-        android:background="#000000" />
+        android:background="@color/lightgray" />
 </LinearLayout>
