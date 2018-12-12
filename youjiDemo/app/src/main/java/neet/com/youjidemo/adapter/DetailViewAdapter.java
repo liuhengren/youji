@@ -7,7 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
-
+/**
+ *desc:详情页的适配器
+ * author:梁启文
+ * time：2018/12/8
+ */
 public class DetailViewAdapter extends BaseAdapter {
     private Context context;
     private List list;

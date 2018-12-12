@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -46,7 +48,7 @@
         android:id="@+id/tv_productions_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="25dp"
         android:maxLines="30"
         android:text="测试测试测试测试"
@@ -55,7 +57,7 @@
     <ImageView
         android:layout_width="336dp"
         android:layout_height="94dp"
-        android:layout_gravity="center"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="15dp"
         android:scaleType="fitXY"
         android:src="@drawable/scenery" />
@@ -63,8 +65,8 @@
     <LinearLayout
         android:layout_width="336dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
         android:orientation="horizontal">
 
         <!--收藏-->

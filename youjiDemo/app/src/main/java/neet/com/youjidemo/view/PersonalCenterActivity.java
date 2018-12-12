@@ -1,22 +1,28 @@
 package neet.com.youjidemo.view;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentTabHost;
+
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
+
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.R;
-import neet.com.youjidemo.adapter.PersonalContentAdapter;
+import neet.com.youjidemo.adapter.ProductionFragmentPagerAdapter;
+
+/**
+ * desc:个人中心Activity
+ * author：梁启文
+ * time:2018/12/06
+ */
 
 public class PersonalCenterActivity extends AppCompatActivity {
     private List productionList;
@@ -28,48 +34,41 @@ public class PersonalCenterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_center);
 
-        //初始化并添加选项卡
-        TabHost tabHost = findViewById(android.R.id.tabhost);
-        tabHost.setup();
-        TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("tab1")
-                .setIndicator("作品")
-                .setContent(R.id.tab1);
-        tabHost.addTab(tabSpec1);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.tb_pde);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
 
-        TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab2")
-                .setIndicator("关注")
-                .setContent(R.id.tab2);
-        tabHost.addTab(tabSpec2);
+        ViewPager mViewPager = findViewById(R.id.viewpager);
+        List<Fragment> list = new ArrayList();
+        ProductionFragment productionFragment = new ProductionFragment();
+        FansFragment fansFragment = new FansFragment();
+        AttentionFragment attentionFragment = new AttentionFragment();
+        list.add(productionFragment);
+        list.add(fansFragment);
+        list.add(attentionFragment);
+        ProductionFragmentPagerAdapter adapter = new ProductionFragmentPagerAdapter(getSupportFragmentManager(),list);
+        mViewPager.setAdapter(adapter);
 
-        TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab3")
-                .setIndicator("粉丝")
-                .setContent(R.id.tab3);
-        tabHost.addTab(tabSpec3);
-
-        ListView listView1 = findViewById(R.id.lv_production);
-
-        //初始化数据（测试数据）
-        productionList = new ArrayList();
-        productionList.add(2);
-        productionList.add(2);
-        productionList.add(2);
-        productionList.add(2);
-        productionList.add(2);
-
-        PersonalContentAdapter adapter = new PersonalContentAdapter(this,productionList,R.layout.personal_center_production_item);
-        listView1.setAdapter(adapter);
-
-        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PersonalCenterActivity.this, "点击了"+position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("作品"));
+        tabLayout.addTab(tabLayout.newTab().setText("关注"));
+        tabLayout.addTab(tabLayout.newTab().setText("粉丝"));
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
     public void editInformaion(View view){
         Intent intent = new Intent(PersonalCenterActivity.this,PersonalDataEditorActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

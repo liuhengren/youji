@@ -54,30 +54,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_review_user_header"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_toRightOf="@+id/image_review_user_header"
             android:text="卡路里卡路里李卡路里，燃烧我的卡路里" />
 
-        <Button
-            android:id="@+id/btn_review"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_below="@+id/tv_review"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="25dp"
-            android:layout_toRightOf="@+id/image_review_user_header"
-            android:background="@color/trans"
-            android:text="回复"
-            android:textColor="@color/lightgray" />
+
 
         <TextView
             android:layout_width="81dp"
             android:layout_height="18dp"
-            android:layout_below="@+id/tv_review"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/btn_review"
+            android:layout_below="@+id/tv_review_username"
+            android:layout_toRightOf="@+id/image_review_user_header"
             android:text="2018/05/06"
+            android:layout_marginStart="10dp"
             android:textColor="@android:color/black" />
     </RelativeLayout>
 

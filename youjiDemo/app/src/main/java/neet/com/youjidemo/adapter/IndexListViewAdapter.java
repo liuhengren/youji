@@ -9,6 +9,12 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * desc:z主页内容适配器
+ * author：梁启文
+ * time：2018/12/7
+ */
 public class IndexListViewAdapter extends BaseAdapter {
     private Context context;
     private List<Object> list = new ArrayList<>();

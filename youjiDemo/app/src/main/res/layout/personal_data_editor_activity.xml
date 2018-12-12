@@ -13,7 +13,7 @@
         android:background="@android:color/white"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
-        app:title=" ">
+        app:title="">
 
         <TextView
             
