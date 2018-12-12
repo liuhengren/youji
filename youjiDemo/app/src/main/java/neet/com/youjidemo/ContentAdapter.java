@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-public class ContentAdapter extends BaseAdapter {
+public class ContentAdapter extends BaseAdapter{
     private Context context;
     private List list;
     private int itemLayout;
