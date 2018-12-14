@@ -8,6 +8,11 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
+/**
+ * desc:ListView适配器
+ * author: 李俊霞
+ * time:2018/12/05
+ */
 public class ContentAdapter extends BaseAdapter {
     private Context context;
     private List list;

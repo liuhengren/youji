@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import neet.com.youjidemo.R;
 
 /**
- * 社区
- * */
+ * desc:首页的推荐Fragment
+ * author:梁启文
+ * time：2018/12/06
+ */
 
 public class Recommend_Fragment extends Fragment {
     @Nullable
