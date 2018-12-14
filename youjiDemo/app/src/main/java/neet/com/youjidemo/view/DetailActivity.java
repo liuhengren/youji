@@ -12,7 +12,11 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.DetailViewAdapter;
-
+/**
+ * desc:详情页（发表内容详情+评论）
+ * author：梁启文
+ * time：2018/12/5
+ */
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -30,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_detail_review);
         DetailViewAdapter adapter = new DetailViewAdapter(list);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
     }
 }
