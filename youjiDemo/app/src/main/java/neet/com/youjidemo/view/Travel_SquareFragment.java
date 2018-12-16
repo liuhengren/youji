@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,12 +25,13 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
-import neet.com.youjidemo.command.PullRefreshTask;
+
 
 /*
- * 具体的美食，游玩，游记，推荐和广场
+1.类别：旅行
+2.具体的分类（推荐或广场）：广场
  * */
-public class SquareFrgament extends Fragment {
+public class Travel_SquareFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
@@ -38,7 +40,7 @@ public class SquareFrgament extends Fragment {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private SquareItemAdapter squareItemAdapter;
     private View view;
-    Button Care;
+    Button care;
     TextView name;
     TextView date;
     TextView signatures;
@@ -47,41 +49,82 @@ public class SquareFrgament extends Fragment {
     TextView goodNum;
     CircleImageView headPhoto;
     ImageView contentImage;
+    ImageButton goodButton;
+    ImageButton collectButton;
+    ImageButton judgeButton;
+    RecyclerView.LayoutManager manager;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.square_layout, container, false);
-        recyclerView = view.findViewById(R.id.rl_square_item);
-        floatingActionButton = view.findViewById(R.id.fab_top);
-        mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
-        list = new ArrayList();
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
-        squareItemAdapter = new SquareItemAdapter(list);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(squareItemAdapter);
+        findViews();
+        setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
-
+        setAllButtonClickListener();
+        setAllData();
         return view;
 
     }
 
 
     private void findViews() {
-        Button Care = view.findViewById(R.id.btn_care);
-        TextView name = view.findViewById(R.id.tv_name);
-        TextView date = view.findViewById(R.id.tv_date);
-        TextView signatures = view.findViewById(R.id.tv_signatures);
-        TextView collectNum = view.findViewById(R.id.tv_collectNum);
-        TextView judgeNum = view.findViewById(R.id.tv_judgeNum);
-        TextView goodNum = view.findViewById(R.id.tv_goodNum);
-        CircleImageView headPhoto = view.findViewById(R.id.iv_headphoto);
-        ImageView contentImage = view.findViewById(R.id.iv_contentimage);
+        recyclerView = view.findViewById(R.id.rl_square_item);
+        floatingActionButton = view.findViewById(R.id.fab_top);
+        mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
+        care = view.findViewById(R.id.btn_care);
+        name = view.findViewById(R.id.tv_name);
+        date = view.findViewById(R.id.tv_date);
+        signatures = view.findViewById(R.id.tv_signatures);
+        collectNum = view.findViewById(R.id.tv_collectNum);
+        judgeNum = view.findViewById(R.id.tv_judgeNum);
+        goodNum = view.findViewById(R.id.tv_goodNum);
+        headPhoto = view.findViewById(R.id.iv_headphoto);
+        contentImage = view.findViewById(R.id.iv_contentimage);
+        goodButton = view.findViewById(R.id.ib_good);
+        judgeButton = view.findViewById(R.id.ib_collect);
+        collectButton = view.findViewById(R.id.ib_judge);
+    }
+
+    /*
+    设置广场上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
+     */
+    private void setAllData() {
+
+    }
+
+
+    /*
+    所有的Button点击事件
+     */
+    private void setAllButtonClickListener() {
+
+        //关注点击事件 点击关注就去关注 或者再次点击取消关注
+        care.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //收藏点击事件 点击收藏就收藏
+        collectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        //点赞点击事件  点击给点赞
+        goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
     }
 
 
@@ -113,9 +156,10 @@ public class SquareFrgament extends Fragment {
             @Override
             public void onClick(View v) {
                 recyclerView.scrollToPosition(0);
-                }
+            }
         });
     }
+
 
     /*
     设置RecycleView下拉刷新
@@ -131,14 +175,26 @@ public class SquareFrgament extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-//        // 通过 setEnabled(false) 禁用下拉刷新
-//        mySwipeRefreshLayout.setEnabled(false);
-
+        // 通过 setEnabled(false) 禁用下拉刷新
+        //  mySwipeRefreshLayout.setEnabled(false);
         // 设定下拉圆圈的背景
         //  mySwipeRefreshLayout.setProgressBackgroundColor(R.color.);
     }
 
+    /*
+    设置RecycleView的数据 ，adapter，
+    */
+    private  void setRecyclerView(){
+        manager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(manager);
 
+        //从服务器获得的笔记的list
+        list = new ArrayList();
+        list.add(1);
+        //这里填入数据list
+        squareItemAdapter = new SquareItemAdapter(list);
+
+        recyclerView.setAdapter(squareItemAdapter);
+    }
 
 }

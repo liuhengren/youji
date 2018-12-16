@@ -96,10 +96,11 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical">
             //收藏图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/collect2"
+                android:id="@+id/ib_collect"
                 />
             //被收藏数量
             <TextView
@@ -120,10 +121,11 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical">
             //评论图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/message"/>
+                android:src="@drawable/message"
+                android:id="@+id/ib_judge"/>
             //被评论数量
             <TextView
                 android:layout_width="wrap_content"
@@ -143,10 +145,11 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical">
             //点赞图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/like"/>
+                android:src="@drawable/like"
+                android:id="@+id/ib_good"/>
             //被点赞数量
             <TextView
                 android:layout_width="wrap_content"
