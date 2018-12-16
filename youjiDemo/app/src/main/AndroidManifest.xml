@@ -7,7 +7,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+
         android:theme="@style/AppTheme"
         android:name=".bean.UserDateApplication">
         <activity android:name=".view.FoodActivity" >
@@ -21,12 +21,23 @@
         <activity android:name=".view.ShareActivity" ></activity>
         <activity android:name=".view.PersonalCenterActivity" ></activity>
         <activity android:name=".view.LogupActivity">
+
+
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.LogupActivity"></activity>
+        <activity android:name=".view.PersonalDataEditorActivity" >
+
         </activity>
-        <activity android:name=".view.PersonalDataEditorActivity" ></activity>
-        <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".view.FoodActivity"></activity>
+        <activity android:name=".view.ShareActivity"></activity>
+        <activity android:name=".view.OthersActivity"></activity>
+        <activity android:name=".view.DetailActivity">
+
+        </activity>
+        <activity android:name=".view.PersonalCenterActivity"></activity>
     </application>
 
 </manifest>
