@@ -1,162 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_pde"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:title=" ">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!--实时显示当前时间-->
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="104dp"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/trans"
+                android:src="@drawable/collect" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
             <RelativeLayout
+                app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:background="@color/tabWidgetColor">
+                android:layout_height="match_parent">
 
-                <ImageButton
-                    android:id="@+id/ib_share_back"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="6dp"
-                    android:background="#00000000"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_back" />
+                <!--发表人头像-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cImage_detail_head"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/head" />
 
+                <!--发表人昵称-->
+                <TextView
+                    android:id="@+id/tv_detail_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/cImage_detail_head"
+                    android:maxLength="15"
+                    android:text="北极熊怀里的企鹅"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <!--发表时间-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textSize="20dp" />
+                    android:layout_below="@+id/tv_detail_username"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@+id/cImage_detail_head"
+                    android:text="2018/12/5"
+                    android:textSize="16dp" />
 
+                <!--关注按钮-->
                 <ImageButton
-                    android:id="@+id/bt_share_upload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="14dp"
-                    android:background="#00000000"
-                    android:src="@drawable/collect" />
+                    android:layout_marginRight="20dp"
+                    android:background="@color/trans"
+                    android:src="@drawable/befans" />
             </RelativeLayout>
-        </RelativeLayout>
-
-        <!--用户头像，用户名-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="12dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_user_header"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/scenery" />
-
-            <TextView
-                android:id="@+id/tv_detail_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/image_user_header"
-                android:text="北极熊怀里的企鹅" />
-
-            <TextView
-                android:id="@+id/tv_have_published"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_detail_username"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_toRightOf="@id/image_user_header"
-                android:text="2018/12/05" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="37dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/lightgray" />
-
-        <!--发表内容（文字+图片）-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tv_detail_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="与你一起到过的地方"
-                android:textSize="14dp" />
 
             <ImageView
-                android:id="@+id/image_detail"
                 android:layout_width="match_parent"
-                android:layout_height="71dp"
-                android:layout_below="@+id/tv_detail_text"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/scenery" />
+                android:layout_height="140dp"
+                android:src="@drawable/scenery"
+                app:layout_scrollFlags="scroll|enterAlways"/>
+        </android.support.design.widget.AppBarLayout>
 
-            <ImageView
-                android:id="@+id/image_detail_location"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_below="@+id/image_detail"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/ic_location" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/image_detail"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="30dp"
-                android:layout_toRightOf="@+id/image_detail_location"
-                android:text="天津/Tientsin"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lightgray" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_detail_review"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="275dp" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/lightgray"
-        android:layout_alignParentBottom="true">
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"/>
-    </LinearLayout>
-</RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
