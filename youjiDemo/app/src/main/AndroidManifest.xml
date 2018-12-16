@@ -12,11 +12,19 @@
 
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.LogupActivity"></activity>
-        <activity android:name=".view.PersonalDataEditorActivity">
-        </activity>
+
+        <activity android:name=".view.PersonalDataEditorActivity" />
+
+        
+
+       
+ 
+      
+        
         <activity android:name=".MainActivity">
 
         </activity>
+
         <activity android:name=".view.FoodActivity"></activity>
         <activity android:name=".view.ShareActivity"></activity>
         <activity android:name=".view.OthersActivity"></activity>
@@ -28,6 +36,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.PersonalCenterActivity"></activity>
+
+
+
+        <activity android:name=".view.DetailActivity"></activity>
+
     </application>
 
 </manifest>
