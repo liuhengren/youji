@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".bean.UserDateApplication">
-        <activity android:name=".view.FoodActivity" ></activity>
+        <activity android:name=".view.FoodActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.OthersActivity"></activity>
         <activity android:name=".view.ShareActivity" ></activity>
         <activity android:name=".view.PersonalCenterActivity" ></activity>
@@ -19,11 +25,7 @@
         <activity android:name=".view.PersonalDataEditorActivity" ></activity>
         <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

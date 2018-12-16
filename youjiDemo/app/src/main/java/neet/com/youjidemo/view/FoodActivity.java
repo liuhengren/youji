@@ -7,6 +7,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
+import android.view.View;
 
 
 import java.util.ArrayList;
@@ -28,19 +30,17 @@ public class FoodActivity extends AppCompatActivity {
         setContentView(R.layout.food_activity);
         findViews();
         inits();
-//        setFloatingActionButton();
 
         Toolbar toolbar=findViewById(R.id.tb_back);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
     }
 
     private void findViews() {
         tabLayout = findViewById(R.id.tl_recommend);
-        viewPager=findViewById(R.id.vp_dynamic);
+      viewPager=findViewById(R.id.vp_dynamic);
 
     }
 
