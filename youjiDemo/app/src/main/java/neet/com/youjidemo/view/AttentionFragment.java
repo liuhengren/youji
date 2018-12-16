@@ -7,12 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.AttentionPagerAdapter;
 
@@ -37,10 +41,32 @@ public class AttentionFragment extends Fragment {
         list.add(1);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_production);
+
+        //创建默认的线性LayoutManager
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
+
+        //创建Adapter
         AttentionPagerAdapter adapter = new AttentionPagerAdapter(list);
+
+        //如果Item的高度是固定的，这句代码可以提高效率
+        recyclerView.setHasFixedSize(true);
+
+        //这只Adapter
         recyclerView.setAdapter(adapter);
+
+        //设置Item的点击事件（具体实现方法在Adapter中）
+        adapter.setmOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"点击了"+v.getId(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         return view;
     }
+
+
+
 }

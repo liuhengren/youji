@@ -3,7 +3,6 @@ package neet.com.youjidemo.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +18,9 @@ import neet.com.youjidemo.adapter.SquareAdapter;
 
 
 /*
-* 1.分类：食物的Activity
-* */
-public class FoodActivity extends AppCompatActivity {
+ * 1.分类：旅游的Activity
+ * */
+public class TravleActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private List fragmentList=new ArrayList();
@@ -41,9 +40,6 @@ public class FoodActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
-
     }
 
     private void findViews() {
@@ -59,12 +55,12 @@ public class FoodActivity extends AppCompatActivity {
     创建广场和推荐 对应的Fragment
      */
     private  void  setFragment(){
+        Travel_SquareFragment squareFregament=new Travel_SquareFragment();
+        Travel_RecommendFragment recommendFragment=new Travel_RecommendFragment();
 
-        Food_RecommendFragment recommendFragment=new Food_RecommendFragment();
-        Food_SquareFragment squareFregament=new Food_SquareFragment();
-
-        fragmentList.add(recommendFragment);
         fragmentList.add(squareFregament);
+        fragmentList.add(recommendFragment);
+
         viewPager.setAdapter(new SquareAdapter(getSupportFragmentManager(),fragmentList));
         tabLayout.setupWithViewPager(viewPager);
 
@@ -73,8 +69,8 @@ public class FoodActivity extends AppCompatActivity {
 
 
     /*
-    * 设置 “美食”对应的TextView  以及 底部的简介
-    * */
+     * 设置 “美食”对应的TextView  以及 底部的简介
+     * */
     private void setData(){
     }
 

@@ -2,49 +2,111 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="20dp">
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
 
     <RelativeLayout
+        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--作品头像-->
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/cImage_attention_head"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
+            android:id="@+id/image_production_head"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/head" />
 
+        <!--用户名-->
         <TextView
-            android:id="@+id/tv_attention_username"
-            android:layout_width="150dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/cImage_attention_head"
-            android:gravity="center|left"
-            android:text="埃里克的把那么" />
-
-        <TextView
-            android:id="@+id/tv_attention_sign"
-            android:layout_width="150dp"
-            android:layout_height="25dp"
-            android:layout_below="@+id/tv_attention_username"
-            android:layout_toRightOf="@+id/cImage_attention_head"
-            android:text="一壶清酒，一身尘灰" />
-
-        <Button
-            android:id="@+id/btn_attention_yes"
+            android:id="@+id/tv_productions_username"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/personal_center_attention_btn"
-            android:text="已关注" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/image_production_head"
+            android:text="一个胖子"
+            android:textColor="@color/personal_username"
+            android:textStyle="bold" />
+
+        <!--发表了-->
+        <TextView
+            android:id="@+id/tv_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_productions_username"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/image_production_head"
+            android:text="主公上马新不爽" />
+
 
     </RelativeLayout>
+    <!--发表内容-->
+    <TextView
+        android:id="@+id/tv_productions_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="25dp"
+        android:maxLines="30"
+        android:text="测试测试测试测试"
+        android:textColor="@color/smssdk_black" />
 
+    <ImageView
+        android:layout_width="336dp"
+        android:layout_height="94dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/scenery" />
+
+    <LinearLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="40dp"
+        android:orientation="horizontal">
+
+        <!--收藏-->
+        <ImageButton
+            android:background="@color/trans"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/havecollect" />
+
+        <!--收藏数量-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="6" />
+
+        <!--评论-->
+        <ImageButton
+            android:background="@color/trans"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/message" />
+
+        <!--评论数量-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center_vertical"
+            android:text="25" />
+
+        <!--发表时间-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018/11/25"
+            android:layout_marginLeft="147dp"/>
+    </LinearLayout>
 </LinearLayout>
