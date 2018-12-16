@@ -18,6 +18,7 @@ public class SquareAdapter extends FragmentStatePagerAdapter {
         this.fragmentList = fragmentList;
     }
 
+
     @Override
     public Fragment getItem(int i) {
         return fragmentList.get(i);

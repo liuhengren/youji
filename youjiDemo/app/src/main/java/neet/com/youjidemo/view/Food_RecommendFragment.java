@@ -53,6 +53,7 @@ public class Food_RecommendFragment extends Fragment {
         setFloatingActionButton();
         setPullRefresh();
 
+
         return view;
 
     }
@@ -126,6 +127,7 @@ public class Food_RecommendFragment extends Fragment {
                 new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
             }
         });
+
     }
 
     /*
