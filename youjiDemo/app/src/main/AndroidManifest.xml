@@ -10,11 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.PersonalDataEditorActivity"></activity>
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.LogupActivity" />
-        <activity android:name=".view.ShareActivity" />
-        <activity android:name=".view.OthersActivity" />
-        <activity android:name=".view.DetailActivity" />
+        <activity android:name=".view.LogupActivity"></activity>
+        <activity android:name=".view.ShareActivity"></activity>
+        <activity android:name=".view.OthersActivity"></activity>
+        <activity android:name=".view.DetailActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,7 @@
         <activity android:name=".view.PersonalCenterActivity"></activity>
         <activity android:name=".view.MyLoveActivity"></activity>
         <activity android:name=".view.IndexActivity"></activity>
-
+        <activity android:name=".view.MyLoveActivity"></activity>
     </application>
 
 </manifest>
