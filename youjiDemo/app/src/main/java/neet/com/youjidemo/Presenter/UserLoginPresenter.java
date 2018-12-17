@@ -1,10 +1,8 @@
 package neet.com.youjidemo.Presenter;
 
-import android.os.Handler;
-
 import neet.com.youjidemo.biz.IUserLog;
 import neet.com.youjidemo.biz.Userbiz;
-import neet.com.youjidemo.view.ILoginView;
+import neet.com.youjidemo.view.IView.ILoginView;
 
 public class UserLoginPresenter {
     private IUserLog userLog;

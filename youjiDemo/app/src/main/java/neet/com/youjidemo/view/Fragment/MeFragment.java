@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.view.LoginActivity;
 
 
 public class MeFragment extends Fragment {

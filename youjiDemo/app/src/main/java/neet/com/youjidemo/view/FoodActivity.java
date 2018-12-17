@@ -3,12 +3,9 @@ package neet.com.youjidemo.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
@@ -18,6 +15,8 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareAdapter;
+import neet.com.youjidemo.view.Fragment.Food_RecommendFragment;
+import neet.com.youjidemo.view.Fragment.Food_SquareFragment;
 
 
 /*

@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,23 +20,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.R;
-import neet.com.youjidemo.adapter.IndexRecommendRecycleItemAdapter;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
 
 
 /*
- * 1.位置：首页的推荐
- * 2.作者：李俊霞
+ * 1.类别：游迹
+ * 2.推荐或广场：广场
  * */
-public class Index_FoodFragment extends Fragment {
+public class Travel_SquareFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
+    private com.melnykov.fab.FloatingActionButton floatingActionButton;
+    private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout mySwipeRefreshLayout;
-    private IndexRecommendRecycleItemAdapter indexRecommendRecycleItemAdapter;
+    private SquareItemAdapter squareItemAdapter;
     private View view;
     RecyclerView.LayoutManager manager;
+    int lastVisibleItem;
     boolean isLoading=false;
 
 
@@ -44,30 +46,69 @@ public class Index_FoodFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-     if(view==null) {
-         view = inflater.inflate(R.layout.index_recommend_layout, container, false);
-         findViews();
-         setPullRefresh();
-         setRecyclerView();
 
-     }
+        if(view==null) {
+            view = inflater.inflate(R.layout.square_layout, container, false);
+
+        findViews();
+        setRecyclerView();
+        setFloatingActionButton();
+        setPullRefresh();
+        }
+
         return view;
+
     }
 
     private void findViews() {
-        recyclerView = view.findViewById(R.id.rl_index_recommend);
+        recyclerView = view.findViewById(R.id.rl_square_item);
+        floatingActionButton = view.findViewById(R.id.fab_top);
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
 
     }
+
+
+    /*
+     * 设置FloatingActionButton 让ListView回到顶部
+     * */
+    private void setFloatingActionButton() {
+        floatingActionButton.hide();
+
+//            floatingActionButton和RecycleView绑定
+        floatingActionButton.attachToRecyclerView(recyclerView, new ScrollDirectionListener() {
+            @Override
+            public void onScrollDown() {
+                floatingActionButton.hide();
+            }
+
+            @Override
+            public void onScrollUp() {
+                floatingActionButton.show();
+            }
+        }, new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+        /*floatingButton点击回到顶部*/
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
+    }
+
 
     /*
     设置RecycleView下拉刷新
     */
     private void setPullRefresh() {
         // 设置下拉出现小圆圈是否是缩放出现，出现的位置，最大的下拉位置
-        mySwipeRefreshLayout.setProgressViewOffset(true, 50, 150);
+        mySwipeRefreshLayout.setProgressViewOffset(true, 50, 200);
         // 设置下拉圆圈的大小，两个值 LARGE， DEFAULT
-        mySwipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        mySwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
         mySwipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
@@ -83,7 +124,7 @@ public class Index_FoodFragment extends Fragment {
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
                 isLoading = false;
                 //  footView.setVisibility(View.GONE);
             }
@@ -99,23 +140,22 @@ public class Index_FoodFragment extends Fragment {
     private void setRecyclerView() {
 
         manager = new LinearLayoutManager(getContext());
+
+
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
         list = new ArrayList();
         list.add(1);
-        list.add(1);
-        list.add(1);
         //这里填入数据list
-        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list);
+        squareItemAdapter = new SquareItemAdapter(list);
 
-        recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
+        recyclerView.setAdapter(squareItemAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
 
 

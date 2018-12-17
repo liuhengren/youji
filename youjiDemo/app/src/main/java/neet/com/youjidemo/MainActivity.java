@@ -5,11 +5,8 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -19,10 +16,10 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 
-import neet.com.youjidemo.view.Index_Fragment;
-import neet.com.youjidemo.view.MeFragment;
-import neet.com.youjidemo.view.MessageFragment;
-import neet.com.youjidemo.view.Recommend_Fragment;
+import neet.com.youjidemo.view.Fragment.Index_Fragment;
+import neet.com.youjidemo.view.Fragment.MeFragment;
+import neet.com.youjidemo.view.Fragment.MessageFragment;
+import neet.com.youjidemo.view.Fragment.Recommend_Fragment;
 import neet.com.youjidemo.view.ShareActivity;
 
 public class MainActivity extends AppCompatActivity {

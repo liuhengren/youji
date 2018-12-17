@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,20 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.IndexRecommendAdapter;
-import neet.com.youjidemo.adapter.SquareAdapter;
-
-import static android.support.design.widget.TabLayout.MODE_FIXED;
 
 
 /**

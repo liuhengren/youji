@@ -26,8 +26,6 @@
         <activity android:name=".view.FoodActivity"></activity>
         <activity android:name=".view.PersonalCenterActivity"></activity>
         <activity android:name=".view.MyLoveActivity"></activity>
-        <activity android:name=".view.IndexActivity"></activity>
-        <activity android:name=".view.MyLoveActivity"></activity>
+        <activity android:name=".view.TravleActivity"></activity>
     </application>
-
 </manifest>

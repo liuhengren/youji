@@ -13,7 +13,7 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.CommentMessae;
-import neet.com.youjidemo.view.MessageFragment;
+import neet.com.youjidemo.view.Fragment.MessageFragment;
 
 public class CommentAdapter extends BaseAdapter {
     private MessageFragment context;
