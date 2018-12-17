@@ -14,21 +14,29 @@
 
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.LogupActivity"></activity>
+
         <activity android:name=".view.PersonalDataEditorActivity" />
 
         
 
-        <activity android:name=".view.FoodActivity" ></activity>
-        <activity android:name=".view.OthersActivity"></activity>
-        <activity android:name=".view.ShareActivity" ></activity>
-        <activity android:name=".view.PersonalCenterActivity" ></activity>
+       
+ 
       
         
+        <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity android:name=".view.FoodActivity"></activity>
+        <activity android:name=".view.ShareActivity"></activity>
+        <activity android:name=".view.OthersActivity"></activity>
+        <activity android:name=".view.DetailActivity">
 
         <activity android:name=".MainActivity">
 
 
         <activity android:name=".view.FoodActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +45,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.PersonalCenterActivity"></activity>
 
 
 
-        <activity android:name=".view.DetailActivity"></activity>
+
 
         <activity android:name=".view.OthersActivity" />
         <activity android:name=".view.ShareActivity" />
@@ -53,6 +62,7 @@
         <activity
             android:name=".view.TravleActivity"
             android:label="@string/title_activity_travle"></activity>
+
 
     </application>
 
