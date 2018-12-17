@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;

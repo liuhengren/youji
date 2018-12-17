@@ -1,6 +1,5 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,7 +29,7 @@ import neet.com.youjidemo.command.PullRefreshTask;
  * 1.位置：首页的推荐
  * 2.作者：李俊霞
  * */
-public class Index_FoodFragment extends Fragment {
+public class Index_RecommendFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
@@ -45,13 +44,13 @@ public class Index_FoodFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-     if(view==null) {
-         view = inflater.inflate(R.layout.index_recommend_layout, container, false);
-         findViews();
-         setPullRefresh();
-         setRecyclerView();
+        if(view==null) {
+            view = inflater.inflate(R.layout.index_recommend_layout, container, false);
+            findViews();
+            setPullRefresh();
+            setRecyclerView();
 
-     }
+        }
         return view;
     }
 
@@ -111,13 +110,7 @@ public class Index_FoodFragment extends Fragment {
         indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list);
 
         recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
-        indexRecommendRecycleItemAdapter.setmOnItemClickListener(new IndexRecommendRecycleItemAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getContext(),DetailActivity.class);
-                startActivity(intent);
-            }
-        });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);

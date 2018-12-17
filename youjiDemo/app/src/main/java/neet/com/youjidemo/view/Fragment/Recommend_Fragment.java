@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.view.FoodActivity;
+import neet.com.youjidemo.view.TravleActivity;
 
 /**
  * desc:首页的推荐Fragment

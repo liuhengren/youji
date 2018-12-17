@@ -23,8 +23,9 @@ import cn.smssdk.SMSSDK;
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLogupPresenter;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.view.IView.ILogUpView;
 
-public class LogupActivity extends AppCompatActivity implements ILogUpView{
+public class LogupActivity extends AppCompatActivity implements ILogUpView {
     private EditText mEtUserPhone,mEtCode,mUserPassword;
     private Button mBtLogup,mBtgetCode;
     private TextView mTvToLogin,mTvForgetPassword;

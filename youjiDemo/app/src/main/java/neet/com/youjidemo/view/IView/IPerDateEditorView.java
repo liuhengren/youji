@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.IView;
 
 public interface IPerDateEditorView {
     String getUserName();

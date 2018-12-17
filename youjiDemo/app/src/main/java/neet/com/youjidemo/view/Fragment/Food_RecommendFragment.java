@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.melnykov.fab.ScrollDirectionListener;
 
 import java.util.ArrayList;
@@ -26,10 +25,10 @@ import neet.com.youjidemo.command.PullRefreshTask;
 
 
 /*
- * 1.类别：旅行
+ * 1.类别：食物
  * 2.推荐或广场：推荐
  * */
-public class Travel_RecommendFragment extends Fragment {
+public class Food_RecommendFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
@@ -39,20 +38,21 @@ public class Travel_RecommendFragment extends Fragment {
     private SquareItemAdapter squareItemAdapter;
     private View view;
     RecyclerView.LayoutManager manager;
-    boolean isLoading=false;
+    int lastVisibleItem;
+   boolean isLoading=false;
 
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(view==null) {
-            view = inflater.inflate(R.layout.square_layout, container, false);
-            findViews();
-            setRecyclerView();
-            setFloatingActionButton();
-            setPullRefresh();
-        }
+        view = inflater.inflate(R.layout.square_layout, container, false);
+        findViews();
+        setRecyclerView();
+        setFloatingActionButton();
+       setPullRefresh();
+
+
         return view;
 
     }
@@ -112,6 +112,10 @@ public class Travel_RecommendFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        // 通过 setEnabled(false) 禁用下拉刷新
+        //  mySwipeRefreshLayout.setEnabled(false);
+        // 设定下拉圆圈的背景
+        //  mySwipeRefreshLayout.setProgressBackgroundColor(R.color.);
 
 
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -119,6 +123,7 @@ public class Travel_RecommendFragment extends Fragment {
             public void onRefresh() {
                 new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
                 isLoading = false;
+              //  footView.setVisibility(View.GONE);
             }
         });
 
@@ -132,19 +137,31 @@ public class Travel_RecommendFragment extends Fragment {
     private void setRecyclerView() {
 
         manager = new LinearLayoutManager(getContext());
-         recyclerView.setLayoutManager(manager);
-         //从服务器获得的笔记的list
+
+
+        recyclerView.setLayoutManager(manager);
+
+        //从服务器获得的笔记的list
+
         list = new ArrayList();
-        list.add(1);
-        //这里填入数据list
-        squareItemAdapter = new SquareItemAdapter(list);
+        list.add(1);//这里填入数据list
+
+
+        squareItemAdapter = new SquareItemAdapter(list);//创建Adapter
+
         recyclerView.setAdapter(squareItemAdapter);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+
+
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 int lastVisibleItemPosition = 0;
@@ -153,10 +170,11 @@ public class Travel_RecommendFragment extends Fragment {
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                     lastVisibleItemPosition =
                             ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+
                     if (lastVisibleItemPosition >= layoutManager.getItemCount() - 1) {//到达最后一条数据是
 
                         isLoading = true;
-                    }
+                        }
                 }
             }
         });

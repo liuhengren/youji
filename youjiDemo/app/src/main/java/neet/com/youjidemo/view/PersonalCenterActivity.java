@@ -18,6 +18,9 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.ProductionFragmentPagerAdapter;
+import neet.com.youjidemo.view.Fragment.AttentionFragment;
+import neet.com.youjidemo.view.Fragment.FansFragment;
+import neet.com.youjidemo.view.Fragment.ProductionFragment;
 
 /**
  * desc:个人中心Activity
