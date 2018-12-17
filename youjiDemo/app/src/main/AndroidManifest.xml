@@ -24,12 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.PersonalCenterActivity"></activity>
 
-        <activity android:name=".view.DetailActivity"></activity>
-        <activity
-            android:name=".view.TravleActivity"
-            android:label="@string/title_activity_travle"></activity>
     </application>
 
 </manifest>
