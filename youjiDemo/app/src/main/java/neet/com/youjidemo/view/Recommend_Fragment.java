@@ -19,29 +19,24 @@ import neet.com.youjidemo.R;
  */
 
 public class Recommend_Fragment extends Fragment {
-
-    View view;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(view==null) {
-            view = inflater.inflate(R.layout.community_layout, null);
-        }
-            return view;
-
-    private ImageButton btnImageFood,btnImageTravel,btnImagePlay,btnImageHappy;
+    private ImageButton btnImageFood, btnImageTravel, btnImagePlay, btnImageHappy;
     private View view;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.community_layout,null);
+        if (view == null) {
+            view = inflater.inflate(R.layout.community_layout, null);
+        }
+
+
         findViews();
         /**左上角图的点击事件*/
         btnImageFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),FoodActivity.class);
+                Intent intent = new Intent(getContext(), FoodActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +45,7 @@ public class Recommend_Fragment extends Fragment {
         btnImageTravel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),TravleActivity.class);
+                Intent intent = new Intent(getContext(), TravleActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,7 +65,7 @@ public class Recommend_Fragment extends Fragment {
 
             }
         });
-
+        return view;
 
     }
 
@@ -84,3 +79,4 @@ public class Recommend_Fragment extends Fragment {
     }
 
 }
+

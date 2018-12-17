@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private TabWidget tabWidget;
     private FragmentTabHost fragmentTabHost;
-    private int frameHeight;
-    private int tabWidgetHeight;
     private DisplayMetrics dm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTabHost = findViewById(android.R.id.tabhost);
         fragmentTabHost.setup(this,getSupportFragmentManager(),android.R.id.tabcontent);
-
-
-        //初始化选项卡
-        TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
-                .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
-        //添加选项卡
-        fragmentTabHost.addTab(tabSpec1,Index_Fragment.class,null);
-
-
 
         frameLayout = findViewById(android.R.id.content);
         tabWidget = findViewById(android.R.id.tabs);
@@ -68,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         frameLayout.getLayoutParams().height = (screenHeight/20)*20;
         tabWidget.getLayoutParams().height = (screenHeight/20)*2;
 
-        //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec3,Index_Fragment.class,null);
+
 
         frameLayout.getLayoutParams().width = screenWidth;
         tabWidget.getLayoutParams().width = screenWidth;
@@ -173,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
                 .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
         //添加选项卡
-        fragmentTabHost.addTab(tabSpec1,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec1,Index_Fragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
@@ -188,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
 
         //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec3,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec3,Index_Fragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")
