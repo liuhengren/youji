@@ -1,0 +1,45 @@
+package neet.com.youjidemo.view;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import neet.com.youjidemo.R;
+
+
+public class MeFragment extends Fragment {
+    private ImageView headsculpture;
+    private TextView login;
+    private ImageButton collection;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_me,container,false);
+        headsculpture = view.findViewById(R.id.iv_head_sculpture);
+        login = view.findViewById(R.id.tv_login);
+        collection = view.findViewById(R.id.ib_collection);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                headsculpture.setImageResource(R.drawable.module_message_at);
+                login.setText("世俗的眼光");
+            }
+        });
+        headsculpture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                headsculpture.setImageResource(R.drawable.module_message_at);
+                login.setText("世俗的眼光");
+            }
+        });
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+}
