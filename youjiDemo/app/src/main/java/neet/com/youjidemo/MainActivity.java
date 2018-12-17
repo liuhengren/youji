@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 
-import neet.com.youjidemo.view.Food_Fragment;
+import neet.com.youjidemo.view.Index_Fragment;
 import neet.com.youjidemo.view.MeFragment;
 import neet.com.youjidemo.view.MessageFragment;
 import neet.com.youjidemo.view.Recommend_Fragment;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
                 .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
         //添加选项卡
-        fragmentTabHost.addTab(tabSpec1,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec1,Index_Fragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
 
         //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec3,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec3,Index_Fragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")

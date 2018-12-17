@@ -17,11 +17,14 @@ import neet.com.youjidemo.R;
  */
 
 public class Recommend_Fragment extends Fragment {
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.community_layout,null);
+        if(view==null) {
+            view = inflater.inflate(R.layout.community_layout, null);
+        }
+            return view;
 
-        return view;
     }
 }
