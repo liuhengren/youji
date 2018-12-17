@@ -1,3 +1,4 @@
+
 package neet.com.youjidemo.view;
 
 import android.os.Bundle;
@@ -67,10 +68,3 @@ public class TravleActivity extends AppCompatActivity {
 
 
 
-    /**
-     * 设置 “美食”对应的TextView  以及 底部的简介
-     */
-    private void setData(){
-    }
-
-}
