@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -23,55 +27,54 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String,View> tabSpecMap = new HashMap<String,View>();
     private HashMap<String,ImageView> imageViewMap = new HashMap<String, ImageView>();
     private HashMap<String,TextView> tagNameMap = new HashMap<String,TextView>();
+    private FrameLayout frameLayout;
+    private TabWidget tabWidget;
+    private FragmentTabHost fragmentTabHost;
+    private int frameHeight;
+    private int tabWidgetHeight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FragmentTabHost fragmentTabHost = findViewById(android.R.id.tabhost);
+        fragmentTabHost = findViewById(android.R.id.tabhost);
         fragmentTabHost.setup(this,getSupportFragmentManager(),android.R.id.tabcontent);
 
-        //初始化选项卡
-        TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
-                .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
-        //添加选项卡
-        fragmentTabHost.addTab(tabSpec1,Food_Fragment.class,null);
 
-        //初始化选项卡
-        TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
-                .setIndicator(getTabSpec(R.drawable.home,"社区","tab2"));
-        //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec2,Recommend_Fragment.class,null);
-
-        //初始化选项卡
-
-
-        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tab3")
-                .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
-
-        //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec3,Food_Fragment.class,null);
-
-        //初始化选项卡
-        TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")
-                .setIndicator(getTabSpec(R.drawable.message,"消息","tab4"));
-        //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec4,MessageFragment.class,null);
-
-        //初始化选项卡
-        TabHost.TabSpec tabSpec5 = fragmentTabHost.newTabSpec("tab5")
-                .setIndicator(getTabSpec(R.drawable.me,"我","tab5"));
-        //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec5,MeFragment.class,null);
-
-        //设置默认选中的选项卡
-        fragmentTabHost.setCurrentTab(0);
-        ImageView imageView = imageViewMap.get("tab1");
-        imageView.setImageResource(R.drawable.fivestar_choosed);
-        final TextView textView = tagNameMap.get("tab1");
-        textView.setTextColor(getResources().getColor(android.R.color.black));
+        frameLayout = findViewById(android.R.id.content);
+        tabWidget = findViewById(android.R.id.tabs);
+        //初始化
+        init();
 
         //选项卡更换事件
+        setChanged();
+
+
+
+        Log.e("高度","frameLayout:"+frameHeight+";"+"tabWidgetHeight:"+tabWidgetHeight);
+
+    }
+
+
+    /**
+     *加载tabSpec布局，并将标签中的Icon和标签名存储到Map中
+     */
+    private View getTabSpec(int imageId,String tagName,String tag){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.tabspec_layout,null);
+        ImageView imageView = view.findViewById(R.id.tab_icon);
+        imageView.setImageResource(imageId);
+        TextView textView = view.findViewById(R.id.tab_text);
+        textView.setText(tagName);
+        tabSpecMap.put(tag,view);
+        imageViewMap.put(tag,imageView);
+        tagNameMap.put(tag,textView);
+        return view;
+    }
+
+
+    //选项卡更改事件
+    private void setChanged(){
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
@@ -139,28 +142,50 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        
-
     }
 
 
-    /**
-     *加载tabSpec布局，并将标签中的Icon和标签名存储到Map中
-     */
-    private View getTabSpec(int imageId,String tagName,String tag){
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.tabspec_layout,null);
-        ImageView imageView = view.findViewById(R.id.tab_icon);
-        imageView.setImageResource(imageId);
-        TextView textView = view.findViewById(R.id.tab_text);
-        textView.setText(tagName);
-        tabSpecMap.put(tag,view);
-        imageViewMap.put(tag,imageView);
-        tagNameMap.put(tag,textView);
-        return view;
+    //初始化
+    private void init(){
+        //初始化选项卡
+        TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
+                .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
+        //添加选项卡
+        fragmentTabHost.addTab(tabSpec1,Food_Fragment.class,null);
+
+        //初始化选项卡
+        TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
+                .setIndicator(getTabSpec(R.drawable.home,"社区","tab2"));
+        //添加选项卡(后来补充)
+        fragmentTabHost.addTab(tabSpec2,Recommend_Fragment.class,null);
+
+        //初始化选项卡
+
+
+        TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tab3")
+                .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
+
+        //添加选项卡(后来补充)
+        fragmentTabHost.addTab(tabSpec3,Food_Fragment.class,null);
+
+        //初始化选项卡
+        TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")
+                .setIndicator(getTabSpec(R.drawable.message,"消息","tab4"));
+        //添加选项卡(后来补充)
+        fragmentTabHost.addTab(tabSpec4,MessageFragment.class,null);
+
+        //初始化选项卡
+        TabHost.TabSpec tabSpec5 = fragmentTabHost.newTabSpec("tab5")
+                .setIndicator(getTabSpec(R.drawable.me,"我","tab5"));
+        //添加选项卡(后来补充)
+        fragmentTabHost.addTab(tabSpec5,MeFragment.class,null);
+
+        //设置默认选中的选项卡
+        fragmentTabHost.setCurrentTab(0);
+        ImageView imageView = imageViewMap.get("tab1");
+        imageView.setImageResource(R.drawable.fivestar_choosed);
+        final TextView textView = tagNameMap.get("tab1");
+        textView.setTextColor(getResources().getColor(android.R.color.black));
     }
-
-
 
 }
