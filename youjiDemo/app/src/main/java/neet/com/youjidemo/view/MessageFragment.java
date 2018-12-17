@@ -155,7 +155,7 @@ public class MessageFragment extends Fragment {
                 }
             }
         });
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();

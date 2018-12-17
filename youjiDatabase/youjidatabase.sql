@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-12-15 14:58:44
+Date: 2018-12-17 17:22:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_text` text,
+  `comment_time` datetime DEFAULT NULL,
   `comment_dynamic_id` int(11) DEFAULT NULL,
   `comment_like_num` int(11) DEFAULT NULL,
   `comment_user_id` int(11) DEFAULT NULL,

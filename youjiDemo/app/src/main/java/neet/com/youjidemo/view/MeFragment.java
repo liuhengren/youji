@@ -40,6 +40,6 @@ public class MeFragment extends Fragment {
                 login.setText("世俗的眼光");
             }
         });
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
