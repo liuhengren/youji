@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.LogupActivity"></activity>
-        <activity android:name=".view.PersonalDataEditorActivity" />
         <activity android:name=".view.ShareActivity"></activity>
         <activity android:name=".view.OthersActivity"></activity>
         <activity android:name=".view.DetailActivity"></activity>
