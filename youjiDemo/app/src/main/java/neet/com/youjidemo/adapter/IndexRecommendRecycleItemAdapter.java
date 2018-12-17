@@ -18,18 +18,18 @@ import neet.com.youjidemo.R;
 
 public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder>{
     private List list;
-//    Button care;
-//    TextView name;
-//    TextView date;
-//    TextView signatures;
-//    TextView collectNum;
-//    TextView judgeNum;
-//    TextView goodNum;
-//    CircleImageView headPhoto;
-//    ImageView contentImage;
-//    ImageButton goodButton;
-//    ImageButton collectButton;
-//    ImageButton judgeButton;
+    Button care;
+    TextView name;
+    TextView location;
+    TextView description;
+    TextView collectNum;
+    TextView judgeNum;
+    TextView goodNum;
+    CircleImageView headPhoto;
+    ImageView contentImage;
+    ImageButton goodButton;
+    ImageButton collectButton;
+    ImageButton judgeButton;
 
 
 
@@ -51,7 +51,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
        /*
-    设置广场上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
+    设置首页上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
      */
         //例如： viewHolder.name.setText("李四");
 
@@ -66,18 +66,18 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            care = itemView.findViewById(R.id.btn_care);
-//            name = itemView.findViewById(R.id.tv_name);
-//            date = itemView.findViewById(R.id.tv_date);
-//            signatures = itemView.findViewById(R.id.tv_signatures);
-//            collectNum = itemView.findViewById(R.id.tv_collectNum);
-//            judgeNum = itemView.findViewById(R.id.tv_judgeNum);
-//            goodNum = itemView.findViewById(R.id.tv_goodNum);
-//            headPhoto = itemView.findViewById(R.id.iv_headphoto);
-//            contentImage = itemView.findViewById(R.id.iv_contentimage);
-//            goodButton = itemView.findViewById(R.id.ib_good);
-//            judgeButton = itemView.findViewById(R.id.ib_collect);
-//            collectButton = itemView.findViewById(R.id.ib_judge);
+            care = itemView.findViewById(R.id.btn_care);
+            name = itemView.findViewById(R.id.tv_name);
+            location = itemView.findViewById(R.id.tv_location);
+            description = itemView.findViewById(R.id.tv_description);
+            collectNum = itemView.findViewById(R.id.tv_collectNum);
+            judgeNum = itemView.findViewById(R.id.tv_judgeNum);
+            goodNum = itemView.findViewById(R.id.tv_goodNum);
+            headPhoto = itemView.findViewById(R.id.iv_headphoto);
+            contentImage = itemView.findViewById(R.id.iv_contentimage);
+            goodButton = itemView.findViewById(R.id.ib_good);
+            judgeButton = itemView.findViewById(R.id.ib_judge);
+            collectButton = itemView.findViewById(R.id.ib_collect);
 
 
         }
@@ -90,30 +90,30 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
      */
     private void setAllButtonClickListener() {
 
-//        //关注点击事件 点击关注就去关注 或者再次点击取消关注
-//        care.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        //收藏点击事件 点击收藏就收藏
-//        collectButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-//        //点赞点击事件  点击给点赞
-//        goodButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-//
+        //关注点击事件 点击关注就去关注 或者再次点击取消关注
+        care.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        //收藏点击事件 点击收藏就收藏
+        collectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        //点赞点击事件  点击给点赞
+        goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
   }
 
 }

@@ -12,7 +12,7 @@
         android:layout_gravity="center_horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/head_portrait"
+            android:id="@+id/iv_headphoto"
             android:layout_width="41dp"
             android:layout_height="41dp"
             android:layout_marginTop="21dp"
@@ -20,34 +20,34 @@
 
         <!--用户昵称-->
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/tv_name"
             android:layout_width="168dp"
             android:layout_height="21dp"
             android:layout_marginLeft="13dp"
             android:layout_marginTop="21dp"
             android:text="中华熊猫饲养员"
             android:textColor="@android:color/black"
-            android:layout_toRightOf="@+id/head_portrait"
+            android:layout_toRightOf="@+id/iv_headphoto"
             android:maxHeight="21dp" />
 
         <!--用户的位置信息-->
         <TextView
-            android:id="@+id/site"
+            android:id="@+id/tv_location"
             android:layout_width="91dp"
             android:layout_height="21dp"
-            android:layout_below="@+id/username"
+            android:layout_below="@+id/tv_name"
             android:layout_marginLeft="13dp"
             android:text="beijing/北京"
-            android:layout_toRightOf="@+id/head_portrait" />
+            android:layout_toRightOf="@+id/iv_headphoto" />
 
         <!--关注按钮-->
         <Button
-            android:id="@+id/attention"
+            android:id="@+id/btn_care"
             android:layout_width="66dp"
             android:layout_height="35dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="14dp"
-            android:layout_toRightOf="@+id/username"
+            android:layout_toRightOf="@+id/tv_name"
             android:elevation="50dp"
             android:text="关注"
             android:textSize="14dp" />
@@ -70,7 +70,7 @@
             android:background="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/tv_description"
             android:layout_width="329dp"
             android:layout_height="57dp"
             android:layout_below="@+id/gray_line"
@@ -80,11 +80,11 @@
             android:textSize="14dp" />
 
         <ImageView
-            android:id="@+id/user_photo"
+            android:id="@+id/iv_contentimage"
             android:layout_width="316dp"
             android:layout_height="75dp"
-            android:layout_below="@id/description"
-            android:layout_alignEnd="@+id/description"
+            android:layout_below="@id/tv_description"
+            android:layout_alignEnd="@id/tv_description"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="8dp"
             android:maxHeight="244dp"
@@ -114,7 +114,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/collect"
+                android:id="@+id/ib_collect"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/collect"
@@ -125,7 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收藏"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:id="@+id/tv_collectNum"/>
         </LinearLayout>
 
         <!--评论-->
@@ -136,7 +137,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/comment"
+                android:id="@+id/ib_judge"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/comment"
@@ -145,7 +146,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:text="208"
+                android:layout_gravity="center_vertical"
+                android:inputType="number"
+                android:id="@+id/tv_judgeNum"/>
         </LinearLayout>
 
         <!--点赞-->
@@ -156,16 +160,18 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/like"
+                android:id="@+id/ib_good"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/like"
                 android:background="#00000000"/>
-
-            <TextView   
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:text="208"
+                android:layout_gravity="center_vertical"
+                android:inputType="number"
+                android:id="@+id/tv_goodNum"/>
         </LinearLayout>
     </RelativeLayout>
 
