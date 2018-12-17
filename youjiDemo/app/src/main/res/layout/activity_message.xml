@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:elevation="10dp"
+        android:id="@+id/rl_title"
+        android:background="#e5e5e5"
+        android:layout_width="match_parent"
+        android:layout_height="111dp">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Notification"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/tv_movement"
+            android:textSize="18sp"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="90dp"
+            android:text="推送"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_message"
+            android:textSize="18sp"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="280dp"
+            android:text="消息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="135dp"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="#a6a6a6" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TabHost
+            android:id="@android:id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="340dp"
+                    android:layout_height="41dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="0dp"></TabWidget>
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <!--推送页-->
+                    <LinearLayout
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/lv_propelling"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></ListView>
+                   </LinearLayout>
+                    <!--私信页-->
+
+                    <LinearLayout
+                        android:layout_marginTop="40dp"
+                        android:id="@+id/tab2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:id="@+id/ll_at"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="74dp"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="17dp"
+                                        android:src="@drawable/module_message_at" />
+                                    <TextView
+                                        android:id="@+id/tv_at_text"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="16dp"
+                                        android:text="\u0040的消息"
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="197dp"
+                                        android:text="30"
+                                        android:id="@+id/tv_at_num"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                                <View
+                                    android:layout_width="380dp"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="#999999" />
+                                <ListView
+                                    android:visibility="gone"
+                                    android:id="@+id/lv_at"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"></ListView>
+                                <LinearLayout
+                                    android:id="@+id/ll_comment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="74dp"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/module_message_comment"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="17dp" />
+
+                                    <TextView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="15dp"
+                                        android:text="评论"
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="226dp"
+                                        android:text="30"
+                                        android:id="@+id/tv_comment_num"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                                <View
+                                    android:layout_width="380dp"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="#999999" />
+                                <ListView
+                                    android:visibility="gone"
+                                    android:id="@+id/lv_comment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </ListView>
+                                <LinearLayout
+                                    android:id="@+id/ll_good"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="74dp"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/module_message_good"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="17dp" />
+
+                                    <TextView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="15dp"
+                                        android:text="点赞/收藏"
+                                        android:textSize="16sp" />
+                                    <TextView
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="190dp"
+                                        android:text="30"
+                                        android:id="@+id/tv_collection_num"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                                <View
+                                    android:layout_marginTop="5dp"
+                                    android:layout_width="380dp"
+                                    android:layout_height="1dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="#999999" />
+                                <ListView
+                                    android:visibility="gone"
+                                    android:id="@+id/lv_good"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                </ListView>
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+                </FrameLayout>
+            </RelativeLayout>
+        </TabHost>
+    </LinearLayout>
+</RelativeLayout>

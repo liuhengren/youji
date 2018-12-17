@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_good_head_sculpture"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="21dp"
+            android:src="@drawable/module_message_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:textStyle="bold"
+            android:text="Arthur"
+            android:layout_marginTop="18dp"
+            android:layout_toRightOf="@+id/iv_good_head_sculpture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#a6a6a6"
+            android:layout_marginTop="44dp"
+            android:layout_toRightOf="@+id/iv_good_head_sculpture"
+            android:text="点赞了我的作品:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:background="#a6a6a6"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="75dp"
+            android:layout_width="290dp"
+            android:layout_height="70dp">
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/test"
+                android:layout_gravity="center_vertical"
+                android:layout_width="71dp"
+                android:layout_height="61dp" />
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:text="我们之间的距离好像忽远又忽进sdf，如果能重来我要选李白。"
+                android:layout_width="200dp"
+                android:layout_height="61dp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="380dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
