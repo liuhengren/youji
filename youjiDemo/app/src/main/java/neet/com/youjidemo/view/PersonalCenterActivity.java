@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +29,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
     private List productionList;
     private List attentionList;
     private List fansList;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_center);
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.tb_pde);
+        swipeRefreshLayout=findViewById(R.id.srl_downrefresh);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
@@ -56,6 +59,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("粉丝"));
         tabLayout.setupWithViewPager(mViewPager);
 
+        setDownRefresh();
     }
 
     public void editInformaion(View view){
@@ -72,5 +76,27 @@ public class PersonalCenterActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
+/*
+* 设置个人中心的下拉刷新
+* */
+    private  void setDownRefresh(){
+        swipeRefreshLayout.setProgressViewOffset(true, 50, 200);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //整个界面刷新 进行
+            }
+        });
+    }
+
+
 }
+
