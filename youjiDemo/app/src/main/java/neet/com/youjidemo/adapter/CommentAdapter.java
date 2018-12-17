@@ -16,7 +16,7 @@ import neet.com.youjidemo.bean.CommentMessae;
 import neet.com.youjidemo.view.MessageFragment;
 
 public class CommentAdapter extends BaseAdapter {
-    private Context context;
+    private MessageFragment context;
     private int itemLayout;
     private List<CommentMessae> messages = new ArrayList<>();
     public CommentAdapter(MessageFragment context, int itemLayout, List<CommentMessae> messages){
@@ -42,7 +42,7 @@ public class CommentAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context.getContext());
             convertView = layoutInflater.inflate(itemLayout, null);
         }
         TextView replyme = convertView.findViewById(R.id.tv_reply_me);

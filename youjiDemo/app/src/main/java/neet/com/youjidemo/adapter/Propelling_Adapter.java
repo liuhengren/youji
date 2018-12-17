@@ -18,9 +18,9 @@ import neet.com.youjidemo.view.MessageFragment;
 public class Propelling_Adapter extends BaseAdapter {
     private Context context;
     private int itemLayout;
-    private List<com.example.administrator.youji_my.Message> messages = new ArrayList<>();
+    private List<Message> messages = new ArrayList<>();
     public Propelling_Adapter(MessageFragment messageFragment, int propelling_listview_item, List<Message> messages){};
-    public Propelling_Adapter(Context context, int itemLayout, List<com.example.administrator.youji_my.Message> messages) {
+    public Propelling_Adapter(Context context, int itemLayout, List<Message> messages) {
         this.context = context;
         this.itemLayout = itemLayout;
         this.messages = messages;
