@@ -14,7 +14,6 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways"
             app:contentScrim="@color/view_background"
-            android:id="@+id/ctl"
             >
             <!--一.Banner 图-->
             <RelativeLayout
