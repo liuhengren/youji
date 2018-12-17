@@ -55,6 +55,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("收藏"));
         tabLayout.addTab(tabLayout.newTab().setText("粉丝"));
         tabLayout.setupWithViewPager(mViewPager);
+
     }
 
     public void editInformaion(View view){
@@ -71,4 +72,5 @@ public class PersonalCenterActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
 }
