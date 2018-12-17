@@ -151,10 +151,12 @@ public class Food_RecommendFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
+
         list = new ArrayList();
-        list.add(1);
-        //这里填入数据list
-        squareItemAdapter = new SquareItemAdapter(list);
+        list.add(1);//这里填入数据list
+
+
+        squareItemAdapter = new SquareItemAdapter(list);//创建Adapter
 
         recyclerView.setAdapter(squareItemAdapter);
 
