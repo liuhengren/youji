@@ -19,13 +19,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".view.FoodActivity"></activity>
-        <activity android:name=".view.PersonalCenterActivity" >
-
-        </activity>
+        <activity android:name=".view.PersonalCenterActivity"></activity>
+        <activity android:name=".view.MyLoveActivity"></activity>
+        <activity android:name=".view.IndexActivity"></activity>
         <activity android:name=".view.MyLoveActivity"></activity>
     </application>
 

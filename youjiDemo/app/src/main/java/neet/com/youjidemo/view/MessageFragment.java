@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MessageFragment extends Fragment {
     private boolean is_good;
     private TextView movement;
     private TextView message;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class MessageFragment extends Fragment {
         is_at = false;is_comment = false; is_good = false;
         movement = view.findViewById(R.id.tv_movement);
         message = view.findViewById(R.id.tv_message);
+
+        swipeRefreshLayout=view.findViewById(R.id.srl_downrefresh);
+        setDownRefresh();
         final TabHost tabHost = view.findViewById(android.R.id.tabhost);
         tabHost.setup();
         TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("First").setIndicator("推送").setContent(R.id.tab1);
@@ -169,4 +174,27 @@ public class MessageFragment extends Fragment {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
+
+  /*
+   * 设置推荐的下拉刷新
+* */
+    private  void setDownRefresh(){
+        swipeRefreshLayout.setProgressViewOffset(true, 50, 200);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //推送刷新 进行请求数据
+
+            }
+        });
+    }
+
+
 }

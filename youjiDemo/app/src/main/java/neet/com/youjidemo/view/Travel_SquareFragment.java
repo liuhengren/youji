@@ -46,12 +46,15 @@ public class Travel_SquareFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.square_layout, container, false);
+
+        if(view==null) {
+            view = inflater.inflate(R.layout.square_layout, container, false);
+
         findViews();
         setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
-
+        }
 
         return view;
 

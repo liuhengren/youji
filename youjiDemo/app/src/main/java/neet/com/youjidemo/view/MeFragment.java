@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,14 +31,16 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 headsculpture.setImageResource(R.drawable.module_message_at);
-                login.setText("世俗的眼光");
+                Intent intent = new Intent(getContext(),LoginActivity.class);
+                startActivity(intent);
             }
         });
         headsculpture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 headsculpture.setImageResource(R.drawable.module_message_at);
-                login.setText("世俗的眼光");
+                Intent intent = new Intent(getContext(),LoginActivity.class);
+                startActivity(intent);
             }
         });
         return view;

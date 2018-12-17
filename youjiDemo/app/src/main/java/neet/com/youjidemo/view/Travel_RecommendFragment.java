@@ -46,11 +46,13 @@ public class Travel_RecommendFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.square_layout, container, false);
-        findViews();
-        setRecyclerView();
-        setFloatingActionButton();
-        setPullRefresh();
+        if(view==null) {
+            view = inflater.inflate(R.layout.square_layout, container, false);
+            findViews();
+            setRecyclerView();
+            setFloatingActionButton();
+            setPullRefresh();
+        }
         return view;
 
     }
