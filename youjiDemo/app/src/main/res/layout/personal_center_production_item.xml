@@ -40,7 +40,7 @@
             android:layout_below="@+id/tv_productions_username"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/image_production_head"
-            android:text="发布:" />
+            android:text="主公上马新不爽" />
 
 
     </RelativeLayout>
@@ -71,7 +71,8 @@
         android:orientation="horizontal">
 
         <!--收藏-->
-        <ImageView
+        <ImageButton
+            android:background="@color/trans"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/collect" />
@@ -85,7 +86,8 @@
             android:text="6" />
 
         <!--评论-->
-        <ImageView
+        <ImageButton
+            android:background="@color/trans"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginLeft="30dp"

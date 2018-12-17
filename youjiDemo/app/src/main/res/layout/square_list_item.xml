@@ -45,14 +45,16 @@
                 android:layout_height="wrap_content"
                 android:text="2012-05-08"
                 android:textSize="14dp"
-                android:layout_marginTop="26dp" />
+                android:layout_marginTop="26dp"
+                android:id="@+id/tv_date"/>
         </RelativeLayout>
         <Button
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:text="关注"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:id="@+id/btn_care"/>
     </RelativeLayout>
 
     <!--二.内容-->
@@ -63,7 +65,7 @@
         android:layout_below="@id/rl_part1"
         android:textSize="14dp"
         android:paddingLeft="20dp"
-        android:id="@+id/rl_part2"
+        android:id="@+id/tv_signatures"
         android:padding="10dp"
         android:text="唯愿你走固原市黑党的看的地方搜啊说的" />
 
@@ -72,18 +74,19 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/rl_part2"
-        android:id="@+id/rl_part3"
+        android:layout_below="@id/tv_signatures"
+
         android:src="@drawable/item"
+        android:id="@+id/iv_contentimage"
         />
     <!--四.收藏，评论，点赞-->
     <RelativeLayout
         android:layout_width="337dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl_part3"
+        android:layout_below="@id/iv_contentimage"
         android:layout_centerHorizontal="true"
-        android:id="@+id/rl_part4"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:id="@+id/rl_part4">
 
         //1.收藏
         <LinearLayout
@@ -93,17 +96,20 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical">
             //收藏图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/collect2"/>
+                android:src="@drawable/collect2"
+                android:id="@+id/ib_collect"
+                />
             //被收藏数量
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
                 android:textSize="15dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tv_collectNum"/>
 
         </LinearLayout>
 
@@ -115,17 +121,19 @@
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical">
             //评论图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/message"/>
+                android:src="@drawable/message"
+                android:id="@+id/ib_judge"/>
             //被评论数量
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="200"
                 android:textSize="15dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tv_judgeNum"/>
 
         </LinearLayout>
 
@@ -137,17 +145,19 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical">
             //点赞图片
-            <ImageView
+            <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/like"/>
+                android:src="@drawable/like"
+                android:id="@+id/ib_good"/>
             //被点赞数量
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="200"
                 android:textSize="15dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tv_goodNum"/>
 
         </LinearLayout>
     </RelativeLayout>

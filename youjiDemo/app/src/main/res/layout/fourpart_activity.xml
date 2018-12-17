@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cd_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/abl_part1"
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     app:title=" " />
                 <!--//2.“美食”两个字-->
                 <TextView
-                    android:id="@+id/tv_food_text"
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -45,11 +45,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_food_text"
+                    android:layout_below="@id/tv_title"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:text="唯美食与爱不可辜负"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:id="@+id/tv_instruction"/>
             </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
 
