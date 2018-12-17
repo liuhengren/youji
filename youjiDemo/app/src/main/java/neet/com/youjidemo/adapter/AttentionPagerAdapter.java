@@ -62,8 +62,9 @@ public class AttentionPagerAdapter extends RecyclerView.Adapter<AttentionPagerAd
 
     /**
      * 设置Listenter
+     * @param listener
      */
-    public void setmOnItemClickListener(View.OnClickListener listener){
+    public void setmOnItemClickListener(OnItemClickListener listener){
         this.mOnItemClickListener = (OnItemClickListener) listener;
     }
 
