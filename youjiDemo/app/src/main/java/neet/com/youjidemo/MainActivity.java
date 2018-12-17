@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTabHost fragmentTabHost;
     private int frameHeight;
     private int tabWidgetHeight;
+    private DisplayMetrics dm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +52,18 @@ public class MainActivity extends AppCompatActivity {
         //选项卡更换事件
         setChanged();
 
+        dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
 
+        int screenHeight = dm.heightPixels;
+        int screenWidth = dm.widthPixels;
+        frameLayout.getLayoutParams().height = (screenHeight/20)*20;
+        tabWidget.getLayoutParams().height = (screenHeight/20)*2;
 
-        Log.e("高度","frameLayout:"+frameHeight+";"+"tabWidgetHeight:"+tabWidgetHeight);
+        frameLayout.getLayoutParams().width = screenWidth;
+        tabWidget.getLayoutParams().width = screenWidth;
+
+        Log.e("高度","frameLayout"+frameLayout.getLayoutParams().height+";"+"tabWidget:"+tabWidget.getLayoutParams().height);
 
     }
 
