@@ -20,11 +20,9 @@ import com.melnykov.fab.ScrollDirectionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
-import neet.com.youjidemo.customWidget.FootView;
 
 
 /*
@@ -42,7 +40,7 @@ public class Travel_RecommendFragment extends Fragment {
     private View view;
     RecyclerView.LayoutManager manager;
     boolean isLoading=false;
-    FootView footView;
+
 
 
     @Nullable
@@ -154,7 +152,7 @@ public class Travel_RecommendFragment extends Fragment {
                     lastVisibleItemPosition =
                             ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                     if (lastVisibleItemPosition >= layoutManager.getItemCount() - 1) {//到达最后一条数据是
-                        footView.setVisibility(View.VISIBLE);
+
                         isLoading = true;
                     }
                 }

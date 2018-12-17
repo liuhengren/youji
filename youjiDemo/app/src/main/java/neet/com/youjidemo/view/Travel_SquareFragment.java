@@ -5,32 +5,23 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.melnykov.fab.ScrollDirectionListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
-import neet.com.youjidemo.customWidget.FootView;
 
 
 /*
@@ -49,7 +40,7 @@ public class Travel_SquareFragment extends Fragment {
     RecyclerView.LayoutManager manager;
     int lastVisibleItem;
     boolean isLoading=false;
-    FootView footView;
+
 
 
     @Nullable
@@ -163,7 +154,6 @@ public class Travel_SquareFragment extends Fragment {
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        footView = new FootView(getContext());
 
 
 
@@ -179,7 +169,7 @@ public class Travel_SquareFragment extends Fragment {
                             ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
 
                     if (lastVisibleItemPosition >= layoutManager.getItemCount() - 1) {//到达最后一条数据是
-                        footView.setVisibility(View.VISIBLE);
+
                         isLoading = true;
                     }
                 }
