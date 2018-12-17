@@ -33,18 +33,19 @@ public class PullRefreshTask extends AsyncTask {
     protected void onProgressUpdate(Object[] values) {
 
         super.onProgressUpdate(values);
-        list.add(1);
+        list.add(0,1);
         squareItemAdapter.notifyDataSetChanged();
-        mySwipeRefreshLayout.setEnabled(false);
+        mySwipeRefreshLayout.setRefreshing(false);//停止下拉刷新
     }
 
 
     @Override
     protected Object doInBackground(Object[] objects) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             publishProgress();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
