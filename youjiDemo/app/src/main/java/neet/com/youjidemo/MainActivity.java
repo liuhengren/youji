@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Set;
 
 import neet.com.youjidemo.view.Food_Fragment;
+import neet.com.youjidemo.view.MeFragment;
+import neet.com.youjidemo.view.MessageFragment;
+import neet.com.youjidemo.view.Recommend_Fragment;
 import neet.com.youjidemo.view.ShareActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
                 .setIndicator(getTabSpec(R.drawable.home,"社区","tab2"));
         //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec2,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec2,Recommend_Fragment.class,null);
 
         //初始化选项卡
 
@@ -53,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")
                 .setIndicator(getTabSpec(R.drawable.message,"消息","tab4"));
         //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec4,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec4,MessageFragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec5 = fragmentTabHost.newTabSpec("tab5")
                 .setIndicator(getTabSpec(R.drawable.me,"我","tab5"));
         //添加选项卡(后来补充)
-        fragmentTabHost.addTab(tabSpec5,Food_Fragment.class,null);
+        fragmentTabHost.addTab(tabSpec5,MeFragment.class,null);
 
         //设置默认选中的选项卡
         fragmentTabHost.setCurrentTab(0);
