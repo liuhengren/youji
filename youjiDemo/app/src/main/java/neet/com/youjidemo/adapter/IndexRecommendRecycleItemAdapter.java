@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,8 +17,12 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 
-public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder>{
+public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder> implements View.OnClickListener {
     private List list;
+    private IndexRecommendRecycleItemAdapter.OnItemClickListener mOnItemClickListener = null;
+    /**
+     * 声明Item点击事件接口的变量
+     */
     Button care;
     TextView name;
     TextView location;
@@ -32,7 +37,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     ImageButton judgeButton;
 
 
-
     public IndexRecommendRecycleItemAdapter(List list) {
         this.list = list;
     }
@@ -41,9 +45,9 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).
-                inflate(R.layout.recommend_tabspec_item, viewGroup,false);
-        ViewHolder viewHolder=new ViewHolder(view);
-
+                inflate(R.layout.recommend_tabspec_item, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener((View.OnClickListener) this);//将创建的View注册点击事件
         return viewHolder;
     }
 
@@ -54,14 +58,33 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     设置首页上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
      */
         //例如： viewHolder.name.setText("李四");
-
+        viewHolder.itemView.setTag(i);//将position保存在itemView的Tag中，以便点击时进行获取
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-    public  class  ViewHolder extends RecyclerView.ViewHolder{
+
+    /**
+     * 重写OnClick方法
+     */
+    @Override
+    public void onClick(View v) {
+        mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
+    }
+
+    /**
+     * 设置Listenter
+     *
+     * @param listener
+     */
+    public void setmOnItemClickListener(IndexRecommendRecycleItemAdapter.OnItemClickListener listener) {
+        this.mOnItemClickListener = (IndexRecommendRecycleItemAdapter.OnItemClickListener) listener;
+    }
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,7 +107,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     }
 
 
-
     /*
     所有的Button点击事件
      */
@@ -105,6 +127,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
 
             }
         });
+
+
         //点赞点击事件  点击给点赞
         goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +138,14 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
             }
         });
 
-  }
+
+    }
+
+    /**
+     * 自定义接口，实现RecyclerView的Item点击事件
+     */
+    public static interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
 
 }

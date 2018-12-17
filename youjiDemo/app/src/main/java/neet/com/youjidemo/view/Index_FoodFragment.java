@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -110,7 +111,13 @@ public class Index_FoodFragment extends Fragment {
         indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list);
 
         recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
-
+        indexRecommendRecycleItemAdapter.setmOnItemClickListener(new IndexRecommendRecycleItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
