@@ -8,17 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.melnykov.fab.ScrollDirectionListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,8 +117,6 @@ public class Food_SquareFragment extends Fragment {
     */
     private  void setRecyclerView(){
          manager = new LinearLayoutManager(getContext());
-
-
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
@@ -133,8 +124,9 @@ public class Food_SquareFragment extends Fragment {
         list.add(1);
         //这里填入数据list
         squareItemAdapter = new SquareItemAdapter(list);
-
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(squareItemAdapter);
+
     }
 
 }
