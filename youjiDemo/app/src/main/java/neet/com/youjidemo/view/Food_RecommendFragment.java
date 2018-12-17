@@ -5,13 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
+import neet.com.youjidemo.customWidget.FootView;
 
 
 /*
@@ -42,6 +47,9 @@ public class Food_RecommendFragment extends Fragment {
     private SquareItemAdapter squareItemAdapter;
     private View view;
     RecyclerView.LayoutManager manager;
+    int lastVisibleItem;
+   boolean isLoading=false;
+   FootView footView;
 
 
     @Nullable
@@ -51,7 +59,7 @@ public class Food_RecommendFragment extends Fragment {
         findViews();
         setRecyclerView();
         setFloatingActionButton();
-        setPullRefresh();
+       setPullRefresh();
 
 
         return view;
@@ -64,9 +72,6 @@ public class Food_RecommendFragment extends Fragment {
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
 
     }
-
-
-
 
 
     /*
@@ -120,32 +125,72 @@ public class Food_RecommendFragment extends Fragment {
         //  mySwipeRefreshLayout.setEnabled(false);
         // 设定下拉圆圈的背景
         //  mySwipeRefreshLayout.setProgressBackgroundColor(R.color.);
+
+
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.e("看话剧 黑科技好","okd h dskh ");
                 new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
+                isLoading = false;
+              //  footView.setVisibility(View.GONE);
             }
         });
+
+
 
     }
 
     /*
     设置RecycleView的数据 ，adapter，
     */
-    private  void setRecyclerView(){
+    private void setRecyclerView() {
+
         manager = new LinearLayoutManager(getContext());
 
 
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
+
         list = new ArrayList();
-        list.add(1);
-        //这里填入数据list
-        squareItemAdapter = new SquareItemAdapter(list);
+        list.add(1);//这里填入数据list
+
+
+        squareItemAdapter = new SquareItemAdapter(list);//创建Adapter
 
         recyclerView.setAdapter(squareItemAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        footView = new FootView(getContext());
+
+
+
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                int lastVisibleItemPosition = 0;
+                //滑动手指且之前滑动的加载更多已经完成
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && !isLoading) {
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    lastVisibleItemPosition =
+                            ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+
+                    if (lastVisibleItemPosition >= layoutManager.getItemCount() - 1) {//到达最后一条数据是
+                        footView.setVisibility(View.VISIBLE);
+                        isLoading = true;
+                        }
+                }
+            }
+        });
     }
+
+
+
+
 
 }

@@ -5,13 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,11 +29,13 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
+import neet.com.youjidemo.command.PullRefreshTask;
+import neet.com.youjidemo.customWidget.FootView;
 
 
 /*
-1.类别：旅行
-2.具体的分类（推荐或广场）：广场
+ * 1.类别：游迹
+ * 2.推荐或广场：广场
  * */
 public class Travel_SquareFragment extends Fragment {
 
@@ -40,19 +46,10 @@ public class Travel_SquareFragment extends Fragment {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private SquareItemAdapter squareItemAdapter;
     private View view;
-    Button care;
-    TextView name;
-    TextView date;
-    TextView signatures;
-    TextView collectNum;
-    TextView judgeNum;
-    TextView goodNum;
-    CircleImageView headPhoto;
-    ImageView contentImage;
-    ImageButton goodButton;
-    ImageButton collectButton;
-    ImageButton judgeButton;
     RecyclerView.LayoutManager manager;
+    int lastVisibleItem;
+    boolean isLoading=false;
+    FootView footView;
 
 
     @Nullable
@@ -63,67 +60,16 @@ public class Travel_SquareFragment extends Fragment {
         setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
-        setAllButtonClickListener();
-        setAllData();
+
+
         return view;
 
     }
-
 
     private void findViews() {
         recyclerView = view.findViewById(R.id.rl_square_item);
         floatingActionButton = view.findViewById(R.id.fab_top);
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
-        care = view.findViewById(R.id.btn_care);
-        name = view.findViewById(R.id.tv_name);
-        date = view.findViewById(R.id.tv_date);
-        signatures = view.findViewById(R.id.tv_signatures);
-        collectNum = view.findViewById(R.id.tv_collectNum);
-        judgeNum = view.findViewById(R.id.tv_judgeNum);
-        goodNum = view.findViewById(R.id.tv_goodNum);
-        headPhoto = view.findViewById(R.id.iv_headphoto);
-        contentImage = view.findViewById(R.id.iv_contentimage);
-        goodButton = view.findViewById(R.id.ib_good);
-        judgeButton = view.findViewById(R.id.ib_collect);
-        collectButton = view.findViewById(R.id.ib_judge);
-    }
-
-    /*
-    设置广场上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
-     */
-    private void setAllData() {
-
-    }
-
-
-    /*
-    所有的Button点击事件
-     */
-    private void setAllButtonClickListener() {
-
-        //关注点击事件 点击关注就去关注 或者再次点击取消关注
-        care.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //收藏点击事件 点击收藏就收藏
-        collectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-        //点赞点击事件  点击给点赞
-        goodButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
 
     }
 
@@ -179,13 +125,29 @@ public class Travel_SquareFragment extends Fragment {
         //  mySwipeRefreshLayout.setEnabled(false);
         // 设定下拉圆圈的背景
         //  mySwipeRefreshLayout.setProgressBackgroundColor(R.color.);
+
+
+        mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
+                isLoading = false;
+                //  footView.setVisibility(View.GONE);
+            }
+        });
+
+
+
     }
 
     /*
     设置RecycleView的数据 ，adapter，
     */
-    private  void setRecyclerView(){
+    private void setRecyclerView() {
+
         manager = new LinearLayoutManager(getContext());
+
+
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
@@ -195,6 +157,38 @@ public class Travel_SquareFragment extends Fragment {
         squareItemAdapter = new SquareItemAdapter(list);
 
         recyclerView.setAdapter(squareItemAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        footView = new FootView(getContext());
+
+
+
+
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                int lastVisibleItemPosition = 0;
+                //滑动手指且之前滑动的加载更多已经完成
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && !isLoading) {
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    lastVisibleItemPosition =
+                            ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+
+                    if (lastVisibleItemPosition >= layoutManager.getItemCount() - 1) {//到达最后一条数据是
+                        footView.setVisibility(View.VISIBLE);
+                        isLoading = true;
+                    }
+                }
+            }
+        });
     }
+
+
+
+
 
 }
