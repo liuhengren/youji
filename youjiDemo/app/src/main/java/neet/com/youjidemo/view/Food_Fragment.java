@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.adapter.IndexListViewAdapter;
 import neet.com.youjidemo.R;
 
@@ -69,22 +70,12 @@ public class Food_Fragment extends Fragment {
         IndexListViewAdapter adapter = new IndexListViewAdapter(getContext(), list, R.layout.recommend_tabspec_item);
         listView.setAdapter(adapter);
 
-        ListView listView1 = view.findViewById(R.id.delicious);
-        List list1 = new ArrayList();
-        list1.add(1);
-        list1.add(2);
-        list1.add(3);
-        list1.add(4);
-        list1.add(5);
-        IndexListViewAdapter adapter1 = new IndexListViewAdapter(getContext(), list, R.layout.recommend_tabspec_item);
-        listView1.setAdapter(adapter1);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),"点击了"+position,Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getContext(), DetailActivity.class);
-                startActivity(intent);
+                Toast.makeText(getContext(), "点击了"+position, Toast.LENGTH_SHORT).show();
             }
         });
         return view;

@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.FoodActivity">
 
 
@@ -31,6 +32,9 @@
         <activity android:name=".view.MyLoveActivity" >
 
         </activity>
+
+        
+
 
     </application>
 
