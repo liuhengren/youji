@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.melnykov.fab.ScrollDirectionListener;
 
@@ -37,6 +39,8 @@ public class Food_SquareFragment extends Fragment {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private SquareItemAdapter squareItemAdapter;
     private View view;
+
+
     RecyclerView.LayoutManager manager;
     int lastVisibleItem;
     boolean isLoading=false;
@@ -51,6 +55,7 @@ public class Food_SquareFragment extends Fragment {
         setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
+
 
 
         return view;
@@ -177,9 +182,5 @@ public class Food_SquareFragment extends Fragment {
             }
         });
     }
-
-
-
-
 
 }

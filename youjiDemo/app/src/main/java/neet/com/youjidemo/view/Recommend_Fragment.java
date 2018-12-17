@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import neet.com.youjidemo.R;
 
@@ -17,6 +19,7 @@ import neet.com.youjidemo.R;
  */
 
 public class Recommend_Fragment extends Fragment {
+
     View view;
     @Nullable
     @Override
@@ -26,5 +29,58 @@ public class Recommend_Fragment extends Fragment {
         }
             return view;
 
+    private ImageButton btnImageFood,btnImageTravel,btnImagePlay,btnImageHappy;
+    private View view;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.community_layout,null);
+        findViews();
+        /**左上角图的点击事件*/
+        btnImageFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),FoodActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /**右上角图的点击事件*/
+        btnImageTravel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),TravleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /**左下角图的点击事件*/
+        btnImagePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /**右下角图的点击事件*/
+        btnImageHappy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
+
+    private void findViews() {
+
+        btnImageFood = view.findViewById(R.id.image_btn_food);
+        btnImageTravel = view.findViewById(R.id.image_btn_travel);
+        btnImagePlay = view.findViewById(R.id.image_btn_play);
+        btnImageHappy = view.findViewById(R.id.image_btn_note);
+
+    }
+
 }
