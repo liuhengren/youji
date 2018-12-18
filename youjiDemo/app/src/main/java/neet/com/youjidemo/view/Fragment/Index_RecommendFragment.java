@@ -107,19 +107,12 @@ public class Index_RecommendFragment extends Fragment {
         list.add(1);
         list.add(1);
         //这里填入数据list
-        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list);
-
+        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list,this.getContext());
         recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-
-
-
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -139,9 +132,5 @@ public class Index_RecommendFragment extends Fragment {
             }
         });
     }
-
-
-
-
 
 }

@@ -24,6 +24,7 @@ import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.IndexRecommendRecycleItemAdapter;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
+import neet.com.youjidemo.view.DetailActivity;
 
 
 /*
@@ -108,7 +109,7 @@ public class Index_FoodFragment extends Fragment {
         list.add(1);
         list.add(1);
         //这里填入数据list
-        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list);
+        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list,this.getContext());
 
         recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
         indexRecommendRecycleItemAdapter.setmOnItemClickListener(new IndexRecommendRecycleItemAdapter.OnItemClickListener() {
