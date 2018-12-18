@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.adapter.IndexFoodRecycleItemAdapter;
 import neet.com.youjidemo.adapter.IndexRecommendRecycleItemAdapter;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
 import neet.com.youjidemo.command.PullRefreshTask;
@@ -36,7 +37,7 @@ public class Index_FoodFragment extends Fragment {
     private List list;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mySwipeRefreshLayout;
-    private IndexRecommendRecycleItemAdapter indexRecommendRecycleItemAdapter;
+    private IndexFoodRecycleItemAdapter indexFoodRecycleItemAdapter;
     private View view;
     RecyclerView.LayoutManager manager;
     boolean isLoading=false;
@@ -111,14 +112,18 @@ public class Index_FoodFragment extends Fragment {
         //这里填入数据list
         indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list,this.getContext());
 
-        recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
-        indexRecommendRecycleItemAdapter.setmOnItemClickListener(new IndexRecommendRecycleItemAdapter.OnItemClickListener() {
+        recyclerView.setAdapter(indexFoodRecycleItemAdapter);
+
+        //RecyclerView点击事件
+        indexFoodRecycleItemAdapter.setmOnItemClickListener(new IndexFoodRecycleItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getContext(),DetailActivity.class);
                 startActivity(intent);
             }
         });
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
