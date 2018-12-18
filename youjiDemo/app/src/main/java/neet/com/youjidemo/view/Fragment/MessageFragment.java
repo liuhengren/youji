@@ -82,6 +82,8 @@ public class MessageFragment extends Fragment {
         ListView listView = view.findViewById(R.id.lv_propelling);
         Propelling_Adapter adapter = new Propelling_Adapter(this, R.layout.propelling_listview_item, messages);
 
+
+        //推送页ListView的点击事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,6 +116,16 @@ public class MessageFragment extends Fragment {
         final ListView commentListview = view.findViewById(R.id.lv_comment);
         CommentAdapter commentAdapter = new CommentAdapter(this,R.layout.comment_listview_adpter,commentOnes);
         commentListview.setAdapter(commentAdapter);
+
+        //commentListView的点击事件
+        commentListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //收藏的listview
         List<GoodMessage> goodOnes = new ArrayList<>();
         GoodMessage goodMessage1 = new GoodMessage(R.drawable.module_message_at, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
@@ -127,6 +139,16 @@ public class MessageFragment extends Fragment {
         final ListView goodListview = view.findViewById(R.id.lv_good);
         GoodAdapter good_adapter = new GoodAdapter(this, R.layout.good_listview_item, goodOnes);
         goodListview.setAdapter(good_adapter);
+
+        //点赞收藏的Item点击事件
+        goodListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         setListViewHeightBasedOnChildren(atListview);
         setListViewHeightBasedOnChildren(goodListview);
         setListViewHeightBasedOnChildren(commentListview);
