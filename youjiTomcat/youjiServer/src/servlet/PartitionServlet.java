@@ -1,29 +1,25 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.Dynamic;
-import dao.DynamicDao;
+import dao.PartitionDao;
 
 /**
- * Servlet implementation class Dynamicservlet
+ * Servlet implementation class PartitionServlet
  */
-@WebServlet("/Dynamicservlet")
-public class SearchAllDynamicservlet extends HttpServlet {
+@WebServlet("/PartitionServlet")
+public class PartitionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAllDynamicservlet() {
+    public PartitionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +27,15 @@ public class SearchAllDynamicservlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
-		List<Dynamic>allDynamic=DynamicDao.getDynamic();
+		String message=request.getParameter("message");
+
+		//1.获得分区
+		if("partition_getPartition".equals(message)) {
+			
+			PartitionDao.getPartition(partition_id);
+		}
 		
 		
 		
@@ -45,7 +47,6 @@ public class SearchAllDynamicservlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }
