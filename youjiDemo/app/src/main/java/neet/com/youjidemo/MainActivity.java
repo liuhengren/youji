@@ -95,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
                 TextView textViewtab4 = tagNameMap.get("tab4");
                 TextView textViewtab5 = tagNameMap.get("tab5");
 
+                //判断是否选中了分享内容选项卡
+                if (tabId.equals("tab3")){
+                    Intent intent = new Intent(MainActivity.this,ShareActivity.class);
+                    startActivity(intent);
+                }
+
                 //获取选项卡的标签集合
                 Set<String> keys = tabSpecMap.keySet();
                 for (String s:keys){
@@ -119,10 +125,6 @@ public class MainActivity extends AppCompatActivity {
                         textViewtab2.setTextColor(getResources().getColor(R.color.smssdk_black));
                         textViewtab4.setTextColor(getResources().getColor(R.color.lightgray));
                         textViewtab5.setTextColor(getResources().getColor(R.color.lightgray));
-                    }
-                    if (tabId.equals("tab3")){
-                        Intent intent = new Intent(MainActivity.this,ShareActivity.class);
-                        startActivity(intent);
                     }
                     if (tabId.equals("tab4")){
                         imageViewtab1.setImageResource(R.drawable.fivestar);
@@ -174,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
         //添加选项卡(后来补充)
         fragmentTabHost.addTab(tabSpec3,Index_Fragment.class,null);
+
 
         //初始化选项卡
         TabHost.TabSpec tabSpec4 = fragmentTabHost.newTabSpec("tab4")

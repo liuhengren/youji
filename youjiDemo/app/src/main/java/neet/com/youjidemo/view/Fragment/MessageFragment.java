@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view.Fragment;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,6 +30,7 @@ import neet.com.youjidemo.bean.AtMessage;
 import neet.com.youjidemo.bean.CommentMessae;
 import neet.com.youjidemo.bean.GoodMessage;
 import neet.com.youjidemo.bean.Message;
+import neet.com.youjidemo.view.DetailActivity;
 
 public class MessageFragment extends Fragment {
     private LinearLayout ll_at;
@@ -78,6 +81,15 @@ public class MessageFragment extends Fragment {
         messages.add(message4);
         ListView listView = view.findViewById(R.id.lv_propelling);
         Propelling_Adapter adapter = new Propelling_Adapter(this, R.layout.propelling_listview_item, messages);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
         listView.setAdapter(adapter);
         //at人的ListView
         List<AtMessage> atOnes = new ArrayList<>();
