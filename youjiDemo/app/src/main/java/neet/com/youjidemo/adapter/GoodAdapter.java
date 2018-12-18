@@ -16,11 +16,10 @@ import neet.com.youjidemo.bean.GoodMessage;
 import neet.com.youjidemo.view.MessageFragment;
 
 public class GoodAdapter extends BaseAdapter {
-    private Context context;
+    private MessageFragment context;
     private int itemLayout;
     private List<GoodMessage> messages = new ArrayList<>();
-    public GoodAdapter(MessageFragment messageFragment, int good_listview_item, List<GoodMessage> goodOnes){}
-    public GoodAdapter(Context context, int itemLayout, List<GoodMessage> messages) {
+    public GoodAdapter(MessageFragment context, int itemLayout, List<GoodMessage> messages) {
         this.context = context;
         this.itemLayout = itemLayout;
         this.messages = messages;
@@ -43,7 +42,7 @@ public class GoodAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context.getContext());
             convertView = layoutInflater.inflate(itemLayout, null);
         }
         ImageView headsculpture = convertView.findViewById(R.id.iv_good_head_sculpture);

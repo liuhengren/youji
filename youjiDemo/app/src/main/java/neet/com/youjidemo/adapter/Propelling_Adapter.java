@@ -16,11 +16,11 @@ import neet.com.youjidemo.bean.Message;
 import neet.com.youjidemo.view.MessageFragment;
 
 public class Propelling_Adapter extends BaseAdapter {
-    private Context context;
+    private MessageFragment context;
     private int itemLayout;
-    private List<com.example.administrator.youji_my.Message> messages = new ArrayList<>();
-    public Propelling_Adapter(MessageFragment messageFragment, int propelling_listview_item, List<Message> messages){};
-    public Propelling_Adapter(Context context, int itemLayout, List<com.example.administrator.youji_my.Message> messages) {
+    private List<Message> messages = new ArrayList<>();
+    //public Propelling_Adapter(MessageFragment messageFragment, int propelling_listview_item, List<Message> messages){};
+    public Propelling_Adapter(MessageFragment context, int itemLayout, List<Message> messages) {
         this.context = context;
         this.itemLayout = itemLayout;
         this.messages = messages;
@@ -43,7 +43,7 @@ public class Propelling_Adapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context.getContext());
             convertView = layoutInflater.inflate(itemLayout, null);
         }
         ImageView head_sculpture = convertView.findViewById(R.id.lv_head_sculpture);
