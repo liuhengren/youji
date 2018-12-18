@@ -8,7 +8,7 @@ import android.util.Log;
 
 import neet.com.youjidemo.biz.IUserDetailEdit;
 import neet.com.youjidemo.biz.UserDetailbiz;
-import neet.com.youjidemo.view.IPerDateEditorView;
+import neet.com.youjidemo.view.IView.IPerDateEditorView;
 
 public class PerDateEditPresenter {
     private IPerDateEditorView perDateEditorView;

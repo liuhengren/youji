@@ -22,19 +22,13 @@
             android:text="点击登录"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageButton
-            android:id="@+id/iv_love"
-            android:layout_marginLeft="31dp"
-            android:layout_marginBottom="17dp"
+        <Button
+            android:id="@+id/btn_love"
+            android:layout_marginLeft="75dp"
+            android:layout_marginBottom="5dp"
             android:layout_alignParentBottom="true"
             android:background="#00000000"
-            android:src="@drawable/collection_full"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="168dp"
-            android:layout_toRightOf="@+id/iv_love"
+            android:drawableLeft="@drawable/collection_full"
             android:text="收藏"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -44,30 +38,26 @@
             android:layout_centerHorizontal="true"
             android:layout_width="1dp"
             android:layout_height="35dp"/>
-       <ImageButton
-           android:id="@+id/iv_footprint"
-           android:layout_marginLeft="286dp"
+       <Button
+           android:id="@+id/btn_footprint"
+           android:layout_marginLeft="256dp"
            android:layout_marginTop="165dp"
            android:background="#00000000"
-           android:src="@drawable/me_foot_print"
+           android:drawableLeft="@drawable/me_foot_print"
+           android:text="足迹"
+           android:layout_marginBottom="15dp"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="168dp"
-            android:layout_toRightOf="@+id/iv_footprint"
-            android:text="足迹"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
+            android:id="@+id/btn_personal_center"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="我的关注"
+            android:text="个人中心"
             android:background="#FFFFFFFF"
             android:layout_weight="1"
             android:layout_width="match_parent"

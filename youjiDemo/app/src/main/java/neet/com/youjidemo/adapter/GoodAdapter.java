@@ -1,6 +1,5 @@
 package neet.com.youjidemo.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.GoodMessage;
-import neet.com.youjidemo.view.MessageFragment;
+import neet.com.youjidemo.view.Fragment.MessageFragment;
 
 public class GoodAdapter extends BaseAdapter {
     private MessageFragment context;

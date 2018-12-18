@@ -16,6 +16,8 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareAdapter;
+import neet.com.youjidemo.view.Fragment.Travel_RecommendFragment;
+import neet.com.youjidemo.view.Fragment.Travel_SquareFragment;
 
 
 /**
@@ -67,6 +69,5 @@ public class TravleActivity extends AppCompatActivity {
 
     }
 }
-
 
 

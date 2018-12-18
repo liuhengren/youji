@@ -1,4 +1,4 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,10 +25,10 @@ import neet.com.youjidemo.command.PullRefreshTask;
 
 
 /*
- * 1.类别：食物
+ * 1.类别：游迹
  * 2.推荐或广场：广场
  * */
-public class Food_SquareFragment extends Fragment {
+public class Travel_SquareFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
@@ -46,12 +46,15 @@ public class Food_SquareFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.square_layout, container, false);
+
+        if(view==null) {
+            view = inflater.inflate(R.layout.square_layout, container, false);
+
         findViews();
         setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
-
+        }
 
         return view;
 
@@ -153,7 +156,6 @@ public class Food_SquareFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
 
 

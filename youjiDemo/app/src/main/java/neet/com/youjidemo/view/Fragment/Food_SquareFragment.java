@@ -1,5 +1,6 @@
-package neet.com.youjidemo.view;
+package neet.com.youjidemo.view.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.melnykov.fab.ScrollDirectionListener;
 
@@ -25,10 +27,10 @@ import neet.com.youjidemo.command.PullRefreshTask;
 
 
 /*
- * 1.类别：游迹
+ * 1.类别：食物
  * 2.推荐或广场：广场
  * */
-public class Travel_SquareFragment extends Fragment {
+public class Food_SquareFragment extends Fragment {
 
     private List list;
     private RecyclerView recyclerView;
@@ -37,6 +39,8 @@ public class Travel_SquareFragment extends Fragment {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private SquareItemAdapter squareItemAdapter;
     private View view;
+
+
     RecyclerView.LayoutManager manager;
     int lastVisibleItem;
     boolean isLoading=false;
@@ -51,6 +55,7 @@ public class Travel_SquareFragment extends Fragment {
         setRecyclerView();
         setFloatingActionButton();
         setPullRefresh();
+
 
 
         return view;
@@ -158,6 +163,7 @@ public class Travel_SquareFragment extends Fragment {
 
 
 
+
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -176,9 +182,5 @@ public class Travel_SquareFragment extends Fragment {
             }
         });
     }
-
-
-
-
 
 }
