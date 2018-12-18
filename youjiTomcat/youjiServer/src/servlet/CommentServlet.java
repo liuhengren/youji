@@ -1,8 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.ResultSet;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,36 +12,47 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import bean.Dynamic;
-import dao.DynamicDao;
+import dao.CommentDao;
 
 /**
- * Servlet implementation class Dynamicservlet
+ * Servlet implementation class CommentServlet
  */
-@WebServlet("/SerchAllDynamicservlet")
-public class SearchAllDynamicservlet extends HttpServlet {
+@WebServlet("/CommentServlet")
+public class CommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAllDynamicservlet() {
+    public CommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
-		List<Dynamic>allDynamic=DynamicDao.getDynamic();
-		JSONObject object=new JSONObject();
-		object.put("list", allDynamic);
-		response.getWriter().append(object.toString());
-		
-		
+		String message=request.getParameter("message");
+		PrintWriter out=response.getWriter();
+		//1.获取该动态的所有评论
+		if("comment_ByDynamicId".equals(message)) {
+			List list=CommentDao.getCommentByDynamicId(dynamic_id);
+			JSONObject object=new JSONObject()；
+					object.put("list", list);
+			out.write(object.toString());
+		}
+		 //2.插入一条评论
+		if("comment_addComment".equals(message)) {
+			CommentDao.addComment(comment);
+			
+			
+		}
+		 //3.给该评论点赞+1
+		if("comment_likeComment".equals(message)) {
+			CommentDao.likeComment(comment_id);
+		}
 	}
 
 	/**
@@ -51,7 +61,6 @@ public class SearchAllDynamicservlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }

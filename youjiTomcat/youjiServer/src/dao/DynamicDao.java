@@ -11,7 +11,7 @@ import bean.Dynamic;
 public class DynamicDao {
 	
 	
-	//1.DynamicDao 查找
+	//1.DynamicDao 查找所有
 	public static List<bean.Dynamic> getDynamic() {
 		
 		Connection connection=DataBase.getConnection();
@@ -183,7 +183,7 @@ public class DynamicDao {
 	}
 
 	//6.通过Id删除一条动态
-	  public void deleteDynamic(int Dynamic_id) {
+	  public static void deleteDynamic(int Dynamic_id) {
 		  
 		  Connection connection=DataBase.getConnection();
 			Dynamic dynamic=null;
@@ -202,7 +202,7 @@ public class DynamicDao {
 			
 	  }
 
-	  //6.根据热度获得动态
+	  //7.根据热度获得动态
 	  public List<Dynamic> getDynamicOrderHot(){
 		  return null;
 	 }

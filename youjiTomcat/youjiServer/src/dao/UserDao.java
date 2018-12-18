@@ -54,8 +54,8 @@ public class UserDao {
 
 	}
 
-	// 4.通过用户Id获得用户
-	public User getUserById(int user_id) {
+	// 3.通过用户Id获得用户
+	public static User getUserById(int user_id) {
 		Connection connection = DataBase.getConnection();
 		String sql = "select * from user where user_id=?";
 		User user = null;
@@ -79,8 +79,8 @@ public class UserDao {
 		return user;
 	}
 	
-	//5.修改用户名
-	  public void updateUsername(int user_id,String username) {
+	//4.修改用户名
+	  public static void updateUsername(int user_id,String username) {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_name=? where user_id=?";
 			try {
@@ -95,12 +95,12 @@ public class UserDao {
 			}  
 	  }
 	  
-	  //6.修改头像
-	  public void updateUsertouxiang(int user_id,String img){
+	  //5.修改头像
+	  public static void updateUsertouxiang(int user_id,String img){
 		 
 	    }
-	    //7.修改性别
-	  public void updateUserSex(int user_id,String userSex)
+	    //6.修改性别
+	  public static void updateUserSex(int user_id,String userSex)
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_sex=? where user_id=?";
@@ -116,8 +116,8 @@ public class UserDao {
 				e.printStackTrace();
 			}  
 	    }
-	    //8.修改简介
-	  public void updateUserIntroduction(int user_id,String userIntroduction)
+	    //7.修改简介
+	  public  static void updateUserIntroduction(int user_id,String userIntroduction)
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_introduction=? where user_id=?";
@@ -133,8 +133,8 @@ public class UserDao {
 				e.printStackTrace();
 			}  
 	    }
-	    //9.修改生日
-	  public void updateUserBirthday(int user_id,Date userBirthday)
+	    //8.修改生日
+	  public static void updateUserBirthday(int user_id,Date userBirthday)
 	    {
 
 		  Connection connection=DataBase.getConnection();
@@ -151,8 +151,8 @@ public class UserDao {
 				e.printStackTrace();
 			}  
 	    }
-	    //10.修改家乡
-	  public void updateUserHometown(int user_id,String userHometown) 
+	    //9.修改家乡
+	  public static void updateUserHometown(int user_id,String userHometown) 
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_address=? where user_id=?";

@@ -8,26 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Dynamic;
+import bean.Follow;
 
 
 public class FollowDao {
 
-	public FollowDao(int int1, int int2, int int3) {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 
 	//1.通过用户Id获得他的关注者
-	 public static  List<FollowDao> getFollowByUserId(int user_id){
+	 public static  List<Follow> getFollowByUserId(int user_id){
 			
 			Connection connection=DataBase.getConnection();
-			List <FollowDao> followList=new ArrayList<FollowDao>();
+			List <Follow> followList=new ArrayList<Follow>();
 			String sql="select * from follow";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				ResultSet result=preparedStatement.executeQuery();
 				while(result.next()) {
-					FollowDao follow=new FollowDao(
+					Follow follow=new Follow(
 							result.getInt("follow_id"),
 							result.getInt("user_id"),
 							result.getInt("follow_user_id"));
@@ -45,7 +44,7 @@ public class FollowDao {
 	 
 	 
 	 //2.添加关注者
-	 public void addFollow(int user_id,int follow_user_id) {
+	 public static void addFollow(int user_id,int follow_user_id) {
 		 Connection connection=DataBase.getConnection();
 			
 			String sql="insert into follow(user_id,follow_user_id)values(?,?)";
@@ -65,7 +64,7 @@ public class FollowDao {
 	 
 	 
 	 //3.删除关注者
-	 public void deleteFollow(int user_id,int follow_user_id) {
+	 public static void deleteFollow(int user_id,int follow_user_id) {
 		  Connection connection=DataBase.getConnection();
 		  
 			String sql="delete * from follow where user_id=?,follow_user_id";
@@ -86,7 +85,7 @@ public class FollowDao {
 	  }
 	 
 	 //4.判断是否被关注
-	 public boolean isFollow(int user_id,int follow_user_id) {
+	 public static boolean isFollow(int user_id,int follow_user_id) {
 			Connection connection=DataBase.getConnection();
 			boolean judge=false;
 			String sql="select * from follow where user_id=?,follow_user_id=?";

@@ -10,6 +10,7 @@ import bean.Partition;
 
 public class PartitionDao {
 
+	//获得分区
 	 public static String getPartition(int partition_id) {
 		 Connection connection=DataBase.getConnection();
 		 String partition_text=null;

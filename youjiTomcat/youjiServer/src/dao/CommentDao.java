@@ -13,7 +13,7 @@ import bean.Comment;
 public class CommentDao {
 	
 	//1.获取该动态的所有评论
-	 public List<Comment> getCommentByDynamicId(int dynamic_id)
+	 public static List<Comment> getCommentByDynamicId(int dynamic_id)
 	 {
 		 Connection connection=DataBase.getConnection();
 			List <Comment> allCommentByDynamicId=new ArrayList<Comment>();
@@ -43,7 +43,7 @@ public class CommentDao {
 	 }
 	 
 	 //2.插入一条评论
-	   public  void addComment(Comment comment)
+	   public static  void addComment(Comment comment)
 	   {
 		   Connection connection=DataBase.getConnection();
 		   String sql="insert into comment("
@@ -66,7 +66,7 @@ public class CommentDao {
 	} 
 	   
 	   //3.给该评论点赞+1
-	   public  void likeComment(int comment_id)
+	   public static  void likeComment(int comment_id)
 	    {
 		   Connection connection=DataBase.getConnection();
 			 
