@@ -1,12 +1,18 @@
 package servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import bean.Partition;
 import dao.PartitionDao;
 
 /**
@@ -30,12 +36,27 @@ public class PartitionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
-
-		//1.获得分区
-		if("partition_getPartition".equals(message)) {
-			
-			PartitionDao.getPartition(partition_id);
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
+		StringBuffer sb = new StringBuffer("");
+		String temp;
+		while((temp = br.readLine()) != null){
+			sb.append(temp);
 		}
+		br.close();
+		String reqMessage = sb.toString();
+		System.out.println("请求报文:" + reqMessage);
+		
+		JSONObject jsonObject = new JSONObject(reqMessage);
+		String string = jsonObject.getString("partition_text");
+	
+		System.out.println(string);
+		
+		
+//		//1.获得分区
+//		if("partition_getPartition".equals(message)) {
+//			
+//			PartitionDao.getPartition(partition_id);
+//		}
 		
 		
 		
