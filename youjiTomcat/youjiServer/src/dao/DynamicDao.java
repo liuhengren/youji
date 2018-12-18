@@ -192,7 +192,7 @@ public class DynamicDao {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.setInt(0, Dynamic_id);
 				
-				ResultSet result=preparedStatement.executeQuery(sql);
+				preparedStatement.executeUpdate(sql);
 			
 				connection.close();
 			} catch (SQLException e) {
@@ -202,4 +202,8 @@ public class DynamicDao {
 			
 	  }
 
+	  //6.根据热度获得动态
+	  public List<Dynamic> getDynamicOrderHot(){
+		  return null;
+	 }
 }
