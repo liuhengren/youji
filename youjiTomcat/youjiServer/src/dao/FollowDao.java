@@ -45,15 +45,14 @@ public class FollowDao {
 	 
 	 
 	 //2.添加关注者
-	 public void addFollow(int user_id) {
+	 public void addFollow(int user_id,int follow_user_id) {
 		 Connection connection=DataBase.getConnection();
 			
 			String sql="insert into follow(user_id,follow_user_id)values(?,?)";
 			try {
 				PreparedStatement prepareStatement = connection.prepareStatement(sql);
-				prepareStatement.setInt(0, dynamic.getUser_id());
-				prepareStatement.setInt(1, dynamic.getCollection_num());
-				
+				prepareStatement.setInt(0, user_id);
+				prepareStatement.setInt(1, follow_user_id);
 				
 				boolean result = prepareStatement.execute();
 				connection.close();
@@ -66,15 +65,17 @@ public class FollowDao {
 	 
 	 
 	 //3.删除关注者
-	 public void deleteFollow(int user_id) {
+	 public void deleteFollow(int user_id,int follow_user_id) {
 		  Connection connection=DataBase.getConnection();
-			Dynamic dynamic=null;
-			String sql="delete * from dynamic where dynamic_id=?";
+		  
+			String sql="delete * from follow where user_id=?,follow_user_id";
 			try {
-				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, Dynamic_id);
 				
-				ResultSet result=preparedStatement.executeQuery(sql);
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setInt(0, user_id);
+				preparedStatement.setInt(0, follow_user_id);
+				
+				preparedStatement.executeUpdate(sql);
 			
 				connection.close();
 			} catch (SQLException e) {
@@ -83,5 +84,29 @@ public class FollowDao {
 			}
 			
 	  }
+	 
+	 //4.判断是否被关注
+	 public boolean isFollow(int user_id,int follow_user_id) {
+			Connection connection=DataBase.getConnection();
+			boolean judge=false;
+			String sql="select * from follow where user_id=?,follow_user_id=?";
+			try {
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setInt(0, user_id);
+				preparedStatement.setInt(0, follow_user_id);
+				ResultSet result=preparedStatement.executeQuery();
+				
+				while(result.next()) {
+					judge= true;
+				}
+					
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return judge;	 
+			}
 	
 }
