@@ -3,6 +3,8 @@ package neet.com.youjidemo.view;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ import neet.com.youjidemo.bean.LoveMessage;
  * @author ieasy360_1
  *
  */
-public class MyLoveActivity extends Activity implements OnClickListener {
+public class MyLoveActivity extends AppCompatActivity implements OnClickListener {
     private boolean judge = true;
     private ListView listview;
     private List<String> array = new ArrayList<String>(); //显示的内容
@@ -48,6 +50,8 @@ public class MyLoveActivity extends Activity implements OnClickListener {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_love);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         listview = (ListView)findViewById(R.id.list);
         layout = (RelativeLayout)findViewById(R.id.relative);
         txtcount = (TextView)findViewById(R.id.txtcount);
