@@ -72,12 +72,10 @@ public class Recommend_Fragment extends Fragment {
     }
 
     private void findViews() {
-
         btnImageFood = view.findViewById(R.id.image_btn_food);
         btnImageTravel = view.findViewById(R.id.image_btn_travel);
         btnImagePlay = view.findViewById(R.id.image_btn_play);
         btnImageHappy = view.findViewById(R.id.image_btn_note);
-
     }
 
 }

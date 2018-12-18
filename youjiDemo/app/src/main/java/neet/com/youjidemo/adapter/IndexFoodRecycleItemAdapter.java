@@ -2,11 +2,9 @@ package neet.com.youjidemo.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,9 +15,9 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 
-public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder> implements View.OnClickListener {
+public class IndexFoodRecycleItemAdapter extends RecyclerView.Adapter <IndexFoodRecycleItemAdapter.ViewHolder> implements View.OnClickListener {
     private List list;
-    private IndexRecommendRecycleItemAdapter.OnItemClickListener mOnItemClickListener = null;
+    private IndexFoodRecycleItemAdapter.OnItemClickListener mOnItemClickListener = null;
     /**
      * 声明Item点击事件接口的变量
      */
@@ -37,22 +35,22 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     ImageButton judgeButton;
 
 
-    public IndexRecommendRecycleItemAdapter(List list) {
+    public IndexFoodRecycleItemAdapter(List list) {
         this.list = list;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public IndexFoodRecycleItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).
                 inflate(R.layout.recommend_tabspec_item, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+       ViewHolder viewHolder = new ViewHolder(view);
         view.setOnClickListener((View.OnClickListener) this);//将创建的View注册点击事件
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull IndexFoodRecycleItemAdapter.ViewHolder viewHolder, int i) {
 
        /*
     设置首页上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
@@ -79,8 +77,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
      *
      * @param listener
      */
-    public void setmOnItemClickListener(IndexRecommendRecycleItemAdapter.OnItemClickListener listener) {
-        this.mOnItemClickListener = (IndexRecommendRecycleItemAdapter.OnItemClickListener) listener;
+    public void setmOnItemClickListener(IndexFoodRecycleItemAdapter.OnItemClickListener listener) {
+        this.mOnItemClickListener = (IndexFoodRecycleItemAdapter.OnItemClickListener) listener;
     }
 
 
@@ -147,5 +145,4 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     public static interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-
 }
