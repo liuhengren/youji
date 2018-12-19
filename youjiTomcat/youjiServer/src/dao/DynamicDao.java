@@ -57,15 +57,15 @@ public class DynamicDao {
 				+ "values(?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
-			prepareStatement.setInt(0, dynamic.getUser_id());
-			prepareStatement.setString(1, dynamic.getText());
-			prepareStatement.setString(2, dynamic.getImg());
-			prepareStatement.setInt(3, dynamic.getCollection_num());
-			prepareStatement.setInt(4, dynamic.getLike_num());
-			prepareStatement.setInt(5, dynamic.getComment_num());
-			prepareStatement.setString(6,dynamic.getAddress());
-			prepareStatement.setDate(7, dynamic.getTime());
-			prepareStatement.setInt(8, dynamic.getPartition_id());
+			prepareStatement.setInt(1, dynamic.getUser_id());
+			prepareStatement.setString(2, dynamic.getText());
+			prepareStatement.setString(3, dynamic.getImg());
+			prepareStatement.setInt(4, dynamic.getCollection_num());
+			prepareStatement.setInt(5, dynamic.getLike_num());
+			prepareStatement.setInt(6, dynamic.getComment_num());
+			prepareStatement.setString(7,dynamic.getAddress());
+			prepareStatement.setDate(8, dynamic.getTime());
+			prepareStatement.setInt(9, dynamic.getPartition_id());
 			
 			boolean result = prepareStatement.execute();
 			connection.close();
@@ -84,7 +84,7 @@ public class DynamicDao {
 		String sql="select * from dynamic where dynamic_partition_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(0, partition_id);
+			preparedStatement.setInt(1, partition_id);
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
@@ -120,7 +120,7 @@ public class DynamicDao {
 		String sql="select * from dynamic where dynamic_user_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(0, user_id);
+			preparedStatement.setInt(1, user_id);
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
@@ -155,7 +155,7 @@ public class DynamicDao {
 		String sql="select * from dynamic where dynamic_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(0, dynamic_id);
+			preparedStatement.setInt(1, dynamic_id);
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
@@ -187,13 +187,13 @@ public class DynamicDao {
 		  
 		  Connection connection=DataBase.getConnection();
 			Dynamic dynamic=null;
-			String sql="delete * from dynamic where dynamic_id=?";
+			String sql="delete  from dynamic where dynamic_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, Dynamic_id);
+				preparedStatement.setInt(1, Dynamic_id);
 				
-				preparedStatement.executeUpdate(sql);
-			
+				preparedStatement.executeUpdate();
+			System.out.println("É¾³ý³É¹¦£¡");
 				connection.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

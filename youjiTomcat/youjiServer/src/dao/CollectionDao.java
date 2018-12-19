@@ -19,11 +19,13 @@ public class CollectionDao {
 		String sql = "select * from collection where collection_user_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(0, user_id);
+			preparedStatement.setInt(1, user_id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
-				Collection collection = new Collection(result.getInt("collection_id"),
-						result.getInt("collection_user_id"), result.getInt("collection_dynamic_id"));
+				Collection collection = new Collection(
+						result.getInt("collection_id"),
+						result.getInt("collection_user_id"), 
+						result.getInt("collection_dynamic_id"));
 				CollectionByUserIdlist.add(collection);
 
 			}
@@ -41,13 +43,12 @@ public class CollectionDao {
 	public static void addCollection(int user_id, int dynamic_id) {
 		Connection connection = DataBase.getConnection();
 
-		String sql = "insert into collection(collection_user_id,collection_dynamic_id values(?,?)";
+		String sql = "insert into collection(collection_user_id,collection_dynamic_id) values(?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
-			prepareStatement.setInt(0, user_id);
-			prepareStatement.setInt(1, dynamic_id);
-
-			boolean result = prepareStatement.execute();
+			prepareStatement.setInt(1, user_id);
+			prepareStatement.setInt(2, dynamic_id);
+			prepareStatement.execute();
 			connection.close();
 
 		} catch (SQLException e) {
@@ -60,11 +61,11 @@ public class CollectionDao {
 	public static void deleteCollection(int collection_id) {
 		Connection connection = DataBase.getConnection();
 		
-		String sql = "delete * from collection where collection_id=?";
+		String sql = "delete  from collection where collection_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(0, collection_id);
-			 preparedStatement.executeUpdate(sql);
+			preparedStatement.setInt(1, collection_id);
+			 preparedStatement.executeUpdate();
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
