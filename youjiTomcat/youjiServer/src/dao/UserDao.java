@@ -16,7 +16,7 @@ import jdk.nashorn.api.scripting.JSObject;
 public class UserDao {
 
 	// 1.通过手机号注册
-	public static void logup(String userphone, String password) {
+	public static boolean logup(String userphone, String password) {
 		Connection connection = DataBase.getConnection();
 
 		String sql = "insert into user(user_phone,user_password)values(?,?)";
@@ -27,11 +27,12 @@ public class UserDao {
 			prepareStatement.execute();
 			System.out.println("手机号注册成功！");
 			connection.close();
-
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	// 2.通过手机号登录
@@ -84,7 +85,7 @@ public class UserDao {
 	}
 	
 	//4.修改用户名
-	  public static void updateUsername(int user_id,String username) {
+	  public static boolean updateUsername(int user_id,String username) {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_name=? where user_id=?";
 			try {
@@ -95,11 +96,12 @@ public class UserDao {
 				preparedStatement.executeUpdate();
 				connection.close();
 				System.out.println("修改用户名成功！");
-				
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
+			return false;
 	  }
 	  
 	  //5.修改头像
@@ -107,7 +109,7 @@ public class UserDao {
 		 
 	    }
 	    //6.修改性别
-	  public static void updateUserSex(int user_id,String userSex)
+	  public static boolean updateUserSex(int user_id,String userSex)
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_sex=? where user_id=?";
@@ -119,13 +121,15 @@ public class UserDao {
 				preparedStatement.executeUpdate();
 				connection.close();
 				System.out.println("修改性别成功！");
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
+			return false;
 	    }
 	    //7.修改简介
-	  public  static void updateUserIntroduction(int user_id,String userIntroduction)
+	  public  static boolean updateUserIntroduction(int user_id,String userIntroduction)
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_introduction=? where user_id=?";
@@ -138,13 +142,15 @@ public class UserDao {
 				preparedStatement.executeUpdate();
 				connection.close();
 				System.out.println("修改简介成功！");
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
+			return false;
 	    }
 	    //8.修改生日
-	  public static void updateUserBirthday(int user_id,Date userBirthday)
+	  public static boolean updateUserBirthday(int user_id,Date userBirthday)
 	    {
 
 		  Connection connection=DataBase.getConnection();
@@ -158,13 +164,15 @@ public class UserDao {
 				preparedStatement.executeUpdate();
 				connection.close();
 				System.out.println("修改生日成功！");
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
+			return false;
 	    }
 	    //9.修改家乡
-	  public static void updateUserHometown(int user_id,String userHometown) 
+	  public static boolean updateUserHometown(int user_id,String userHometown) 
 	    {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_address=? where user_id=?";
@@ -177,10 +185,12 @@ public class UserDao {
 				preparedStatement.executeUpdate();
 				connection.close();
 				System.out.println("修改家乡成功！");
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
+			return false;
 	    }
 	  //10.通过用户手机号查询用户所有信息
 	  public static JSONObject getUserDetail(String userphone)

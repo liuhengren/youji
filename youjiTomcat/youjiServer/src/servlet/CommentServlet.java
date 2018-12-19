@@ -56,7 +56,10 @@ public class CommentServlet extends HttpServlet {
 			
 			String id=request.getParameter("id");
 			int comment_id=Integer.parseInt(id);
-			CommentDao.likeComment(comment_id);
+			boolean result = CommentDao.likeComment(comment_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 	}
 
