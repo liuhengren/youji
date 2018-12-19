@@ -10,8 +10,8 @@ import neet.com.youjidemo.bean.UserDetail;
 
 public class UserDetailbiz implements IUserDetailEdit{
     private Handler handler;
-    public  UserDetailbiz( Handler handler){
-        this.handler=handler;
+    public  UserDetailbiz(){
+
     }
     @Override
     public UserDetail getUserDetail(String userphone) {

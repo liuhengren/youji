@@ -19,7 +19,7 @@ public class UserLogupPresenter {
     private static final int GET_SUCCESS = 1;//获取验证码成功
     private static final int SUBMIT_SUCCESS = 2;//验证成功
     private static final int CHECK_FAILE = 3;//检查失败
-    private int logupResulet;
+    private Boolean logupResulet;
     public UserLogupPresenter(ILogUpView logUpView){
         this.logUpView=logUpView;
         userBiz=new Userbiz();
@@ -106,7 +106,7 @@ public class UserLogupPresenter {
         return m.matches();
     }
     private void checkLogupResulet(){
-        if (logupResulet==1){
+        if (logupResulet){
             logUpView.fishTimedown();
             logUpView.clearUser();
             logUpView.toMainActivity();
