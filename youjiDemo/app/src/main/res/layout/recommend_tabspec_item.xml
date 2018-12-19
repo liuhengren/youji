@@ -48,7 +48,6 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="14dp"
             android:layout_toRightOf="@+id/tv_name"
-            android:elevation="50dp"
             android:text="关注"
             android:textSize="14dp" />
     </RelativeLayout>
@@ -104,9 +103,9 @@
 
     <!--评论、点赞、收藏-->
     <RelativeLayout
-        android:layout_width="310dp"
+        android:layout_width="325dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp">
         <!--收藏-->
         <LinearLayout
@@ -117,18 +116,20 @@
 
             <ImageButton
                 android:id="@+id/ib_collect"
-                android:layout_width="32dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:src="@drawable/collect"
                 android:background="#00000000"/>
 
-
             <TextView
+                android:id="@+id/tv_collectNum"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="15dp"
+                android:textColor="@color/smssdk_black"
                 android:text="收藏"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/tv_collectNum"/>
+                android:gravity="center"/>
+
         </LinearLayout>
 
         <!--评论-->
@@ -140,18 +141,20 @@
 
             <ImageButton
                 android:id="@+id/ib_judge"
-                android:layout_width="32dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:src="@drawable/comment"
                 android:background="#00000000"/>
 
             <TextView
+                android:id="@+id/tv_judgeNum"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="208"
-                android:layout_gravity="center_vertical"
-                android:inputType="number"
-                android:id="@+id/tv_judgeNum"/>
+                android:layout_height="30dp"
+                android:textSize="15dp"
+                android:textColor="@color/smssdk_black"
+                android:text="评论"
+                android:gravity="center"/>
+
         </LinearLayout>
 
         <!--点赞-->
@@ -163,17 +166,19 @@
 
             <ImageButton
                 android:id="@+id/ib_good"
-                android:layout_width="32dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:src="@drawable/like"
                 android:background="#00000000"/>
+
             <TextView
+                android:id="@+id/tv_goodNum"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="208"
-                android:layout_gravity="center_vertical"
-                android:inputType="number"
-                android:id="@+id/tv_goodNum"/>
+                android:layout_height="30dp"
+                android:textSize="15dp"
+                android:textColor="@color/smssdk_black"
+                android:text="点赞"
+                android:gravity="center"/>
         </LinearLayout>
     </RelativeLayout>
 

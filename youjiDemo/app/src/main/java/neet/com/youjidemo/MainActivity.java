@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = findViewById(android.R.id.content);
         tabWidget = findViewById(android.R.id.tabs);
-        //初始化
+        //初始化z
         init();
 
         //选项卡更换事件
@@ -49,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int screenHeight = dm.heightPixels;
-        int screenWidth = dm.widthPixels;
-        frameLayout.getLayoutParams().height = (screenHeight/20)*20;
-        tabWidget.getLayoutParams().height = (screenHeight/20)*2;
-
-
-
-        frameLayout.getLayoutParams().width = screenWidth;
-        tabWidget.getLayoutParams().width = screenWidth;
+//        ViewGroup.LayoutParams layoutParams = frameLayout.getLayoutParams();
+//        int screenHeight = dm.heightPixels;
+//        int screenWidth = dm.widthPixels;
+//        layoutParams.height=screenHeight-tabWidget.getLayoutParams().height;
+//
+//
+//        frameLayout.setLayoutParams(layoutParams);
+//        frameLayout.getLayoutParams().width = screenWidth;
+//        tabWidget.getLayoutParams().width = screenWidth;
 
 
     }

@@ -1,6 +1,7 @@
 package neet.com.youjidemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.Dynamic;
+import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.view.Fragment.Index_RecommendFragment;
 
 public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder> implements View.OnClickListener {
@@ -29,18 +31,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     /**
      * 声明Item点击事件接口的变量
      */
-    Button care;
-    TextView name;
-    TextView location;
-    TextView description;
-    TextView collectNum;
-    TextView judgeNum;
-    TextView goodNum;
-    CircleImageView headPhoto;
-    ImageView contentImage;
-    ImageButton goodButton;
-    ImageButton collectButton;
-    ImageButton judgeButton;
+
 
 
     public IndexRecommendRecycleItemAdapter(List list,Context context) {
@@ -59,7 +50,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
 
        /*
     设置首页上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
@@ -75,6 +66,47 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         //options.error(R.drawable.img_holder_error_style1);
         Glide.with(context).load(url).apply(options).into(viewHolder.contentImage);
         viewHolder.itemView.setTag(i);//将position保存在itemView的Tag中，以便点击时进行获取
+
+        viewHolder.care.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.care.getText()=="关注"){
+                    viewHolder.care.setText("已关注");
+                }else {
+                    viewHolder.care.setText("关注");
+                }
+            }
+        });
+
+        viewHolder.collectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.collectNum.getText() == "收藏"){
+                    viewHolder.collectButton.setImageResource(R.drawable.havecollect);
+                    viewHolder.collectNum.setText("已收藏");
+                }else {
+                    viewHolder.collectButton.setImageResource(R.drawable.collect);
+                    viewHolder.collectNum.setText("收藏");
+                }
+            }
+        });
+
+        viewHolder.judgeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.goodButton.get){
+
+                }
+            }
+        });
     }
 
     @Override
@@ -131,41 +163,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
 
 
         }
-    }
-
-
-    /*
-    所有的Button点击事件
-     */
-    private void setAllButtonClickListener() {
-
-        //关注点击事件 点击关注就去关注 或者再次点击取消关注
-        care.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //收藏点击事件 点击收藏就收藏
-        collectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
-
-        //点赞点击事件  点击给点赞
-        goodButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
-
     }
 
     /**

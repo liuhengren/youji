@@ -110,7 +110,7 @@ public class Index_FoodFragment extends Fragment {
         list.add(1);
         list.add(1);
         //这里填入数据list
-        indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list,this.getContext());
+        indexFoodRecycleItemAdapter = new IndexFoodRecycleItemAdapter(list,this.getContext());
 
         recyclerView.setAdapter(indexFoodRecycleItemAdapter);
 
