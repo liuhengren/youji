@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -51,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         int screenHeight = dm.heightPixels;
         int screenWidth = dm.widthPixels;
-        frameLayout.getLayoutParams().height = (screenHeight/20)*20;
-        tabWidget.getLayoutParams().height = (screenHeight/20)*2;
+        int b=frameLayout.getLayoutParams().height;
+        int a=tabWidget.getLayoutParams().height;
+        Log.e("screenHight",""+screenHeight);
+        Log.e("b",""+b);
+        Log.e("a",""+a);
+
 
 
 
