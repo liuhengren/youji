@@ -1,6 +1,5 @@
 package neet.com.youjidemo.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,13 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.AtMessage;
-import neet.com.youjidemo.view.MessageFragment;
+import neet.com.youjidemo.view.Fragment.MessageFragment;
 
 public class AtAdapter extends BaseAdapter {
-    private Context context;
+    private MessageFragment context;
     private int itemLayout;
     private List<AtMessage> messages = new ArrayList<>();
-    public AtAdapter(MessageFragment messageFragment, int at_listview_adpter, List<AtMessage> atOnes){}
-    public AtAdapter(Context context, int itemLayout, List<AtMessage> messages) {
+    public AtAdapter(MessageFragment context, int itemLayout, List<AtMessage> messages) {
         this.context = context;
         this.itemLayout = itemLayout;
         this.messages = messages;
@@ -43,7 +41,7 @@ public class AtAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView) {
-            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context.getContext());
             convertView = layoutInflater.inflate(itemLayout, null);
         }
         ImageView headphoto = convertView.findViewById(R.id.lv_head_sculpture);

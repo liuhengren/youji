@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_pde"
+        android:id="@+id/tb_personal_center"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
@@ -24,88 +24,101 @@
             android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/srl_downrefresh">
 
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="204dp"
-                    android:scaleType="center"
-                    android:src="@drawable/background" />
-
-
-            </FrameLayout>
-
-            <!--个人信息（简略）-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-25dp"
-                app:layout_scrollFlags="scroll|enterAlways">
-                <!--头像-->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image_personal_center_head"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/head" />
-
-                <!--昵称-->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-                    android:layout_below="@id/image_personal_center_head"
-                    android:layout_alignStart="@+id/image_personal_center_head"
-                    android:layout_marginTop="5dp"
-                    android:text="一个胖子"
-                    android:textStyle="bold" />
-
-                <!--编辑资料按钮-->
-                <Button
-                    android:layout_width="60dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/personal_center_attention_btn"
-                    android:onClick="editInformaion"
-                    android:text="编辑资料" />
-            </RelativeLayout>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabMode="fixed" />
-        </android.support.design.widget.AppBarLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:fillViewport="true">
 
-            <!--不同页面内容，用来实现上滑隐藏效果-->
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
+            <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
+
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_scrollFlags="scroll|enterAlways">
+
+                        <ImageButton
+                            android:layout_width="match_parent"
+                            android:layout_height="204dp"
+                            android:scaleType="center"
+                            android:src="@drawable/background" />
+
+
+                    </FrameLayout>
+
+                    <!--个人信息（简略）-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-25dp"
+                        app:layout_scrollFlags="scroll|enterAlways">
+                        <!--头像-->
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image_personal_center_head"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="20dp"
+                            android:src="@drawable/head" />
+
+                        <!--昵称-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_below="@id/image_personal_center_head"
+                            android:layout_alignStart="@+id/image_personal_center_head"
+                            android:layout_marginTop="5dp"
+                            android:text="一个胖子"
+                            android:textStyle="bold" />
+
+                        <!--编辑资料按钮-->
+                        <Button
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="35dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/personal_center_attention_btn"
+                            android:onClick="editInformaion"
+                            android:text="编辑资料" />
+                    </RelativeLayout>
+
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:tabGravity="fill"
+                        app:tabMode="fixed" />
+                </android.support.design.widget.AppBarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <!--不同页面内容，用来实现上滑隐藏效果-->
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </android.support.design.widget.CoordinatorLayout>
+
+
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

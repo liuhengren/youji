@@ -16,6 +16,8 @@ import java.util.List;
 
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareAdapter;
+import neet.com.youjidemo.view.Fragment.Travel_RecommendFragment;
+import neet.com.youjidemo.view.Fragment.Travel_SquareFragment;
 
 
 /**
@@ -24,9 +26,9 @@ import neet.com.youjidemo.adapter.SquareAdapter;
 public class TravleActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private List fragmentList=new ArrayList();
+    private List fragmentList = new ArrayList();
     private TextView title;
-    private  TextView instruction;
+    private TextView instruction;
     Toolbar toolbar;
 
     @Override
@@ -45,26 +47,27 @@ public class TravleActivity extends AppCompatActivity {
 
     private void findViews() {
         tabLayout = findViewById(R.id.tl_recommend);
-        viewPager=findViewById(R.id.vp_dynamic);
-        title=findViewById(R.id.tv_title);
-        instruction=findViewById(R.id.tv_instruction);
-        toolbar=findViewById(R.id.tb_back);
+        viewPager = findViewById(R.id.vp_dynamic);
+        title = findViewById(R.id.tv_title);
+        instruction = findViewById(R.id.tv_instruction);
+        toolbar = findViewById(R.id.tb_back);
     }
 
 
     /**
-     * 创建广场和推荐 对应的Fragment*/
-    private  void  setFragment(){
-        Travel_SquareFragment squareFregament=new Travel_SquareFragment();
-        Travel_RecommendFragment recommendFragment=new Travel_RecommendFragment();
+     * 创建广场和推荐 对应的Fragment
+     */
+    private void setFragment() {
+        Travel_SquareFragment squareFregament = new Travel_SquareFragment();
+        Travel_RecommendFragment recommendFragment = new Travel_RecommendFragment();
 
         fragmentList.add(squareFregament);
         fragmentList.add(recommendFragment);
 
-        viewPager.setAdapter(new SquareAdapter(getSupportFragmentManager(),fragmentList));
+        viewPager.setAdapter(new SquareAdapter(getSupportFragmentManager(), fragmentList));
         tabLayout.setupWithViewPager(viewPager);
 
     }
-
+}
 
 

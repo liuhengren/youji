@@ -11,7 +11,7 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import neet.com.youjidemo.biz.IUserLog;
 import neet.com.youjidemo.biz.Userbiz;
-import neet.com.youjidemo.view.ILogUpView;
+import neet.com.youjidemo.view.IView.ILogUpView;
 
 public class UserLogupPresenter {
     private ILogUpView logUpView;

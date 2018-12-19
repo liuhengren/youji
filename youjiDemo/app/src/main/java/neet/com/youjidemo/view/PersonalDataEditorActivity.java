@@ -11,7 +11,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -44,11 +43,10 @@ import java.util.Date;
 import neet.com.youjidemo.Presenter.PerDateEditPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.JsonBean;
-import neet.com.youjidemo.bean.UserDateApplication;
-import neet.com.youjidemo.bean.UserDetail;
 import neet.com.youjidemo.command.GetJsonDataUtil;
+import neet.com.youjidemo.view.IView.IPerDateEditorView;
 
-public class PersonalDataEditorActivity extends AppCompatActivity implements IPerDateEditorView{
+public class PersonalDataEditorActivity extends AppCompatActivity implements IPerDateEditorView {
     private LinearLayout pdeLlRoot;
     private LinearLayout mLltouxiang,mLlSex;
     private RelativeLayout mRlHometown;

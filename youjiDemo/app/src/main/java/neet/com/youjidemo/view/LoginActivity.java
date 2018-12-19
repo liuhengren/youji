@@ -16,16 +16,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.DoubleBounce;
-
-import java.util.ArrayList;
-
 import neet.com.youjidemo.Presenter.UserLoginPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.view.IView.ILoginView;
 
-public class LoginActivity extends AppCompatActivity implements ILoginView{
+public class LoginActivity extends AppCompatActivity implements ILoginView {
     private EditText mEtUserPhone,mEtPassword;
     private Button mBtnLogin;
     private TextView mTvLogup,mTvFindPassword;

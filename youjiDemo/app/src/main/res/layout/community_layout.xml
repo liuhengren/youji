@@ -12,37 +12,49 @@
         android:columnCount="2"
         android:rowCount="2">
 
-        <ImageView
+        <!--吃分区-->
+        <ImageButton
+            android:id="@+id/image_btn_food"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:scaleType="fitXY"
-            android:src="@drawable/b5" />
+            android:src="@drawable/b5"
+            android:background="@color/trans"/>
 
-        <ImageView
+        <!--旅行分区-->
+        <ImageButton
+            android:id="@+id/image_btn_travel"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:scaleType="fitXY"
-            android:src="@drawable/item3" />
+            android:src="@drawable/item3"
+            android:background="@color/trans"/>
 
-        <ImageView
+        <!--玩分区-->
+        <ImageButton
+            android:id="@+id/image_btn_play"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:scaleType="fitXY"
-            android:src="@drawable/b8" />
+            android:src="@drawable/b8"
+            android:background="@color/trans"/>
 
-        <ImageView
+        <!--待定分区-->
+        <ImageButton
+            android:id="@+id/image_btn_note"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:scaleType="fitXY"
-            android:src="@drawable/item2" />
+            android:src="@drawable/item2"
+            android:background="@color/trans"/>
 
     </GridLayout>
 

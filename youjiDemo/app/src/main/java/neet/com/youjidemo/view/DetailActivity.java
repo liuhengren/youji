@@ -9,13 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.DetailViewAdapter;
 /**
@@ -25,6 +30,7 @@ import neet.com.youjidemo.adapter.DetailViewAdapter;
  */
 public class DetailActivity extends AppCompatActivity {
 
+    /**系统定时发广播来通知APP时间的变化*/
     private BroadcastReceiver mTimeRefreshReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -34,8 +40,25 @@ public class DetailActivity extends AppCompatActivity {
         }
     };
 
-    private TextView time;
+    private ImageButton imageButton;
 
+    private int isAttentioned;//用来标记该用户是否被关注
+
+    private ClickListener mClickListener; //点击事件监听器
+
+    private CircleImageView btnImageHead; //头像
+
+    private TextView time; //当前系统时间
+
+    private List mDataList; //数据源
+
+    private RecyclerView recyclerView; //列表
+
+    private TextView tvUserName; //用户名
+
+    private ImageButton btnAttention; //关注按钮
+
+    /**设置时间*/
     private void setTime(CharSequence systemTime) {
 
         time.setText(systemTime);
@@ -50,23 +73,27 @@ public class DetailActivity extends AppCompatActivity {
         registerReceiver(mTimeRefreshReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
         String currentTime = (String) getSystemTime();
         time.setText(currentTime);
-        List list = new ArrayList();
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        RecyclerView recyclerView = findViewById(R.id.rv_detail_review);
-        DetailViewAdapter adapter = new DetailViewAdapter(list);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.tbdetail_pde);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
+
+        findViews();
+        init();
+        btnImageHead.setOnClickListener(mClickListener);
+        tvUserName.setOnClickListener(mClickListener);
+        btnAttention.setOnClickListener(mClickListener);
+        DetailViewAdapter adapter = new DetailViewAdapter(mDataList);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         unregisterReceiver(mTimeRefreshReceiver);
     }
 
@@ -77,4 +104,70 @@ public class DetailActivity extends AppCompatActivity {
         return dateFormat.format(sysTime);
     }
 
+    /**初始化数据*/
+    private void init(){
+        mDataList = new ArrayList();
+        mDataList.add(1);
+        mDataList.add(1);
+        mDataList.add(1);
+        mDataList.add(1);
+        mDataList.add(1);
+        mDataList.add(1);
+        mDataList.add(1);
+    }
+
+    /***初始化控件*/
+    private void findViews(){
+        mClickListener = new ClickListener();
+        tvUserName = findViewById(R.id.tv_detail_username);
+        recyclerView = findViewById(R.id.rv_detail_review);
+        btnImageHead = findViewById(R.id.cImage_detail_head);
+        tvUserName = findViewById(R.id.tv_detail_username);
+        btnAttention = findViewById(R.id.btn_detail_attention);
+        isAttentioned = R.drawable.befans;
+    }
+
+    /**定义一个内部类来处里Activity中的点击事件*/
+    public class ClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                /**点击用户名和头像可以跳转至个人中心，注意数据的获取*/
+                case R.id.cImage_detail_head:
+                    Intent intent = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.tv_detail_username:
+                    Intent intent1 = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    startActivity(intent1);
+                    break;
+                /**点击之后应在数据库里增加一条数据，并标识，
+                 * 在绘制Activity时也用先判断该用户是否被关注了
+                 * ，来实现指定好图标
+                 */
+                case R.id.btn_detail_attention:
+                    if (isAttentioned == R.drawable.befans){
+                        btnAttention.setImageResource(R.drawable.have_attention);
+                        isAttentioned = R.drawable.have_attention;
+                    }
+                    else if (isAttentioned == R.drawable.have_attention){
+                        btnAttention.setImageResource(R.drawable.befans);
+                        isAttentioned = R.drawable.befans;
+                    }
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.tbdetail_pde:
+            finish();
+            break;
+        }
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 }
