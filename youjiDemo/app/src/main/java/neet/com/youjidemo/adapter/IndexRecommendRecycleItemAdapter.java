@@ -1,6 +1,7 @@
 package neet.com.youjidemo.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,15 +16,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.Dynamic;
+import neet.com.youjidemo.biz.Dynamicbiz;
 import neet.com.youjidemo.view.Fragment.Index_RecommendFragment;
 
 public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<IndexRecommendRecycleItemAdapter.ViewHolder> implements View.OnClickListener {
-    private List<Dynamic> list;
+    private List<Dynamic> list=new ArrayList<>();
     private IndexRecommendRecycleItemAdapter.OnItemClickListener mOnItemClickListener = null;
     private Context context;
     /**
@@ -43,7 +46,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     ImageButton judgeButton;
 
 
-    public IndexRecommendRecycleItemAdapter(List list,Context context) {
+    public IndexRecommendRecycleItemAdapter(List<Dynamic> list,Context context) {
         this.list = list;
         this.context=context;
     }
@@ -66,8 +69,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
      */
         //例如： viewHolder.name.setText("李四");
         //viewHolder.collectNum.setText(list.get(i).getDynamic_collection_num()+"");
-        //String url=list.get(i).getDynamic_img();
-        String url="http://cn.bing.com/az/hprichbg/rb/Dongdaemun_ZH-CN10736487148_1920x1080.jpg";
+        String url=list.get(i).getDynamic_img();
+        //String url="http://cn.bing.com/az/hprichbg/rb/Dongdaemun_ZH-CN10736487148_1920x1080.jpg";
         RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
         //图片加载时的占位图片
         //options.placeholder(R.drawable.ic_what_is_vip);
@@ -174,5 +177,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     public static interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-
+    public void updataList(List<Dynamic> list){
+        this.list.addAll(list);
+        notifyDataSetChanged();
+    }
 }
