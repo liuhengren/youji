@@ -12,12 +12,13 @@ import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
 
 public class FollowBiz implements IFollow {
-    private final String followUrl="";
+    private final String followUrl="FollowServlet";
     private List<Follow> followList=new ArrayList<>();
     @Override
     public List<Follow> getFollowByUserId(int user_id) {
+        String msg="follow_ByUserId";
         followList=new ArrayList<>();
-        String str = GetJsonStr.getJsonStrbyUrl(followUrl);//修改
+        String str = GetJsonStr.getJsonStrbyUrl(followUrl+"?message="+msg+"&user_id="+user_id);//修改
         try {
             JSONArray jsonArray = (new JSONObject(str).getJSONArray("list"));
             for(int i=0;i<jsonArray.length();i++){
@@ -36,16 +37,20 @@ public class FollowBiz implements IFollow {
 
     @Override
     public void addFollow(int user_id, int follow_user_id) {
-
+        String msg="follow_addFollow";
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
     }
 
     @Override
     public void deleteFollow(int user_id, int follow_user_id) {
-
+        String msg="follow_deleteFollow";
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
     }
 
     @Override
-    public boolean ifFollow(int user_id, int follow_user_id) {
+    public boolean isFollow(int user_id, int follow_user_id) {
+        String msg="follow_isFollow";
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
         return false;
     }
 }
