@@ -45,7 +45,7 @@ public class FollowDao {
 	 
 	 
 	 //2.添加关注者
-	 public static void addFollow(int user_id,int follow_user_id) {
+	 public static boolean addFollow(int user_id,int follow_user_id) {
 		 Connection connection=DataBase.getConnection();
 			
 			String sql="insert into follow(user_id,follow_user_id)values(?,?)";
@@ -57,17 +57,18 @@ public class FollowDao {
 				boolean result = prepareStatement.execute();
 				System.out.println("添加关注:"+result);
 				connection.close();
-				
+				return true;
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return false;
 		} 
 	 
 	 
 	 //3.删除关注者
-	 public static void deleteFollow(int user_id,int follow_user_id) {
+	 public static boolean deleteFollow(int user_id,int follow_user_id) {
 		  Connection connection=DataBase.getConnection();
 		  
 			String sql="delete from follow where user_id=? and follow_user_id=?";
@@ -80,10 +81,12 @@ public class FollowDao {
 				preparedStatement.executeUpdate();
 			
 				connection.close();
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return false;
 			
 	  }
 	 

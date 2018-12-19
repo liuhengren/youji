@@ -61,7 +61,9 @@ public class PartitionServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			int partition_id=Integer.parseInt(id);
 			
-			PartitionDao.getPartition(partition_id);
+			String partition = PartitionDao.getPartition(partition_id);
+			
+			response.getWriter().write(partition);
 		}
 		
 		

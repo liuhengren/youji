@@ -56,7 +56,10 @@ public class FollowServlet extends HttpServlet {
 			int user_id=Integer.parseInt(id);
 			int follow_user_id=Integer.parseInt(fid);
 			
-			FollowDao.addFollow(user_id, follow_user_id);
+			boolean result = FollowDao.addFollow(user_id, follow_user_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		 //3.删除关注者
 		else if("follow_deleteFollow".equals(message)) {
@@ -65,7 +68,10 @@ public class FollowServlet extends HttpServlet {
 			String fid=request.getParameter("follow_user_id");
 			int user_id=Integer.parseInt(id);
 			int follow_user_id=Integer.parseInt(fid);
-			FollowDao.deleteFollow(user_id, follow_user_id);
+			boolean result = FollowDao.deleteFollow(user_id, follow_user_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		//4.判断是否被关注
 		else if("follow_isFollow".equals(message)) {

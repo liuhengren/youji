@@ -47,7 +47,7 @@ public class DynamicDao {
 	
 	
 	//2.插入一条动态
-	private static void addDynamic(Dynamic dynamic) {
+	private static boolean addDynamic(Dynamic dynamic) {
 		Connection connection=DataBase.getConnection();
 		
 		String sql="insert into dynamic("
@@ -69,11 +69,12 @@ public class DynamicDao {
 			
 			boolean result = prepareStatement.execute();
 			connection.close();
-			
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	} 
 	
 	
@@ -183,7 +184,7 @@ public class DynamicDao {
 	}
 
 	//6.通过Id删除一条动态
-	  public static void deleteDynamic(int Dynamic_id) {
+	  public static boolean deleteDynamic(int Dynamic_id) {
 		  
 		  Connection connection=DataBase.getConnection();
 			Dynamic dynamic=null;
@@ -195,11 +196,12 @@ public class DynamicDao {
 				preparedStatement.executeUpdate();
 			System.out.println("删除成功！");
 				connection.close();
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			return false;
 	  }
 
 	  //7.根据热度获得动态
