@@ -1,6 +1,7 @@
 package neet.com.youjidemo.biz;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,51 +13,57 @@ import neet.com.youjidemo.command.JsonObjiecrToObject;
 
 public class Dynamicbiz implements IDynamic{
     private List<Dynamic> dynamicList=new ArrayList<>();
-    final private String getDynamicUrl="";
+    final private String DynamicUrl="http://10.222.185.41:8080/youjiServer/Dynamicservlet";
     @Override
     public List<Dynamic> getDynamic() {
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                String jsonStr = GetJsonStr.getJsonStrbyUrl(getDynamicUrl);
-                Log.e("测试",jsonStr);
-                addListData(jsonStr);
-            }
-        };
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl);
+        addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public List<Dynamic> getDynamicOrderHot() {
-
+        //传递参数确认方法
+        String msg="";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public List<Dynamic> getDynamicByPartitionId(int partition_id) {
-
+        String msg="";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public List<Dynamic> getDynamicByUserId(int user_id) {
+        String msg="";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public Dynamic getDynamicById(int dynamic_id) {
-        return null;
+        String msg="";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        addListData(jsonStr);
+        return dynamicList.get(0);
     }
 
     @Override
     public void addDynamic(Dynamic dynamic) {
-
+        String msg="";
+        
     }
 
     @Override
     public void deleteDynamic(int Dynamic_id) {
-
+        String msg="";
+        String url=DynamicUrl+"?msg=";
     }
     private void addListData(String str){
         try {
