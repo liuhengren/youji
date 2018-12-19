@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = findViewById(android.R.id.content);
         tabWidget = findViewById(android.R.id.tabs);
-        //初始化
+        //初始化z
         init();
 
         //选项卡更换事件
@@ -50,19 +51,8 @@ public class MainActivity extends AppCompatActivity {
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int screenHeight = dm.heightPixels;
-        int screenWidth = dm.widthPixels;
-        int b=frameLayout.getLayoutParams().height;
-        int a=tabWidget.getLayoutParams().height;
-        Log.e("screenHight",""+screenHeight);
-        Log.e("b",""+b);
-        Log.e("a",""+a);
 
 
-
-
-        frameLayout.getLayoutParams().width = screenWidth;
-        tabWidget.getLayoutParams().width = screenWidth;
 
 
     }

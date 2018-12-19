@@ -41,7 +41,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public List<Dynamic> getDynamicByUserId(int user_id) {
         String msg="dynamic_getDynamicByUserId";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg+"&user_id="+user_id);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&user_id="+user_id);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -49,7 +49,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public Dynamic getDynamicById(int dynamic_id) {
         String msg="dynamic_getDynamicById";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg+"&id="+dynamic_id);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&id="+dynamic_id);
         addListData(jsonStr);
         return dynamicList.get(0);
     }
@@ -57,13 +57,13 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public void addDynamic(Dynamic dynamic) {
         String msg="dynamic_addDynamic";
-        String url=DynamicUrl+"?msg="+msg;
+        String url=DynamicUrl+"?message="+msg;
     }
 
     @Override
     public void deleteDynamic(int Dynamic_id) {
         String msg="";
-        String url=DynamicUrl+"?msg=";
+        String url=DynamicUrl+"?message=";
     }
     private void addListData(String str){
         try {
