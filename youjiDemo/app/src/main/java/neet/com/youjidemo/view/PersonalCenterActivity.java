@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +41,12 @@ public class PersonalCenterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_center);
 
-        Toolbar toolbar=(Toolbar)findViewById(R.id.tb_pde);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.tb_personal_center);
         swipeRefreshLayout=findViewById(R.id.srl_downrefresh);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
+
 
         ViewPager mViewPager = findViewById(R.id.viewpager);
         List<Fragment> list = new ArrayList();
@@ -74,9 +77,11 @@ public class PersonalCenterActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:
+            case R.id.tb_personal_center:
                 finish();
+                break;
         }
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
@@ -99,6 +104,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 }
