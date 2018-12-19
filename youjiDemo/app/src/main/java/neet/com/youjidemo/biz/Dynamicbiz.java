@@ -1,6 +1,5 @@
 package neet.com.youjidemo.biz;
 
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,8 @@ public class Dynamicbiz implements IDynamic{
     final private String DynamicUrl="http://10.222.185.41:8080/youjiServer/Dynamicservlet";
     @Override
     public List<Dynamic> getDynamic() {
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl);
+        String msg="dynamic_allDynamic";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -25,39 +25,39 @@ public class Dynamicbiz implements IDynamic{
     public List<Dynamic> getDynamicOrderHot() {
         //传递参数确认方法
         String msg="";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
         addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public List<Dynamic> getDynamicByPartitionId(int partition_id) {
-        String msg="";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        String msg="dynamic_getDynamicByPartitionId";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&partition_id="+partition_id);
         addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public List<Dynamic> getDynamicByUserId(int user_id) {
-        String msg="";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        String msg="dynamic_getDynamicByUserId";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg+"&user_id="+user_id);
         addListData(jsonStr);
         return dynamicList;
     }
 
     @Override
     public Dynamic getDynamicById(int dynamic_id) {
-        String msg="";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        String msg="dynamic_getDynamicById";
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg+"&id="+dynamic_id);
         addListData(jsonStr);
         return dynamicList.get(0);
     }
 
     @Override
     public void addDynamic(Dynamic dynamic) {
-        String msg="";
-        
+        String msg="dynamic_addDynamic";
+        String url=DynamicUrl+"?msg="+msg;
     }
 
     @Override
