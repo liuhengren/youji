@@ -16,7 +16,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public List<Dynamic> getDynamic() {
         String msg="dynamic_allDynamic";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?"+msg);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -25,7 +25,7 @@ public class Dynamicbiz implements IDynamic{
     public List<Dynamic> getDynamicOrderHot() {
         //传递参数确认方法
         String msg="";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -33,7 +33,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public List<Dynamic> getDynamicByPartitionId(int partition_id) {
         String msg="dynamic_getDynamicByPartitionId";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?msg="+msg+"&partition_id="+partition_id);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&partition_id="+partition_id);
         addListData(jsonStr);
         return dynamicList;
     }
