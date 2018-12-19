@@ -39,7 +39,6 @@ public class DynamicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
-		
 		PrintWriter out=response.getWriter();
 		//1.DynamicDao 查找所有
 		if("dynamic_allDynamic".equals(message)) {
@@ -48,44 +47,56 @@ public class DynamicServlet extends HttpServlet {
 			JSONObject object=new JSONObject();
 			object.put("list", allDynamic);
 			response.getWriter().append(object.toString());
+			System.out.println(allDynamic.size());
 		}
-		//2.插入一条动态
-		else if("dynamic_addDynamic".equals(message)) 
-		{
-			DynamicDao.addDynamic(dynamic);
-			
-		}
+//		//2.插入一条动态
+//		else if("dynamic_addDynamic".equals(message)) 
+//		{
+//			DynamicDao.addDynamic(dynamic);
+//			
+//		}
 		//3.通过分区查找动态
 		else if("dynamic_getDynamicByPartitionId".equals(message))
 		{
+			String id=request.getParameter("id");
+			int partition_id=Integer.parseInt(id);
 			List list=DynamicDao.getDynamicByPartitionId(partition_id);
 			JSONObject object=new JSONObject();
 			object.put("list", list);
 			out.write(object.toString());
+			System.out.println(list.size());
 			
 			
 		}
 		//4.根据用户Id查找动态
 		else if("dynamic_getDynamicByUserId".equals(message))
 		{
+			String id=request.getParameter("id");
+			int user_id=Integer.parseInt(id);
 			List list=DynamicDao.getDynamicByUserId(user_id);
 			JSONObject object=new JSONObject();
 			object.put("list", list);
 			out.write(object.toString());
+			System.out.println(list.size());
 			
 		}
 		//5.通过动态Id获得动态
 		else if("dynamic_getDynamicById".equals(message))
 		{
+			String id=request.getParameter("id");
+			int dynamic_id=Integer.parseInt(id);
 			Dynamic dynamic=DynamicDao.getDynamicById(dynamic_id);
 			JSONObject object=new JSONObject();
 			object.put("list", dynamic);
 			out.write(object.toString());
+			
 		}
 		//6.通过Id删除一条动态
 		else if("dynamic_deleteDynamic".equals(message))
 		{
-			
+			String id=request.getParameter("id");
+			int Dynamic_id=Integer.parseInt(id);
+
 			DynamicDao.deleteDynamic(Dynamic_id);
 		}
 		

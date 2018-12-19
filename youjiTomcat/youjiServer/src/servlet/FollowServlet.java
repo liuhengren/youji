@@ -39,22 +39,44 @@ public class FollowServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		//1.通过用户Id获得他的关注者
 		if("follow_ByUserId".equals(message)) {
+			
+			String id=request.getParameter("id");
+			int user_id=Integer.parseInt(id);
+			
 			List <Follow>list=FollowDao.getFollowByUserId(user_id);
+			System.out.println(list.size());
 			JSONObject object=new JSONObject();
 			out.write(object.toString());
 		}
 		 //2.添加关注者
 		else if("follow_addFollow".equals(message)) {
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
+			
 			FollowDao.addFollow(user_id, follow_user_id);
 		}
 		 //3.删除关注者
 		else if("follow_deleteFollow".equals(message)) {
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
 			FollowDao.deleteFollow(user_id, follow_user_id);
 		}
 		//4.判断是否被关注
 		else if("follow_isFollow".equals(message)) {
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
 			boolean judge=FollowDao.isFollow(user_id, follow_user_id);
 			JSONObject object=new JSONObject();
+			object.put("object", object);
 			out.write(object.toString());
 		}
 	}
