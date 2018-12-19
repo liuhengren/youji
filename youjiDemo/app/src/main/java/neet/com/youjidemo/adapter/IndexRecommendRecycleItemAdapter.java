@@ -1,6 +1,7 @@
 package neet.com.youjidemo.adapter;
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.AsyncTask;
@@ -37,8 +38,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     /**
      * 声明Item点击事件接口的变量
      */
-
-
 
     public IndexRecommendRecycleItemAdapter(List<Dynamic> list,Context context) {
         this.list = list;
@@ -108,7 +107,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.goodButton.get){
+                if (viewHolder.isgood == false){
 
                 }
             }
@@ -151,6 +150,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         ImageButton goodButton;
         ImageButton collectButton;
         ImageButton judgeButton;
+        Boolean isgood = false;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
