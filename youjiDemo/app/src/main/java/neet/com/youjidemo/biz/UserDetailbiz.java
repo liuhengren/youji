@@ -4,6 +4,8 @@ package neet.com.youjidemo.biz;
 
 import android.os.Handler;
 
+import java.sql.Date;
+
 import neet.com.youjidemo.bean.UserDetail;
 
 public class UserDetailbiz implements IUserDetailEdit{
@@ -17,8 +19,8 @@ public class UserDetailbiz implements IUserDetailEdit{
     }
 
     @Override
-    public void updateUsername(String username) {
-        handler.sendEmptyMessage(1);
+    public void updateUsername(int user_id, String username) {
+
     }
 
     @Override
@@ -27,23 +29,24 @@ public class UserDetailbiz implements IUserDetailEdit{
     }
 
     @Override
-    public void updateUserSex(String userSex) {
+    public void updateUserSex(int user_id, String userSex) {
 
     }
 
     @Override
-    public void updateUserIntroduction(String userIntroduction) {
+    public void updateUserIntroduction(int user_id, String userIntroduction) {
 
     }
 
     @Override
-    public void updateUserBirthday(String userBirthday) {
+    public void updateUserBirthday(int user_id, Date userBirthday) {
 
     }
 
     @Override
-    public void updateUserHometown(String userHometown) {
+    public void updateUserHometown(int user_id, String userHometown) {
 
     }
+
 
 }
