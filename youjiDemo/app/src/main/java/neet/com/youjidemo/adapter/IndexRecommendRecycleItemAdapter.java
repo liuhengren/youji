@@ -39,8 +39,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
      * 声明Item点击事件接口的变量
      */
 
-
-
     public IndexRecommendRecycleItemAdapter(List<Dynamic> list,Context context) {
         this.list = list;
         this.context=context;
