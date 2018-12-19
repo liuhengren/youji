@@ -51,15 +51,8 @@ public class MainActivity extends AppCompatActivity {
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-//        ViewGroup.LayoutParams layoutParams = frameLayout.getLayoutParams();
-//        int screenHeight = dm.heightPixels;
-//        int screenWidth = dm.widthPixels;
-//        layoutParams.height=screenHeight-tabWidget.getLayoutParams().height;
-//
-//
-//        frameLayout.setLayoutParams(layoutParams);
-//        frameLayout.getLayoutParams().width = screenWidth;
-//        tabWidget.getLayoutParams().width = screenWidth;
+
+
 
 
     }

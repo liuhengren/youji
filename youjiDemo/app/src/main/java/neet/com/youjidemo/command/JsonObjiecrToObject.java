@@ -26,7 +26,7 @@ public class JsonObjiecrToObject {
             dynamic.setDynamic_like_num(jsonObject.getInt("like_num"));
             dynamic.setDynamic_comment_num(jsonObject.getInt("comment_num"));
             dynamic.setDynamic_id(jsonObject.getInt("partition_id"));
-            dynamic.setDynamic_time(((Date)jsonObject.get("time")));
+            //dynamic.setDynamic_time(((Date)jsonObject.get("time")));
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("动态字符串解析","出错");
