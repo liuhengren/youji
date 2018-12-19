@@ -34,6 +34,7 @@ public class PartitionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("”–»À∑√Œ ");
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
