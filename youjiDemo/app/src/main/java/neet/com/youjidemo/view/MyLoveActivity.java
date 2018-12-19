@@ -2,6 +2,7 @@ package neet.com.youjidemo.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -69,6 +71,13 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
         init();
         adapter = new Adapter(this,txtcount,messages);
         listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MyLoveActivity.this,DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
