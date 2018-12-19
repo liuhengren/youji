@@ -14,22 +14,7 @@ public class Userbiz implements IUserLog {
 
     @Override
     public boolean logup(final String userphone, String password) {
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if("15303316718".equals(userphone)){
-                    logupResulet=true;
-                }else{
-                    logupResulet=false;
-                }
-            }
-        }.start();
-        return logupResulet;
+        return false;
     }
+
 }
