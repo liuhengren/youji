@@ -42,18 +42,17 @@ public class FollowServlet extends HttpServlet {
 			List <Follow>list=FollowDao.getFollowByUserId(user_id);
 			JSONObject object=new JSONObject();
 			out.write(object.toString());
-			
 		}
 		 //2.添加关注者
-		if("follow_addFollow".equals(message)) {
+		else if("follow_addFollow".equals(message)) {
 			FollowDao.addFollow(user_id, follow_user_id);
 		}
 		 //3.删除关注者
-		if("follow_deleteFollow".equals(message)) {
+		else if("follow_deleteFollow".equals(message)) {
 			FollowDao.deleteFollow(user_id, follow_user_id);
 		}
 		//4.判断是否被关注
-		if("follow_isFollow".equals(message)) {
+		else if("follow_isFollow".equals(message)) {
 			boolean judge=FollowDao.isFollow(user_id, follow_user_id);
 			JSONObject object=new JSONObject();
 			out.write(object.toString());

@@ -39,18 +39,18 @@ public class CommentServlet extends HttpServlet {
 		//1.获取该动态的所有评论
 		if("comment_ByDynamicId".equals(message)) {
 			List list=CommentDao.getCommentByDynamicId(dynamic_id);
-			JSONObject object=new JSONObject()；
+			JSONObject object=new JSONObject();
 					object.put("list", list);
 			out.write(object.toString());
 		}
 		 //2.插入一条评论
-		if("comment_addComment".equals(message)) {
+		else if("comment_addComment".equals(message)) {
 			CommentDao.addComment(comment);
 			
 			
 		}
 		 //3.给该评论点赞+1
-		if("comment_likeComment".equals(message)) {
+		else if("comment_likeComment".equals(message)) {
 			CommentDao.likeComment(comment_id);
 		}
 	}

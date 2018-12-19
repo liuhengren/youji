@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -38,7 +40,7 @@ public class UserServlet extends HttpServlet {
 		String message=request.getParameter("message");
 		PrintWriter out = response.getWriter();
 
-		String streamIn = ReadStream.read(new BufferedInputStream(request.getInputStream()));
+		
 
 		// 1.通过手机号注册
 		if("user_login".equals(message)) {
