@@ -38,18 +38,29 @@ public class CollectionServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		// 1.通过用户Id获得该用户的所有收藏
 		if("collection_ByUserId".equals(message)) {
+			
+			String id=request.getParameter("user_id");
+			int user_id=Integer.parseInt(id);
 			List list=CollectionDao.getCollectionByUserId(user_id);
 			JSONObject object=new JSONObject();
 			out.write(object.toString());
+			System.out.println("收藏数："+list.size());
 		}
 		// 2.添加一条收藏
 		else if("collection_addCollection".equals(message)) {
-			List list=CollectionDao.addCollection(user_id, dynamic_id);
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(fid);
+			
+			CollectionDao.addCollection(user_id, dynamic_id);
+		
 		}
 		//3.删除一条收藏
 		else if("collection_deleteCollection".equals(message)) {
+			String fid=request.getParameter("id");
+			int collection_id=Integer.parseInt(fid);
 			CollectionDao.deleteCollection(collection_id);
 		}
 	}
