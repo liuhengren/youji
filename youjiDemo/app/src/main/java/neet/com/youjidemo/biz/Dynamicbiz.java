@@ -9,6 +9,8 @@ import java.util.List;
 import neet.com.youjidemo.bean.Dynamic;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
+import neet.com.youjidemo.command.ObjectToJsonObject;
+import neet.com.youjidemo.command.PostJson;
 
 public class Dynamicbiz implements IDynamic{
     private List<Dynamic> dynamicList=new ArrayList<>();
@@ -58,12 +60,14 @@ public class Dynamicbiz implements IDynamic{
     public void addDynamic(Dynamic dynamic) {
         String msg="dynamic_addDynamic";
         String url=DynamicUrl+"?message="+msg;
+        JSONObject object = ObjectToJsonObject.DynamicToJson(dynamic);
+        PostJson.PostDynamicToSever(object,url);
     }
 
     @Override
     public void deleteDynamic(int Dynamic_id) {
         String msg="";
-        String url=DynamicUrl+"?message=";
+        String url=DynamicUrl+"?message="+"&dynamic_id="+Dynamic_id;
     }
     private void addListData(String str){
         try {

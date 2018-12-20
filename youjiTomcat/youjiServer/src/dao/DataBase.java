@@ -15,7 +15,7 @@ public class DataBase {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			//Class.forName("com.mysql.jdbc.Driver")
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/youji?"
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/youjidatabase?"
 					+ "serverTimezone=GMT"
 					+ "&useUnicode=true"
 					+ "&characterEncoding=utf-8"

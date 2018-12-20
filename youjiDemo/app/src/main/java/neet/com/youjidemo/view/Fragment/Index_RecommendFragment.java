@@ -52,7 +52,7 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
 
         }
         getDynamicPresenter=new GetDynamicPresenter(this);
-        getDynamicPresenter.getList();
+        //getDynamicPresenter.getList();
         return view;
     }
 
@@ -85,7 +85,7 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getDynamicPresenter.getList();
+                //getDynamicPresenter.getList();
                 isLoading = false;
                 //  footView.setVisibility(View.GONE);
             }

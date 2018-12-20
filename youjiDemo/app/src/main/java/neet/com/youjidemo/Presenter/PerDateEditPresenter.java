@@ -16,8 +16,11 @@ public class PerDateEditPresenter {
 
     public PerDateEditPresenter(IPerDateEditorView perDateEditorView){
         this.perDateEditorView=perDateEditorView;
+        userDetailEdit=new UserDetailbiz();
     }
     public void update(String tag,String msg){
 
+        }
+
     }
-}
+

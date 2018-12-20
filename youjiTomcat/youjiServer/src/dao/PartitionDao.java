@@ -17,7 +17,7 @@ public class PartitionDao {
 			String sql="select partition_text from partition where partition_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, partition_id);
+				preparedStatement.setInt(1, partition_id);
 				
 				ResultSet result=preparedStatement.executeQuery();
 				while(result.next()) {
@@ -25,6 +25,7 @@ public class PartitionDao {
 					partition_text = result.getString("partition_text");
 				
 					}
+				System.out.println("您获得的分区是："+partition_text);
 				connection.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

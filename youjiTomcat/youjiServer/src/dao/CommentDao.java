@@ -20,7 +20,7 @@ public class CommentDao {
 			String sql="select * from comment where comment_dynamic_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, dynamic_id);
+				preparedStatement.setInt(1, dynamic_id);
 				ResultSet result=preparedStatement.executeQuery();
 				
 				while(result.next()) {
@@ -43,7 +43,7 @@ public class CommentDao {
 	 }
 	 
 	 //2.插入一条评论
-	   public static  void addComment(Comment comment)
+	   public static  boolean addComment(Comment comment)
 	   {
 		   Connection connection=DataBase.getConnection();
 		   String sql="insert into comment("
@@ -51,22 +51,23 @@ public class CommentDao {
 				+ "comment_like_num,comment_user_id,values(?,?,?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
-			prepareStatement.setString(0, comment.getText());
-			prepareStatement.setInt(1, comment.getDynamic_id());
-			prepareStatement.setInt(2, comment.getLike_num());
-			prepareStatement.setInt(3, comment.getUser_id());
+			prepareStatement.setString(1, comment.getText());
+			prepareStatement.setInt(2, comment.getDynamic_id());
+			prepareStatement.setInt(3, comment.getLike_num());
+			prepareStatement.setInt(4, comment.getUser_id());
 			
 			boolean result = prepareStatement.execute();
 			connection.close();
-			
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	} 
 	   
 	   //3.给该评论点赞+1
-	   public static  void likeComment(int comment_id)
+	   public static  boolean likeComment(int comment_id)
 	    {
 		   Connection connection=DataBase.getConnection();
 			 
@@ -75,20 +76,24 @@ public class CommentDao {
 				int num=0;
 				try {
 					PreparedStatement preparedStatement=connection.prepareStatement(sql);
-					preparedStatement.setInt(0, comment_id);
+					preparedStatement.setInt(1, comment_id);
 					ResultSet result=preparedStatement.executeQuery();
 					while(result.next()) {
 						num=result.getInt("comment_like_num");
 					}
-					PreparedStatement preparedStatement2=connection.prepareStatement(sql);
-					preparedStatement.setInt(0, comment_id);
-					preparedStatement.setInt(1, num);
-					preparedStatement.executeUpdate(sql2);
+					PreparedStatement preparedStatement2=connection.prepareStatement(sql2);
+					num=num+1;
+					preparedStatement2.setInt(1, num);
+					preparedStatement2.setInt(2, comment_id);
+					preparedStatement2.executeUpdate();
 					connection.close();
+					System.out.println("点赞完成！");
+					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				return false;
 				
 	    }
 

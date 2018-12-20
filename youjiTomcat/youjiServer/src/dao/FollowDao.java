@@ -21,9 +21,10 @@ public class FollowDao {
 			
 			Connection connection=DataBase.getConnection();
 			List <Follow> followList=new ArrayList<Follow>();
-			String sql="select * from follow";
+			String sql="select * from follow where user_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setInt(1, user_id);
 				ResultSet result=preparedStatement.executeQuery();
 				while(result.next()) {
 					Follow follow=new Follow(
@@ -44,43 +45,48 @@ public class FollowDao {
 	 
 	 
 	 //2.添加关注者
-	 public static void addFollow(int user_id,int follow_user_id) {
+	 public static boolean addFollow(int user_id,int follow_user_id) {
 		 Connection connection=DataBase.getConnection();
 			
 			String sql="insert into follow(user_id,follow_user_id)values(?,?)";
 			try {
 				PreparedStatement prepareStatement = connection.prepareStatement(sql);
-				prepareStatement.setInt(0, user_id);
-				prepareStatement.setInt(1, follow_user_id);
+				prepareStatement.setInt(1, user_id);
+				prepareStatement.setInt(2, follow_user_id);
 				
 				boolean result = prepareStatement.execute();
+				System.out.println("添加关注:"+result);
 				connection.close();
+				return true;
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return false;
 		} 
 	 
 	 
 	 //3.删除关注者
-	 public static void deleteFollow(int user_id,int follow_user_id) {
+	 public static boolean deleteFollow(int user_id,int follow_user_id) {
 		  Connection connection=DataBase.getConnection();
 		  
-			String sql="delete * from follow where user_id=?,follow_user_id";
+			String sql="delete from follow where user_id=? and follow_user_id=?";
 			try {
 				
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, user_id);
-				preparedStatement.setInt(0, follow_user_id);
+				preparedStatement.setInt(1, user_id);
+				preparedStatement.setInt(2, follow_user_id);
 				
-				preparedStatement.executeUpdate(sql);
+				preparedStatement.executeUpdate();
 			
 				connection.close();
+				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return false;
 			
 	  }
 	 
@@ -88,17 +94,17 @@ public class FollowDao {
 	 public static boolean isFollow(int user_id,int follow_user_id) {
 			Connection connection=DataBase.getConnection();
 			boolean judge=false;
-			String sql="select * from follow where user_id=?,follow_user_id=?";
+			String sql="select * from follow where user_id=? and follow_user_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
-				preparedStatement.setInt(0, user_id);
-				preparedStatement.setInt(0, follow_user_id);
+				preparedStatement.setInt(1, user_id);
+				preparedStatement.setInt(2, follow_user_id);
 				ResultSet result=preparedStatement.executeQuery();
 				
 				while(result.next()) {
 					judge= true;
 				}
-					
+					System.out.println(judge+"被关注");
 				connection.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
