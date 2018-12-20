@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,18 +23,31 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.command.UploadUtil;
 
 public class ShareActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static String requestURL = "http://10.7.89.253:8080/AndroidServlet/";
+    private int SELECT_PHOTO = 200;
+    private static String requestURL = "http://10.7.89.245:8080/AndroidServlet/";
     private Button  upload;
     private ImageButton selectImage;
     private String picPath = null;
     private Uri uri = null;
+    private String result;
+
+    private String img_src;
+
+    /**
+     * 从相册选取图片
+     */
+    public void selectImg() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(intent, SELECT_PHOTO);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +61,15 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            /** 这个是Android内置的Intent，用来过滤图片文件，同时也可以过滤其他文件*/
             case R.id.select_image:
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,1);
+                /*** * 这个是调用android内置的intent，来过滤图片文件 ，同时也可以过滤其他的 */
+                selectImg();
                 break;
             case R.id.btn_share_upload:
-                if (picPath == null) {
+                if (img_src == null) {
                     Toast.makeText(ShareActivity.this, "请选择图片！", Toast.LENGTH_LONG).show();
                 } else {
-                    Async async = new Async();
-                    async.execute();
+                    uploadImage(img_src);
                 }
                 break;
             default:
@@ -72,52 +82,45 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         upload = findViewById(R.id.btn_share_upload);
     }
 
-    /**用一个异步任务类来处理网络操作*/
-    public class Async extends AsyncTask {
 
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            final File file = new File(picPath);
-            if (file != null) {
-                UploadUtil.uploadFile(file, requestURL);
-            }
-            return requestURL;
-        }
-    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            uri = data.getData();
-            /** * 当选择的图片不为空的话，在获取到图片的途径 */
-            Log.e("tag", "uri = " + uri);
-            try {
-                String[] pojo = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(uri, pojo, null, null, null);
-                if (cursor != null) {
-                    ContentResolver cr = ShareActivity.this.getContentResolver();
-                    int colunm_index = cursor
-                            .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    String path = cursor.getString(colunm_index);
-                    /***
-                     * * 这里加这样一个判断主要是为了第三方的软件选择，比如：使用第三方的文件管理器的话，你选择的文件就不一定是图片了，
-                     * * 这样的话，我们判断文件的后缀名 如果是图片格式的话，那么才可以
-                     */
-                    if (path.endsWith("jpg") || path.endsWith("png")) {
-                        picPath = path;
-                        Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                        selectImage.setImageBitmap(bitmap);
-                    } else {
-                        alert();
-                    }
-                } else {
-                    alert();
-                }
-            } catch (Exception e) {
-            }
-        }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 200:
+                switch (resultCode) {
+                    case RESULT_OK:
+                        Uri uri = data.getData();
+                        img_src = uri.getPath();//这是本机的图片路径
+
+                        ContentResolver cr = getContentResolver();
+                        try {
+                            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                            /* 将Bitmap设定到ImageView */
+                            selectImage.setImageBitmap(bitmap);
+
+                            String[] proj = {MediaStore.Images.Media.DATA};
+                            CursorLoader loader = new CursorLoader(ShareActivity.this, uri, proj, null, null, null);
+                            Cursor cursor = loader.loadInBackground();
+                            if (cursor != null) {
+                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                                cursor.moveToFirst();
+
+                                img_src = cursor.getString(column_index);//图片实际路径
+
+                            }
+                            cursor.close();
+
+                        } catch (FileNotFoundException e) {
+                            Log.e("Exception", e.getMessage(), e);
+                        }
+
+                        break;
+                }
+                break;
+
+        }
     }
 
     /**当上传图片不符合标准时，弹出提示*/
@@ -126,9 +129,28 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                 .setMessage("您选择的不是有效的图片")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        picPath = null;
+                        img_src = null;
                     }
                 }).create();
         dialog.show();
+    }
+
+
+    public void uploadImage(String path) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
+                try {
+                    File file = new File(img_src);
+                    result = UploadUtil.uploadImage(file, uploadurl,ShareActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 }
