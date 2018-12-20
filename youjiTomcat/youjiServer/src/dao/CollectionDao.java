@@ -7,26 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import bean.Collection;
 import bean.Dynamic;
 
 public class CollectionDao {
 
 	// 1.通过用户Id获得该用户的所有收藏
-	public static List<Collection> getCollectionByUserId(int user_id) {
+	public static JSONArray getCollectionByUserId(int user_id) {
 		Connection connection = DataBase.getConnection();
-		List<Collection> CollectionByUserIdlist = new ArrayList<Collection>();
+		JSONArray array=new JSONArray();
 		String sql = "select * from collection where collection_user_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
-				Collection collection = new Collection(
-						result.getInt("collection_id"),
-						result.getInt("collection_user_id"), 
-						result.getInt("collection_dynamic_id"));
-				CollectionByUserIdlist.add(collection);
+				JSONObject object=new JSONObject();
+				object.put("id", result.getInt("collection_id"));
+				object.put("user_id", result.getInt("collection_user_id"));
+				object.put("dynamic_id", result.getInt("collection_dynamic_id"));
+				array.put(object);
 
 			}
 			connection.close();
@@ -35,7 +38,7 @@ public class CollectionDao {
 			e.printStackTrace();
 		}
 
-		return CollectionByUserIdlist;
+		return array;
 
 	}
 

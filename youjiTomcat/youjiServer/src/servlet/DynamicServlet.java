@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import bean.Dynamic;
@@ -43,11 +44,10 @@ public class DynamicServlet extends HttpServlet {
 		//1.DynamicDao 查找所有
 		if("dynamic_allDynamic".equals(message)) {
 			
-			List<Dynamic>allDynamic=DynamicDao.getDynamic();
-			JSONObject object=new JSONObject();
-			object.put("list", allDynamic);
-			response.getWriter().append(object.toString());
-			System.out.println(allDynamic.size());
+			JSONArray array=DynamicDao.getDynamic();
+			
+			response.getWriter().append(array.toString());
+			
 		}
 //		//2.插入一条动态
 //		else if("dynamic_addDynamic".equals(message)) 
@@ -60,11 +60,10 @@ public class DynamicServlet extends HttpServlet {
 		{
 			String id=request.getParameter("id");
 			int partition_id=Integer.parseInt(id);
-			List list=DynamicDao.getDynamicByPartitionId(partition_id);
-			JSONObject object=new JSONObject();
-			object.put("list", list);
-			out.write(object.toString());
-			System.out.println(list.size());
+			JSONArray array=DynamicDao.getDynamicByPartitionId(partition_id);
+			
+			out.write(array.toString());
+			
 			
 			
 		}
@@ -73,11 +72,10 @@ public class DynamicServlet extends HttpServlet {
 		{
 			String id=request.getParameter("id");
 			int user_id=Integer.parseInt(id);
-			List list=DynamicDao.getDynamicByUserId(user_id);
-			JSONObject object=new JSONObject();
-			object.put("list", list);
-			out.write(object.toString());
-			System.out.println(list.size());
+			JSONArray array=DynamicDao.getDynamicByUserId(user_id);
+			
+			out.write(array.toString());
+			
 			
 		}
 		//5.通过动态Id获得动态

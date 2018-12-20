@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dao.CollectionDao;
@@ -41,10 +42,10 @@ public class CollectionServlet extends HttpServlet {
 			
 			String id=request.getParameter("user_id");
 			int user_id=Integer.parseInt(id);
-			List list=CollectionDao.getCollectionByUserId(user_id);
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
-			System.out.println("收藏数："+list.size());
+			JSONArray array=CollectionDao.getCollectionByUserId(user_id);
+			
+			out.write(array.toString());
+			
 		}
 		// 2.添加一条收藏
 		else if("collection_addCollection".equals(message)) {
