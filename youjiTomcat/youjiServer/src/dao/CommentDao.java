@@ -7,16 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import bean.Comment;
 
 
 public class CommentDao {
 	
 	//1.获取该动态的所有评论
-	 public static List<Comment> getCommentByDynamicId(int dynamic_id)
+	 public static JSONArray getCommentByDynamicId(int dynamic_id)
 	 {
 		 Connection connection=DataBase.getConnection();
-			List <Comment> allCommentByDynamicId=new ArrayList<Comment>();
+			JSONArray array=new JSONArray();
 			String sql="select * from comment where comment_dynamic_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -24,13 +27,15 @@ public class CommentDao {
 				ResultSet result=preparedStatement.executeQuery();
 				
 				while(result.next()) {
-					Comment comment=new Comment(
-							result.getInt("comment_id"),
-							result.getString("comment_text"),
-							result.getInt("comment_dynamic_id"),
-							result.getInt("comment_like_num"),
-							result.getInt("comment_user_id"));
-					allCommentByDynamicId.add(comment);
+					JSONObject object=new JSONObject();
+					object.put("id", result.getInt("comment_id"));
+					object.put("text", result.getString("comment_text"));
+					object.put("dynamic_id", result.getInt("comment_dynamic_id"));
+					object.put("like_num", result.getInt("comment_like_num"));
+					object.put("user_id", result.getInt("comment_user_id"));
+				
+					array.put(object);
+			
 					
 				}
 				connection.close();
@@ -39,7 +44,7 @@ public class CommentDao {
 				e.printStackTrace();
 			}
 			
-			return allCommentByDynamicId;
+			return array;
 	 }
 	 
 	 //2.插入一条评论

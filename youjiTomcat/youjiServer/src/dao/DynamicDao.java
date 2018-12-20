@@ -6,35 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import bean.Dynamic;
 
 public class DynamicDao {
 	
 	
 	//1.DynamicDao 查找所有
-	public static List<bean.Dynamic> getDynamic() {
+	public static JSONArray getDynamic() {
 		
 		Connection connection=DataBase.getConnection();
-		List <Dynamic> allDaynamic=new ArrayList<Dynamic>();
+		JSONArray array=new JSONArray();
 		String sql="select * from dynamic";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
-				Dynamic dynamic=new Dynamic(
-						result.getInt("dynamic_id"),
-						result.getInt("dynamic_user_id"),
-						result.getString("dynamic_text"),
-						result.getString("dynamic_img"),
-						result.getInt("dynamic_collection_num"),
-						result.getInt("dynamic_like_num"),
-						result.getInt("dynamic_comment_num"),
-						result.getString("dynamic_address"),
-						result.getDate("dynamic_time"),
-						result.getInt("dynamic_partition_id")
-						);
-				allDaynamic.add(dynamic);
+				JSONObject object=new JSONObject();
 				
+						object.put("id", result.getInt("dynamic_id"));
+						object.put("user_id", result.getInt("dynamic_user_id"));
+						object.put("text", result.getString("dynamic_text"));
+						object.put("img", result.getString("dynamic_img"));
+						object.put("collection_num", result.getInt("dynamic_collection_num"));
+						object.put("like_num", result.getInt("dynamic_like_num"));
+						object.put("comment_num", result.getInt("dynamic_comment_num"));
+						object.put("address", result.getString("dynamic_address"));
+						object.put("time", result.getDate("dynamic_time"));
+						object.put("partition_id", result.getInt("dynamic_partition_id"));
+					
+				array.put(object);
+								
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -42,7 +47,7 @@ public class DynamicDao {
 			e.printStackTrace();
 		}
 		
-		return allDaynamic;
+		return array;
 	}
 	
 	
@@ -79,9 +84,9 @@ public class DynamicDao {
 	
 	
 	//3.通过分区查找动态
-	public  static List<Dynamic> getDynamicByPartitionId(int partition_id) {
+	public  static JSONArray getDynamicByPartitionId(int partition_id) {
 		Connection connection=DataBase.getConnection();
-		List <Dynamic> allPartitionDaynamic=new ArrayList<Dynamic>();
+		JSONArray array=new JSONArray();
 		String sql="select * from dynamic where dynamic_partition_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -89,19 +94,20 @@ public class DynamicDao {
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
-				Dynamic dynamic=new Dynamic(
-						result.getInt("dynamic_id"),
-						result.getInt("dynamic_user_id"),
-						result.getString("dynamic_text"),
-						result.getString("dynamic_img"),
-						result.getInt("dynamic_collection_num"),
-						result.getInt("dynamic_like_num"),
-						result.getInt("dynamic_comment_num"),
-						result.getString("dynamic_address"),
-						result.getDate("dynamic_time"),
-						result.getInt("dynamic_partition_id")
-						);
-				allPartitionDaynamic.add(dynamic);
+				JSONObject object=new JSONObject();
+				
+				object.put("id", result.getInt("dynamic_id"));
+				object.put("user_id", result.getInt("dynamic_user_id"));
+				object.put("text", result.getString("dynamic_text"));
+				object.put("img", result.getString("dynamic_img"));
+				object.put("collection_num", result.getInt("dynamic_collection_num"));
+				object.put("like_num", result.getInt("dynamic_like_num"));
+				object.put("comment_num", result.getInt("dynamic_comment_num"));
+				object.put("address", result.getString("dynamic_address"));
+				object.put("time", result.getDate("dynamic_time"));
+				object.put("partition_id", result.getInt("dynamic_partition_id"));
+			
+				array.put(object);
 				
 			}
 			connection.close();
@@ -110,14 +116,14 @@ public class DynamicDao {
 			e.printStackTrace();
 		}
 		
-		return allPartitionDaynamic;
+		return array;
 		
 	}
 	
 	//4.根据用户Id查找动态
-	public static List<Dynamic> getDynamicByUserId(int user_id){
+	public static JSONArray getDynamicByUserId(int user_id){
 		Connection connection=DataBase.getConnection();
-		List <Dynamic> allUserDaynamic=new ArrayList<Dynamic>();
+		JSONArray array=new JSONArray();
 		String sql="select * from dynamic where dynamic_user_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -125,19 +131,20 @@ public class DynamicDao {
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
-				Dynamic dynamic=new Dynamic(
-						result.getInt("dynamic_id"),
-						result.getInt("dynamic_user_id"),
-						result.getString("dynamic_text"),
-						result.getString("dynamic_img"),
-						result.getInt("dynamic_collection_num"),
-						result.getInt("dynamic_like_num"),
-						result.getInt("dynamic_comment_num"),
-						result.getString("dynamic_address"),
-						result.getDate("dynamic_time"),
-						result.getInt("dynamic_partition_id")
-						);
-				allUserDaynamic.add(dynamic);
+				JSONObject object=new JSONObject();
+				
+				object.put("id", result.getInt("dynamic_id"));
+				object.put("user_id", result.getInt("dynamic_user_id"));
+				object.put("text", result.getString("dynamic_text"));
+				object.put("img", result.getString("dynamic_img"));
+				object.put("collection_num", result.getInt("dynamic_collection_num"));
+				object.put("like_num", result.getInt("dynamic_like_num"));
+				object.put("comment_num", result.getInt("dynamic_comment_num"));
+				object.put("address", result.getString("dynamic_address"));
+				object.put("time", result.getDate("dynamic_time"));
+				object.put("partition_id", result.getInt("dynamic_partition_id"));
+			
+				array.put(object);
 				
 			}
 			connection.close();
@@ -146,7 +153,7 @@ public class DynamicDao {
 			e.printStackTrace();
 		}
 		
-		return allUserDaynamic;
+		return array;
 	}
 	
 	//5.通过动态Id获得动态

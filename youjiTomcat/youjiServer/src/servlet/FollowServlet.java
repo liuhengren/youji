@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import bean.Follow;
@@ -43,10 +44,9 @@ public class FollowServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			int user_id=Integer.parseInt(id);
 			
-			List <Follow>list=FollowDao.getFollowByUserId(user_id);
-			System.out.println(list.size());
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
+			JSONArray array=FollowDao.getFollowByUserId(user_id);
+			
+			out.write(array.toString());
 		}
 		 //2.Ìí¼Ó¹Ø×¢Õß
 		else if("follow_addFollow".equals(message)) {

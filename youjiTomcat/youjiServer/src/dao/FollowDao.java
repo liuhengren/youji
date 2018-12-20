@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import bean.Dynamic;
 import bean.Follow;
 
@@ -17,21 +20,26 @@ public class FollowDao {
 
 
 	//1.通过用户Id获得他的关注者
-	 public static  List<Follow> getFollowByUserId(int user_id){
+	 public static  JSONArray getFollowByUserId(int user_id){
 			
 			Connection connection=DataBase.getConnection();
-			List <Follow> followList=new ArrayList<Follow>();
+			JSONArray array=new JSONArray();
+			
+			
 			String sql="select * from follow where user_id=?";
 			try {
 				PreparedStatement preparedStatement=connection.prepareStatement(sql);
 				preparedStatement.setInt(1, user_id);
 				ResultSet result=preparedStatement.executeQuery();
 				while(result.next()) {
-					Follow follow=new Follow(
-							result.getInt("follow_id"),
-							result.getInt("user_id"),
-							result.getInt("follow_user_id"));
-					followList.add(follow);
+					
+					JSONObject object=new JSONObject();
+					object.put("id", result.getInt("follow_id"));
+					object.put("user_id", result.getInt("user_id"));
+					object.put("follow_user_id", result.getInt("follow_user_id"));
+					
+						
+					array.put(object);
 				}
 					
 				connection.close();
@@ -40,7 +48,7 @@ public class FollowDao {
 				e.printStackTrace();
 			}
 			
-			return followList;	 
+			return array;	 
 			}
 	 
 	 

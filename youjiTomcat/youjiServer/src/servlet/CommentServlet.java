@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dao.CommentDao;
@@ -40,10 +41,9 @@ public class CommentServlet extends HttpServlet {
 		if("comment_ByDynamicId".equals(message)) {
 			String id=request.getParameter("dynamic_id");
 			int dynamic_id=Integer.parseInt(id);
-			List list=CommentDao.getCommentByDynamicId(dynamic_id);
-			JSONObject object=new JSONObject();
-					object.put("list", list);
-			out.write(object.toString());
+			JSONArray array=CommentDao.getCommentByDynamicId(dynamic_id);
+					
+			out.write(array.toString());
 		}
 //		 //2.插入一条评论
 //		else if("comment_addComment".equals(message)) {
