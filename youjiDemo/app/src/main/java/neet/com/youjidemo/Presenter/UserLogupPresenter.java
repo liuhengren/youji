@@ -84,7 +84,7 @@ public class UserLogupPresenter {
                 case SUBMIT_SUCCESS ://验证成功处理
                     // Logger.d("验证成功");
                     Log.e("验证成功","成功");
-                    logupResulet = userBiz.logup(logUpView.getUserPhone(), logUpView.getUserPassword());
+                    //logupResulet = userBiz.logup(logUpView.getUserPhone(), logUpView.getUserPassword());
                     checkLogupResulet();
                     break;
                 case CHECK_FAILE://服务器返回错误处理

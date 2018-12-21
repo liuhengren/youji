@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
 
     <android.support.v7.widget.Toolbar
@@ -46,17 +45,17 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/cl_main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tbdetail_pde">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <RelativeLayout
-                app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <!--发表人头像-->
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -105,29 +104,131 @@
 
             <TextView
                 android:id="@+id/tv_detail_description"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="25dp"
-                android:textSize="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="独为伊人醉红尘"/>
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:text="独为伊人醉红尘"
+                android:textSize="20dp"
+                app:layout_scrollFlags="scroll|enterAlways" />
 
             <ImageView
                 android:id="@+id/image_detail_picture"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:src="@drawable/scenery"
-                app:layout_scrollFlags="scroll|enterAlways"/>
+                app:layout_scrollFlags="scroll|enterAlways" />
         </android.support.design.widget.AppBarLayout>
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_detail_review"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="23dp"
+            android:layout_marginRight="23dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
     </android.support.design.widget.CoordinatorLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rl_enroll"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/lightgray">
+
+        <ImageView
+            android:id="@+id/image_detail_collect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:layout_gravity="center"
+            android:src="@drawable/collect" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/smssdk_black"/>
+
+        <ImageView
+            android:id="@+id/image_detail_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
+            android:src="@drawable/comment"
+            android:layout_gravity="center"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/smssdk_black"/>
+
+        <ImageView
+            android:id="@+id/image_detail_like"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/like"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_comment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/hide_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hide_down"
+            android:textSize="13sp"
+            android:textColor="@color/txtgrey"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            android:layout_toRightOf="@id/hide_down"
+            android:layout_marginLeft="10dp"/>
+        <EditText
+            android:id="@+id/comment_content"
+            android:hint="@string/comment_content"
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:layout_toRightOf="@id/hide_down"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:id="@+id/comment_send"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:text="@string/send"
+            android:textSize="13sp"
+            android:textColor="@color/white"
+            android:background="@color/mainColor"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"/>
+    </RelativeLayout>
+</RelativeLayout>
