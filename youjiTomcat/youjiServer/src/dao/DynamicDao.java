@@ -51,36 +51,53 @@ public class DynamicDao {
 	}
 	
 	
-	//2.插入一条动态
-	private static boolean addDynamic(Dynamic dynamic) {
-		Connection connection=DataBase.getConnection();
-		
-		String sql="insert into dynamic("
-				+ "dynamic_user_id,dynamic_text,dynamic_img,"
-				+ "dynamic_collection_num,dynamic_like_num,dynamic_comment_num,"
-				+ "dynamic_address,dynamic_time,dynamic_partition_id) "
-				+ "values(?,?,?,?,?,?,?,?,?)";
-		try {
-			PreparedStatement prepareStatement = connection.prepareStatement(sql);
-			prepareStatement.setInt(1, dynamic.getUser_id());
-			prepareStatement.setString(2, dynamic.getText());
-			prepareStatement.setString(3, dynamic.getImg());
-			prepareStatement.setInt(4, dynamic.getCollection_num());
-			prepareStatement.setInt(5, dynamic.getLike_num());
-			prepareStatement.setInt(6, dynamic.getComment_num());
-			prepareStatement.setString(7,dynamic.getAddress());
-			prepareStatement.setDate(8, dynamic.getTime());
-			prepareStatement.setInt(9, dynamic.getPartition_id());
+	//2.插入一条动态(只是内容)
+		public static int addDynamic(Dynamic dynamic) {
+			Connection connection=DataBase.getConnection();
 			
-			boolean result = prepareStatement.execute();
-			connection.close();
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String sql="insert into dynamic("
+					+ "dynamic_user_id,dynamic_text,"
+					+ "dynamic_collection_num,dynamic_like_num,dynamic_comment_num,"
+					+ "dynamic_address,dynamic_time,dynamic_partition_id) "
+					+ "values(?,?,?,?,?,?,?,?,?)";
+			try {
+				PreparedStatement prepareStatement = connection.prepareStatement(sql);
+				prepareStatement.setInt(1, dynamic.getUser_id());
+				prepareStatement.setString(2, dynamic.getText());
+				prepareStatement.setInt(4, dynamic.getCollection_num());
+				prepareStatement.setInt(5, dynamic.getLike_num());
+				prepareStatement.setInt(6, dynamic.getComment_num());
+				prepareStatement.setString(7,dynamic.getAddress());
+				prepareStatement.setDate(8, dynamic.getTime());
+				prepareStatement.setInt(9, dynamic.getPartition_id());
+				boolean result = prepareStatement.execute();
+				connection.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		} 
+		
+		
+		//插入动态图片 
+		public  static boolean insertDynamicImage(int id,String img) {
+			Connection connection=DataBase.getConnection();
+			String sql="insert into dynamic(dynamic_img)values(?)";
+			PreparedStatement prepareStatement;
+			try {
+				prepareStatement = connection.prepareStatement(sql);
+				prepareStatement.setInt(1, id);
+				
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
 		}
-		return false;
-	} 
 	
 	
 	//3.通过分区查找动态
@@ -157,9 +174,9 @@ public class DynamicDao {
 	}
 	
 	//5.通过动态Id获得动态
-	public static  Dynamic getDynamicById(int dynamic_id) {
+	public static  JSONObject getDynamicById(int dynamic_id) {
 		Connection connection=DataBase.getConnection();
-		Dynamic dynamic=null;
+		JSONObject object=new JSONObject();
 		String sql="select * from dynamic where dynamic_id=?";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
@@ -167,19 +184,19 @@ public class DynamicDao {
 			
 			ResultSet result=preparedStatement.executeQuery();
 			while(result.next()) {
-				 dynamic=new Dynamic(
-						result.getInt("dynamic_id"),
-						result.getInt("dynamic_user_id"),
-						result.getString("dynamic_text"),
-						result.getString("dynamic_img"),
-						result.getInt("dynamic_collection_num"),
-						result.getInt("dynamic_like_num"),
-						result.getInt("dynamic_comment_num"),
-						result.getString("dynamic_address"),
-						result.getDate("dynamic_time"),
-						result.getInt("dynamic_partition_id")
-						);
-			
+				object.put("id", result.getInt("dynamic_id"));
+				object.put("user_id", result.getInt("dynamic_user_id"));
+				object.put("text", result.getString("dynamic_text"));
+				object.put("img", result.getString("dynamic_img"));
+				object.put("collection_num", result.getInt("dynamic_collection_num"));
+				object.put("like_num", result.getInt("dynamic_like_num"));
+				object.put("comment_num", result.getInt("dynamic_comment_num"));
+				object.put("address", result.getString("dynamic_address"));
+				object.put("time", result.getDate("dynamic_time"));
+				object.put("partition_id", result.getInt("dynamic_partition_id"));
+				
+				 
+				
 				}
 			connection.close();
 		} catch (SQLException e) {
@@ -187,7 +204,7 @@ public class DynamicDao {
 			e.printStackTrace();
 		}
 		
-		return dynamic;
+		return object;
 	}
 
 	//6.通过Id删除一条动态
