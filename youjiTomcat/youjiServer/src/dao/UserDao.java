@@ -60,20 +60,27 @@ public class UserDao {
 	}
 
 	// 3.通过用户Id获得用户
-	public static User getUserById(int user_id) {
+	public static JSONObject getUserById(int user_id) {
 		Connection connection = DataBase.getConnection();
 		String sql = "select * from user where user_id=?";
-		User user = null;
+		JSONObject object=new JSONObject();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
-				user = new User(result.getInt("user_id"), result.getString("user_phone"), "",
-						result.getString("user_name"), result.getString("user_sex"), result.getDate("user_birthday"),
-						result.getString("user_address"), result.getInt("user_funnum"),
-						result.getInt("user_collection_num"), result.getString("user_touxiang_url"),
-						result.getString("user_background_url"), result.getString("user_introduction"));
+				object.put("user_id", result.getInt("user_id"));
+				object.put("user_phone", result.getString("user_phone")); 
+				object.put("user_name",result.getString("user_name")); 
+				object.put("user_sex", result.getString("user_sex")); 
+				object.put("user_birthday", result.getDate("user_birthday")); 
+				object.put("user_address", result.getString("user_address")); 
+				object.put("user_funnum", result.getInt("user_funnum")); 
+				object.put("user_collection_num", result.getInt("user_collection_num")); 
+				object.put("user_touxiang_url", result.getString("user_touxiang_url"));
+				object.put("user_background_url", result.getString("user_background_url")); 
+				object.put("user_introduction", result.getString("user_introduction"));
+				object.put("user_password", ""); 
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -81,7 +88,7 @@ public class UserDao {
 			e.printStackTrace();
 		}
 
-		return user;
+		return object;
 	}
 	
 	//4.修改用户名
@@ -217,8 +224,6 @@ public class UserDao {
 					object.put("user_background_url", result.getString("user_background_url")); 
 					object.put("user_introduction", result.getString("user_introduction"));
 					object.put("user_password", ""); 
-							
-					
 				}
 				connection.close();
 			} catch (SQLException e) {
@@ -229,6 +234,25 @@ public class UserDao {
 			return object;
 		  
 	  }
-
+	//11.修改用户的背景
+	  public static boolean updateUserBackground(int user_id,String img) {
+		  Connection connection=DataBase.getConnection();
+			String sql="update user set user_background_url=? where user_id=?";
+			try {
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				
+				preparedStatement.setString(1, img);
+				preparedStatement.setInt(2, user_id);
+				preparedStatement.executeUpdate();
+				connection.close();
+				System.out.println("修改背景成功！");
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			return false;
+	  }
+	  
 
 }

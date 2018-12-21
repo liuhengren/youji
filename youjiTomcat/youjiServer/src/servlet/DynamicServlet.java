@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
@@ -45,16 +47,23 @@ public class DynamicServlet extends HttpServlet {
 		if("dynamic_allDynamic".equals(message)) {
 			
 			JSONArray array=DynamicDao.getDynamic();
-			
 			response.getWriter().append(array.toString());
 			
 		}
-//		//2.插入一条动态
-//		else if("dynamic_addDynamic".equals(message)) 
-//		{
-//			DynamicDao.addDynamic(dynamic);
-//			
-//		}
+		//2.插入一条动态
+		else if("dynamic_addDynamic".equals(message)) 
+		{
+			
+			BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(request.getInputStream()));
+			JSONObject oJsonObject=new JSONObject(bufferedReader.readLine());
+			Dynamic dynamic=new Dynamic();
+			
+			bufferedReader.close();
+			out.append("奥出我要去吃饭了");
+			
+			DynamicDao.addDynamic(dynamic);
+			
+		}
 		//3.通过分区查找动态
 		else if("dynamic_getDynamicByPartitionId".equals(message))
 		{
@@ -83,9 +92,7 @@ public class DynamicServlet extends HttpServlet {
 		{
 			String id=request.getParameter("id");
 			int dynamic_id=Integer.parseInt(id);
-			Dynamic dynamic=DynamicDao.getDynamicById(dynamic_id);
-			JSONObject object=new JSONObject();
-			object.put("list", dynamic);
+			JSONObject object=DynamicDao.getDynamicById(dynamic_id);
 			out.write(object.toString());
 			
 		}

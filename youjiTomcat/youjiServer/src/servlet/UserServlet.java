@@ -44,140 +44,109 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
-		System.out.println("GET连接成功！");
-		String message=request.getParameter("message");
 		PrintWriter out = response.getWriter();
-	
+		System.out.println("GET连接成功！");
 		
-
-		
-//		JSONObject object5=new JSONObject();
-//		
-//		object5.put("phone", "1366648887580");
-//		out.append(object5.toString());
-//		
-		System.out.println("我到早就好了");
-		BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(
-				request.getInputStream()));
-
-		System.out.println("撒旦如何湖人的烦恼");
-		JSONObject oJsonObject=new JSONObject(bufferedReader.readLine());
-		System.out.println(oJsonObject.toString());
-		
-		
-		bufferedReader.close();
-
-
-//		
-	
-		
-//	
-//		BufferedReader br = new BufferedReader(
-//				new InputStreamReader(request.getInputStream(), "UTF-8"));
-//		StringBuffer sb = new StringBuffer("");
-//		String temp;
-//		while((temp = br.readLine()) != null){
-//			sb.append(temp);
+		String message=request.getParameter("message");
+			// 1.通过手机号注册
+		if("user_login".equals(message)) {
+			String userphone=request.getParameter("userphone");
+			String password=request.getParameter("password");
+			System.out.println("userphone"+userphone);
+			System.out.println("password"+password);
+			boolean result = UserDao.logup(userphone,password);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+			
+		}
+		// 2.通过手机号登录
+		else if("user_logup".equals(message)) {
+			String userphone=request.getParameter("userphone");
+			String password=request.getParameter("password");
+			boolean result = UserDao.login(userphone,password);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+			
+					
+		}
+		 //3.通过用户Id获得用户
+		else if("user_getUserById".equals(message)) {
+			String id=request.getParameter("id");
+			int user_id=Integer.parseInt(id);
+			JSONObject object=UserDao.getUserById(user_id);
+			
+			out.write(object.toString());
+		}
+		//4.修改用户名
+		else if("user_Username".equals(message)) {
+			String id=request.getParameter("id");
+			String username=request.getParameter("name");
+			int user_id=Integer.parseInt(id);
+			boolean result = UserDao.updateUsername(user_id, username);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+//		  //5.修改头像
+//		else if("user_touxiang".equals(message)) {
+//			UserDao.updateUsertouxiang(user_id, img);
 //		}
-//		br.close();
-//		String reqMessage = sb.toString();
-//		System.out.println("请求报文:" + reqMessage);
-//		
-//		JSONObject jsonObject = new JSONObject(reqMessage);
-//		String string = jsonObject.getString("id");
-//	
-//		System.out.println("我这是ID：：：："+string);
-//		
-		
-//			// 1.通过手机号注册
-//		if("user_login".equals(message)) {
-//			
-//			String userphone=request.getParameter("userphone");
-//			String password=request.getParameter("password");
-//			System.out.println("userphone"+userphone);
-//			System.out.println("password"+password);
-//			boolean result = UserDao.logup(userphone,password);
-//			JSONObject object = new  JSONObject();
-//			object.put("res", result);
-//			out.write(object.toString());
-//			
-//		}
-//		// 2.通过手机号登录
-//		else if("user_logup".equals(message)) {
-//			String userphone=request.getParameter("userphone");
-//			String password=request.getParameter("password");
-//			boolean result = UserDao.login(userphone,password);
-//			JSONObject object = new  JSONObject();
-//			object.put("res", result);
-//			out.write(object.toString());
-//			
-//					
-//		}
-//		// 3.通过用户Id获得用户
-////		else if("user_getUserById".equals(message)) {
-////			String id=request.getParameter("id");
-////			int user_id=Integer.parseInt(id);
-////			User user=UserDao.getUserById(user_id);
-////			JSONObject object=new JSONObject();
-////			object.put("user", user);
-////			object.put("phone", "1366647580");
-////			out.write(object.toString());
-////		}
-//		//4.修改用户名
-//		else if("user_Username".equals(message)) {
+		//6.修改性别
+		else if("user_sex".equals(message)) {
+			String id=request.getParameter("id");
+			String userSex=request.getParameter("sex");
+			int user_id=Integer.parseInt(id);
+			boolean result = UserDao.updateUserSex(user_id, userSex);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+		 //7.修改简介
+		else if("user_instruction".equals(message)) {
+			String id=request.getParameter("id");
+			String userIntroduction=request.getParameter("instruction");
+			int user_id=Integer.parseInt(id);
+			UserDao.updateUserIntroduction(user_id, userIntroduction);
+		}
+//	    //8.修改生日
+//		else if("user_birthday".equals(message)) {
 //			String id=request.getParameter("id");
-//			String username=request.getParameter("name");
+//			String userBirthday=request.getParameter("birthday");
 //			int user_id=Integer.parseInt(id);
-//			boolean result = UserDao.updateUsername(user_id, username);
-//			JSONObject object = new  JSONObject();
-//			object.put("res", result);
-//			out.write(object.toString());
+//			UserDao.updateUserBirthday(user_id, userBirthday);
 //		}
-////		  //5.修改头像
-////		else if("user_touxiang".equals(message)) {
-////			UserDao.updateUsertouxiang(user_id, img);
-////		}
-//		//6.修改性别
-//		else if("user_sex".equals(message)) {
-//			String id=request.getParameter("id");
-//			String userSex=request.getParameter("sex");
-//			int user_id=Integer.parseInt(id);
-//			boolean result = UserDao.updateUserSex(user_id, userSex);
-//			JSONObject object = new  JSONObject();
-//			object.put("res", result);
-//			out.write(object.toString());
-//		}
-//		 //7.修改简介
-//		else if("user_instruction".equals(message)) {
-//			String id=request.getParameter("id");
-//			String userIntroduction=request.getParameter("instruction");
-//			int user_id=Integer.parseInt(id);
-//			UserDao.updateUserIntroduction(user_id, userIntroduction);
-//		}
-////	    //8.修改生日
-////		else if("user_birthday".equals(message)) {
-////			String id=request.getParameter("id");
-////			String userBirthday=request.getParameter("birthday");
-////			int user_id=Integer.parseInt(id);
-////			UserDao.updateUserBirthday(user_id, userBirthday);
-////		}
-//		  //9.修改家乡
-//		else if("user_address".equals(message)) {
-//			String id=request.getParameter("id");
-//			String userHometown=request.getParameter("address");
-//			int user_id=Integer.parseInt(id);
-//			boolean result = UserDao.updateUserHometown(user_id, userHometown);
-//			JSONObject object = new  JSONObject();
-//			object.put("res", result);
-//			out.write(object.toString());
-//		}
-//		 //10.通过用户手机号查询用户所有信息
-//		else if("user_UserDetail".equals(message)) {
-//			String phone=request.getParameter("phone");
-//			JSONObject phoneobject=UserDao.getUserDetail(phone);
-//		
-//			out.write(phoneobject.toString());
-//		}
+		  //9.修改家乡
+		else if("user_address".equals(message)) {
+			String id=request.getParameter("id");
+			String userHometown=request.getParameter("address");
+			int user_id=Integer.parseInt(id);
+			boolean result = UserDao.updateUserHometown(user_id, userHometown);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+		 //10.通过用户手机号查询用户所有信息
+		else if("user_UserDetail".equals(message)) {
+			String phone=request.getParameter("phone");
+			JSONObject phoneobject=UserDao.getUserDetail(phone);
+		
+			out.write(phoneobject.toString());
+		}
+		
+		//11.修改用户背景图
+		else if("user_UserBackground".equals(message)) {
+			String id=request.getParameter("id");
+			String background_url=request.getParameter("background_url");
+			int userid=Integer.parseInt(id);
+			
+			boolean result = UserDao.updateUserBackground(userid,background_url);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+		
 }
 
 	/**
