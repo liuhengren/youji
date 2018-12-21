@@ -3,4 +3,7 @@
     <string name="log_show_tips">开启你的旅程</string>
     <string name="pde_inter_default">还没想好怎么介绍自己</string>
     <string name="title_activity_travle">TravleActivity</string>
+    <string name="send">发表</string>
+    <string name="comment_content">说点什么吧...</string>
+    <string name="hide_down">隐藏</string>
 </resources>

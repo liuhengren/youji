@@ -30,12 +30,11 @@ public class UploadUtil {
      * @param RequestURL  请求的url
      * @return 返回响应的内容
      */
-    public static String uploadImage(File file, String RequestURL,Context context) {
+    public static String uploadImage(File file, String RequestURL) {
         String result = "error";
         String BOUNDARY = UUID.randomUUID().toString();//边界标识 随机生成
         String PREFIX = "--", LINE_END = "\r\n";
         String CONTENT_TYPE = "multipart/form-data";//内容类型
-        Context context1 = context;
         try {
             URL url = new URL(RequestURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -62,7 +61,7 @@ public class UploadUtil {
 //                dos.writeBytes(LINE_END);
 
                 FileInputStream is = new FileInputStream(file);
-                byte[] bytes = new byte[150000];
+                byte[] bytes = new byte[200000];
                 int len = -1;
                 while ((len = is.read(bytes)) != -1) {
                     dos.write(bytes, 0, len);
@@ -85,7 +84,6 @@ public class UploadUtil {
                 int res = conn.getResponseCode();
                 Log.e("res",""+res);
                 if (res == 200) {
-                    Toast.makeText(context1,"上传成功！",Toast.LENGTH_SHORT);
                     InputStream input = conn.getInputStream();
                     StringBuilder sbs = new StringBuilder();
                     int ss;
@@ -103,7 +101,7 @@ public class UploadUtil {
         catch (IOException e) {
             e.printStackTrace();
         }
-        return "ffrf";
+        return result;
     }
 
     private static String getMIMEType(File file) {

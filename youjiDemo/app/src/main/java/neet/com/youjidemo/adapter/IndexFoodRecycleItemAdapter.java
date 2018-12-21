@@ -79,6 +79,16 @@ public class IndexFoodRecycleItemAdapter extends RecyclerView.Adapter <IndexFood
             }
         });
 
+        /**点赞按钮的点击事件*/
+        viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.goodNum.getText() == "点赞"){
+                    viewHolder.goodButton.setImageResource(R.drawable.havelike);
+                    viewHolder.goodNum.setText("Like");
+                }
+            }
+        });
 
     }
 

@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import neet.com.youjidemo.MainActivity;
+import neet.com.youjidemo.Presenter.ImagePresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.command.UploadUtil;
 
@@ -63,13 +64,13 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.select_image:
                 /*** * 这个是调用android内置的intent，来过滤图片文件 ，同时也可以过滤其他的 */
-                selectImg();
+                ImagePresenter.selectImage(ShareActivity.this);
                 break;
             case R.id.btn_share_upload:
                 if (img_src == null) {
                     Toast.makeText(ShareActivity.this, "请选择图片！", Toast.LENGTH_LONG).show();
                 } else {
-                    uploadImage(img_src);
+                    ImagePresenter.uploadImage(img_src,ShareActivity.this);
                 }
                 break;
             default:
@@ -82,8 +83,6 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         upload = findViewById(R.id.btn_share_upload);
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -91,35 +90,11 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
             case 200:
                 switch (resultCode) {
                     case RESULT_OK:
-                        Uri uri = data.getData();
-                        img_src = uri.getPath();//这是本机的图片路径
-
-                        ContentResolver cr = getContentResolver();
-                        try {
-                            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                            /* 将Bitmap设定到ImageView */
-                            selectImage.setImageBitmap(bitmap);
-
-                            String[] proj = {MediaStore.Images.Media.DATA};
-                            CursorLoader loader = new CursorLoader(ShareActivity.this, uri, proj, null, null, null);
-                            Cursor cursor = loader.loadInBackground();
-                            if (cursor != null) {
-                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                                cursor.moveToFirst();
-
-                                img_src = cursor.getString(column_index);//图片实际路径
-
-                            }
-                            cursor.close();
-
-                        } catch (FileNotFoundException e) {
-                            Log.e("Exception", e.getMessage(), e);
-                        }
-
+                        Log.e("data:",""+data.getData());
+                        img_src = ImagePresenter.getImageSrc(ShareActivity.this, data,selectImage);
                         break;
                 }
                 break;
-
         }
     }
 
@@ -135,22 +110,22 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         dialog.show();
     }
 
-
-    public void uploadImage(String path) {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
-                try {
-                    File file = new File(img_src);
-                    result = UploadUtil.uploadImage(file, uploadurl,ShareActivity.this);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-    }
+    /**上传图片*/
+//    public void uploadImage(String path) {
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
+//                try {
+//                    File file = new File(img_src);
+//                    result = UploadUtil.uploadImage(file, uploadurl);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//
+//    }
 }
