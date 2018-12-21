@@ -49,7 +49,7 @@ public class UserServlet extends HttpServlet {
 		
 		String message=request.getParameter("message");
 			// 1.通过手机号注册
-		if("user_login".equals(message)) {
+		if("user_logup".equals(message)) {
 			String userphone=request.getParameter("userphone");
 			String password=request.getParameter("password");
 			System.out.println("userphone"+userphone);
@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet {
 			
 		}
 		// 2.通过手机号登录
-		else if("user_logup".equals(message)) {
+		else if("user_login".equals(message)) {
 			String userphone=request.getParameter("userphone");
 			String password=request.getParameter("password");
 			boolean result = UserDao.login(userphone,password);

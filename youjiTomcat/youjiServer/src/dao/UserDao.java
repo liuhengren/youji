@@ -39,7 +39,7 @@ public class UserDao {
 	public static boolean login(String userphone, String password) {
 		
 		Connection connection = DataBase.getConnection();
-		String sql = "select * from user where user_phone=?,user_password=?";
+		String sql = "select * from user where user_phone=? and user_password=?";
 		boolean judge=false;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
