@@ -19,11 +19,12 @@ public class UserDao {
 	public static boolean logup(String userphone, String password) {
 		Connection connection = DataBase.getConnection();
 
-		String sql = "insert into user(user_phone,user_password)values(?,?)";
+		String sql = "insert into user(user_phone,user_password,user_name)values(?,?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setString(1, userphone);
 			prepareStatement.setString(2, password);
+			prepareStatement.setString(3, userphone);
 			prepareStatement.execute();
 			System.out.println("手机号注册成功！");
 			connection.close();

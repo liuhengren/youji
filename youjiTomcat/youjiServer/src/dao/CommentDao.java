@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import bean.Comment;
 
 public class CommentDao {
 	
-	//1.»ñÈ¡¸Ã¶¯Ì¬µÄËùÓĞÆÀÂÛ
+	//1.ï¿½ï¿½È¡ï¿½Ã¶ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 public static JSONArray getCommentByDynamicId(int dynamic_id)
 	 {
 		 Connection connection=DataBase.getConnection();
@@ -33,10 +34,7 @@ public class CommentDao {
 					object.put("dynamic_id", result.getInt("comment_dynamic_id"));
 					object.put("like_num", result.getInt("comment_like_num"));
 					object.put("user_id", result.getInt("comment_user_id"));
-				
 					array.put(object);
-			
-					
 				}
 				connection.close();
 			} catch (SQLException e) {
@@ -47,19 +45,21 @@ public class CommentDao {
 			return array;
 	 }
 	 
-	 //2.²åÈëÒ»ÌõÆÀÂÛ
+	 //2.æ·»åŠ ä¸€æ¡è¯„è®º
 	   public static  boolean addComment(Comment comment)
 	   {
+		   Timestamp timestamp=new Timestamp(System.currentTimeMillis());
 		   Connection connection=DataBase.getConnection();
 		   String sql="insert into comment("
 				+ "comment_text,comment_dynamic_id,"
-				+ "comment_like_num,comment_user_id,values(?,?,?,?)";
+				+ "comment_like_num,comment_user_id,comment_time values(?,?,?,?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setString(1, comment.getText());
 			prepareStatement.setInt(2, comment.getDynamic_id());
 			prepareStatement.setInt(3, comment.getLike_num());
 			prepareStatement.setInt(4, comment.getUser_id());
+			prepareStatement.setTimestamp(5, timestamp);
 			
 			boolean result = prepareStatement.execute();
 			connection.close();
@@ -71,7 +71,7 @@ public class CommentDao {
 		return false;
 	} 
 	   
-	   //3.¸ø¸ÃÆÀÂÛµãÔŞ+1
+	   //3.ç»™è¯„è®ºç‚¹èµæ•°+1
 	   public static  boolean likeComment(int comment_id)
 	    {
 		   Connection connection=DataBase.getConnection();
@@ -92,7 +92,7 @@ public class CommentDao {
 					preparedStatement2.setInt(2, comment_id);
 					preparedStatement2.executeUpdate();
 					connection.close();
-					System.out.println("µãÔŞÍê³É£¡");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½");
 					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block

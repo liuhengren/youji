@@ -1,11 +1,14 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +18,7 @@ import bean.Dynamic;
 public class DynamicDao {
 	
 	
-	//1.DynamicDao ²éÕÒËùÓÐ
+	//1.DynamicDao ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static JSONArray getDynamic() {
 		
 		Connection connection=DataBase.getConnection();
@@ -51,45 +54,61 @@ public class DynamicDao {
 	}
 	
 	
-	//2.²åÈëÒ»Ìõ¶¯Ì¬(Ö»ÊÇÄÚÈÝ)
+	//2.ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ì¬(Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 		public static int addDynamic(Dynamic dynamic) {
 			Connection connection=DataBase.getConnection();
 			
+			int id=0;
+			Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+		
+			System.out.println(timestamp);
 			String sql="insert into dynamic("
 					+ "dynamic_user_id,dynamic_text,"
 					+ "dynamic_collection_num,dynamic_like_num,dynamic_comment_num,"
 					+ "dynamic_address,dynamic_time,dynamic_partition_id) "
-					+ "values(?,?,?,?,?,?,?,?,?)";
+					+ "values(?,?,?,?,?,?,?,?)";
+			String sql2="select dynamic_id from dynamic where dynamic_time=?";
+			
 			try {
 				PreparedStatement prepareStatement = connection.prepareStatement(sql);
 				prepareStatement.setInt(1, dynamic.getUser_id());
 				prepareStatement.setString(2, dynamic.getText());
-				prepareStatement.setInt(4, dynamic.getCollection_num());
-				prepareStatement.setInt(5, dynamic.getLike_num());
-				prepareStatement.setInt(6, dynamic.getComment_num());
-				prepareStatement.setString(7,dynamic.getAddress());
-				prepareStatement.setDate(8, dynamic.getTime());
-				prepareStatement.setInt(9, dynamic.getPartition_id());
-				boolean result = prepareStatement.execute();
+				prepareStatement.setInt(3, 0);
+				prepareStatement.setInt(4,0);
+				prepareStatement.setInt(5, 0);
+				prepareStatement.setString(6,dynamic.getAddress());
+				prepareStatement.setTimestamp(7, timestamp);
+				prepareStatement.setInt(8, dynamic.getPartition_id());
+				prepareStatement.execute();
+				
+				PreparedStatement prepareStatement2 = connection.prepareStatement(sql2);
+				prepareStatement2.setTimestamp(1, timestamp);
+				 prepareStatement2.executeQuery();
+				 ResultSet result=prepareStatement2.executeQuery();
+					while(result.next()) {
+						id=result.getInt("dynamic_id");
+					}
 				connection.close();
 				
+				return id;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return 0;
+			return id;
 		} 
 		
 		
-		//²åÈë¶¯Ì¬Í¼Æ¬ 
+		//3.ï¿½ï¿½ï¿½ë¶¯Ì¬Í¼Æ¬ 
 		public  static boolean insertDynamicImage(int id,String img) {
 			Connection connection=DataBase.getConnection();
-			String sql="insert into dynamic(dynamic_img)values(?)";
+			String sql="insert into dynamic(dynamic_img) values(?) where dynamic_id=?";
 			PreparedStatement prepareStatement;
 			try {
 				prepareStatement = connection.prepareStatement(sql);
-				prepareStatement.setInt(1, id);
-				
+				prepareStatement.setString(1, img);
+				prepareStatement.setInt(2, id);
+				 prepareStatement.execute();
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -100,7 +119,7 @@ public class DynamicDao {
 		}
 	
 	
-	//3.Í¨¹ý·ÖÇø²éÕÒ¶¯Ì¬
+	//4.Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½Ì¬
 	public  static JSONArray getDynamicByPartitionId(int partition_id) {
 		Connection connection=DataBase.getConnection();
 		JSONArray array=new JSONArray();
@@ -137,7 +156,7 @@ public class DynamicDao {
 		
 	}
 	
-	//4.¸ù¾ÝÓÃ»§Id²éÕÒ¶¯Ì¬
+	//5.ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Idï¿½ï¿½ï¿½Ò¶ï¿½Ì¬
 	public static JSONArray getDynamicByUserId(int user_id){
 		Connection connection=DataBase.getConnection();
 		JSONArray array=new JSONArray();
@@ -173,7 +192,7 @@ public class DynamicDao {
 		return array;
 	}
 	
-	//5.Í¨¹ý¶¯Ì¬Id»ñµÃ¶¯Ì¬
+	//6.Í¨ï¿½ï¿½ï¿½ï¿½Ì¬Idï¿½ï¿½Ã¶ï¿½Ì¬
 	public static  JSONObject getDynamicById(int dynamic_id) {
 		Connection connection=DataBase.getConnection();
 		JSONObject object=new JSONObject();
@@ -207,7 +226,7 @@ public class DynamicDao {
 		return object;
 	}
 
-	//6.Í¨¹ýIdÉ¾³ýÒ»Ìõ¶¯Ì¬
+	//7.Í¨ï¿½ï¿½IdÉ¾ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ì¬
 	  public static boolean deleteDynamic(int Dynamic_id) {
 		  
 		  Connection connection=DataBase.getConnection();
@@ -218,7 +237,7 @@ public class DynamicDao {
 				preparedStatement.setInt(1, Dynamic_id);
 				
 				preparedStatement.executeUpdate();
-			System.out.println("É¾³ý³É¹¦£¡");
+			System.out.println("É¾ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 				connection.close();
 				return true;
 			} catch (SQLException e) {
@@ -228,7 +247,7 @@ public class DynamicDao {
 			return false;
 	  }
 
-	  //7.¸ù¾ÝÈÈ¶È»ñµÃ¶¯Ì¬
+	  //8.ï¿½ï¿½ï¿½ï¿½ï¿½È¶È»ï¿½Ã¶ï¿½Ì¬
 	  public List<Dynamic> getDynamicOrderHot(){
 		  return null;
 	 }

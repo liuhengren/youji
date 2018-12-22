@@ -37,21 +37,20 @@ public class CommentServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		PrintWriter out=response.getWriter();
-		//1.»ñÈ¡¸Ã¶¯Ì¬µÄËùÓĞÆÀÂÛ
+		//1.ï¿½ï¿½È¡ï¿½Ã¶ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if("comment_ByDynamicId".equals(message)) {
 			String id=request.getParameter("dynamic_id");
 			int dynamic_id=Integer.parseInt(id);
 			JSONArray array=CommentDao.getCommentByDynamicId(dynamic_id);
-					
 			out.write(array.toString());
 		}
-//		 //2.²åÈëÒ»ÌõÆÀÂÛ
+//		 //2.ä¸€æ¡æ·»åŠ è¯„è®º
 //		else if("comment_addComment".equals(message)) {
 //			CommentDao.addComment(comment);
 //			
 //			
 //		}
-		 //3.¸ø¸ÃÆÀÂÛµãÔŞ+1
+		 //3.ç»™ç”¨æˆ·çš„è¯„è®ºç‚¹èµ+1
 		else if("comment_likeComment".equals(message)) {
 			
 			String id=request.getParameter("id");
