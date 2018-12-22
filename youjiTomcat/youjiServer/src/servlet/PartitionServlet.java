@@ -34,30 +34,21 @@ public class PartitionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("有人访问");
+
+		
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
-		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
-		StringBuffer sb = new StringBuffer("");
-		String temp;
-		while((temp = br.readLine()) != null){
-			sb.append(temp);
+		
+		//1.获得分区
+		if("partition_getPartition".equals(message)) {
+			
+			String id=request.getParameter("id");
+			int partition_id=Integer.parseInt(id);
+			
+			String partition = PartitionDao.getPartition(partition_id);
+			
+			response.getWriter().write(partition);
 		}
-		br.close();
-		String reqMessage = sb.toString();
-		System.out.println("请求报文:" + reqMessage);
-		
-		JSONObject jsonObject = new JSONObject(reqMessage);
-		String string = jsonObject.getString("partition_text");
-	
-		System.out.println(string);
-		
-		
-//		//1.获得分区
-//		if("partition_getPartition".equals(message)) {
-//			
-//			PartitionDao.getPartition(partition_id);
-//		}
 		
 		
 		

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dao.CollectionDao;
@@ -38,19 +39,36 @@ public class CollectionServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		// 1.通过用户Id获得该用户的所有收藏
 		if("collection_ByUserId".equals(message)) {
-			List list=CollectionDao.getCollectionByUserId(user_id);
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
+			
+			String id=request.getParameter("user_id");
+			int user_id=Integer.parseInt(id);
+			JSONArray array=CollectionDao.getCollectionByUserId(user_id);
+			
+			out.write(array.toString());
+			
 		}
 		// 2.添加一条收藏
 		else if("collection_addCollection".equals(message)) {
-			List list=CollectionDao.addCollection(user_id, dynamic_id);
-			JSONObject object=new JSONObject();
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(fid);
+			
+			boolean result=CollectionDao.addCollection(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
 			out.write(object.toString());
+		
 		}
 		//3.删除一条收藏
 		else if("collection_deleteCollection".equals(message)) {
-			CollectionDao.deleteCollection(collection_id);
+			String fid=request.getParameter("id");
+			int collection_id=Integer.parseInt(fid);
+			boolean result = CollectionDao.deleteCollection(collection_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 	}
 

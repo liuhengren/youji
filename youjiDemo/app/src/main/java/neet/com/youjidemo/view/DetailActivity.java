@@ -14,10 +14,17 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import android.widget.LinearLayout;
+
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -30,6 +37,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.DetailViewAdapter;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Comment;
+
 
 /**
  * desc:详情页（发表内容详情+评论），通过广播方式（每一分钟广播一次）获取当前系统时间
@@ -50,6 +59,12 @@ public class DetailActivity extends AppCompatActivity {
 
     private ImageButton imageButton;
 
+    private ImageView imageCollect; //底部收藏图片
+
+    private ImageView imageComment; //底部评论图片
+
+    private ImageView imageLike; //底部点赞图片
+
     private int isAttentioned;//用来标记该用户是否被关注
 
     private ClickListener mClickListener; //点击事件监听器
@@ -58,13 +73,14 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView time; //当前系统时间
 
-    private List mDataList; //数据源
+    private List<Comment> mDataList; //数据源
 
     private RecyclerView recyclerView; //列表
 
     private TextView tvUserName; //用户名
 
     private ImageButton btnAttention; //关注按钮
+
 
     private TextView tvDetaTime;
 
@@ -74,6 +90,20 @@ public class DetailActivity extends AppCompatActivity {
 
     private ShowDynamicInAll showDynamicInAll;
 
+
+    private DetailViewAdapter adapter;
+
+    private LinearLayout rl_enroll;
+
+    private RelativeLayout rl_comment;
+
+    private TextView hide_down;
+
+    private Button comment_send;
+
+    private TextView comment_content;
+
+    private Toolbar toolbar;
 
     /**设置时间*/
     private void setTime(CharSequence systemTime) {
@@ -86,24 +116,12 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        time = findViewById(R.id.tv_time);
+        findViews();
         registerReceiver(mTimeRefreshReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
         String currentTime = (String) getSystemTime();
         time.setText(currentTime);
-
-        Toolbar toolbar=(Toolbar)findViewById(R.id.tbdetail_pde);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
-        findViews();
         init();
-        btnImageHead.setOnClickListener(mClickListener);
-        tvUserName.setOnClickListener(mClickListener);
-        btnAttention.setOnClickListener(mClickListener);
-        DetailViewAdapter adapter = new DetailViewAdapter(mDataList);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        setClickListener();
         showDynamicInAll=(ShowDynamicInAll)getIntent().getSerializableExtra("dynamicDeta");
         setDynamic(showDynamicInAll);
     }
@@ -124,18 +142,33 @@ public class DetailActivity extends AppCompatActivity {
     /**初始化数据*/
     private void init(){
         mDataList = new ArrayList();
-        mDataList.add(1);
-        mDataList.add(1);
-        mDataList.add(1);
-        mDataList.add(1);
-        mDataList.add(1);
-        mDataList.add(1);
-        mDataList.add(1);
+        adapter = new DetailViewAdapter(mDataList);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+    }
+
+    /**设置监听器*/
+    private void setClickListener(){
+        btnImageHead.setOnClickListener(mClickListener);
+        tvUserName.setOnClickListener(mClickListener);
+        btnAttention.setOnClickListener(mClickListener);
+        imageCollect.setOnClickListener(mClickListener);
+        imageComment.setOnClickListener(mClickListener);
+        imageLike.setOnClickListener(mClickListener);
+        comment_content.setOnClickListener(mClickListener);
+        comment_send.setOnClickListener(mClickListener);
+        hide_down.setOnClickListener(mClickListener);
     }
 
     /***初始化控件*/
     private void findViews(){
         mClickListener = new ClickListener();
+        time = findViewById(R.id.tv_time);
+        toolbar = findViewById(R.id.tbdetail_pde);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         tvUserName = findViewById(R.id.tv_detail_username);
         recyclerView = findViewById(R.id.rv_detail_review);
         btnImageHead = findViewById(R.id.cImage_detail_head);
@@ -145,6 +178,14 @@ public class DetailActivity extends AppCompatActivity {
         tvDetaTime=findViewById(R.id.tv_detail_time);
         tvDetaDes=findViewById(R.id.tv_detail_description);
         iVDetaPic=findViewById(R.id.image_detail_picture);
+        imageCollect = findViewById(R.id.image_detail_collect);
+        imageComment = findViewById(R.id.image_detail_comment);
+        imageLike = findViewById(R.id.image_detail_like);
+        rl_enroll = findViewById(R.id.rl_enroll);
+        rl_comment = findViewById(R.id.rl_comment);
+        hide_down = findViewById(R.id.hide_down);
+        comment_send = findViewById(R.id.comment_send);
+        comment_content = findViewById(R.id.comment_content);
     }
 
     /**定义一个内部类来处里Activity中的点击事件*/
@@ -178,6 +219,33 @@ public class DetailActivity extends AppCompatActivity {
                         isAttentioned = R.drawable.befans;
                     }
                     break;
+                case R.id.image_detail_collect:
+
+                    break;
+                case R.id.image_detail_comment:
+                    // 弹出输入法
+                    InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    // 显示评论框
+                    rl_enroll.setVisibility(View.GONE);
+                    rl_comment.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.image_detail_like:
+
+                    break;
+                case R.id.comment_send:
+                    sendComment();
+                    break;
+                case R.id.hide_down:
+                    // 隐藏评论框
+                    rl_enroll.setVisibility(View.VISIBLE);
+                    rl_comment.setVisibility(View.GONE);
+                    // 隐藏输入法，然后暂存当前输入框的内容，方便下次使用
+                    InputMethodManager im = (InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    im.hideSoftInputFromWindow(comment_content.getWindowToken(), 0);
+                    break;
+
+
             }
         }
     }
@@ -192,6 +260,7 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         return super.onOptionsItemSelected(item);
     }
+
     private void setDynamic(ShowDynamicInAll showDynamicInAll){
         tvUserName.setText(showDynamicInAll.getUsername());
         RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
@@ -199,5 +268,20 @@ public class DetailActivity extends AppCompatActivity {
         tvDetaDes.setText(showDynamicInAll.getDynamic_text());
         tvDetaTime.setText(showDynamicInAll.getTime());
         Glide.with(this).load(showDynamicInAll.getDynamicImg_url()).into(iVDetaPic);
+	}
+
+    public void sendComment(){
+        if(comment_content.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(), "评论不能为空！", Toast.LENGTH_SHORT).show();
+        }else{
+            // 生成评论数据
+            Comment comment = new Comment();
+            comment.setComment_text(comment_content.getText().toString());
+            adapter.addComment(comment);
+            // 发送完，清空输入框
+            comment_content.setText("");
+
+            Toast.makeText(getApplicationContext(), "评论成功！", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import bean.Follow;
@@ -39,22 +40,49 @@ public class FollowServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		//1.通过用户Id获得他的关注者
 		if("follow_ByUserId".equals(message)) {
-			List <Follow>list=FollowDao.getFollowByUserId(user_id);
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
+			
+			String id=request.getParameter("id");
+			int user_id=Integer.parseInt(id);
+			
+			JSONArray array=FollowDao.getFollowByUserId(user_id);
+			
+			out.write(array.toString());
 		}
 		 //2.添加关注者
 		else if("follow_addFollow".equals(message)) {
-			FollowDao.addFollow(user_id, follow_user_id);
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
+			
+			boolean result = FollowDao.addFollow(user_id, follow_user_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		 //3.删除关注者
 		else if("follow_deleteFollow".equals(message)) {
-			FollowDao.deleteFollow(user_id, follow_user_id);
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
+			boolean result = FollowDao.deleteFollow(user_id, follow_user_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		//4.判断是否被关注
 		else if("follow_isFollow".equals(message)) {
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("follow_user_id");
+			int user_id=Integer.parseInt(id);
+			int follow_user_id=Integer.parseInt(fid);
 			boolean judge=FollowDao.isFollow(user_id, follow_user_id);
 			JSONObject object=new JSONObject();
+			object.put("object", object);
 			out.write(object.toString());
 		}
 	}
@@ -64,6 +92,7 @@ public class FollowServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+	
 		doGet(request, response);
 	}
 

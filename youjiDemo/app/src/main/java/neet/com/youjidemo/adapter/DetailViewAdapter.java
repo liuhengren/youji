@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.Comment;
 
 /**
  *desc:详情页的适配器
@@ -41,6 +42,15 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewAdapter.Vi
     @Override
     public int getItemCount() {
         return mDataSet.size();
+    }
+
+    /**
+     * 添加一条评论,刷新列表
+     * @param comment
+     */
+    public void addComment(Comment comment){
+        mDataSet.add(comment);
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

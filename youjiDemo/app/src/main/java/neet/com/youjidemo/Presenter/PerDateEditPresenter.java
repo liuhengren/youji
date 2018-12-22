@@ -13,6 +13,7 @@ public class PerDateEditPresenter {
     private IPerDateEditorView perDateEditorView;
     private IUserDetailEdit userDetailEdit;
     private int User_id;
+
     public PerDateEditPresenter(IPerDateEditorView perDateEditorView){
         this.perDateEditorView=perDateEditorView;
         userDetailEdit=new UserDetailbiz();
@@ -81,6 +82,7 @@ public class PerDateEditPresenter {
             perDateEditorView.setUserName(user.getUser_name());
             perDateEditorView.setUserSex(user.getUser_sex());
         }
+
     }
     public void setUserDetail(){
         setDetails setDetails = new setDetails();
