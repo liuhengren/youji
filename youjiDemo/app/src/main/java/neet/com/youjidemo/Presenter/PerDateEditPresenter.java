@@ -13,6 +13,7 @@ import neet.com.youjidemo.view.IView.IPerDateEditorView;
 public class PerDateEditPresenter {
     private IPerDateEditorView perDateEditorView;
     private IUserDetailEdit userDetailEdit;
+
     public PerDateEditPresenter(IPerDateEditorView perDateEditorView){
         this.perDateEditorView=perDateEditorView;
         userDetailEdit=new UserDetailbiz();
@@ -20,5 +21,6 @@ public class PerDateEditPresenter {
     public void update(String tag,String msg){
 
         }
+
     }
 

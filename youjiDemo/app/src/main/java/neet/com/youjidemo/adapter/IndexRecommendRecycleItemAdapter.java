@@ -104,11 +104,13 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
             }
         });
 
+/**点赞按钮的点击事件*/
         viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.isgood == false){
-
+                if (viewHolder.goodNum.getText() == "点赞"){
+                    viewHolder.goodButton.setImageResource(R.drawable.havelike);
+                    viewHolder.goodNum.setText("Like");
                 }
             }
         });
@@ -166,8 +168,6 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
             goodButton = itemView.findViewById(R.id.ib_good);
             judgeButton = itemView.findViewById(R.id.ib_judge);
             collectButton = itemView.findViewById(R.id.ib_collect);
-
-
         }
     }
 
