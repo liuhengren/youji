@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,8 @@ import java.util.List;
 import neet.com.youjidemo.Presenter.GetDynamicPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.IndexRecommendRecycleItemAdapter;
-import neet.com.youjidemo.bean.Dynamic;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.view.IView.IGetDynamicInAll;
 
@@ -31,7 +33,7 @@ import neet.com.youjidemo.view.IView.IGetDynamicInAll;
  * */
 public class Index_RecommendFragment extends Fragment implements IGetDynamicInAll {
 
-    private List<Dynamic> list=new ArrayList<>();
+    private List<ShowDynamicInAll> list=new ArrayList<>();
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private IndexRecommendRecycleItemAdapter indexRecommendRecycleItemAdapter;
@@ -39,7 +41,7 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
     RecyclerView.LayoutManager manager;
     boolean isLoading=false;
     private GetDynamicPresenter getDynamicPresenter;
-
+    private UserDateApplication userDateApplication;
 
     @Nullable
     @Override
@@ -49,10 +51,11 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
             findViews();
             setPullRefresh();
             setRecyclerView();
+            userDateApplication=(UserDateApplication)(getActivity().getApplication());
 
         }
         getDynamicPresenter=new GetDynamicPresenter(this);
-        //getDynamicPresenter.getList();
+        getDynamicPresenter.getList("all",0);
         return view;
     }
 
@@ -84,9 +87,9 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
 
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                //getDynamicPresenter.getList();
+            public void onRefresh(){
                 isLoading = false;
+                getDynamicPresenter.getList("all",0);
                 //  footView.setVisibility(View.GONE);
             }
         });
@@ -104,12 +107,6 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
         recyclerView.setLayoutManager(manager);
 
         //从服务器获得的笔记的list
-        list = new ArrayList();
-//        list.add(1);
-//        list.add(1);
-//        list.add(1);
-        //这里填入数据list
-
         indexRecommendRecycleItemAdapter = new IndexRecommendRecycleItemAdapter(list,this.getContext());
         recyclerView.setAdapter(indexRecommendRecycleItemAdapter);
 
@@ -118,6 +115,8 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getContext(),DetailActivity.class);
+                ShowDynamicInAll showDynamicInAll=(ShowDynamicInAll) indexRecommendRecycleItemAdapter.getmItem(position);
+                intent.putExtra("dynamicDeta",showDynamicInAll);
                 startActivity(intent);
             }
         });
@@ -147,10 +146,19 @@ public class Index_RecommendFragment extends Fragment implements IGetDynamicInAl
     }
 
     @Override
-    public void setListByTag(List<Dynamic> list) {
+    public void setListByTag(List<ShowDynamicInAll> list) {
+        this.list=new ArrayList<>();
         this.list.addAll(list);
     }
+
+    @Override
+    public int getmUserId() {
+        int user_id = userDateApplication.getUser().getUser_id();
+        return user_id;
+    }
+
     public void change(){
         indexRecommendRecycleItemAdapter.updataList(this.list);
     }
+
 }

@@ -1,7 +1,5 @@
 package neet.com.youjidemo.bean;
 
-import java.util.Date;
-
 public class Dynamic {
     private int dynamic_id;
     private int dynamic_user_id;
@@ -11,7 +9,7 @@ public class Dynamic {
     private int dynamic_like_num;
     private int dynamic_comment_num;
     private String dynamic_address;
-    private Date dynamic_time;
+    private String dynamic_time;
     private int dynamic_partition_id;
 
     public int getDynamic_id() {
@@ -78,11 +76,11 @@ public class Dynamic {
         this.dynamic_address = dynamic_address;
     }
 
-    public Date getDynamic_time() {
+    public String getDynamic_time() {
         return dynamic_time;
     }
 
-    public void setDynamic_time(Date dynamic_time) {
+    public void setDynamic_time(String dynamic_time) {
         this.dynamic_time = dynamic_time;
     }
 

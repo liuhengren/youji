@@ -12,6 +12,7 @@ import java.util.List;
 import neet.com.youjidemo.bean.Collection;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
+import neet.com.youjidemo.command.PostJson;
 
 public class Collectionbiz implements ICollection{
     //CollectionServletUrl地址
@@ -26,15 +27,19 @@ public class Collectionbiz implements ICollection{
     }
 
     @Override
-    public void addCollection(int user_id, int dynamic_id) {
+    public boolean addCollection(int user_id, int dynamic_id) {
         String msg="collection_addCollection";
         String url=CollectionUrl+"?message="+msg+"&user_id="+user_id+"&dynamic_id="+dynamic_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 
     @Override
-    public void deleteCollection(int collection_id) {
+    public boolean deleteCollection(int collection_id) {
         String msg="collection_deleteCollection";
         String url=CollectionUrl+"?message="+msg+"&collection_id="+collection_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
     private void addList(String str){
         try {

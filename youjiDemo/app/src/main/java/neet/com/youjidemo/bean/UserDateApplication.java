@@ -1,11 +1,25 @@
 package neet.com.youjidemo.bean;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+
+import neet.com.youjidemo.biz.UserDetailbiz;
 
 public class UserDateApplication extends Application {
-    private boolean isLogin=false;
+    private boolean isLogin;
     private User user;
-    private UserDetail userDetail;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private int user_id;
+    @Override
+    public String toString() {
+        return "UserDateApplication{" +
+                "isLogin=" + isLogin +
+                ", user=" + user +
+                '}';
+    }
 
     public boolean isLogin() {
         return isLogin;
@@ -13,6 +27,8 @@ public class UserDateApplication extends Application {
 
     public void setLogin(boolean login) {
         isLogin = login;
+        editor.putBoolean("isLogin",isLogin);
+        editor.commit();
     }
 
     public User getUser() {
@@ -21,29 +37,31 @@ public class UserDateApplication extends Application {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public UserDetail getUserDetail() {
-        return userDetail;
-    }
-
-    public void setUserDetail(UserDetail userDetail) {
-        this.userDetail = userDetail;
+        editor.putInt("user_id",user.getUser_id());
+        editor.commit();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        if(isLogin) {
-            new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-                    //从网络获取用户信息,解析JSON串
-                    user=new User();
-                    userDetail=new UserDetail();
-                }
-            }.start();
+        sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        user_id=sharedPreferences.getInt("user_id",0);
+        isLogin=sharedPreferences.getBoolean("isLogin",false);
+        this.user=new User();
+        if(user_id!=0){
+            user.setUser_id(user_id);
+            new GetUserTask().execute();
+        }
+    }
+    private class GetUserTask extends AsyncTask{
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            UserDetailbiz userDetailbiz = new UserDetailbiz();
+            User userById = userDetailbiz.getUserById(user_id);
+            user=userById;
+            return null;
         }
     }
 }

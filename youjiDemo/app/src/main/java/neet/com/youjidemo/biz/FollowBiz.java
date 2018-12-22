@@ -10,9 +10,10 @@ import java.util.List;
 import neet.com.youjidemo.bean.Follow;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
+import neet.com.youjidemo.command.PostJson;
 
 public class FollowBiz implements IFollow {
-    private final String followUrl="FollowServlet";
+    private final String followUrl="http://10.222.184.38:8080/youjiServer/FollowServlet";
     private List<Follow> followList=new ArrayList<>();
     @Override
     public List<Follow> getFollowByUserId(int user_id) {
@@ -36,21 +37,26 @@ public class FollowBiz implements IFollow {
     }
 
     @Override
-    public void addFollow(int user_id, int follow_user_id) {
+    public boolean addFollow(int user_id, int follow_user_id) {
         String msg="follow_addFollow";
         String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 
     @Override
-    public void deleteFollow(int user_id, int follow_user_id) {
+    public boolean deleteFollow(int user_id, int follow_user_id) {
         String msg="follow_deleteFollow";
         String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 
     @Override
     public boolean isFollow(int user_id, int follow_user_id) {
         String msg="follow_isFollow";
-        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
-        return false;
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"&follow_user_id="+follow_user_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 }

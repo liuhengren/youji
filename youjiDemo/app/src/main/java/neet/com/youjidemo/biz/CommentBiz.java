@@ -10,6 +10,8 @@ import java.util.List;
 import neet.com.youjidemo.bean.Comment;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
+import neet.com.youjidemo.command.ObjectToJsonObject;
+import neet.com.youjidemo.command.PostJson;
 
 public class CommentBiz implements IComment {
     private final String CommentUrl="CommentServlet";
@@ -36,14 +38,19 @@ public class CommentBiz implements IComment {
     }
 
     @Override
-    public void addComment(Comment comment) {
+    public boolean addComment(Comment comment) {
         String msg="comment_addComment";
         String url=CommentUrl+"?message="+msg;
+        JSONObject object = ObjectToJsonObject.CommentToJson(comment);
+        boolean b = PostJson.PostToSever(object, url);
+        return b;
     }
 
     @Override
-    public void likeComment(int comment_id) {
+    public boolean likeComment(int comment_id) {
         String msg="comment_likeComment";
         String url=CommentUrl+"?message="+msg+"&comment_id="+comment_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 }

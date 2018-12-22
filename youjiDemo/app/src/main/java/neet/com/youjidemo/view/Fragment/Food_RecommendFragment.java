@@ -144,7 +144,6 @@ public class Food_RecommendFragment extends Fragment {
         //从服务器获得的笔记的list
 
         list = new ArrayList();
-        list.add(1);//这里填入数据list
 
 
         squareItemAdapter = new SquareItemAdapter(list);//创建Adapter

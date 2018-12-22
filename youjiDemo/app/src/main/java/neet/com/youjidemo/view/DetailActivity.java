@@ -11,11 +11,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.DetailViewAdapter;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
+
 /**
  * desc:详情页（发表内容详情+评论），通过广播方式（每一分钟广播一次）获取当前系统时间
  * author：梁启文
@@ -58,6 +66,15 @@ public class DetailActivity extends AppCompatActivity {
 
     private ImageButton btnAttention; //关注按钮
 
+    private TextView tvDetaTime;
+
+    private TextView tvDetaDes;
+
+    private ImageView iVDetaPic;
+
+    private ShowDynamicInAll showDynamicInAll;
+
+
     /**设置时间*/
     private void setTime(CharSequence systemTime) {
 
@@ -78,7 +95,6 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击x
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
-
         findViews();
         init();
         btnImageHead.setOnClickListener(mClickListener);
@@ -88,7 +104,8 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-
+        showDynamicInAll=(ShowDynamicInAll)getIntent().getSerializableExtra("dynamicDeta");
+        setDynamic(showDynamicInAll);
     }
 
     @Override
@@ -125,6 +142,9 @@ public class DetailActivity extends AppCompatActivity {
         tvUserName = findViewById(R.id.tv_detail_username);
         btnAttention = findViewById(R.id.btn_detail_attention);
         isAttentioned = R.drawable.befans;
+        tvDetaTime=findViewById(R.id.tv_detail_time);
+        tvDetaDes=findViewById(R.id.tv_detail_description);
+        iVDetaPic=findViewById(R.id.image_detail_picture);
     }
 
     /**定义一个内部类来处里Activity中的点击事件*/
@@ -136,10 +156,12 @@ public class DetailActivity extends AppCompatActivity {
                 /**点击用户名和头像可以跳转至个人中心，注意数据的获取*/
                 case R.id.cImage_detail_head:
                     Intent intent = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    intent.putExtra("user_id",showDynamicInAll.getUser_id());
                     startActivity(intent);
                     break;
                 case R.id.tv_detail_username:
                     Intent intent1 = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    intent1.putExtra("user_id",showDynamicInAll.getUser_id());
                     startActivity(intent1);
                     break;
                 /**点击之后应在数据库里增加一条数据，并标识，
@@ -169,5 +191,13 @@ public class DetailActivity extends AppCompatActivity {
         }
         finish();
         return super.onOptionsItemSelected(item);
+    }
+    private void setDynamic(ShowDynamicInAll showDynamicInAll){
+        tvUserName.setText(showDynamicInAll.getUsername());
+        RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
+        Glide.with(DetailActivity.this).load(showDynamicInAll.getUser_touxiang()).into(btnImageHead);
+        tvDetaDes.setText(showDynamicInAll.getDynamic_text());
+        tvDetaTime.setText(showDynamicInAll.getTime());
+        Glide.with(this).load(showDynamicInAll.getDynamicImg_url()).into(iVDetaPic);
     }
 }

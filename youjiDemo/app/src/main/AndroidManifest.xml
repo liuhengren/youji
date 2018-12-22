@@ -10,13 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.PersonalDataEditorActivity"></activity>
+        <activity android:name=".view.PersonalDataEditorActivity">
+        </activity>
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.LogupActivity"></activity>
+        <activity android:name=".view.LogupActivity">
+
+        </activity>
         <activity android:name=".view.ShareActivity"></activity>
         <activity android:name=".view.OthersActivity"></activity>
-        <activity android:name=".view.DetailActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.DetailActivity">
+
+        </activity>
+        <activity android:name=".MainActivity"
+            android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

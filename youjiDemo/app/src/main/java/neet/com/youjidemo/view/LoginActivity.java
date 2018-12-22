@@ -16,9 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLoginPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.ILoginView;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private ImageButton mIBCancel,mIbLogByqq,mIBLogbyWxChat;
     private UserLoginPresenter userLoginPresenter;
     private ProgressBar progressBar;
+    private UserDateApplication userDateApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +49,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mIBLogbyWxChat=findViewById(R.id.btn_login_wechat);
         userLoginPresenter=new UserLoginPresenter(LoginActivity.this);
         progressBar=findViewById(R.id.spin_kit);
+        userDateApplication=(UserDateApplication)getApplication();
     }
     private void initListener(){
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                userLoginPresenter.login();
             }
         });
         mTvLogup.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +98,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void toMainActivity(User user) {
+    public void toMainActivity() {
         Intent mainIntent = new Intent();
-
+        mainIntent.setClass(LoginActivity.this,MainActivity.class);
+        mainIntent.putExtra("res",200);
+        startActivity(mainIntent);
+        finish();
     }
 
     @Override
@@ -125,6 +132,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void forgetPasswordActivity() {
         Intent forgetIntent = new Intent();
+    }
+
+    @Override
+    public void setUserApp(User user) {
+        userDateApplication.setUser(user);
+        userDateApplication.setLogin(true);
     }
 
     /**

@@ -1,6 +1,8 @@
 package neet.com.youjidemo.biz;
 
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,11 +16,12 @@ import neet.com.youjidemo.command.PostJson;
 
 public class Dynamicbiz implements IDynamic{
     private List<Dynamic> dynamicList=new ArrayList<>();
-    final private String DynamicUrl="http://10.222.185.41:8080/youjiServer/Dynamicservlet";
+    final private String DynamicUrl="http://10.222.184.38:8080/youjiServer/DynamicServlet";
     @Override
     public List<Dynamic> getDynamic() {
         String msg="dynamic_allDynamic";
         String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
+        Log.e("1",jsonStr);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -57,17 +60,28 @@ public class Dynamicbiz implements IDynamic{
     }
 
     @Override
-    public void addDynamic(Dynamic dynamic) {
+    public int addDynamic(Dynamic dynamic) {
         String msg="dynamic_addDynamic";
         String url=DynamicUrl+"?message="+msg;
         JSONObject object = ObjectToJsonObject.DynamicToJson(dynamic);
-        PostJson.PostDynamicToSever(object,url);
+        JSONObject object1=new JSONObject();
+        int b = PostJson.PostDynamicToSever(object, url);
+        return b;
     }
 
     @Override
-    public void deleteDynamic(int Dynamic_id) {
+    public boolean addDynamicImg(int dynamic_id) {
+        String msg="";
+        String url="";
+        return false;
+    }
+
+    @Override
+    public boolean deleteDynamic(int Dynamic_id) {
         String msg="";
         String url=DynamicUrl+"?message="+"&dynamic_id="+Dynamic_id;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
     private void addListData(String str){
         try {

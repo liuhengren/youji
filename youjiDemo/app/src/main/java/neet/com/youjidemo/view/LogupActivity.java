@@ -23,6 +23,8 @@ import cn.smssdk.SMSSDK;
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLogupPresenter;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.ILogUpView;
 
 public class LogupActivity extends AppCompatActivity implements ILogUpView {
@@ -32,6 +34,7 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
     private UserLogupPresenter userLogupPresenter;
     private ProgressBar progressBar;
     private ImageButton lpIbcancel;
+    private UserDateApplication userDateApplication=(UserDateApplication)getApplication();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +140,12 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
     @Override
     public void fishTimedown() {
         mTimer.cancel();
+    }
+
+    @Override
+    public void setUserApp(User user) {
+        userDateApplication.setUser(user);
+        userDateApplication.setLogin(true);
     }
 
     /**
