@@ -111,7 +111,10 @@ public class UserServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			String userIntroduction=request.getParameter("instruction");
 			int user_id=Integer.parseInt(id);
-			UserDao.updateUserIntroduction(user_id, userIntroduction);
+			boolean result = UserDao.updateUserIntroduction(user_id, userIntroduction);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 //	    //8.更新用户生日
 //		else if("user_birthday".equals(message)) {

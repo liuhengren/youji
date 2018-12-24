@@ -62,11 +62,7 @@ public class DynamicServlet extends HttpServlet {
 			
 		}
 		
-		//2.插入一条动态（内容）
-		 if("dynamic_addDynamic_text".equals(message)) 
-		{
-
-		}
+	
 		
 			
 //			//3.插入动态的图片（图片）
@@ -138,7 +134,30 @@ public class DynamicServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		
+		 //8.查看当前动态是否被当前用户收藏
+		else if("dynamic_isCollected".equals(message)) {
+			String id=request.getParameter("user_id");
+			String did=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(did);
+
+			boolean result = DynamicDao.isCollected(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+		 //9.查看当前动态是否被当前用户点赞
+		else if("dynamic_isLikeuped".equals(message)) {
+			String id=request.getParameter("user_id");
+			String did=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(did);
+
+			boolean result = DynamicDao.isLikeuped(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
 	}
 
 	/**

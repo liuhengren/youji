@@ -27,9 +27,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="42034c744c45c8f608b4fce3ebeb84a2"></meta-data>
 
     <application
         android:name=".bean.UserDateApplication"
@@ -62,6 +59,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="42034c744c45c8f608b4fce3ebeb84a2"/>
+
     </application>
 
 </manifest>

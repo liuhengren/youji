@@ -18,7 +18,7 @@ import bean.Dynamic;
 public class DynamicDao {
 	
 	
-	//1.DynamicDao ��������
+	//1.DynamicDao 获得所有动态
 	public static JSONArray getDynamic() {
 		
 		Connection connection=DataBase.getConnection();
@@ -54,7 +54,7 @@ public class DynamicDao {
 	}
 	
 	
-	//2.����һ����̬(ֻ������)
+	//2.插入动态内容（文字）
 		public static int addDynamic(Dynamic dynamic) {
 			Connection connection=DataBase.getConnection();
 			
@@ -68,7 +68,6 @@ public class DynamicDao {
 					+ "dynamic_address,dynamic_time,dynamic_partition_id) "
 					+ "values(?,?,?,?,?,?,?,?)";
 			String sql2="select dynamic_id from dynamic where dynamic_time=?";
-			
 			try {
 				PreparedStatement prepareStatement = connection.prepareStatement(sql);
 				prepareStatement.setInt(1, dynamic.getUser_id());
@@ -99,7 +98,7 @@ public class DynamicDao {
 		} 
 		
 		
-		//3.���붯̬ͼƬ 
+		//3.插入动态图片
 		public  static boolean insertDynamicImage(int id,String img) {
 			Connection connection=DataBase.getConnection();
 			String sql="insert into dynamic(dynamic_img) values(?) where dynamic_id=?";
@@ -119,7 +118,7 @@ public class DynamicDao {
 		}
 	
 	
-	//4.ͨ���������Ҷ�̬
+	//4.ͨ通过分类Id获得动态
 	public  static JSONArray getDynamicByPartitionId(int partition_id) {
 		Connection connection=DataBase.getConnection();
 		JSONArray array=new JSONArray();
@@ -156,7 +155,7 @@ public class DynamicDao {
 		
 	}
 	
-	//5.�����û�Id���Ҷ�̬
+	//5.通过用户Id获得动态
 	public static JSONArray getDynamicByUserId(int user_id){
 		Connection connection=DataBase.getConnection();
 		JSONArray array=new JSONArray();
@@ -192,7 +191,7 @@ public class DynamicDao {
 		return array;
 	}
 	
-	//6.ͨ����̬Id��ö�̬
+	//6.ͨ通过Id查询动态
 	public static  JSONObject getDynamicById(int dynamic_id) {
 		Connection connection=DataBase.getConnection();
 		JSONObject object=new JSONObject();
@@ -226,7 +225,7 @@ public class DynamicDao {
 		return object;
 	}
 
-	//7.ͨ��Idɾ��һ����̬
+	//7.ͨ删除一条动态
 	  public static boolean deleteDynamic(int Dynamic_id) {
 		  
 		  Connection connection=DataBase.getConnection();
@@ -247,8 +246,57 @@ public class DynamicDao {
 			return false;
 	  }
 
-	  //8.�����ȶȻ�ö�̬
+	  //8.查看当前动态是否被收藏
+	  public static boolean isCollected(int user_id,int  dynamic_id) {
+			Connection connection=DataBase.getConnection();
+			
+			String sql="select * from collection where collection_user_id=? and collection_dynamic_id=?";
+			try {
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setInt(1, user_id);
+				preparedStatement.setInt(2, dynamic_id);
+				ResultSet result=preparedStatement.executeQuery();
+				
+				while(result.next()) {
+					return true;
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;	 
+			}
+	//9.查看当前动态是否被点赞
+	  
+	  public static boolean isLikeuped(int user_id,int  dynamic_id) {
+			Connection connection=DataBase.getConnection();
+			
+			String sql="select * from likeup where likeup_user_id=? and likeup_dynamic_id=?";
+			try {
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				preparedStatement.setInt(1, user_id);
+				preparedStatement.setInt(2, dynamic_id);
+				ResultSet result=preparedStatement.executeQuery();
+				
+				while(result.next()) {
+					return true;
+				}
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;	 
+			}
+	    
+	  
+	  //9.�����ȶȻ�ö�̬
 	  public List<Dynamic> getDynamicOrderHot(){
 		  return null;
 	 }
+	  
+	 
 }
