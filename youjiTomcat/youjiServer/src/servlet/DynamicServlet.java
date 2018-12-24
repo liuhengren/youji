@@ -97,7 +97,10 @@ public class DynamicServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			int Dynamic_id=Integer.parseInt(id);
 
-			DynamicDao.deleteDynamic(Dynamic_id);
+			boolean result = DynamicDao.deleteDynamic(Dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		
 	}

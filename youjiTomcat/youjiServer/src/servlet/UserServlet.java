@@ -47,14 +47,20 @@ public class UserServlet extends HttpServlet {
 			String password=request.getParameter("password");
 			System.out.println("userphone"+userphone);
 			System.out.println("password"+password);
-			UserDao.logup(userphone,password);
+			boolean result = UserDao.logup(userphone,password);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 			
 		}
 		// 2.通过手机号登录
 		else if("user_logup".equals(message)) {
 			String userphone=request.getParameter("userphone");
 			String password=request.getParameter("password");
-			UserDao.login(userphone,password);
+			boolean result = UserDao.login(userphone,password);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 			
 					
 		}
@@ -72,7 +78,10 @@ public class UserServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			String username=request.getParameter("name");
 			int user_id=Integer.parseInt(id);
-			UserDao.updateUsername(user_id, username);
+			boolean result = UserDao.updateUsername(user_id, username);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 //		  //5.修改头像
 //		else if("user_touxiang".equals(message)) {
@@ -83,7 +92,10 @@ public class UserServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			String userSex=request.getParameter("sex");
 			int user_id=Integer.parseInt(id);
-			UserDao.updateUserSex(user_id, userSex);
+			boolean result = UserDao.updateUserSex(user_id, userSex);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		 //7.修改简介
 		else if("user_instruction".equals(message)) {
@@ -104,7 +116,10 @@ public class UserServlet extends HttpServlet {
 			String id=request.getParameter("id");
 			String userHometown=request.getParameter("address");
 			int user_id=Integer.parseInt(id);
-			UserDao.updateUserHometown(user_id, userHometown);
+			boolean result = UserDao.updateUserHometown(user_id, userHometown);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 		 //10.通过用户手机号查询用户所有信息
 		else if("user_UserDetail".equals(message)) {

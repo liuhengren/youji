@@ -54,14 +54,20 @@ public class CollectionServlet extends HttpServlet {
 			int user_id=Integer.parseInt(id);
 			int dynamic_id=Integer.parseInt(fid);
 			
-			CollectionDao.addCollection(user_id, dynamic_id);
+			boolean result=CollectionDao.addCollection(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		
 		}
 		//3.…æ≥˝“ªÃı ’≤ÿ
 		else if("collection_deleteCollection".equals(message)) {
 			String fid=request.getParameter("id");
 			int collection_id=Integer.parseInt(fid);
-			CollectionDao.deleteCollection(collection_id);
+			boolean result = CollectionDao.deleteCollection(collection_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
 	}
 

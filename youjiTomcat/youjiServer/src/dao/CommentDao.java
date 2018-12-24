@@ -43,7 +43,7 @@ public class CommentDao {
 	 }
 	 
 	 //2.插入一条评论
-	   public static  void addComment(Comment comment)
+	   public static  boolean addComment(Comment comment)
 	   {
 		   Connection connection=DataBase.getConnection();
 		   String sql="insert into comment("
@@ -58,15 +58,16 @@ public class CommentDao {
 			
 			boolean result = prepareStatement.execute();
 			connection.close();
-			
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	} 
 	   
 	   //3.给该评论点赞+1
-	   public static  void likeComment(int comment_id)
+	   public static  boolean likeComment(int comment_id)
 	    {
 		   Connection connection=DataBase.getConnection();
 			 
@@ -87,10 +88,12 @@ public class CommentDao {
 					preparedStatement2.executeUpdate();
 					connection.close();
 					System.out.println("点赞完成！");
+					return true;
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				return false;
 				
 	    }
 
