@@ -87,7 +87,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@+id/cImage_detail_head"
-                    android:text="2018/12/5"
+                    android:text="发表了："
                     android:textSize="16dp" />
 
                 <!--关注按钮-->
@@ -105,7 +105,8 @@
             <TextView
                 android:id="@+id/tv_detail_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:text="独为伊人醉红尘"
@@ -114,10 +115,27 @@
 
             <ImageView
                 android:id="@+id/image_detail_picture"
-                android:layout_width="match_parent"
+                android:layout_width="375dp"
                 android:layout_height="140dp"
                 android:src="@drawable/scenery"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_horizontal"
                 app:layout_scrollFlags="scroll|enterAlways" />
+            <TextView
+                android:id="@+id/tv_detail_local"
+                android:layout_width="375dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:text="天津/Tientsin"
+                />
+            <TextView
+                android:layout_width="375dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:text="2018/12/24"
+                android:gravity="center|right|top"/>
         </android.support.design.widget.AppBarLayout>
 
 
@@ -154,13 +172,15 @@
             android:layout_height="40dp"
             android:background="@color/smssdk_black"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/image_detail_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_margin="0dp"
-            android:src="@drawable/comment"
+            android:text="点击发表你的评论"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
 
         <View

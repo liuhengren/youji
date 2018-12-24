@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Set;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.view.Fragment.Index_Fragment;
 import neet.com.youjidemo.view.Fragment.MeFragment;
 import neet.com.youjidemo.view.Fragment.MessageFragment;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TabWidget tabWidget;
     private FragmentTabHost fragmentTabHost;
     private DisplayMetrics dm;
+    private ImageButton newAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = findViewById(android.R.id.content);
         tabWidget = findViewById(android.R.id.tabs);
+        newAdd = findViewById(R.id.new_add);
+        newAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ShareActivity.class);
+                startActivity(intent);
+            }
+        });
         //初始化z
         init();
 
@@ -82,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabChanged(String tabId) {
                 ImageView imageViewtab1 = imageViewMap.get("tab1");
                 ImageView imageViewtab2 = imageViewMap.get("tab2");
-                ImageView imageViewtab3 = imageViewMap.get("tab3");
+
                 ImageView imageViewtab4 = imageViewMap.get("tab4");
                 ImageView imageViewtab5 = imageViewMap.get("tab5");
                 TextView textViewtab1 = tagNameMap.get("tab1");
@@ -90,11 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView textViewtab4 = tagNameMap.get("tab4");
                 TextView textViewtab5 = tagNameMap.get("tab5");
 
-                //判断是否选中了分享内容选项卡
-                if (tabId.equals("tab3")){
-                    Intent intent = new Intent(MainActivity.this,ShareActivity.class);
-                    startActivity(intent);
-                }
 
                 //获取选项卡的标签集合
                 Set<String> keys = tabSpecMap.keySet();
@@ -102,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     if (tabId.equals("tab1")){
                         imageViewtab1.setImageResource(R.drawable.fivestar_choosed);
                         imageViewtab2.setImageResource(R.drawable.home);
-                        imageViewtab3.setImageResource(R.drawable.add);
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(android.R.color.black));
@@ -113,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                     if (tabId.equals("tab2")){
                         imageViewtab1.setImageResource(R.drawable.fivestar);
                         imageViewtab2.setImageResource(R.drawable.home_choosed);
-                        imageViewtab3.setImageResource(R.drawable.add);
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
@@ -124,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                     if (tabId.equals("tab4")){
                         imageViewtab1.setImageResource(R.drawable.fivestar);
                         imageViewtab2.setImageResource(R.drawable.home);
-                        imageViewtab3.setImageResource(R.drawable.add);
                         imageViewtab4.setImageResource(R.drawable.message_choosed);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
@@ -135,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
                     if (tabId.equals("tab5")){
                         imageViewtab1.setImageResource(R.drawable.fivestar);
                         imageViewtab2.setImageResource(R.drawable.home);
-                        imageViewtab3.setImageResource(R.drawable.add);
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me_choosed);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         TabHost.TabSpec tabSpec3 = fragmentTabHost.newTabSpec("tab3")
-                .setIndicator(getTabSpec(R.drawable.add,null,"tab3"));
+                .setIndicator(getTabSpec(R.drawable.jia,null,"tab3"));
 
         //添加选项卡(后来补充)
         fragmentTabHost.addTab(tabSpec3,Index_Fragment.class,null);
