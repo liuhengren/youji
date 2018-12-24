@@ -53,7 +53,6 @@ public class AddDynamicText extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String s = reader.readLine();
-		System.out.println("s::" + s);
 		String string = "";
 		while (s != null) {
 			string += s;
