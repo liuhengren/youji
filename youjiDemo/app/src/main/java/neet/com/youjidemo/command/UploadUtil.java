@@ -61,6 +61,7 @@ public class UploadUtil {
 //                dos.writeBytes(LINE_END);
 
                 FileInputStream is = new FileInputStream(file);
+                dos.write("dynamic_id".getBytes());
                 byte[] bytes = new byte[200000];
                 int len = -1;
                 while ((len = is.read(bytes)) != -1) {
