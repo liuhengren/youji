@@ -51,7 +51,7 @@ public class CollectionDao {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setInt(1, user_id);
 			prepareStatement.setInt(2, dynamic_id);
-			
+			prepareStatement.execute();
 			connection.close();
 			//给动态的收藏数+1
 			addOneCollectionToDynamic(dynamic_id);
