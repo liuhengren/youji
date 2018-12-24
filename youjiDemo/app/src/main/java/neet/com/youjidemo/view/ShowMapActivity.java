@@ -13,14 +13,14 @@ import android.os.Bundle;
 
 import neet.com.youjidemo.R;
 
-public class TextActivity extends Activity {
+public class ShowMapActivity extends Activity {
 
     private MapView mapView;
     private AMap aMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.text_layout);
+        setContentView(R.layout.showmap_layout);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);//必须要写
         init();

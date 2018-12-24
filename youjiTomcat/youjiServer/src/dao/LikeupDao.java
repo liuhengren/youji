@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class LikeupDao {
 
 	// 1.添加一条点赞
@@ -112,5 +115,32 @@ public class LikeupDao {
 		return false;
 
 	}
+	//4.通过UserID获得所有点赞
+	public static JSONArray getLikeupByUserId(int user_id) {
+		Connection connection = DataBase.getConnection();
+		JSONArray array = new JSONArray();
+		String sql = "select * from likeup where likeup_user_id=?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user_id);
+			ResultSet result = preparedStatement.executeQuery();
+
+			while (result.next()) {
+				JSONObject object = new JSONObject();
+				object.put("id", result.getInt("likeup_id"));
+				object.put("user_id", result.getInt("likeup_user_id"));
+				object.put("dynamic_id", result.getInt("likeup_dynamic_id"));
+				array.put(object);
+			}
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return array;
+		
+	}
+	
 
 }

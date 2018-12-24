@@ -29,6 +29,7 @@ public class CommentDao {
 				JSONObject object = new JSONObject();
 				object.put("id", result.getInt("comment_id"));
 				object.put("text", result.getString("comment_text"));
+				object.put("time", result.getTimestamp("comment_time"));
 				object.put("dynamic_id", result.getInt("comment_dynamic_id"));
 				object.put("like_num", result.getInt("comment_like_num"));
 				object.put("user_id", result.getInt("comment_user_id"));
@@ -125,6 +126,36 @@ public class CommentDao {
 		}
 		return false;
 
+	}
+	//5.通过用户Id获得一个comment对象
+	public static JSONArray getCommentByUserId(int user_id) {
+		
+		Connection connection = DataBase.getConnection();
+		JSONArray array = new JSONArray();
+		String sql = "select * from comment where comment_user_id=?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, user_id);
+			ResultSet result = preparedStatement.executeQuery();
+
+			while (result.next()) {
+				JSONObject object = new JSONObject();
+				object.put("id", result.getInt("comment_id"));
+				object.put("text", result.getString("comment_text"));
+				object.put("dynamic_id", result.getInt("comment_dynamic_id"));
+				object.put("time", result.getTimestamp("comment_time"));
+				object.put("like_num", result.getInt("comment_like_num"));
+				object.put("user_id", result.getInt("comment_user_id"));
+				array.put(object);
+			}
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return array;
+		
 	}
 
 }
