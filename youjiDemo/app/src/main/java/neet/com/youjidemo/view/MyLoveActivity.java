@@ -241,7 +241,6 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
                             }
                             txtcount.setText("共选择了" + selectid.size() + "项");
                         } else {
-
                             Intent intent = new Intent(MyLoveActivity.this, DetailActivity.class);
                             startActivity(intent);
                         }
