@@ -63,6 +63,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
             }
         });
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initview();
+    }
+
     private void initListener(){
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
