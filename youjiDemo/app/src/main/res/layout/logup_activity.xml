@@ -4,7 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    >
+
+    <neet.com.youjidemo.customWidget.CustomVideoView
+        android:id="@+id/videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageButton
+        android:src="@drawable/ic_login_cancel"
+        android:layout_marginTop="31dp"
+        android:layout_marginLeft="28dp"
+        android:background="#00ffffff"
+        android:id="@+id/btn_logup_cancel"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
@@ -23,6 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@android:color/white"/>
+
+        <ImageButton
+            android:id="@+id/new_add"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:src="@drawable/jia"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
 </android.support.v4.app.FragmentTabHost>
