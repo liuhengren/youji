@@ -1,5 +1,6 @@
 package neet.com.youjidemo.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,31 +12,32 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.view.Fragment.Food_RecommendFragment;
+import neet.com.youjidemo.view.IView.IDynamicOption;
 
 public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.ViewHolder>{
-    private List list;
+    private List<ShowDynamicInAll> list=new ArrayList<>();
     Button care;
-    TextView name;
-    TextView date;
-    TextView signatures;
-    TextView collectNum;
-    TextView judgeNum;
-    TextView goodNum;
-    CircleImageView headPhoto;
-    ImageView contentImage;
     ImageButton goodButton;
     ImageButton collectButton;
     ImageButton judgeButton;
+    private IDynamicOption food_recommendFragment;
+    private Context context;
 
-
-
-    public SquareItemAdapter(List list) {
+    public SquareItemAdapter(List<ShowDynamicInAll> list,IDynamicOption food_recommendFragment,Context context) {
         this.list = list;
-    }
+        this.food_recommendFragment=food_recommendFragment;
+        this.context=context;
+
+}
 
     @NonNull
     @Override
@@ -47,13 +49,89 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
        /*
     设置广场上的头像，名字，笔记的内容，是否关注，评论数量，点赞数量，收藏数量
      */
         //例如： viewHolder.name.setText("李四");
+        Glide.with(context).load(list.get(i).getDynamicImg_url()).into(viewHolder.contentImage);
+        Glide.with(context).load(list.get(i).getUser_touxiang()).into(viewHolder.headPhoto);
+        viewHolder.name.setText(list.get(i).getUsername());
+        viewHolder.date.setText(list.get(i).getTime());
+        viewHolder.signatures.setText(list.get(i).getDynamic_text());
+        viewHolder.collectNum.setText(list.get(i).getCollection_num()+"");
+        viewHolder.judgeNum.setText(list.get(i).getComment_num()+"");
+        viewHolder.goodNum.setText(list.get(i).getLike_num()+"");
+        if(food_recommendFragment.getmUserId()==list.get(i).getUser_id()){
+            viewHolder.care.setVisibility(View.GONE);
+        }
+        else if(list.get(i).isFollow()){
+            viewHolder.care.setText("已关注");
+        }else{
+            viewHolder.care.setText("关注");
+        }
+        if (!list.get(i).isCollection() ){
+            viewHolder.collectButton.setImageResource(R.drawable.collect);
+        }else {
+            viewHolder.collectButton.setImageResource(R.drawable.havecollect);
+        }
+        if (!list.get(i).isLike()){
+            viewHolder.goodButton.setImageResource(R.drawable.like);
+        }else{
+            viewHolder.goodButton.setImageResource(R.drawable.havelike);
+        }
+        viewHolder.care.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.care.getText().equals("关注")){
+                    viewHolder.care.setText("已关注");
+                    food_recommendFragment.addFollow(list.get(i).getUser_id());
 
+                }else {
+                    viewHolder.care.setText("关注");
+                    food_recommendFragment.cancelFollow(list.get(i).getUser_id());
+                }
+            }
+        });
+        //收藏点击事件 点击收藏就收藏
+        viewHolder.collectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.get(i).isCollection() ){
+                    viewHolder.collectButton.setImageResource(R.drawable.collect);
+                    food_recommendFragment.cancelCollection(list.get(i).getDyanmic_id());
+                    viewHolder.collectNum.setText(list.get(i).getCollection_num()-1+"");
+                    list.get(i).setCollection_num(list.get(i).getCollection_num()-1);
+                    list.get(i).setCollection(false);
+                }else {
+                    viewHolder.collectButton.setImageResource(R.drawable.havecollect);
+                    food_recommendFragment.addCollection(list.get(i).getDyanmic_id());
+                    viewHolder.collectNum.setText(list.get(i).getCollection_num()+1+"");
+                    list.get(i).setCollection_num(list.get(i).getCollection_num()+1);
+                    list.get(i).setCollection(true);
+                }
+            }
+        });
+        //点赞点击事件  点击给点赞
+        viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.get(i).isLike()){
+                    viewHolder.goodButton.setImageResource(R.drawable.like);
+                    food_recommendFragment.cancelLike(list.get(i).getDyanmic_id());
+                    viewHolder.goodNum.setText(list.get(i).getLike_num()-1+"");
+                    list.get(i).setLike_num(list.get(i).getLike_num()-1);
+                    list.get(i).setLike(false);
+                }else{
+                    viewHolder.goodButton.setImageResource(R.drawable.havelike);
+                    food_recommendFragment.likeTheDynamic(list.get(i).getDyanmic_id());
+                    viewHolder.goodNum.setText(list.get(i).getLike_num()+1+"");
+                    list.get(i).setLike_num(list.get(i).getLike_num()+1);
+                    list.get(i).setLike(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -61,7 +139,18 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
         return list.size();
     }
     public  class  ViewHolder extends RecyclerView.ViewHolder{
-
+        Button care;
+        TextView name;
+        TextView date;
+        TextView signatures;
+        TextView collectNum;
+        TextView judgeNum;
+        TextView goodNum;
+        CircleImageView headPhoto;
+        ImageView contentImage;
+        ImageButton goodButton;
+        ImageButton collectButton;
+        ImageButton judgeButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,35 +173,10 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
 
 
 
-    /*
-    所有的Button点击事件
-     */
-    private void setAllButtonClickListener() {
 
-        //关注点击事件 点击关注就去关注 或者再次点击取消关注
-        care.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        //收藏点击事件 点击收藏就收藏
-        collectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-        //点赞点击事件  点击给点赞
-        goodButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
+    public void updateList(List<ShowDynamicInAll> list){
+        this.list=new ArrayList<>();
+        this.list=list;
+        notifyDataSetChanged();
     }
-
 }
