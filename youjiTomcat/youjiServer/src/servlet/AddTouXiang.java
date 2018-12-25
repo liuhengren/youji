@@ -46,7 +46,8 @@ public class AddTouXiang extends HttpServlet {
 		String uid=request.getHeader("id");
 		int id=Integer.parseInt(uid);
 		InputStream input = request.getInputStream();
-		String path="upload\\"+Math.random()*1000+".jpg";
+		double name=Math.random()*1000;
+		String path="upload\\"+name+".jpg";
 		File file = new File(request.getSession().getServletContext().getRealPath("/")+path);
 		if (!file.exists()) {
 			file.createNewFile();
@@ -64,7 +65,7 @@ public class AddTouXiang extends HttpServlet {
 		ServletOutputStream outputStream = response.getOutputStream();
 		outputStream.write("1".getBytes());
 		outputStream.close();
-		UserDao.updateUsertouxiang(id, path);
+		UserDao.updateUsertouxiang(id, name+".jpg");
 		doGet(request, response);
 	}
 
