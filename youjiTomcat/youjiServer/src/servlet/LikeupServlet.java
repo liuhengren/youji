@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,19 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import dao.CommentDao;
+import dao.CollectionDao;
+import dao.LikeupDao;
 
 /**
- * Servlet implementation class CommentServlet
+ * Servlet implementation class LikeupServlet
  */
-@WebServlet("/CommentServlet")
-public class CommentServlet extends HttpServlet {
+@WebServlet("/LikeupServlet")
+public class LikeupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentServlet() {
+    public LikeupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,19 +37,28 @@ public class CommentServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		PrintWriter out=response.getWriter();
-		//1.根据动态Id获得所有的评论
-		if("comment_ByDynamicId".equals(message)) {
-			String id=request.getParameter("dynamic_id");
-			int dynamic_id=Integer.parseInt(id);
-			JSONArray array=CommentDao.getCommentByDynamicId(dynamic_id);
-			out.write(array.toString());
-		}
 	
-		 //2.给用户的评论点赞+1
-		else if("comment_likeComment".equals(message)) {
-			String id=request.getParameter("id");
-			int comment_id=Integer.parseInt(id);
-			boolean result = CommentDao.addOnelikeToComment(comment_id);
+		// 1.用户给动态添加一条点赞
+		 if("likeup_addlikeup".equals(message)) {
+			 
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(fid);
+			
+			boolean result=LikeupDao.addLikeup(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		
+		}
+		//2.删除一条点赞
+		else if("likeup_deletelikeup".equals(message)) {
+			String userid=request.getParameter("user_id");
+			String dyid=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(userid);
+			int dynamic_id=Integer.parseInt(dyid);
+			boolean result = LikeupDao.deleteLikeup(user_id,dynamic_id);
 			JSONObject object = new  JSONObject();
 			object.put("res", result);
 			out.write(object.toString());

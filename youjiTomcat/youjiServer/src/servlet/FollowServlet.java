@@ -38,7 +38,7 @@ public class FollowServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		PrintWriter out=response.getWriter();
-		//1.Í¨¹ýÓÃ»§Id»ñµÃËûµÄ¹Ø×¢Õß
+		//1.Í¨ï¿½ï¿½ï¿½Ã»ï¿½Idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½×¢ï¿½ï¿½
 		if("follow_ByUserId".equals(message)) {
 			
 			String id=request.getParameter("id");
@@ -48,7 +48,7 @@ public class FollowServlet extends HttpServlet {
 			
 			out.write(array.toString());
 		}
-		 //2.Ìí¼Ó¹Ø×¢Õß
+		 //2.ï¿½ï¿½Ó¹ï¿½×¢ï¿½ï¿½
 		else if("follow_addFollow".equals(message)) {
 			
 			String id=request.getParameter("user_id");
@@ -61,7 +61,7 @@ public class FollowServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		 //3.É¾³ý¹Ø×¢Õß
+		 //3.É¾ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 		else if("follow_deleteFollow".equals(message)) {
 			
 			String id=request.getParameter("user_id");
@@ -73,7 +73,7 @@ public class FollowServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		//4.ÅÐ¶ÏÊÇ·ñ±»¹Ø×¢
+		//4.ï¿½Ð¶ï¿½ï¿½Ç·ñ±»¹ï¿½×¢
 		else if("follow_isFollow".equals(message)) {
 			
 			String id=request.getParameter("user_id");
@@ -82,7 +82,7 @@ public class FollowServlet extends HttpServlet {
 			int follow_user_id=Integer.parseInt(fid);
 			boolean judge=FollowDao.isFollow(user_id, follow_user_id);
 			JSONObject object=new JSONObject();
-			object.put("object", object);
+			object.put("res", judge);
 			out.write(object.toString());
 		}
 	}

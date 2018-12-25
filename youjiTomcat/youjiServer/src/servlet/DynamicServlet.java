@@ -1,7 +1,11 @@
 package servlet;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -9,6 +13,7 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
+
 import bean.Dynamic;
 import dao.DynamicDao;
+import jdk.nashorn.api.scripting.JSObject;
 
 /**
  * Servlet implementation class Dynamicservlet
@@ -41,30 +49,49 @@ public class DynamicServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
-		String message=request.getParameter("message");
+		request.setCharacterEncoding("utf-8");
+		System.out.println("Getè¯·æ±‚");
 		PrintWriter out=response.getWriter();
-		//1.DynamicDao ²éÕÒËùÓĞ
+		String message=request.getParameter("message");
+		System.out.println("meassge::"+message);
+		//1.DynamicDao æŸ¥æ‰¾æ‰€æœ‰
 		if("dynamic_allDynamic".equals(message)) {
 			
 			JSONArray array=DynamicDao.getDynamic();
 			response.getWriter().append(array.toString());
 			
 		}
-		//2.²åÈëÒ»Ìõ¶¯Ì¬
-		else if("dynamic_addDynamic".equals(message)) 
-		{
+		
+	
+		
 			
-			BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(request.getInputStream()));
-			JSONObject oJsonObject=new JSONObject(bufferedReader.readLine());
-			Dynamic dynamic=new Dynamic();
-			
-			bufferedReader.close();
-			out.append("°Â³öÎÒÒªÈ¥³Ô·¹ÁË");
-			
-			DynamicDao.addDynamic(dynamic);
-			
-		}
-		//3.Í¨¹ı·ÖÇø²éÕÒ¶¯Ì¬
+//			//3.æ’å…¥åŠ¨æ€çš„å›¾ç‰‡ï¼ˆå›¾ç‰‡ï¼‰
+//			else if("dynamic_addDynamic_img".equals(message)) {
+//				
+//					System.out.println("è¿æ¥æˆåŠŸï¼");
+//					InputStream input = request.getInputStream();
+//					String path="upload\\"+Math.random()*1000+".jpg";
+//					File file = new File(request.getSession().getServletContext().getRealPath("/")+path);
+//					if (!file.exists()) {
+//						file.createNewFile();
+//					}
+//					FileOutputStream output = new FileOutputStream(file);
+//					Byte[] bytes = new Byte[150000];
+//					int read = input.read();
+//					while(read!=-1) {
+//						output.write(read);
+//						read = input.read();
+//					}
+//					input.close();
+//					output.flush();
+//					output.close();
+//					ServletOutputStream outputStream = response.getOutputStream();
+//					outputStream.write("1".getBytes());
+//					outputStream.close();
+//					
+//					DynamicDao.insertDynamicImage(id, path);
+//			}
+		//4.é€šè¿‡åˆ†åŒºæŸ¥æ‰¾åŠ¨æ€
 		else if("dynamic_getDynamicByPartitionId".equals(message))
 		{
 			String id=request.getParameter("id");
@@ -76,7 +103,7 @@ public class DynamicServlet extends HttpServlet {
 			
 			
 		}
-		//4.¸ù¾İÓÃ»§Id²éÕÒ¶¯Ì¬
+		//5.æ ¹æ®ç”¨æˆ·IdæŸ¥æ‰¾åŠ¨æ€
 		else if("dynamic_getDynamicByUserId".equals(message))
 		{
 			String id=request.getParameter("id");
@@ -87,7 +114,7 @@ public class DynamicServlet extends HttpServlet {
 			
 			
 		}
-		//5.Í¨¹ı¶¯Ì¬Id»ñµÃ¶¯Ì¬
+		//6.é€šè¿‡åŠ¨æ€Idè·å¾—åŠ¨æ€
 		else if("dynamic_getDynamicById".equals(message))
 		{
 			String id=request.getParameter("id");
@@ -96,7 +123,7 @@ public class DynamicServlet extends HttpServlet {
 			out.write(object.toString());
 			
 		}
-		//6.Í¨¹ıIdÉ¾³ıÒ»Ìõ¶¯Ì¬
+		//7.é€šè¿‡Idåˆ é™¤ä¸€æ¡åŠ¨æ€
 		else if("dynamic_deleteDynamic".equals(message))
 		{
 			String id=request.getParameter("id");
@@ -107,7 +134,30 @@ public class DynamicServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		
+		 //8.æŸ¥çœ‹å½“å‰åŠ¨æ€æ˜¯å¦è¢«å½“å‰ç”¨æˆ·æ”¶è—
+		else if("dynamic_isCollected".equals(message)) {
+			String id=request.getParameter("user_id");
+			String did=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(did);
+
+			boolean result = DynamicDao.isCollected(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
+		 //9.æŸ¥çœ‹å½“å‰åŠ¨æ€æ˜¯å¦è¢«å½“å‰ç”¨æˆ·ç‚¹èµ
+		else if("dynamic_isLikeuped".equals(message)) {
+			String id=request.getParameter("user_id");
+			String did=request.getParameter("dynamic_id");
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(did);
+
+			boolean result = DynamicDao.isLikeuped(user_id, dynamic_id);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
+		}
 	}
 
 	/**
@@ -115,8 +165,15 @@ public class DynamicServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		
+		System.out.println("postè¯·æ±‚");
+		doGet(request, response);
+	
+
+
+		
+		
+	
 	}
 
 }

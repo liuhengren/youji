@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.Buffer;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -45,10 +46,11 @@ public class UserServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("GETÁ¬½Ó³É¹¦£¡");
+		System.out.println("GETï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½");
+		
 		
 		String message=request.getParameter("message");
-			// 1.Í¨¹ýÊÖ»úºÅ×¢²á
+			// 1.Í¨ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½×¢ï¿½ï¿½
 		if("user_logup".equals(message)) {
 			String userphone=request.getParameter("userphone");
 			String password=request.getParameter("password");
@@ -60,7 +62,7 @@ public class UserServlet extends HttpServlet {
 			out.write(object.toString());
 			
 		}
-		// 2.Í¨¹ýÊÖ»úºÅµÇÂ¼
+		// 2.Í¨ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Åµï¿½Â¼
 		else if("user_login".equals(message)) {
 			String userphone=request.getParameter("userphone");
 			String password=request.getParameter("password");
@@ -68,10 +70,11 @@ public class UserServlet extends HttpServlet {
 			JSONObject object = new  JSONObject();
 			object.put("res", result);
 			out.write(object.toString());
-			
+			Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+			System.out.println(timestamp);
 					
 		}
-		 //3.Í¨¹ýÓÃ»§Id»ñµÃÓÃ»§
+		 //3.Í¨ï¿½ï¿½ï¿½Ã»ï¿½Idï¿½ï¿½ï¿½ï¿½Ã»ï¿½
 		else if("user_getUserById".equals(message)) {
 			String id=request.getParameter("id");
 			int user_id=Integer.parseInt(id);
@@ -79,7 +82,7 @@ public class UserServlet extends HttpServlet {
 			
 			out.write(object.toString());
 		}
-		//4.ÐÞ¸ÄÓÃ»§Ãû
+		//4.ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 		else if("user_Username".equals(message)) {
 			String id=request.getParameter("id");
 			String username=request.getParameter("name");
@@ -89,11 +92,11 @@ public class UserServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-//		  //5.ÐÞ¸ÄÍ·Ïñ
+//		  //5.ï¿½Þ¸ï¿½Í·ï¿½ï¿½
 //		else if("user_touxiang".equals(message)) {
 //			UserDao.updateUsertouxiang(user_id, img);
 //		}
-		//6.ÐÞ¸ÄÐÔ±ð
+		//6.ï¿½Þ¸ï¿½ï¿½Ô±ï¿½
 		else if("user_sex".equals(message)) {
 			String id=request.getParameter("id");
 			String userSex=request.getParameter("sex");
@@ -103,21 +106,24 @@ public class UserServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		 //7.ÐÞ¸Ä¼ò½é
+		 //7.ï¿½Þ¸Ä¼ï¿½ï¿½
 		else if("user_instruction".equals(message)) {
 			String id=request.getParameter("id");
 			String userIntroduction=request.getParameter("instruction");
 			int user_id=Integer.parseInt(id);
-			UserDao.updateUserIntroduction(user_id, userIntroduction);
+			boolean result = UserDao.updateUserIntroduction(user_id, userIntroduction);
+			JSONObject object = new  JSONObject();
+			object.put("res", result);
+			out.write(object.toString());
 		}
-//	    //8.ÐÞ¸ÄÉúÈÕ
+//	    //8.æ›´æ–°ç”¨æˆ·ç”Ÿæ—¥
 //		else if("user_birthday".equals(message)) {
 //			String id=request.getParameter("id");
 //			String userBirthday=request.getParameter("birthday");
 //			int user_id=Integer.parseInt(id);
 //			UserDao.updateUserBirthday(user_id, userBirthday);
 //		}
-		  //9.ÐÞ¸Ä¼ÒÏç
+		  //9.ï¿½Þ¸Ä¼ï¿½ï¿½ï¿½
 		else if("user_address".equals(message)) {
 			String id=request.getParameter("id");
 			String userHometown=request.getParameter("address");
@@ -127,15 +133,14 @@ public class UserServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		 //10.Í¨¹ýÓÃ»§ÊÖ»úºÅ²éÑ¯ÓÃ»§ËùÓÐÐÅÏ¢
+		 //10.Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ö»ï¿½ï¿½Å²ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		else if("user_UserDetail".equals(message)) {
 			String phone=request.getParameter("phone");
 			JSONObject phoneobject=UserDao.getUserDetail(phone);
-		
 			out.write(phoneobject.toString());
 		}
 		
-		//11.ÐÞ¸ÄÓÃ»§±³¾°Í¼
+		//11.ï¿½Þ¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 		else if("user_UserBackground".equals(message)) {
 			String id=request.getParameter("id");
 			String background_url=request.getParameter("background_url");
@@ -155,7 +160,7 @@ public class UserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println("POSTÁ¬½Ó³É¹¦£¡");
+		System.out.println("POSTï¿½ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½");
 			doGet(request, response);
 		
 	}
