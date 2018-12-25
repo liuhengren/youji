@@ -15,13 +15,13 @@
         app:title=" ">
 
         <TextView
-
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="个人中心"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -51,7 +51,6 @@
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <ImageButton
-                            android:id="@+id/user_background"
                             android:layout_width="match_parent"
                             android:layout_height="204dp"
                             android:scaleType="center"
@@ -69,31 +68,31 @@
                         <!--头像-->
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/image_personal_center_head"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_marginLeft="20dp"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="10dp"
+                            android:elevation="10dp"
                             android:src="@drawable/head" />
 
                         <!--昵称-->
                         <TextView
-                            android:id="@+id/PCAname"
+                            android:layout_marginLeft="1dp"
+                            android:textSize="18sp"
                             android:layout_width="wrap_content"
-                            android:layout_height="22dp"
-                            android:layout_below="@id/image_personal_center_head"
-                            android:layout_alignStart="@+id/image_personal_center_head"
-                            android:layout_marginTop="5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/image_personal_center_head"
+                            android:layout_marginTop="40dp"
                             android:text="一个胖子"
                             android:textStyle="bold" />
 
                         <!--编辑资料按钮-->
                         <Button
-                            android:id="@+id/pc_btn"
-                            android:layout_width="60dp"
-                            android:layout_height="30dp"
+                            android:elevation="20dp"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
                             android:layout_alignParentRight="true"
                             android:layout_marginTop="35dp"
                             android:layout_marginRight="20dp"
-                            android:background="@drawable/personal_center_attention_btn"
                             android:onClick="editInformaion"
                             android:text="编辑资料" />
                     </RelativeLayout>
