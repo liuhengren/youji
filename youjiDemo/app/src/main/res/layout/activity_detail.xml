@@ -37,6 +37,7 @@
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:background="@color/trans"
+                android:visibility="gone"
                 android:src="@drawable/collect" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
@@ -166,6 +167,7 @@
             android:layout_weight="1"
             android:scaleType="center"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:src="@drawable/collect" />
 
         <View
@@ -196,6 +198,7 @@
             android:layout_margin="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/like"
+            android:visibility="gone"
             android:layout_gravity="center"/>
     </LinearLayout>
 
