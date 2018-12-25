@@ -7,26 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import bean.Collection;
 import bean.Dynamic;
 
 public class CollectionDao {
 
-	// 1.Í¨¹ıÓÃ»§Id»ñµÃ¸ÃÓÃ»§µÄËùÓĞÊÕ²Ø
-	public static List<Collection> getCollectionByUserId(int user_id) {
+	// 1.Í¨æ ¹æ®ç”¨æˆ·Idè·å¾—æ‰€æœ‰çš„æ”¶è—
+	public static JSONArray getCollectionByUserId(int user_id) {
 		Connection connection = DataBase.getConnection();
-		List<Collection> CollectionByUserIdlist = new ArrayList<Collection>();
+		JSONArray array=new JSONArray();
 		String sql = "select * from collection where collection_user_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
-				Collection collection = new Collection(
-						result.getInt("collection_id"),
-						result.getInt("collection_user_id"), 
-						result.getInt("collection_dynamic_id"));
-				CollectionByUserIdlist.add(collection);
+				JSONObject object=new JSONObject();
+				object.put("id", result.getInt("collection_id"));
+				object.put("user_id", result.getInt("collection_user_id"));
+				object.put("dynamic_id", result.getInt("collection_dynamic_id"));
+				array.put(object);
 
 			}
 			connection.close();
@@ -35,11 +38,11 @@ public class CollectionDao {
 			e.printStackTrace();
 		}
 
-		return CollectionByUserIdlist;
+		return array;
 
 	}
 
-	// 2.Ìí¼ÓÒ»ÌõÊÕ²Ø
+	// 2.æ·»åŠ ä¸€æ¡æ”¶è—
 	public static boolean addCollection(int user_id, int dynamic_id) {
 		Connection connection = DataBase.getConnection();
 		
@@ -48,9 +51,10 @@ public class CollectionDao {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setInt(1, user_id);
 			prepareStatement.setInt(2, dynamic_id);
-			
+			prepareStatement.execute();
 			connection.close();
-
+			//ç»™åŠ¨æ€çš„æ”¶è—æ•°+1
+			addOneCollectionToDynamic(dynamic_id);
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -60,16 +64,21 @@ public class CollectionDao {
 		return false;
 	}
 
-	//3.É¾³ıÒ»ÌõÊÕ²Ø
-	public static boolean deleteCollection(int collection_id) {
+	//3.åˆ é™¤ä¸€æ¡æ”¶è—
+	public static boolean deleteCollection(int user_id, int dynamic_id) {
+		
+		
 		Connection connection = DataBase.getConnection();
 		
-		String sql = "delete  from collection where collection_id=?";
+		String sql = "delete  from collection where collection_user_id=? and collection_dynamic_id=? ";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, collection_id);
+			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(2, dynamic_id);
 			 preparedStatement.executeUpdate();
 			connection.close();
+			//ç»™åŠ¨æ€ç‚¹èµæ•°-1
+			deleteOneCollectionToDynamic(dynamic_id);
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,5 +87,62 @@ public class CollectionDao {
 		return false;
 
 	}
+	//4.ç»™åŠ¨æ€çš„æ”¶è—æ•°+1
+	public static  boolean addOneCollectionToDynamic(int dynamic_id){
+			   Connection connection=DataBase.getConnection();
+				 
+				 	String sql="select dynamic_collection_num from dynamic where dynamic_id=?";
+					String sql2="update dynamic set dynamic_collection_num=? where dynamic_id=?";
+					int num=0;
+					try {
+						PreparedStatement preparedStatement=connection.prepareStatement(sql);
+						preparedStatement.setInt(1, dynamic_id);
+						ResultSet result=preparedStatement.executeQuery();
+						while(result.next()) {
+							num=result.getInt("dynamic_collection_num");
+						}
+						PreparedStatement preparedStatement2=connection.prepareStatement(sql2);
+						num=num+1;
+						preparedStatement2.setInt(1, num);
+						preparedStatement2.setInt(2, dynamic_id);
+						preparedStatement2.executeUpdate();
+						connection.close();
+						return true;
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return false;
+					
+		    }
+
+	//5.ç»™åŠ¨æ€çš„æ”¶è—æ•°-1
+		public static  boolean deleteOneCollectionToDynamic(int dynamic_id){
+				   Connection connection=DataBase.getConnection();
+					 
+					 	String sql="select dynamic_collection_num from dynamic where dynamic_id=?";
+						String sql2="update dynamic set dynamic_collection_num=? where dynamic_id=?";
+						int num=0;
+						try {
+							PreparedStatement preparedStatement=connection.prepareStatement(sql);
+							preparedStatement.setInt(1, dynamic_id);
+							ResultSet result=preparedStatement.executeQuery();
+							while(result.next()) {
+								num=result.getInt("dynamic_collection_num");
+							}
+							PreparedStatement preparedStatement2=connection.prepareStatement(sql2);
+							num=num-1;
+							preparedStatement2.setInt(1, num);
+							preparedStatement2.setInt(2, dynamic_id);
+							preparedStatement2.executeUpdate();
+							connection.close();
+							return true;
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return false;
+						
+			    }
 
 }
