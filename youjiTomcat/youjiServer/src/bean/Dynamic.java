@@ -1,6 +1,7 @@
 package bean;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class Dynamic {
 
@@ -12,7 +13,7 @@ public class Dynamic {
 	private int like_num;
 	private int comment_num;
 	private String address;
-	private Date time;
+	private Timestamp time;
 	private int partition_id;
 	
 	public Dynamic() {
@@ -20,7 +21,7 @@ public class Dynamic {
 		// TODO Auto-generated constructor stub
 	}
 	public Dynamic(int id, int user_id, String text, String img, int collection_num, int like_num, int comment_num,
-			String address, Date time, int partition_id) {
+			String address, Timestamp time, int partition_id) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -34,7 +35,7 @@ public class Dynamic {
 		this.partition_id = partition_id;
 	}
 	public Dynamic(int user_id, String text, int collection_num, int like_num, int comment_num, String address,
-			Date time, int partition_id) {
+			Timestamp time, int partition_id) {
 		super();
 		this.user_id = user_id;
 		this.text = text;
@@ -46,7 +47,7 @@ public class Dynamic {
 		this.partition_id = partition_id;
 	}
 	public Dynamic(int user_id, String text, String img, int collection_num, int like_num, int comment_num,
-			String address, Date time, int partition_id) {
+			String address, Timestamp time, int partition_id) {
 		super();
 		this.user_id = user_id;
 		this.text = text;
@@ -106,10 +107,10 @@ public class Dynamic {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Date getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
-	public void setTime(Date time) {
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
 	public int getPartition_id() {
