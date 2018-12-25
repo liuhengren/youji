@@ -10,6 +10,7 @@ public interface IDynamic {
     List<Dynamic> getDynamicByPartitionId(int partition_id);
     List<Dynamic> getDynamicByUserId(int user_id);
     Dynamic getDynamicById(int dynamic_id);
-    void addDynamic(Dynamic dynamic);
-    void deleteDynamic(int Dynamic_id);
+    int addDynamic(Dynamic dynamic);
+    boolean addDynamicImg(int dynamic_id);
+    boolean deleteDynamic(int Dynamic_id);
 }

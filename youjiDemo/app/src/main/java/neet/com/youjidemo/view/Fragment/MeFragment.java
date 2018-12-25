@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.LoginActivity;
 import neet.com.youjidemo.view.MyLoveActivity;
 import neet.com.youjidemo.view.PersonalCenterActivity;
+import neet.com.youjidemo.view.PersonalDataEditorActivity;
 
 
 public class MeFragment extends Fragment {
@@ -26,6 +32,7 @@ public class MeFragment extends Fragment {
     private TextView login;
     private ImageButton collection;
     private Button btnPersonalCenter,btnLove,btnFootPrint;
+    private UserDateApplication userDateApplication;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,37 +41,57 @@ public class MeFragment extends Fragment {
         }
 
         findViews();
-
+        userDateApplication=(UserDateApplication)getActivity().getApplication();
+        if(userDateApplication.isLogin()){
+            User user=userDateApplication.getUser();
+            Glide.with(MeFragment.this.getContext()).load(user.getUser_touxiang_url()).into(headsculpture);
+            login.setText(user.getUser_name());
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                headsculpture.setImageResource(R.drawable.module_message_at);
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
+                if(userDateApplication.isLogin()){
+
+                }else{
+                    headsculpture.setImageResource(R.drawable.module_message_at);
+                    toLoginActivity();
+                }
             }
         });
         headsculpture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                headsculpture.setImageResource(R.drawable.module_message_at);
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
+                if(userDateApplication.isLogin()){
+                    toPersonDataEditorActivity();
+                }else{
+                    toLoginActivity();
+                }
+
             }
         });
 
         btnPersonalCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),PersonalCenterActivity.class);
-                startActivity(intent);
+                if(userDateApplication.isLogin()){
+                    Intent intent = new Intent(getContext(),PersonalCenterActivity.class);
+                    startActivity(intent);
+                }else{
+                    toLoginActivity();
+                }
             }
         });
 
         btnLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),MyLoveActivity.class);
-                startActivity(intent);
+                if(userDateApplication.isLogin()){
+                    Intent intent = new Intent(getContext(),MyLoveActivity.class);
+                    startActivity(intent);
+                }else{
+                    toLoginActivity();
+                }
+
             }
         });
 
@@ -87,5 +114,13 @@ public class MeFragment extends Fragment {
         btnPersonalCenter = view.findViewById(R.id.btn_personal_center);
         btnFootPrint = view.findViewById(R.id.btn_footprint);
         btnLove = view.findViewById(R.id.btn_love);
+    }
+    public void toLoginActivity(){
+        Intent intent = new Intent(getContext(),LoginActivity.class);
+        startActivity(intent);
+    }
+    public void toPersonDataEditorActivity(){
+        Intent intent = new Intent(getContext(), PersonalDataEditorActivity.class);
+        startActivity(intent);
     }
 }

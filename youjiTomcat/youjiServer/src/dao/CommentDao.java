@@ -49,7 +49,7 @@ public class CommentDao {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		Connection connection = DataBase.getConnection();
 		String sql = "insert into comment(" + "comment_text,comment_dynamic_id,"
-				+ "comment_like_num,comment_user_id,comment_time values(?,?,?,?,?)";
+				+ "comment_like_num,comment_user_id,comment_time) values(?,?,?,?,?)";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setString(1, comment.getText());

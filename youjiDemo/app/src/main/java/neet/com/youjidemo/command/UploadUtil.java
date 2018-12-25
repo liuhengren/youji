@@ -32,8 +32,8 @@ public class UploadUtil {
      * @param RequestURL  请求的url
      * @return 返回响应的内容
      */
-    public static String uploadImage(File file, String RequestURL) {
-        String result = "error";
+    public static boolean uploadImage(File file, String RequestURL,int dynamic_id) {
+        boolean result = false;
         String BOUNDARY = UUID.randomUUID().toString();//边界标识 随机生成
         String PREFIX = "--", LINE_END = "\r\n";
         String CONTENT_TYPE = "multipart/form-data";//内容类型
@@ -51,14 +51,13 @@ public class UploadUtil {
             conn.setRequestProperty("id","55255");
             conn.setRequestProperty("connection", "keep-alive");
             conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
-
+            conn.setRequestProperty("id",String.valueOf(dynamic_id));
 
             Log.e("upload",""+conn);
             Log.e("file",""+file.length());
             if (file != null) {
                 //当文件不为空，把文件包装并且上传
                 DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-
 
                 FileInputStream is = new FileInputStream(file);
 
@@ -70,7 +69,6 @@ public class UploadUtil {
                 }
                 is.close();
 //                dos.write(LINE_END.getBytes());
-
 //                byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
 //                dos.write(end_data);
                 dos.flush();
@@ -92,16 +90,17 @@ public class UploadUtil {
                     while ((ss = input.read()) != -1) {
                         sbs.append((char) ss);
                     }
-                    result = sbs.toString();
+                    result = true;
                     input.close();
                     Log.i(TAG, "result------------------>>" + result);
                 }
             }else{
+                //上传失败操作
                 Log.e("空文件","kong");
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            Log.e("error",e.toString());
         }
         return result;
     }

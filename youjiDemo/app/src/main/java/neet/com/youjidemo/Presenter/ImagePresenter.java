@@ -11,13 +11,17 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.CursorLoader;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import neet.com.youjidemo.R;
 import neet.com.youjidemo.command.UploadUtil;
+import neet.com.youjidemo.view.ShareActivity;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 import top.zibin.luban.OnRenameListener;
@@ -63,19 +67,19 @@ public class ImagePresenter extends FragmentActivity {
     }
 
     /**上传*/
-    public static void uploadImage(final String imgSrc,Context context){
-
+    public static boolean uploadImage(final String imgSrc, Context context, final int dynamic_id){
+        final boolean[] b = {false};
         File file = new File(imgSrc);
         Luban.with(context)
                 .load(file)
                 .ignoreBy(100)
-                .setTargetDir("/storage/emulated/0")
-                .setRenameListener(new OnRenameListener() {
-                    @Override
-                    public String rename(String filePath) {
-                        return "test123.jpg";
-                    }
-                })
+                .setTargetDir("/storage/emulated/0").
+                setRenameListener(new OnRenameListener() {
+            @Override
+            public String rename(String filePath) {
+                return "123456.jpg";
+            }
+        })
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
@@ -85,30 +89,26 @@ public class ImagePresenter extends FragmentActivity {
                     @Override
                     public void onSuccess(final File file) {
                         Log.e("onSuccess","1");
-
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
+                                final String uploadurl = "http://10.7.89.200:8080/youjiServer/AddDynamicInmageServlet";
+                                Log.e("img",uploadurl);
                                 try {
                                     Log.e("fileLength",file.length()+"");
-                                    String result = UploadUtil.uploadImage(file, uploadurl);
+                                    new Thread(){
+                                        @Override
+                                        public void run() {
+                                            b[0] = UploadUtil.uploadImage(file, uploadurl,dynamic_id);
+                                        }
+                                    }.start();
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                            }
-                        }).start();
-
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         Log.e("onError","1");
                     }
                 }).launch();
-
-
-
+        return b[0];
     }
 }

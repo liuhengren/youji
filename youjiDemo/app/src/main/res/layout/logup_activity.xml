@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -119,8 +118,7 @@
             android:textSize="10dp"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-
-    <RelativeLayout
+  <RelativeLayout
         android:layout_width="219dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_inputvrfy"
@@ -140,7 +138,7 @@
              android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <Button
-        android:id="@+id/btn_logup"
+        android:id="@+idn_logup"
         android:layout_width="215dp"
         android:layout_height="38dp"
         android:layout_centerHorizontal="true"
@@ -152,7 +150,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_logup"
+        android:layout_below="@idn_logup"
         android:layout_marginTop="25dp">
     <TextView
         android:id="@+id/tv_login"
@@ -184,10 +182,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_centerInParent="true"
+        android:gravity="center"
         android:text="用户协议"
-        android:textColor="@android:color/white"
+        android:textColor="@android:colorack"
         android:textSize="14dp" />
 
     <com.github.ybq.android.spinkit.SpinKitView
