@@ -127,15 +127,15 @@ public class CommentDao {
 		return false;
 
 	}
-	//5.通过用户Id获得一个comment对象
-	public static JSONArray getCommentByUserId(int user_id) {
+	//5.通过动态Id获得一个comment对象
+	public static JSONArray getCommentByUserId(int dynamic_id) {
 		
 		Connection connection = DataBase.getConnection();
 		JSONArray array = new JSONArray();
-		String sql = "select * from comment where comment_user_id=?";
+		String sql = "select * from comment where comment_dynamic_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(1, dynamic_id);
 			ResultSet result = preparedStatement.executeQuery();
 
 			while (result.next()) {

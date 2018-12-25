@@ -115,14 +115,14 @@ public class LikeupDao {
 		return false;
 
 	}
-	//4.通过UserID获得所有点赞
-	public static JSONArray getLikeupByUserId(int user_id) {
+	//4.通过DynamicID获得所有点赞
+	public static JSONArray getLikeupByUserId(int dynamic_id) {
 		Connection connection = DataBase.getConnection();
 		JSONArray array = new JSONArray();
-		String sql = "select * from likeup where likeup_user_id=?";
+		String sql = "select * from likeup where likeup_dynamic_id=?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(1, dynamic_id);
 			ResultSet result = preparedStatement.executeQuery();
 
 			while (result.next()) {

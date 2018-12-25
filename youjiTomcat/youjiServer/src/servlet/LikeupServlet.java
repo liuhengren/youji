@@ -67,11 +67,10 @@ public class LikeupServlet extends HttpServlet {
 			out.write(object.toString());
 		}
 		// 3.通过用户ID获得所有的点赞
-		else if ("like_getLikeupByUserId".equals(message)) {
-			String id = request.getParameter("user_id");
-			int user_id = Integer.parseInt(id);
-			JSONArray array = LikeupDao.getLikeupByUserId(user_id);
-
+		else if ("like_getLikeupByDynamicId".equals(message)) {
+			String id = request.getParameter("dynamic_id");
+			int dynamic_id = Integer.parseInt(id);
+			JSONArray array = LikeupDao.getLikeupByUserId(dynamic_id);
 			out.write(array.toString());
 		}
 	}
