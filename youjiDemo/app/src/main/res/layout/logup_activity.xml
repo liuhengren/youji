@@ -123,7 +123,7 @@
              android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <Button
-        android:id="@+idn_logup"
+        android:id="@+id/btn_logup"
         android:layout_width="215dp"
         android:layout_height="38dp"
         android:layout_centerHorizontal="true"
@@ -135,7 +135,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@idn_logup"
+        android:layout_below="@+id/btn_logup"
         android:layout_marginTop="25dp">
     <TextView
         android:id="@+id/tv_login"
@@ -169,7 +169,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="用户协议"
-        android:textColor="@android:colorack"
+        android:textColor="@android:color/black"
         android:textSize="14dp" />
 
     <com.github.ybq.android.spinkit.SpinKitView
