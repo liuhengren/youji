@@ -50,5 +50,5 @@ dependencies {
     implementation 'com.amap.api:map2d:latest.integration'
     implementation 'com.amap.api:search:latest.integration'
     implementation 'com.amap.api:location:latest.integration'
-    implementation 'com.amap.api:navi:1.9.4'
+    implementation 'com.amap.api:3dmap:6.6.0'
 }

@@ -43,7 +43,11 @@
         <activity android:name=".view.OthersActivity" />
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".view.FoodActivity" />
         <activity android:name=".view.PersonalCenterActivity" />
@@ -53,11 +57,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".view.ShowMapActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <meta-data
             android:name="com.amap.api.v2.apikey"
