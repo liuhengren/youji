@@ -46,7 +46,7 @@ public class ProductionFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rv_production);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        ProductionPagerAdapter adapter = new ProductionPagerAdapter(list);
+        ProductionPagerAdapter adapter = new ProductionPagerAdapter(list,getActivity());
         recyclerView.setAdapter(adapter);
         return view;
     }

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -38,7 +39,9 @@ import neet.com.youjidemo.bean.Comment;
  */
 public class DetailActivity extends AppCompatActivity {
 
-    /**系统定时发广播来通知APP时间的变化*/
+    /**
+     * 系统定时发广播来通知APP时间的变化
+     */
     private BroadcastReceiver mTimeRefreshReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -52,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private ImageView imageCollect; //底部收藏图片
 
-    private ImageView imageComment; //底部评论图片
+    private TextView imageComment; //底部评论图片
 
     private ImageView imageLike; //底部点赞图片
 
@@ -86,7 +89,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    /**设置时间*/
+    /**
+     * 设置时间
+     */
     private void setTime(CharSequence systemTime) {
 
         time.setText(systemTime);
@@ -111,15 +116,19 @@ public class DetailActivity extends AppCompatActivity {
         unregisterReceiver(mTimeRefreshReceiver);
     }
 
-    /** 获取当前系统时间 */
+    /**
+     * 获取当前系统时间
+     */
     private CharSequence getSystemTime() {
         java.text.DateFormat dateFormat = DateFormat.getTimeFormat(DetailActivity.this);
         long sysTime = System.currentTimeMillis();
         return dateFormat.format(sysTime);
     }
 
-    /**初始化数据*/
-    private void init(){
+    /**
+     * 初始化数据
+     */
+    private void init() {
         mDataList = new ArrayList();
         adapter = new DetailViewAdapter(mDataList);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
@@ -127,8 +136,10 @@ public class DetailActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    /**设置监听器*/
-    private void setClickListener(){
+    /**
+     * 设置监听器
+     */
+    private void setClickListener() {
         btnImageHead.setOnClickListener(mClickListener);
         tvUserName.setOnClickListener(mClickListener);
         btnAttention.setOnClickListener(mClickListener);
@@ -141,7 +152,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     /***初始化控件*/
-    private void findViews(){
+    private void findViews() {
         mClickListener = new ClickListener();
         time = findViewById(R.id.tv_time);
         toolbar = findViewById(R.id.tbdetail_pde);
@@ -164,19 +175,21 @@ public class DetailActivity extends AppCompatActivity {
         comment_content = findViewById(R.id.comment_content);
     }
 
-    /**定义一个内部类来处里Activity中的点击事件*/
+    /**
+     * 定义一个内部类来处里Activity中的点击事件
+     */
     public class ClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 /**点击用户名和头像可以跳转至个人中心，注意数据的获取*/
                 case R.id.cImage_detail_head:
-                    Intent intent = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    Intent intent = new Intent(DetailActivity.this, PersonalCenterActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.tv_detail_username:
-                    Intent intent1 = new Intent(DetailActivity.this,PersonalCenterActivity.class);
+                    Intent intent1 = new Intent(DetailActivity.this, PersonalCenterActivity.class);
                     startActivity(intent1);
                     break;
                 /**点击之后应在数据库里增加一条数据，并标识，
@@ -184,18 +197,18 @@ public class DetailActivity extends AppCompatActivity {
                  * ，来实现指定好图标
                  */
                 case R.id.btn_detail_attention:
-                    if (isAttentioned == R.drawable.befans){
+                    if (isAttentioned == R.drawable.befans) {
                         btnAttention.setImageResource(R.drawable.have_attention);
                         isAttentioned = R.drawable.have_attention;
-                    }
-                    else if (isAttentioned == R.drawable.have_attention){
+                    } else if (isAttentioned == R.drawable.have_attention) {
                         btnAttention.setImageResource(R.drawable.befans);
                         isAttentioned = R.drawable.befans;
                     }
                     break;
                 case R.id.image_detail_collect:
-
+                    /**实现.....your code*/
                     break;
+                /**评论*/
                 case R.id.image_detail_comment:
                     // 弹出输入法
                     InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -215,9 +228,10 @@ public class DetailActivity extends AppCompatActivity {
                     rl_enroll.setVisibility(View.VISIBLE);
                     rl_comment.setVisibility(View.GONE);
                     // 隐藏输入法，然后暂存当前输入框的内容，方便下次使用
-                    InputMethodManager im = (InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager im = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     im.hideSoftInputFromWindow(comment_content.getWindowToken(), 0);
                     break;
+                /**底部收藏按钮事件*/
 
 
             }
@@ -226,19 +240,19 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.tbdetail_pde:
-            finish();
-            break;
+                finish();
+                break;
         }
         finish();
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendComment(){
-        if(comment_content.getText().toString().equals("")){
+    public void sendComment() {
+        if (comment_content.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "评论不能为空！", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             // 生成评论数据
             Comment comment = new Comment();
             comment.setComment_text(comment_content.getText().toString());

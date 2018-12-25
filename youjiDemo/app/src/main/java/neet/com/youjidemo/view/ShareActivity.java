@@ -15,7 +15,9 @@ import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -54,6 +56,11 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
+
+        Toolbar toolbar=(Toolbar)findViewById(R.id.tb_share);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         findView();
         selectImage.setOnClickListener(this);
         upload.setOnClickListener(this);
@@ -111,21 +118,14 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**上传图片*/
-//    public void uploadImage(String path) {
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
-//                try {
-//                    File file = new File(img_src);
-//                    result = UploadUtil.uploadImage(file, uploadurl);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.tb_personal_center:
+                finish();
+                break;
+        }
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
 }

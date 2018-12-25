@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -51,8 +52,10 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_love);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         listview = (ListView) findViewById(R.id.list);
         layout = (RelativeLayout) findViewById(R.id.relative);
         txtcount = (TextView) findViewById(R.id.txtcount);
@@ -270,5 +273,16 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
                 return true;
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.tb_personal_center:
+                finish();
+                break;
+        }
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -7,6 +7,11 @@
     android:focusableInTouchMode="true"
     >
 
+    <neet.com.youjidemo.customWidget.CustomVideoView
+        android:id="@+id/videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <ImageButton
         android:src="@drawable/ic_login_cancel"
         android:layout_marginTop="31dp"

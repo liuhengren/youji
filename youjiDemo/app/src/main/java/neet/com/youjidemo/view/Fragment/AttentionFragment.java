@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.AttentionPagerAdapter;
+import neet.com.youjidemo.view.DetailActivity;
 
 /**
  * desc:个人中心关注Fragment
@@ -64,7 +66,8 @@ public class AttentionFragment extends Fragment {
         adapter.setmOnItemClickListener(new AttentionPagerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getContext(),"点击了"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
 

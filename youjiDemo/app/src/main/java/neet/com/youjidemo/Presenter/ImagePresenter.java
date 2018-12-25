@@ -11,17 +11,13 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.CursorLoader;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import neet.com.youjidemo.R;
 import neet.com.youjidemo.command.UploadUtil;
-import neet.com.youjidemo.view.ShareActivity;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 import top.zibin.luban.OnRenameListener;

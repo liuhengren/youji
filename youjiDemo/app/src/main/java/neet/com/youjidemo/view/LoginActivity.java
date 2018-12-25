@@ -2,6 +2,8 @@ package neet.com.youjidemo.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import neet.com.youjidemo.Presenter.UserLoginPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.customWidget.CustomVideoView;
 import neet.com.youjidemo.view.IView.ILoginView;
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {
@@ -28,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private ImageButton mIBCancel,mIbLogByqq,mIBLogbyWxChat;
     private UserLoginPresenter userLoginPresenter;
     private ProgressBar progressBar;
+    private CustomVideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,18 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         mIBLogbyWxChat=findViewById(R.id.btn_login_wechat);
         userLoginPresenter=new UserLoginPresenter(LoginActivity.this);
         progressBar=findViewById(R.id.spin_kit);
+        videoView =  findViewById(R.id.videoview_login);
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.wallpaper));
+
+        //播放
+        videoView.start();
+        //循环播放
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                videoView.start();
+            }
+        });
     }
     private void initListener(){
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
