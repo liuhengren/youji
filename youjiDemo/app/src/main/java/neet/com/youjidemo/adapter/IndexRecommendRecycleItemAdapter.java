@@ -247,4 +247,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         this.list.addAll(list);
         notifyDataSetChanged();
     }
+    public void reget(){
+        list.clear();
+        notifyDataSetChanged();
+    }
 }

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,19 +28,25 @@ import java.io.FileNotFoundException;
 
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.ImagePresenter;
+import neet.com.youjidemo.Presenter.SharePresenter;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.command.UploadUtil;
+import neet.com.youjidemo.view.IView.IShareView;
 
-public class ShareActivity extends AppCompatActivity implements View.OnClickListener {
+public class ShareActivity extends AppCompatActivity implements View.OnClickListener ,IShareView {
     private int SELECT_PHOTO = 200;
-    private static String requestURL = "http://10.7.89.245:8080/AndroidServlet/";
     private Button  upload;
     private ImageButton selectImage;
     private String picPath = null;
     private Uri uri = null;
     private String result;
-
+    private UserDateApplication userDateApplication;
     private String img_src;
+    private EditText dynmaictext;
+    private boolean b;
+    private SharePresenter sharePresenter;
 
     /**
      * 从相册选取图片
@@ -54,9 +61,11 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
+        sharePresenter=new SharePresenter(this);
         findView();
         selectImage.setOnClickListener(this);
         upload.setOnClickListener(this);
+        userDateApplication=(UserDateApplication)getApplication();
     }
 
     @Override
@@ -70,7 +79,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
                 if (img_src == null) {
                     Toast.makeText(ShareActivity.this, "请选择图片！", Toast.LENGTH_LONG).show();
                 } else {
-                    ImagePresenter.uploadImage(img_src,ShareActivity.this);
+                    sharePresenter.snedText();
                 }
                 break;
             default:
@@ -81,8 +90,8 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     private void findView(){
         selectImage = findViewById(R.id.select_image);
         upload = findViewById(R.id.btn_share_upload);
+        dynmaictext=findViewById(R.id.et_share_passage);
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,22 +119,44 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
         dialog.show();
     }
 
-    /**上传图片*/
-//    public void uploadImage(String path) {
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                String uploadurl = "http://10.7.89.245:8080/UploadFile/AServlet?username=zhangsan";
-//                try {
-//                    File file = new File(img_src);
-//                    result = UploadUtil.uploadImage(file, uploadurl);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//
-//    }
+    @Override
+    public void showMessage(String msg) {
+        Toast.makeText(ShareActivity.this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void startUpImg(int dynamic_id) {
+        b = ImagePresenter.uploadImage(img_src, ShareActivity.this, dynamic_id);
+    }
+
+    @Override
+    public int getmuserId() {
+        return userDateApplication.getUser().getUser_id();
+    }
+
+    @Override
+    public String getTextOnDynamic() {
+        return dynmaictext.getText().toString();
+    }
+
+    @Override
+    public int getPartitionId() {
+        return 0;
+    }
+
+    @Override
+    public String getAddress() {
+        return userDateApplication.getUser().getUser_address();
+    }
+
+    @Override
+    public boolean getResultofDynamic() {
+        return b;
+    }
+
+    @Override
+    public void toManinActivity() {
+        Intent intent = new Intent(ShareActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }

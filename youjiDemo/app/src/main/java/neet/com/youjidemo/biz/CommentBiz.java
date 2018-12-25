@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.bean.Comment;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.ObjectToJsonObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class CommentBiz implements IComment {
-    private final String CommentUrl="http://10.222.189.117:8080/youjiServer/CommentServlet";
+    private final String CommentUrl=Url.mURL+"CommentServlet";
     private List<Comment> commentList=new ArrayList<>();
     @Override
     public List<Comment> getCommentByDynamicId(int dynamic_id) {
@@ -40,7 +41,7 @@ public class CommentBiz implements IComment {
     @Override
     public boolean addComment(Comment comment) {
         String msg="comment_addComment";
-        String url="http://10.222.189.117:8080/youjiServer/AddCommentServlet";
+        String url=Url.mURL+"AddCommentServlet";
         JSONObject object = ObjectToJsonObject.CommentToJson(comment);
         boolean b = PostJson.PostToSever(object, url);
         return b;

@@ -1,5 +1,7 @@
 package neet.com.youjidemo.view.Fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,9 +60,20 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
         }
         dynamicOptionPresenter =new DynamicOptionPresenter(this);
         dynamicOptionPresenter.getList("all",0);
+
         return view;
     }
-
+    private BroadcastReceiver b=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.e("广播","1");
+            dynamicOptionPresenter.getList("all",0);
+            if("MY_BROID".equals(intent.getAction())){
+                indexRecommendRecycleItemAdapter.reget();
+                dynamicOptionPresenter.getList("all",0);
+            }
+        }
+    };
     private void findViews() {
         recyclerView = view.findViewById(R.id.rl_index_recommend);
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);

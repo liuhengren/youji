@@ -31,6 +31,7 @@ public class PostJson {
             BufferedReader br=new BufferedReader(new InputStreamReader(is));
             String res=br.readLine();
             JSONObject jsonObject=new JSONObject(res);
+            id = jsonObject.getInt("id");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import neet.com.youjidemo.bean.Dynamic;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.ObjectToJsonObject;
@@ -16,7 +17,7 @@ import neet.com.youjidemo.command.PostJson;
 
 public class Dynamicbiz implements IDynamic{
     private List<Dynamic> dynamicList=new ArrayList<>();
-    final private String DynamicUrl="http://10.222.189.117:8080/youjiServer/DynamicServlet";
+    final private String DynamicUrl=Url.mURL+"DynamicServlet";
     @Override
     public List<Dynamic> getDynamic() {
         String msg="dynamic_allDynamic";
@@ -69,7 +70,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public int addDynamic(Dynamic dynamic) {
         String msg="dynamic_addDynamic";
-        String url="http://10.222.189.117:8080/youjiServer/AddDynamicText";
+        String url=Url.mURL+"AddDynamicText";
         JSONObject object = ObjectToJsonObject.DynamicToJson(dynamic);
 
         int b = PostJson.PostDynamicToSever(object, url);
@@ -86,7 +87,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public boolean deleteDynamic(int Dynamic_id) {
         String msg="dynamic_deleteDynamic";
-        String url=DynamicUrl+"?message="+"&id="+Dynamic_id;
+        String url=DynamicUrl+"?message="+msg+"&id="+Dynamic_id;
         boolean b = PostJson.PostByUrl(url);
         return b;
     }

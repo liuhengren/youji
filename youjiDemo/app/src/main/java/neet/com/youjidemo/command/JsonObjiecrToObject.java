@@ -12,6 +12,7 @@ import neet.com.youjidemo.bean.Collection;
 import neet.com.youjidemo.bean.Comment;
 import neet.com.youjidemo.bean.Dynamic;
 import neet.com.youjidemo.bean.Follow;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.User;
 
 public class JsonObjiecrToObject {
@@ -22,7 +23,8 @@ public class JsonObjiecrToObject {
             dynamic.setDynamic_address(jsonObject.getString("address"));
             dynamic.setDynamic_user_id(jsonObject.getInt("user_id"));
             dynamic.setDynamic_text(jsonObject.getString("text"));
-            dynamic.setDynamic_img(jsonObject.getString("img"));
+            dynamic.setDynamic_img(Url.MIMAGEURL+jsonObject.getString("img"));
+            Log.e("img",Url.MIMAGEURL+jsonObject.getString("img"));
             dynamic.setDynamic_collection_num(jsonObject.getInt("collection_num"));
             dynamic.setDynamic_like_num(jsonObject.getInt("like_num"));
             dynamic.setDynamic_comment_num(jsonObject.getInt("comment_num"));

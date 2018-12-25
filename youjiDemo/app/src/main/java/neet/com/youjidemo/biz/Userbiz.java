@@ -5,11 +5,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.PostJson;
 
 public class Userbiz implements IUserLog {
     private boolean logupResulet=false;
-    private final String UserUrl="http://10.222.189.117:8080/youjiServer/UserServlet";
+    private final String UserUrl=Url.mURL+"UserServlet";
     @Override
     public boolean login(String userphone, String password) {
         //请求网络服务器

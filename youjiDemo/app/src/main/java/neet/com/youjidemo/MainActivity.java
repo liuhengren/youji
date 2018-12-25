@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences user = getSharedPreferences("user", Context.MODE_PRIVATE);
         Log.e("1",user.getAll().toString());
 
-
     }
 
 

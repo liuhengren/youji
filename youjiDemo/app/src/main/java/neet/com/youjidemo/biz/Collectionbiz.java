@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.bean.Collection;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class Collectionbiz implements ICollection{
     //CollectionServletUrl地址
-    final private String CollectionUrl="http://10.222.189.117:8080/youjiServer/CollectionServlet";
+    final private String CollectionUrl=Url.mURL+"CollectionServlet";
     private List<Collection> collectionList=new ArrayList<>();
     @Override
     public List<Collection> getCollectionByUserId(final int user_id) {
@@ -52,7 +53,7 @@ public class Collectionbiz implements ICollection{
 
     @Override
     public boolean ifCollection(int user_id, int dynamic_id) {
-        String msg="http://10.222.189.117:8080/youjiServer/DynamicServlet?message=dynamic_isCollected";
+        String msg=Url.mURL+"DynamicServlet?message=dynamic_isCollected";
         String url=msg+"&user_id="+user_id+"&dynamic_id="+dynamic_id;
         boolean b = PostJson.PostByUrl(url);
         return b;

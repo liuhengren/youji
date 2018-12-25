@@ -78,7 +78,7 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
     }
     public void init(){
         for(int i=0;i<list.size();i++){
-            array.add(list.get(i).getDyanmic_id());
+            array.add(i);
         }
     }
 

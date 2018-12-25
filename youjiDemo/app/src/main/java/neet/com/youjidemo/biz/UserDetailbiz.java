@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.sql.Date;
 
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.User;
 import neet.com.youjidemo.bean.UserDetail;
 import neet.com.youjidemo.command.GetJsonStr;
@@ -17,7 +18,7 @@ import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class UserDetailbiz implements IUserDetailEdit{
-    private final String UserUrl="http://10.222.189.117:8080/youjiServer/UserServlet";
+    private final String UserUrl=Url.mURL+"UserServlet";
     public  UserDetailbiz(){
 
     }

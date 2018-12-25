@@ -17,7 +17,7 @@ public class ObjectToJsonObject {
             object.put("like_num",dynamic.getDynamic_like_num());
             object.put("comment_num",dynamic.getDynamic_comment_num());
             object.put("address",dynamic.getDynamic_address());
-            //object.put("partition_id",dynamic.getDynamic_partition_id());
+            object.put("partition_id",dynamic.getDynamic_partition_id());
             //object.put("time",dynamic.getDynamic_time());
         } catch (JSONException e) {
             e.printStackTrace();

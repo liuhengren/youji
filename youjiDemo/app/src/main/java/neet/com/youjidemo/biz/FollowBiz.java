@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import neet.com.youjidemo.bean.Follow;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.GetJsonStr;
 import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class FollowBiz implements IFollow {
-    private final String followUrl="http://10.222.189.117:8080/youjiServer/FollowServlet";
+    private final String followUrl=Url.mURL+"FollowServlet";
     private List<Follow> followList=new ArrayList<>();
     @Override
     public List<Follow> getFollowByUserId(int user_id) {

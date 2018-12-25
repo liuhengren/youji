@@ -67,19 +67,19 @@ public class ImagePresenter extends FragmentActivity {
     }
 
     /**上传*/
-    public static void uploadImage(final String imgSrc,Context context){
-
+    public static boolean uploadImage(final String imgSrc, Context context, final int dynamic_id){
+        final boolean[] b = {false};
         File file = new File(imgSrc);
         Luban.with(context)
                 .load(file)
                 .ignoreBy(100)
-                .setTargetDir("/storage/emulated/0")
-                .setRenameListener(new OnRenameListener() {
-                    @Override
-                    public String rename(String filePath) {
-                        return "test123.jpg";
-                    }
-                })
+                .setTargetDir("/storage/emulated/0").
+                setRenameListener(new OnRenameListener() {
+            @Override
+            public String rename(String filePath) {
+                return "123456.jpg";
+            }
+        })
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
@@ -89,30 +89,26 @@ public class ImagePresenter extends FragmentActivity {
                     @Override
                     public void onSuccess(final File file) {
                         Log.e("onSuccess","1");
-
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                String uploadurl = "http://10.222.184.38:8080/youjiServer/?username=zhangsan";
+                                final String uploadurl = "http://10.7.89.200:8080/youjiServer/AddDynamicInmageServlet";
+                                Log.e("img",uploadurl);
                                 try {
                                     Log.e("fileLength",file.length()+"");
-                                    String result = UploadUtil.uploadImage(file, uploadurl);
+                                    new Thread(){
+                                        @Override
+                                        public void run() {
+                                            b[0] = UploadUtil.uploadImage(file, uploadurl,dynamic_id);
+                                        }
+                                    }.start();
+
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                            }
-                        }).start();
-
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         Log.e("onError","1");
                     }
                 }).launch();
-
-
-
+        return b[0];
     }
 }
