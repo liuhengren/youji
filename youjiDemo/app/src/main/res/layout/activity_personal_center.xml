@@ -12,7 +12,7 @@
         android:background="@android:color/white"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
-        app:title="我">
+        app:title=" ">
 
         <TextView
 
@@ -51,6 +51,7 @@
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <ImageButton
+                            android:id="@+id/user_background"
                             android:layout_width="match_parent"
                             android:layout_height="204dp"
                             android:scaleType="center"
@@ -75,6 +76,7 @@
 
                         <!--昵称-->
                         <TextView
+                            android:id="@+id/PCAname"
                             android:layout_width="wrap_content"
                             android:layout_height="22dp"
                             android:layout_below="@id/image_personal_center_head"
@@ -85,6 +87,7 @@
 
                         <!--编辑资料按钮-->
                         <Button
+                            android:id="@+id/pc_btn"
                             android:layout_width="60dp"
                             android:layout_height="30dp"
                             android:layout_alignParentRight="true"

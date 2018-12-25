@@ -1,6 +1,8 @@
 package neet.com.youjidemo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,10 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-
-
-
+        SharedPreferences user = getSharedPreferences("user", Context.MODE_PRIVATE);
+        Log.e("1",user.getAll().toString());
 
     }
 

@@ -6,6 +6,8 @@ import neet.com.youjidemo.bean.Collection;
 
 public interface ICollection {
     List<Collection> getCollectionByUserId(int user_id);
-    void addCollection(int user_id,int dynamic_id);
-    void deleteCollection(int collection_id);
+    boolean addCollection(int user_id,int dynamic_id);
+    boolean deleteCollection(int collection_id);
+    boolean deleteCollection(int user_id,int dynamic_id);
+    boolean ifCollection(int user_id,int dynamic_id);
 }

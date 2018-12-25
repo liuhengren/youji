@@ -10,7 +10,7 @@ public interface ILoginView {
         //展示正在登陆
         void showLoading();
         void hideLoading();
-        void toMainActivity(User user);
+        void toMainActivity();
         void showFailedError(String msg);
         void clearUser();
         //第三方登录
@@ -19,4 +19,5 @@ public interface ILoginView {
         void toLogupActivity();
         //找回密码
         void forgetPasswordActivity();
+        void setUserApp(User user);
 }

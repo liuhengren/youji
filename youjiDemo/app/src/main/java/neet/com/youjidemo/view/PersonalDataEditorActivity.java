@@ -1,5 +1,6 @@
 package neet.com.youjidemo.view;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -43,6 +45,8 @@ import java.util.Date;
 import neet.com.youjidemo.Presenter.PerDateEditPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.JsonBean;
+import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.command.GetJsonDataUtil;
 import neet.com.youjidemo.view.IView.IPerDateEditorView;
 
@@ -58,6 +62,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
     private Thread thread;
     private PopupWindow pdePwSexSelect;
     private PerDateEditPresenter perDateEditPresenter;
+    private UserDateApplication userDateApplication;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         initview();
         openTimePicker();
         setOnLinster();
+        perDateEditPresenter.setUserDetail();
+        userDateApplication=(UserDateApplication) getApplication();
     }
     private void initview(){
         pdeLlRoot=findViewById(R.id.pde_root);
@@ -124,7 +131,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         final TimePickerView tpv=new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
-
+                perDateEditPresenter.update("birthday",getTime(date));
+                setUserBirthday(getTime(date));
             }
         }).build();
         mTvBirthday.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +150,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
                 String tx = options1Items.get(options1).getPickerViewText() +
                         options2Items.get(options1).get(options2) +
                         options3Items.get(options1).get(options2).get(options3);
-
+                perDateEditPresenter.update("hometown",tx);
+                setUserHometown(tx);
             }
         })
                 .setTitleText("城市选择")
@@ -258,6 +267,8 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         pdeTvFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                perDateEditPresenter.update("sex",tmpSex[0]);
+                setUserSex(tmpSex[0]);
                 pdePwSexSelect.dismiss();
             }
         });
@@ -344,6 +355,22 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         mTvHometown.setText(userHometown);
     }
 
+    @Override
+    public int getmUserId() {
+        return userDateApplication.getUser().getUser_id();
+
+    }
+    @Override
+    public void setUserApp(User user) {
+        userDateApplication.setUser(user);
+        userDateApplication.setLogin(true);
+    }
+
+    @Override
+    public void showDig(String msg) {
+        Toast.makeText(PersonalDataEditorActivity.this,msg,Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * EditText失去焦点操作
      */
@@ -355,9 +382,10 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
                 //根据ID更新信息
                 switch (v.getId()){
                     case R.id.pde_et_name:
-                        perDateEditPresenter.update("username",s);
+                        perDateEditPresenter.update("username",getUserName());
                         break;
                     case R.id.pde_et_introduction:
+                        perDateEditPresenter.update("introduction",getUserIntroduction());
                         break;
                 }
             }

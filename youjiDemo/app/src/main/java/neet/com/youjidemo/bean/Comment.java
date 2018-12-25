@@ -1,14 +1,12 @@
 package neet.com.youjidemo.bean;
 
-import java.util.Date;
-
 public class Comment {
     private int comment_id;
     private String comment_text;
     private int comment_dynamic_id;
     private int comment_like_num;
     private int comment_user_id;
-    private Date comment_time;
+    private String comment_time;
 
     public int getComment_id() {
         return comment_id;
@@ -50,11 +48,11 @@ public class Comment {
         this.comment_user_id = comment_user_id;
     }
 
-    public Date getComment_time() {
+    public String getComment_time() {
         return comment_time;
     }
 
-    public void setComment_time(Date comment_time) {
+    public void setComment_time(String comment_time) {
         this.comment_time = comment_time;
     }
 }

@@ -5,16 +5,27 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import neet.com.youjidemo.bean.Url;
+import neet.com.youjidemo.command.PostJson;
+
 public class Userbiz implements IUserLog {
     private boolean logupResulet=false;
+    private final String UserUrl=Url.mURL+"UserServlet";
     @Override
-    public void login(String userphone, String password) {
+    public boolean login(String userphone, String password) {
         //请求网络服务器
+        String msg="user_login";
+        String url=UserUrl+"?message="+msg+"&userphone="+userphone+"&password="+password;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 
     @Override
     public boolean logup(final String userphone, String password) {
-        return false;
+        String msg="user_logup";
+        String url=UserUrl+"?message="+msg+"&userphone="+userphone+"&password="+password;
+        boolean b = PostJson.PostByUrl(url);
+        return b;
     }
 
 }
