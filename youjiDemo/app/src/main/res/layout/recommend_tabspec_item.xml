@@ -7,8 +7,8 @@
     <!--用户信息-->
     <RelativeLayout
         android:layout_width="385dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_headphoto"
