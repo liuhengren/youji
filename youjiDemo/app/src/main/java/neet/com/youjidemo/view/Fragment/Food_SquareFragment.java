@@ -110,7 +110,7 @@ public class Food_SquareFragment extends Fragment {
         // 设置下拉出现小圆圈是否是缩放出现，出现的位置，最大的下拉位置
         mySwipeRefreshLayout.setProgressViewOffset(true, 50, 200);
         // 设置下拉圆圈的大小，两个值 LARGE， DEFAULT
-        mySwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        mySwipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
         mySwipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,

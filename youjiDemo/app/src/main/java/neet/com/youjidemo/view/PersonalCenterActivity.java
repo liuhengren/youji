@@ -90,7 +90,7 @@ public class PersonalCenterActivity extends AppCompatActivity {
 * */
     private  void setDownRefresh(){
         swipeRefreshLayout.setProgressViewOffset(true, 50, 200);
-        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
         swipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
