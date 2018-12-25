@@ -18,6 +18,24 @@ public class ShowDynamicInAll implements Serializable {
     private int like_num;
     private String time;
     private boolean isFollow=false;
+    private boolean isLike=false;
+    private boolean isCollection=false;
+
+    public boolean isCollection() {
+        return isCollection;
+    }
+
+    public void setCollection(boolean collection) {
+        isCollection = collection;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
 
     public ShowDynamicInAll(int user_id, String username, String user_touxiang, String address, int dyanmic_id, String dynamic_text, String dynamicImg_url, int collection_num, int comment_num, int like_num, String time, boolean isFollow) {
         this.user_id = user_id;

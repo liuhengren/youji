@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -51,6 +52,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
     private GetUserPresenter getUserPresenter;
     private int user_id;
     private User user;
+    private Button pc_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
         user_name=findViewById(R.id.PCAname);
         background=findViewById(R.id.user_background);
         ViewPager mViewPager = findViewById(R.id.viewpager);
+        pc_btn=findViewById(R.id.pc_btn);
         List<Fragment> list = new ArrayList();
         ProductionFragment productionFragment = new ProductionFragment();
         FansFragment fansFragment = new FansFragment();
@@ -89,6 +92,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
             setUserMessage();
         }else{
             getUserPresenter.getUserByIdInPc();
+            pc_btn.setVisibility(View.GONE);
         }
     }
 

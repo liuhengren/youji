@@ -2,13 +2,13 @@ package neet.com.youjidemo.bean;
 
 public class ShowCommentBean {
     private int user_id;
-    private int username;
+    private String username;
     private String user_touxiang;
     private String time;
     private String comment_text;
     private int like_num;
 
-    public ShowCommentBean(int user_id, int username, String user_touxiang, String time, String comment_text, int like_num) {
+    public ShowCommentBean(int user_id, String username, String user_touxiang, String time, String comment_text, int like_num) {
         this.user_id = user_id;
         this.username = username;
         this.user_touxiang = user_touxiang;
@@ -25,11 +25,11 @@ public class ShowCommentBean {
         this.user_id = user_id;
     }
 
-    public int getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(int username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

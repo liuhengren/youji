@@ -34,10 +34,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import neet.com.youjidemo.Presenter.CommentPresenter;
+import neet.com.youjidemo.Presenter.DynamicOptionPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.DetailViewAdapter;
+import neet.com.youjidemo.bean.ShowCommentBean;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
 import neet.com.youjidemo.bean.Comment;
+import neet.com.youjidemo.bean.UserDateApplication;
+import neet.com.youjidemo.view.IView.ICommentOption;
+import neet.com.youjidemo.view.IView.IDynamicOption;
 
 
 /**
@@ -45,7 +51,7 @@ import neet.com.youjidemo.bean.Comment;
  * author：梁启文
  * time：2018/12/5
  */
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements ICommentOption ,IDynamicOption {
 
     /**系统定时发广播来通知APP时间的变化*/
     private BroadcastReceiver mTimeRefreshReceiver = new BroadcastReceiver() {
@@ -73,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView time; //当前系统时间
 
-    private List<Comment> mDataList; //数据源
+    private List<ShowCommentBean> mDataList; //数据源
 
     private RecyclerView recyclerView; //列表
 
@@ -104,7 +110,9 @@ public class DetailActivity extends AppCompatActivity {
     private TextView comment_content;
 
     private Toolbar toolbar;
-
+    private CommentPresenter commentPresenter;
+    private UserDateApplication userDateApplication;
+    private DynamicOptionPresenter dynamicOptionPresenter;
     /**设置时间*/
     private void setTime(CharSequence systemTime) {
 
@@ -117,13 +125,15 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         findViews();
+        showDynamicInAll=(ShowDynamicInAll)getIntent().getSerializableExtra("dynamicDeta");
+        dynamicOptionPresenter=new DynamicOptionPresenter(this);
+        setDynamic(showDynamicInAll);
         registerReceiver(mTimeRefreshReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
         String currentTime = (String) getSystemTime();
         time.setText(currentTime);
         init();
         setClickListener();
-        showDynamicInAll=(ShowDynamicInAll)getIntent().getSerializableExtra("dynamicDeta");
-        setDynamic(showDynamicInAll);
+
     }
 
     @Override
@@ -141,11 +151,14 @@ public class DetailActivity extends AppCompatActivity {
 
     /**初始化数据*/
     private void init(){
+        commentPresenter=new CommentPresenter(this);
+        userDateApplication=(UserDateApplication)(getApplication());
         mDataList = new ArrayList();
-        adapter = new DetailViewAdapter(mDataList);
+        adapter = new DetailViewAdapter(mDataList,this);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
+        commentPresenter.getCommentList(showDynamicInAll.getDyanmic_id());
     }
 
     /**设置监听器*/
@@ -188,6 +201,95 @@ public class DetailActivity extends AppCompatActivity {
         comment_content = findViewById(R.id.comment_content);
     }
 
+    @Override
+    public void setList(List<ShowCommentBean> list) {
+        this.mDataList=new ArrayList<>();
+        mDataList=list;
+        adapter.updataList(list);
+    }
+
+    @Override
+    public void setListByTag(List<ShowDynamicInAll> list) {
+
+    }
+
+    @Override
+    public int getmUserId() {
+        if(userDateApplication.isLogin()){
+            return  userDateApplication.getUser().getUser_id();
+        }
+        return 0;
+    }
+
+    @Override
+    public void addCollection(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addCollection(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void addFollow(int follow_user_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addFollow(getmUserId(),follow_user_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void likeTheDynamic(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addLike(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void cancelLike(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelLike(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void cancelFollow(int follow_user_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelFollow(getmUserId(),follow_user_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void cancelCollection(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelCollection(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this,"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void change() {
+
+    }
+
+
     /**定义一个内部类来处里Activity中的点击事件*/
     public class ClickListener implements View.OnClickListener {
 
@@ -210,28 +312,52 @@ public class DetailActivity extends AppCompatActivity {
                  * ，来实现指定好图标
                  */
                 case R.id.btn_detail_attention:
-                    if (isAttentioned == R.drawable.befans){
-                        btnAttention.setImageResource(R.drawable.have_attention);
-                        isAttentioned = R.drawable.have_attention;
-                    }
-                    else if (isAttentioned == R.drawable.have_attention){
-                        btnAttention.setImageResource(R.drawable.befans);
-                        isAttentioned = R.drawable.befans;
-                    }
-                    break;
-                case R.id.image_detail_collect:
 
                     break;
+                case R.id.image_detail_collect:
+                    if(showDynamicInAll.isCollection()){
+                        imageCollect.setImageResource(R.drawable.collect);
+                        cancelCollection(showDynamicInAll.getDyanmic_id());
+                    }else{
+                        imageCollect.setImageResource(R.drawable.havecollect);
+                        addCollection(showDynamicInAll.getDyanmic_id());
+                    }
+                    break;
                 case R.id.image_detail_comment:
+                    if(userDateApplication.isLogin()){
                     // 弹出输入法
                     InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                     // 显示评论框
                     rl_enroll.setVisibility(View.GONE);
-                    rl_comment.setVisibility(View.VISIBLE);
+                    rl_comment.setVisibility(View.VISIBLE);}
+                    else{
+                        Toast.makeText(DetailActivity.this,"等登录后操作",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.image_detail_like:
-
+                    if(showDynamicInAll.isLike()){
+                        imageLike.setImageResource(R.drawable.like);
+                        cancelLike(showDynamicInAll.getDyanmic_id());
+                        showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
+                        showDynamicInAll.setLike(false);
+                    }else{
+                        imageLike.setImageResource(R.drawable.havelike);
+                        likeTheDynamic(showDynamicInAll.getDyanmic_id());
+                        showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
+                        showDynamicInAll.setLike(true);
+                    }
+                    if (showDynamicInAll.isLike()){
+                        imageLike.setImageResource(R.drawable.like);
+                        cancelLike(showDynamicInAll.getDyanmic_id());
+                        showDynamicInAll.setCollection_num(showDynamicInAll.getCollection_num()-1);
+                        showDynamicInAll.setLike(false);
+                    }else{
+                        imageLike.setImageResource(R.drawable.havelike);
+                        likeTheDynamic(showDynamicInAll.getDyanmic_id());
+                        showDynamicInAll.setCollection_num(showDynamicInAll.getCollection_num()+1);
+                        showDynamicInAll.setLike(true);
+                    }
                     break;
                 case R.id.comment_send:
                     sendComment();
@@ -268,6 +394,16 @@ public class DetailActivity extends AppCompatActivity {
         tvDetaDes.setText(showDynamicInAll.getDynamic_text());
         tvDetaTime.setText(showDynamicInAll.getTime());
         Glide.with(this).load(showDynamicInAll.getDynamicImg_url()).into(iVDetaPic);
+        if(!showDynamicInAll.isCollection()){
+            imageCollect.setImageResource(R.drawable.collect);
+        }else{
+            imageCollect.setImageResource(R.drawable.havecollect);
+        }
+        if(!showDynamicInAll.isLike()){
+            imageLike.setImageResource(R.drawable.like);
+        }else{
+            imageLike.setImageResource(R.drawable.havelike);
+        }
 	}
 
     public void sendComment(){
@@ -277,11 +413,31 @@ public class DetailActivity extends AppCompatActivity {
             // 生成评论数据
             Comment comment = new Comment();
             comment.setComment_text(comment_content.getText().toString());
-            adapter.addComment(comment);
+            comment.setComment_user_id(userDateApplication.getUser().getUser_id());
+            comment.setComment_dynamic_id(showDynamicInAll.getDyanmic_id());
+            comment.setComment_like_num(0);
+            commentPresenter.addCommnet(comment);
+            showCommentBean=new ShowCommentBean(userDateApplication.getUser().getUser_id(),
+                    userDateApplication.getUser().getUser_name(),
+                    userDateApplication.getUser().getUser_touxiang_url(),
+                    "刚刚",
+                    comment.getComment_text(),
+                    0);
+
             // 发送完，清空输入框
             comment_content.setText("");
 
+
+        }
+    }
+    private ShowCommentBean showCommentBean;
+    public void ifCommentSussess(boolean b){
+        if(b){
+            adapter.addComment(showCommentBean);
             Toast.makeText(getApplicationContext(), "评论成功！", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "评论失败！", Toast.LENGTH_SHORT).show();
         }
     }
 }

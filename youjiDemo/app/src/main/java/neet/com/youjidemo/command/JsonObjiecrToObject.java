@@ -26,7 +26,7 @@ public class JsonObjiecrToObject {
             dynamic.setDynamic_collection_num(jsonObject.getInt("collection_num"));
             dynamic.setDynamic_like_num(jsonObject.getInt("like_num"));
             dynamic.setDynamic_comment_num(jsonObject.getInt("comment_num"));
-            dynamic.setDynamic_id(jsonObject.getInt("partition_id"));
+            //dynamic.setDynamic_id(jsonObject.getInt("partition_id"));
             dynamic.setDynamic_time((jsonObject.getString("time")));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -64,7 +64,6 @@ public class JsonObjiecrToObject {
             user.setUser_psssword(" ");
         } catch (JSONException e) {
             e.printStackTrace();
-            user=null;
         }
         return user;
     }
@@ -76,6 +75,7 @@ public class JsonObjiecrToObject {
             comment.setComment_text(jsonObject.getString("text"));
             comment.setComment_like_num(jsonObject.getInt("like_num"));
             comment.setComment_user_id(jsonObject.getInt("user_id"));
+            //comment.setComment_time(jsonObject.getString("time"));
         } catch (JSONException e) {
             e.printStackTrace();
             comment=null;

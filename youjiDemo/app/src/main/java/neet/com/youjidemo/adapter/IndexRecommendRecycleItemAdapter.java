@@ -39,15 +39,17 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     private List<ShowDynamicInAll> list=new ArrayList<>();
     private IndexRecommendRecycleItemAdapter.OnItemClickListener mOnItemClickListener = null;
     private Context context;
+    private Index_RecommendFragment index_recommendFragment;
     /**
      * 声明Item点击事件接口的变量
      */
 
 
 
-    public IndexRecommendRecycleItemAdapter(List<ShowDynamicInAll> list, Context context) {
+    public IndexRecommendRecycleItemAdapter(List<ShowDynamicInAll> list, Index_RecommendFragment context) {
         this.list = list;
-        this.context=context;
+        this.context=context.getContext();
+        this.index_recommendFragment=context;
     }
 
     @NonNull
@@ -84,20 +86,37 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         viewHolder.judgeNum.setText(list.get(i).getComment_num()+"");
         viewHolder.goodNum.setText(list.get(i).getLike_num()+"");
         Glide.with(context).load(url).apply(options).into(viewHolder.contentImage);
-        if(list.get(i).isFollow()){
+        if(index_recommendFragment.getmUserId()==list.get(i).getUser_id()){
+            viewHolder.care.setVisibility(View.GONE);
+        }
+        else if(list.get(i).isFollow()){
             viewHolder.care.setText("已关注");
         }else{
             viewHolder.care.setText("关注");
+        }
+        if (!list.get(i).isCollection() ){
+            viewHolder.collectButton.setImageResource(R.drawable.collect);
+        }else {
+            viewHolder.collectButton.setImageResource(R.drawable.havecollect);
+        }
+        if (!list.get(i).isLike()){
+            viewHolder.goodButton.setImageResource(R.drawable.like);
+        }else{
+            viewHolder.goodButton.setImageResource(R.drawable.havelike);
         }
         viewHolder.itemView.setTag(i);//将position保存在itemView的Tag中，以便点击时进行获取
 
         viewHolder.care.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.care.getText()=="关注"){
+                if (viewHolder.care.getText().equals("关注")){
                     viewHolder.care.setText("已关注");
+                    index_recommendFragment.addFollow(list.get(i).getUser_id());
+
+
                 }else {
                     viewHolder.care.setText("关注");
+                    index_recommendFragment.cancelFollow(list.get(i).getUser_id());
                 }
             }
         });
@@ -105,12 +124,18 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         viewHolder.collectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.collectNum.getText() == "收藏"){
-                    viewHolder.collectButton.setImageResource(R.drawable.havecollect);
-                    viewHolder.collectNum.setText("已收藏");
-                }else {
+                if (list.get(i).isCollection() ){
                     viewHolder.collectButton.setImageResource(R.drawable.collect);
-                    viewHolder.collectNum.setText("收藏");
+                    index_recommendFragment.cancelCollection(list.get(i).getDyanmic_id());
+                    viewHolder.collectNum.setText(list.get(i).getCollection_num()-1+"");
+                    list.get(i).setCollection_num(list.get(i).getCollection_num()-1);
+                    list.get(i).setCollection(false);
+                }else {
+                    viewHolder.collectButton.setImageResource(R.drawable.havecollect);
+                    index_recommendFragment.addCollection(list.get(i).getDyanmic_id());
+                    viewHolder.collectNum.setText(list.get(i).getCollection_num()+1+"");
+                    list.get(i).setCollection_num(list.get(i).getCollection_num()+1);
+                    list.get(i).setCollection(true);
                 }
             }
         });
@@ -119,6 +144,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,DetailActivity.class);
+                intent.putExtra("dynamicDeta",list.get(i));
                 context.startActivity(intent);
             }
         });
@@ -127,9 +153,18 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         viewHolder.goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewHolder.goodNum.getText() == "点赞"){
+                if (list.get(i).isLike()){
+                    viewHolder.goodButton.setImageResource(R.drawable.like);
+                    index_recommendFragment.cancelLike(list.get(i).getDyanmic_id());
+                    viewHolder.goodNum.setText(list.get(i).getLike_num()-1+"");
+                    list.get(i).setLike_num(list.get(i).getLike_num()-1);
+                    list.get(i).setLike(false);
+                }else{
                     viewHolder.goodButton.setImageResource(R.drawable.havelike);
-                    viewHolder.goodNum.setText("Like");
+                    index_recommendFragment.likeTheDynamic(list.get(i).getDyanmic_id());
+                    viewHolder.goodNum.setText(list.get(i).getLike_num()+1+"");
+                    list.get(i).setLike_num(list.get(i).getLike_num()+1);
+                    list.get(i).setLike(true);
                 }
             }
         });

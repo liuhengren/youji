@@ -16,7 +16,7 @@ import neet.com.youjidemo.command.PostJson;
 
 public class Dynamicbiz implements IDynamic{
     private List<Dynamic> dynamicList=new ArrayList<>();
-    final private String DynamicUrl="http://10.222.184.38:8080/youjiServer/DynamicServlet";
+    final private String DynamicUrl="http://10.222.189.117:8080/youjiServer/DynamicServlet";
     @Override
     public List<Dynamic> getDynamic() {
         String msg="dynamic_allDynamic";
@@ -38,7 +38,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public List<Dynamic> getDynamicByPartitionId(int partition_id) {
         String msg="dynamic_getDynamicByPartitionId";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&partition_id="+partition_id);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&id="+partition_id);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -46,7 +46,7 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public List<Dynamic> getDynamicByUserId(int user_id) {
         String msg="dynamic_getDynamicByUserId";
-        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&user_id="+user_id);
+        String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&id="+user_id);
         addListData(jsonStr);
         return dynamicList;
     }
@@ -54,17 +54,24 @@ public class Dynamicbiz implements IDynamic{
     @Override
     public Dynamic getDynamicById(int dynamic_id) {
         String msg="dynamic_getDynamicById";
+        Dynamic dynamic;
         String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg+"&id="+dynamic_id);
-        addListData(jsonStr);
-        return dynamicList.get(0);
+        try {
+            JSONObject object = new JSONObject(jsonStr);
+            dynamic = JsonObjiecrToObject.JsonToDynamic(object);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            dynamic=null;
+        }
+        return dynamic;
     }
 
     @Override
     public int addDynamic(Dynamic dynamic) {
         String msg="dynamic_addDynamic";
-        String url=DynamicUrl+"?message="+msg;
+        String url="http://10.222.189.117:8080/youjiServer/AddDynamicText";
         JSONObject object = ObjectToJsonObject.DynamicToJson(dynamic);
-        JSONObject object1=new JSONObject();
+
         int b = PostJson.PostDynamicToSever(object, url);
         return b;
     }
@@ -78,15 +85,15 @@ public class Dynamicbiz implements IDynamic{
 
     @Override
     public boolean deleteDynamic(int Dynamic_id) {
-        String msg="";
-        String url=DynamicUrl+"?message="+"&dynamic_id="+Dynamic_id;
+        String msg="dynamic_deleteDynamic";
+        String url=DynamicUrl+"?message="+"&id="+Dynamic_id;
         boolean b = PostJson.PostByUrl(url);
         return b;
     }
     private void addListData(String str){
         try {
             dynamicList=new ArrayList<>();
-            JSONArray jsonArray = (new JSONObject(str).getJSONArray("list"));
+            JSONArray jsonArray = (new JSONArray(str));
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject object=jsonArray.getJSONObject(i);
                 Dynamic dynamic=JsonObjiecrToObject.JsonToDynamic(object);

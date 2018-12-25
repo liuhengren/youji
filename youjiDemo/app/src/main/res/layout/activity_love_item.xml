@@ -47,6 +47,7 @@
             android:layout_width="303dp"
             android:layout_height="45dp" />
         <ImageView
+            android:scaleType="fitXY"
             android:id="@+id/iv_picture"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="125dp"
@@ -61,7 +62,7 @@
     </RelativeLayout>
     <CheckBox
         android:layout_marginLeft="-30dp"
-        android:id="@+id/check"
+        android:id="@+id/checks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

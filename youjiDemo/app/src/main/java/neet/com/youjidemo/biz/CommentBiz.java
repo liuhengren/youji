@@ -14,15 +14,15 @@ import neet.com.youjidemo.command.ObjectToJsonObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class CommentBiz implements IComment {
-    private final String CommentUrl="CommentServlet";
+    private final String CommentUrl="http://10.222.189.117:8080/youjiServer/CommentServlet";
     private List<Comment> commentList=new ArrayList<>();
     @Override
     public List<Comment> getCommentByDynamicId(int dynamic_id) {
         String msg="comment_ByDynamicId";
         commentList=new ArrayList<>();
-        String str = GetJsonStr.getJsonStrbyUrl(CommentUrl + "?message=");
+        String str = GetJsonStr.getJsonStrbyUrl(CommentUrl + "?message="+msg+"&dynamic_id="+dynamic_id);
         try {
-            JSONArray jsonArray = (new JSONObject(str).getJSONArray("list"));
+            JSONArray jsonArray = (new JSONArray(str));
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject object=jsonArray.getJSONObject(i);
                 Comment comment=JsonObjiecrToObject.JsonToComment(object);
@@ -40,7 +40,7 @@ public class CommentBiz implements IComment {
     @Override
     public boolean addComment(Comment comment) {
         String msg="comment_addComment";
-        String url=CommentUrl+"?message="+msg;
+        String url="http://10.222.189.117:8080/youjiServer/AddCommentServlet";
         JSONObject object = ObjectToJsonObject.CommentToJson(comment);
         boolean b = PostJson.PostToSever(object, url);
         return b;
@@ -52,5 +52,10 @@ public class CommentBiz implements IComment {
         String url=CommentUrl+"?message="+msg+"&comment_id="+comment_id;
         boolean b = PostJson.PostByUrl(url);
         return b;
+    }
+
+    @Override
+    public List<Comment> getCommentByUserId(int user_id) {
+        return null;
     }
 }

@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.melnykov.fab.ScrollDirectionListener;
@@ -20,18 +21,22 @@ import com.melnykov.fab.ScrollDirectionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import neet.com.youjidemo.Presenter.DynamicOptionPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.SquareItemAdapter;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.command.PullRefreshTask;
+import neet.com.youjidemo.view.IView.IDynamicOption;
 
 
 /*
  * 1.类别：旅行
  * 2.推荐或广场：推荐
  * */
-public class Travel_RecommendFragment extends Fragment {
+public class Travel_RecommendFragment extends Fragment implements IDynamicOption {
 
-    private List list;
+    private List<ShowDynamicInAll> list;
     private RecyclerView recyclerView;
     private com.melnykov.fab.FloatingActionButton floatingActionButton;
     private CoordinatorLayout coordinatorLayout;
@@ -40,7 +45,9 @@ public class Travel_RecommendFragment extends Fragment {
     private View view;
     RecyclerView.LayoutManager manager;
     boolean isLoading=false;
-
+    private UserDateApplication userDateApplication;
+    private int user_id;
+    private DynamicOptionPresenter dynamicOptionPresenter;
 
 
     @Nullable
@@ -49,6 +56,9 @@ public class Travel_RecommendFragment extends Fragment {
         if(view==null) {
             view = inflater.inflate(R.layout.square_layout, container, false);
             findViews();
+            userDateApplication=(UserDateApplication) getActivity().getApplication();
+            user_id=userDateApplication.getUser().getUser_id();
+            dynamicOptionPresenter=new DynamicOptionPresenter(this);
             setRecyclerView();
             setFloatingActionButton();
             setPullRefresh();
@@ -117,7 +127,7 @@ public class Travel_RecommendFragment extends Fragment {
         mySwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new PullRefreshTask(list,squareItemAdapter,mySwipeRefreshLayout).execute();
+                dynamicOptionPresenter.getList("partition",1);
                 isLoading = false;
             }
         });
@@ -135,9 +145,9 @@ public class Travel_RecommendFragment extends Fragment {
          recyclerView.setLayoutManager(manager);
          //从服务器获得的笔记的list
         list = new ArrayList();
-        list.add(1);
+        dynamicOptionPresenter.getList("partition",1);
         //这里填入数据list
-        squareItemAdapter = new SquareItemAdapter(list);
+        squareItemAdapter = new SquareItemAdapter(list,this,this.getContext());
         recyclerView.setAdapter(squareItemAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -163,7 +173,82 @@ public class Travel_RecommendFragment extends Fragment {
     }
 
 
+    public void setListByTag(List<ShowDynamicInAll> list) {
+        this.list=new ArrayList<>();
+        this.list=list;
+    }
+
+    @Override
+    public int getmUserId() {
+        return user_id;
+    }
+
+    @Override
+    public void addCollection(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addCollection(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void addFollow(int follow_user_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addFollow(getmUserId(),follow_user_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void likeTheDynamic(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.addLike(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void cancelLike(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelLike(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
+    @Override
+    public void cancelFollow(int follow_user_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelFollow(getmUserId(),follow_user_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
 
+    }
+
+    @Override
+    public void cancelCollection(int dynamic_id) {
+        if(userDateApplication.isLogin()){
+            dynamicOptionPresenter.cancelCollection(getmUserId(),dynamic_id);
+        }
+        else{
+            Toast.makeText(this.getContext(),"请登录后操作",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void change() {
+        squareItemAdapter.updateList(this.list);
+        mySwipeRefreshLayout.setEnabled(false);
+    }
 }

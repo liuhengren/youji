@@ -17,14 +17,14 @@ import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class UserDetailbiz implements IUserDetailEdit{
-    private final String UserUrl="http://10.222.184.38:8080/youjiServer/UserServlet";
+    private final String UserUrl="http://10.222.189.117:8080/youjiServer/UserServlet";
     public  UserDetailbiz(){
 
     }
 
     @Override
     public User getUserById(int user_id) {
-        String msg="userbyid";
+        String msg="user_getUserById";
         User user=new User();
         String url=UserUrl+"?message="+msg+"&id="+user_id;
         String str = GetJsonStr.getJsonStrbyUrl(url);

@@ -1,5 +1,7 @@
 package neet.com.youjidemo.command;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +14,7 @@ import java.net.URL;
 public class GetJsonStr {
     public static String getJsonStrbyUrl(String murl){
         String JsonStr=null;
+        Log.e("url",murl);
         try {
             URL url = new URL(murl);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

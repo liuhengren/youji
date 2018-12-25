@@ -34,7 +34,7 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
     private UserLogupPresenter userLogupPresenter;
     private ProgressBar progressBar;
     private ImageButton lpIbcancel;
-    private UserDateApplication userDateApplication=(UserDateApplication)getApplication();
+    private UserDateApplication userDateApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,7 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
         MobSDK.init(this);
         initview();
         initClickListenrt();
+        userDateApplication=(UserDateApplication)getApplication();
     }
 
     private void initview(){

@@ -6,14 +6,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import java.util.List;
 
 import neet.com.youjidemo.adapter.SquareItemAdapter;
+import neet.com.youjidemo.bean.ShowDynamicInAll;
 
 public class PullRefreshTask extends AsyncTask {
 
-    private List list;
+    private List<ShowDynamicInAll> list;
     private  SquareItemAdapter squareItemAdapter;
     private  SwipeRefreshLayout mySwipeRefreshLayout;
 
-    public PullRefreshTask(List list, SquareItemAdapter squareItemAdapter,SwipeRefreshLayout mySwipeRefreshLayout) {
+    public PullRefreshTask(List<ShowDynamicInAll> list, SquareItemAdapter squareItemAdapter, SwipeRefreshLayout mySwipeRefreshLayout) {
         this.list = list;
         this.squareItemAdapter = squareItemAdapter;
         this.mySwipeRefreshLayout=mySwipeRefreshLayout;
@@ -33,7 +34,6 @@ public class PullRefreshTask extends AsyncTask {
     protected void onProgressUpdate(Object[] values) {
 
         super.onProgressUpdate(values);
-        list.add(0,1);
         squareItemAdapter.notifyDataSetChanged();
         mySwipeRefreshLayout.setRefreshing(false);//停止下拉刷新
     }

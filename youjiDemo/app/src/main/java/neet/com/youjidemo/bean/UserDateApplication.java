@@ -52,6 +52,8 @@ public class UserDateApplication extends Application {
         if(user_id!=0){
             user.setUser_id(user_id);
             new GetUserTask().execute();
+        }else {
+            user.setUser_id(0);
         }
     }
     private class GetUserTask extends AsyncTask{

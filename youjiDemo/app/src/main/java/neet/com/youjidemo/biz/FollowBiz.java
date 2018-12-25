@@ -13,15 +13,15 @@ import neet.com.youjidemo.command.JsonObjiecrToObject;
 import neet.com.youjidemo.command.PostJson;
 
 public class FollowBiz implements IFollow {
-    private final String followUrl="http://10.222.184.38:8080/youjiServer/FollowServlet";
+    private final String followUrl="http://10.222.189.117:8080/youjiServer/FollowServlet";
     private List<Follow> followList=new ArrayList<>();
     @Override
     public List<Follow> getFollowByUserId(int user_id) {
         String msg="follow_ByUserId";
         followList=new ArrayList<>();
-        String str = GetJsonStr.getJsonStrbyUrl(followUrl+"?message="+msg+"&user_id="+user_id);//修改
+        String str = GetJsonStr.getJsonStrbyUrl(followUrl+"?message="+msg+"&id="+user_id);//修改
         try {
-            JSONArray jsonArray = (new JSONObject(str).getJSONArray("list"));
+            JSONArray jsonArray = (new JSONArray(str));
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject object=jsonArray.getJSONObject(i);
                 Follow follow=JsonObjiecrToObject.JsonToFollow(object);
@@ -39,7 +39,7 @@ public class FollowBiz implements IFollow {
     @Override
     public boolean addFollow(int user_id, int follow_user_id) {
         String msg="follow_addFollow";
-        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"&follow_user_id="+follow_user_id;
         boolean b = PostJson.PostByUrl(url);
         return b;
     }
@@ -47,7 +47,7 @@ public class FollowBiz implements IFollow {
     @Override
     public boolean deleteFollow(int user_id, int follow_user_id) {
         String msg="follow_deleteFollow";
-        String url=followUrl+"?message="+msg+"&user_id="+user_id+"follow_user_id="+follow_user_id;
+        String url=followUrl+"?message="+msg+"&user_id="+user_id+"&follow_user_id="+follow_user_id;
         boolean b = PostJson.PostByUrl(url);
         return b;
     }

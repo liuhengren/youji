@@ -94,7 +94,7 @@ public class ImagePresenter extends FragmentActivity {
                             @Override
                             public void run() {
 
-                                String uploadurl = "http://10.7.86.107:8080/UploadFile/AServlet?username=zhangsan";
+                                String uploadurl = "http://10.222.184.38:8080/youjiServer/?username=zhangsan";
                                 try {
                                     Log.e("fileLength",file.length()+"");
                                     String result = UploadUtil.uploadImage(file, uploadurl);

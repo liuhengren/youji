@@ -95,6 +95,7 @@ public class UploadUtil {
                     Log.i(TAG, "result------------------>>" + result);
                 }
             }else{
+                //上传失败操作
                 Log.e("空文件","kong");
             }
         }
