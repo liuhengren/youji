@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 import bean.Dynamic;
 
@@ -56,12 +58,10 @@ public class DynamicDao {
 	
 	//2.插入动态内容（文字）
 		public static int addDynamic(Dynamic dynamic) {
-			Connection connection=DataBase.getConnection();
+	Connection connection=DataBase.getConnection();
 			
 			int id=0;
 			Timestamp timestamp=new Timestamp(System.currentTimeMillis());
-		
-			System.out.println(timestamp);
 			String sql="insert into dynamic("
 					+ "dynamic_user_id,dynamic_text,"
 					+ "dynamic_collection_num,dynamic_like_num,dynamic_comment_num,"
@@ -69,7 +69,7 @@ public class DynamicDao {
 					+ "values(?,?,?,?,?,?,?,?)";
 			String sql2="select dynamic_id from dynamic where dynamic_time=?";
 			try {
-				PreparedStatement prepareStatement = connection.prepareStatement(sql);
+				PreparedStatement prepareStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 				prepareStatement.setInt(1, dynamic.getUser_id());
 				prepareStatement.setString(2, dynamic.getText());
 				prepareStatement.setInt(3, 0);
@@ -78,17 +78,12 @@ public class DynamicDao {
 				prepareStatement.setString(6,dynamic.getAddress());
 				prepareStatement.setTimestamp(7, timestamp);
 				prepareStatement.setInt(8, dynamic.getPartition_id());
-				prepareStatement.execute();
+				prepareStatement.executeUpdate();
 				
-				PreparedStatement prepareStatement2 = connection.prepareStatement(sql2);
-				prepareStatement2.setTimestamp(1, timestamp);
-				 prepareStatement2.executeQuery();
-				 ResultSet result=prepareStatement2.executeQuery();
-					while(result.next()) {
-						id=result.getInt("dynamic_id");
-					}
+			ResultSet keys=prepareStatement.getGeneratedKeys();
+			keys.next();
+			id=keys.getInt(1);
 				connection.close();
-				
 				return id;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

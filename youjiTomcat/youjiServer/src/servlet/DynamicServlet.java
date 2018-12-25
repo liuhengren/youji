@@ -50,7 +50,7 @@ public class DynamicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
-		System.out.println("Get请求");
+	
 		PrintWriter out=response.getWriter();
 		String message=request.getParameter("message");
 		System.out.println("meassge::"+message);
@@ -61,36 +61,7 @@ public class DynamicServlet extends HttpServlet {
 			response.getWriter().append(array.toString());
 			
 		}
-		
 	
-		
-			
-//			//3.插入动态的图片（图片）
-//			else if("dynamic_addDynamic_img".equals(message)) {
-//				
-//					System.out.println("连接成功！");
-//					InputStream input = request.getInputStream();
-//					String path="upload\\"+Math.random()*1000+".jpg";
-//					File file = new File(request.getSession().getServletContext().getRealPath("/")+path);
-//					if (!file.exists()) {
-//						file.createNewFile();
-//					}
-//					FileOutputStream output = new FileOutputStream(file);
-//					Byte[] bytes = new Byte[150000];
-//					int read = input.read();
-//					while(read!=-1) {
-//						output.write(read);
-//						read = input.read();
-//					}
-//					input.close();
-//					output.flush();
-//					output.close();
-//					ServletOutputStream outputStream = response.getOutputStream();
-//					outputStream.write("1".getBytes());
-//					outputStream.close();
-//					
-//					DynamicDao.insertDynamicImage(id, path);
-//			}
 		//4.通过分区查找动态
 		else if("dynamic_getDynamicByPartitionId".equals(message))
 		{
