@@ -11,23 +11,27 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cImage_attention_head"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="25dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:src="@drawable/head" />
 
         <TextView
+            android:textSize="15sp"
+            android:textStyle="bold"
             android:id="@+id/tv_attention_username"
             android:layout_width="150dp"
             android:layout_height="25dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@+id/cImage_attention_head"
             android:gravity="center|left"
             android:text="埃里克的把那么" />
 
         <TextView
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="2dp"
             android:id="@+id/tv_attention_sign"
             android:layout_width="150dp"
             android:layout_height="25dp"
@@ -40,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="15dp"
             android:background="@drawable/personal_center_attention_btn"
             android:text="已关注" />
