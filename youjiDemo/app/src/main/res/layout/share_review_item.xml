@@ -37,7 +37,7 @@
             android:layout_height="20dp"
             android:layout_alignBottom="@+id/tv_review_username"
             android:layout_alignParentRight="true"
-            android:text="23" />
+            android:text=" " />
 
         <TextView
             android:id="@+id/tv_review"

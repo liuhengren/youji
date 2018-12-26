@@ -77,7 +77,7 @@ public class JsonObjiecrToObject {
             comment.setComment_text(jsonObject.getString("text"));
             comment.setComment_like_num(jsonObject.getInt("like_num"));
             comment.setComment_user_id(jsonObject.getInt("user_id"));
-            //comment.setComment_time(jsonObject.getString("time"));
+            comment.setComment_time(jsonObject.getString("time"));
         } catch (JSONException e) {
             e.printStackTrace();
             comment=null;

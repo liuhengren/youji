@@ -22,7 +22,7 @@ public class Dynamicbiz implements IDynamic{
     public List<Dynamic> getDynamic() {
         String msg="dynamic_allDynamic";
         String jsonStr = GetJsonStr.getJsonStrbyUrl(DynamicUrl+"?message="+msg);
-        Log.e("1",jsonStr);
+        Log.e("js",jsonStr);
         addListData(jsonStr);
         return dynamicList;
     }

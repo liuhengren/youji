@@ -80,8 +80,8 @@ public class NotificationMessageFragment extends Fragment {
         commentListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(),DetailActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(),DetailActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -103,8 +103,8 @@ public class NotificationMessageFragment extends Fragment {
         goodListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(),DetailActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(),DetailActivity.class);
+//                startActivity(intent);
             }
         });
 

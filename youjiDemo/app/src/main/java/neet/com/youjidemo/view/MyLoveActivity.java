@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,18 +22,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import de.hdodenhof.circleimageview.CircleImageView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.DynamicOptionPresenter;
 import neet.com.youjidemo.R;
-import neet.com.youjidemo.bean.LoveMessage;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.IDynamicOption;
 
@@ -44,8 +45,8 @@ import neet.com.youjidemo.view.IView.IDynamicOption;
 public class MyLoveActivity extends AppCompatActivity implements OnClickListener,IDynamicOption {
     private boolean judge = true;
     private ListView listview;
-    private List<Integer> array = new ArrayList<Integer>(); //显示的内容
-    private List<Integer> selectid = new ArrayList<Integer>();
+    private List<String> array = new ArrayList<String>(); //显示的内容
+    private List<String> selectid = new ArrayList<String>();
     private boolean isMulChoice = false; //是否多选
     private Adapter adapter;
     private RelativeLayout layout;
@@ -77,12 +78,14 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
         editor = findViewById(R.id.tv_editor);
         cancle.setOnClickListener(this);
         delete.setOnClickListener(this);
-        dynamicOptionPresenter.getList("collection",user_id);
 
+        dynamicOptionPresenter.getList("collection",user_id);
     }
-    public void init(){
-        for(int i=0;i<list.size();i++){
-            array.add(i);
+    void init()
+    {
+        for(int i=0;i<list.size();i++)
+        {
+            array.add(""+i);
         }
     }
 
@@ -101,11 +104,11 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.delete:
                 isMulChoice = false;
-                for (int i = 0; i < selectid.size(); i++) {
-                    for (int j = 0; j < array.size(); j++) {
-                        if (selectid.get(i)==array.get(j)) {
+                for(int i=0;i<selectid.size();i++){
+                    for(int j=0;j<array.size();j++){
+                        if(selectid.get(i).equals(array.get(j))){
                             array.remove(j);
-                            cancelCollection(array.get(j));
+                            cancelCollection(list.get(j).getDyanmic_id());
                         }
                     }
                 }
@@ -132,10 +135,14 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
 
     @Override
     public void setListByTag(List<ShowDynamicInAll> list) {
+        Log.e("1","123");
         this.list=new ArrayList<>();
         this.list=list;
-        //adapter.updateList(list);
         init();
+        adapter = new Adapter(this, txtcount, list);
+        listview.setAdapter(adapter);
+        //adapter.updateList(list);
+
     }
 
     @Override
@@ -175,16 +182,14 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
 
     @Override
     public void change() {
-        adapter = new Adapter(this, txtcount, list);
-        listview.setAdapter(adapter);
-        //adapter.updateList(this.list);
+        adapter.updateList(this.list);
     }
 
     /**
      * @author ieasy360_1
      * 自定义Adapter
      */
-    class Adapter extends BaseAdapter {
+    public class Adapter extends BaseAdapter {
         private List<ShowDynamicInAll> messages;
         private Context context;
         private LayoutInflater inflater = null;
@@ -192,10 +197,7 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
         public HashMap<Integer, Integer> visiblecheck;//用来记录是否显示checkBox
         public HashMap<Integer, Boolean> ischeck;
         private TextView txtcount;
-        public void updateList(List<ShowDynamicInAll> list){
-            this.messages=new ArrayList<>();
-            this.messages=list;
-        }
+
         public Adapter(Context context, TextView txtcount, List<ShowDynamicInAll> messages) {
             this.messages = messages;
             this.context = context;
@@ -215,8 +217,13 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
                     visiblecheck.put(i, CheckBox.INVISIBLE);
                 }
             }
-        }
 
+        }
+        public void updateList(List<ShowDynamicInAll> list){
+            this.messages=new ArrayList<>();
+            this.messages=list;
+            notifyDataSetChanged();
+        }
         public int getCount() {
             // TODO Auto-generated method stub
             return array.size();
@@ -224,7 +231,7 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
 
         public Object getItem(int position) {
             // TODO Auto-generated method stub
-            return array.get(position);
+            return list.get(position);
         }
 
         public long getItemId(int position) {
@@ -240,13 +247,16 @@ public class MyLoveActivity extends AppCompatActivity implements OnClickListener
 
                 view = inflater.inflate(R.layout.activity_love_item, null);
 //                TextView txt = (TextView)view.findViewById(R.id.txtName);
-                ImageView headsculpture = view.findViewById(R.id.iv_sculpture);
+                CircleImageView headsculpture = view.findViewById(R.id.iv_sculptures);
                 TextView name = view.findViewById(R.id.tv_name);
                 TextView time = view.findViewById(R.id.tv_time);
                 TextView content = view.findViewById(R.id.tv_content);
                 ImageView picture = view.findViewById(R.id.iv_picture);
                 final CheckBox ceb = (CheckBox) view.findViewById(R.id.checks);
-                Glide.with(MyLoveActivity.this).load(messages.get(position).getUser_touxiang()).into(headsculpture);
+                RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
+                options.circleCrop();
+                Log.e("imt",Url.MIMAGEURL+messages.get(position).getUser_touxiang());
+                Glide.with(MyLoveActivity.this).load(Url.MIMAGEURL+messages.get(position).getUser_touxiang()).into(headsculpture);
                 name.setText(messages.get(position).getUsername());
                 time.setText(messages.get(position).getTime());
                 content.setText(messages.get(position).getDynamic_text());
