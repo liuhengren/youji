@@ -30,9 +30,11 @@
                     android:id="@+id/tb_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     app:contentInsetStartWithNavigation="0dp"
                     app:navigationIcon="@drawable/ic_back"
                     app:title=" " />
+
                 <!--//2.“美食”两个字-->
                 <TextView
                     android:id="@+id/tv_title"
@@ -41,6 +43,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="美食"
+                    android:textColor="@android:color/white"
                     android:textSize="28dp" />
                 <!--//3.“唯美食与爱不可辜负”字体-->
 
@@ -51,6 +54,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:text="唯美食与爱不可辜负"
+                    android:textColor="@android:color/white"
                     android:textSize="16dp"
                     android:id="@+id/tv_instruction"/>
             </RelativeLayout>
