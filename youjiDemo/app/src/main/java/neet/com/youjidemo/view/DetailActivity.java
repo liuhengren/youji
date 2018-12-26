@@ -67,7 +67,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
 
     private ImageView imageCollect; //底部收藏图片
 
-    private ImageView imageComment; //底部评论图片
+    private TextView imageComment; //底部评论图片
 
     private ImageView imageLike; //底部点赞图片
 

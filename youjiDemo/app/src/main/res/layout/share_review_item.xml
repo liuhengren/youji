@@ -25,28 +25,20 @@
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/image_review_user_header"
             android:maxWidth="40dp"
+            android:textSize="18dp"
             android:text="保温杯里泡枸杞"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
-
-
-        <TextView
-            android:id="@+id/tv_like_count"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignBottom="@+id/tv_review_username"
-            android:layout_alignParentRight="true"
-            android:text="23" />
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_review_user_header"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
+            android:textSize="15dp"
             android:layout_toRightOf="@+id/image_review_user_header"
+            android:layout_marginBottom="15dp"
             android:text="卡路里卡路里李卡路里，燃烧我的卡路里" />
 
 
@@ -55,10 +47,10 @@
             android:id="@+id/time"
             android:layout_width="81dp"
             android:layout_height="18dp"
-            android:layout_below="@+id/tv_review_username"
-            android:layout_toRightOf="@+id/image_review_user_header"
+            android:layout_toRightOf="@+id/tv_review_username"
             android:text="2018/05/06"
-            android:layout_marginStart="10dp"
+            android:layout_alignBottom="@id/tv_review_username"
+            android:layout_marginStart="25dp"
             android:textColor="@android:color/black" />
     </RelativeLayout>
 
