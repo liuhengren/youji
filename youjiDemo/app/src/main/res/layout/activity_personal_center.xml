@@ -51,7 +51,6 @@
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <ImageButton
-                            android:id="@+id/user_background"
                             android:layout_width="match_parent"
                             android:layout_height="204dp"
                             android:scaleType="center"
@@ -77,7 +76,8 @@
 
                         <!--昵称-->
                         <TextView
-                            android:id="@+id/PCAname"
+                            android:layout_marginLeft="1dp"
+                            android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="1dp"

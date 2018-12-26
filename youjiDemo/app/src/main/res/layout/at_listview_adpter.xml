@@ -7,11 +7,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginLeft="10dp"
             android:id="@+id/lv_head_sculpture"
             android:layout_marginTop="15dp"
-            android:src="@drawable/module_message_at"
+            android:src="@drawable/head"
             android:layout_width="45dp"
             android:layout_height="45dp" />
         <TextView

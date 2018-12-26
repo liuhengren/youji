@@ -4,11 +4,13 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,6 +48,7 @@ public class UploadUtil {
             conn.setRequestMethod("POST");//请求方式
             conn.setRequestProperty("Charset", CHARSET);//设置编码
             conn.setRequestProperty("contentType", "utf-8");//设置编码
+            conn.setRequestProperty("id","55255");
             conn.setRequestProperty("connection", "keep-alive");
             conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
             conn.setRequestProperty("id",String.valueOf(dynamic_id));
@@ -55,9 +58,10 @@ public class UploadUtil {
             if (file != null) {
                 //当文件不为空，把文件包装并且上传
                 DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-//                dos.writeBytes(PREFIX + BOUNDARY + LINE_END);
-//                dos.writeBytes("Content-Disposition: form-data; " + "name=\"inputName\";filename=\"" + file.getName() + "\"" + LINE_END);
+
                 FileInputStream is = new FileInputStream(file);
+
+
                 byte[] bytes = new byte[200000];
                 int len = -1;
                 while ((len = is.read(bytes)) != -1) {
