@@ -13,7 +13,6 @@ import android.widget.ImageButton;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.view.FoodActivity;
-import neet.com.youjidemo.view.ShowMapActivity;
 import neet.com.youjidemo.view.TravleActivity;
 
 /**
@@ -71,13 +70,13 @@ public class Recommend_Fragment extends Fragment {
             }
         });
         /*中间图点击事件*/
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(),ShowMapActivity.class);
-                startActivity(intent);
-            }
-        });
+//        circleImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(getContext(),ShowMapActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         return view;
 
 
