@@ -77,8 +77,7 @@
         android:layout_below="@id/tv_signatures"
         android:scaleType="fitXY"
         android:src="@drawable/item"
-        android:id="@+id/iv_contentimage"
-        />
+        android:id="@+id/iv_contentimage" />
     <!--四.收藏，评论，点赞-->
     <RelativeLayout
         android:layout_width="match_parent"
