@@ -106,6 +106,9 @@ public class Index_FoodFragment extends Fragment {
 
         //从服务器获得的笔记的list
         list = new ArrayList();
+        list.add(1);
+        list.add(1);
+        list.add(1);
         //这里填入数据list
 
         indexFoodRecycleItemAdapter = new IndexFoodRecycleItemAdapter(list,this.getContext());
