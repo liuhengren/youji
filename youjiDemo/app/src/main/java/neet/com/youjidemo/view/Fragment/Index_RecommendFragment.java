@@ -59,11 +59,13 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
 
         }
         dynamicOptionPresenter =new DynamicOptionPresenter(this);
-        dynamicOptionPresenter.getList("all",0);
+
+
         if(getActivity().getIntent().getStringExtra("flag")!=null){
-            Log.e("1","flag");
-                indexRecommendRecycleItemAdapter.reget();
                 dynamicOptionPresenter.getList("all",0);
+                Log.e("123","1531351");
+        }else{
+            dynamicOptionPresenter.getList("all",0);
         }
         return view;
     }
@@ -155,6 +157,7 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
 
     @Override
     public void setListByTag(List<ShowDynamicInAll> list) {
+        this.list.clear();
         this.list=new ArrayList<>();
         this.list.addAll(list);
     }
@@ -229,7 +232,9 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
     }
 
     public void change(){
+        indexRecommendRecycleItemAdapter.reget();
         indexRecommendRecycleItemAdapter.updataList(this.list);
+        mySwipeRefreshLayout.setRefreshing(false);
     }
 
 }

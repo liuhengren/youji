@@ -17,6 +17,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.view.Fragment.AttentionFragment;
 
 /**
@@ -48,7 +49,7 @@ public class AttentionPagerAdapter extends RecyclerView.Adapter<AttentionPagerAd
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.collect_layout_item,null);
         ViewHolder viewHolder = new ViewHolder(view);
-        Glide.with(attentionFragment).load(mDataSet.get(i).getUser_touxiang()).into(viewHolder.head);
+        Glide.with(attentionFragment).load(Url.MIMAGEURL+mDataSet.get(i).getUser_touxiang()).into(viewHolder.head);
         viewHolder.user_name.setText(mDataSet.get(i).getUsername());
         viewHolder.address.setText(mDataSet.get(i).getAddress());
         viewHolder.text.setText(mDataSet.get(i).getDynamic_text());

@@ -41,6 +41,7 @@ import neet.com.youjidemo.adapter.DetailViewAdapter;
 import neet.com.youjidemo.bean.ShowCommentBean;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
 import neet.com.youjidemo.bean.Comment;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.ICommentOption;
 import neet.com.youjidemo.view.IView.IDynamicOption;
@@ -386,7 +387,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
     private void setDynamic(ShowDynamicInAll showDynamicInAll){
         tvUserName.setText(showDynamicInAll.getUsername());
         RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
-        Glide.with(DetailActivity.this).load(showDynamicInAll.getUser_touxiang()).into(btnImageHead);
+        Glide.with(DetailActivity.this).load(Url.MIMAGEURL+showDynamicInAll.getUser_touxiang()).into(btnImageHead);
         tvDetaDes.setText(showDynamicInAll.getDynamic_text());
         tvDetaTime.setText(showDynamicInAll.getTime());
         local.setText(showDynamicInAll.getAddress());

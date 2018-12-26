@@ -1,6 +1,7 @@
 package neet.com.youjidemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Url;
+import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.view.Fragment.Food_RecommendFragment;
 import neet.com.youjidemo.view.IView.IDynamicOption;
 
@@ -56,7 +59,7 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
      */
         //例如： viewHolder.name.setText("李四");
         Glide.with(context).load(list.get(i).getDynamicImg_url()).into(viewHolder.contentImage);
-        Glide.with(context).load(list.get(i).getUser_touxiang()).into(viewHolder.headPhoto);
+        Glide.with(context).load(Url.MIMAGEURL+list.get(i).getUser_touxiang()).into(viewHolder.headPhoto);
         viewHolder.name.setText(list.get(i).getUsername());
         viewHolder.date.setText(list.get(i).getTime());
         viewHolder.signatures.setText(list.get(i).getDynamic_text());
@@ -132,6 +135,14 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
                 }
             }
         });
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailActivity.class);
+                intent.putExtra("dynamicDeta",list.get(i));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -165,7 +176,7 @@ public class SquareItemAdapter extends RecyclerView.Adapter<SquareItemAdapter.Vi
             contentImage = itemView.findViewById(R.id.iv_contentimage);
             goodButton = itemView.findViewById(R.id.ib_good);
             judgeButton = itemView.findViewById(R.id.ib_collect);
-            collectButton = itemView.findViewById(R.id.ib_judge);
+            collectButton = itemView.findViewById(R.id.ib_collect);
 
 
         }

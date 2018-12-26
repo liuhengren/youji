@@ -17,6 +17,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.view.Fragment.ProductionFragment;
 
@@ -45,7 +46,7 @@ public class ProductionPagerAdapter extends RecyclerView.Adapter <ProductionPage
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        Glide.with(productionFragment).load(mDataSet.get(i).getUser_touxiang()).into(viewHolder.head);
+        Glide.with(productionFragment).load(Url.MIMAGEURL+mDataSet.get(i).getUser_touxiang()).into(viewHolder.head);
         viewHolder.user_name.setText(mDataSet.get(i).getUsername());
         viewHolder.address.setText(mDataSet.get(i).getAddress());
         viewHolder.text.setText(mDataSet.get(i).getDynamic_text());

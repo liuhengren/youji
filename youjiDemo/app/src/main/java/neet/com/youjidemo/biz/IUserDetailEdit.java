@@ -12,6 +12,6 @@ public interface IUserDetailEdit {
     boolean updateUsertouxiang();
     boolean updateUserSex(int user_id,String userSex);
     boolean updateUserIntroduction(int user_id,String userIntroduction);
-    boolean updateUserBirthday(int user_id,Date userBirthday);
+    boolean updateUserBirthday(int user_id,String userBirthday);
     boolean updateUserHometown(int user_id,String userHometown);
 }

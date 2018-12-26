@@ -21,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.Comment;
 import neet.com.youjidemo.bean.ShowCommentBean;
+import neet.com.youjidemo.bean.Url;
 
 /**
  *desc:详情页的适配器
@@ -46,7 +47,7 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Glide.with(context).load(mDataSet.get(i).getUser_touxiang()).into(viewHolder.user_hander);
+        Glide.with(context).load(Url.MIMAGEURL+mDataSet.get(i).getUser_touxiang()).into(viewHolder.user_hander);
         viewHolder.user_name.setText(mDataSet.get(i).getUsername());
         //viewHolder.like_num.setText(mDataSet.get(i).getLike_num()+"");
         viewHolder.comment_text.setText(mDataSet.get(i).getComment_text());

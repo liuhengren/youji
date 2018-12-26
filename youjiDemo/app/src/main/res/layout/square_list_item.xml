@@ -72,7 +72,7 @@
     <!--三.图片-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="165dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_signatures"
         android:scaleType="fitXY"
