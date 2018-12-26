@@ -117,7 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home2);
                         imageViewtab2.setImageResource(R.drawable.community);
+
                         //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
@@ -129,7 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community2);
+
                         //imageViewtab3.setImageResource(R.drawable.add);
+
 					    imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
@@ -142,7 +146,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community);
+
                         //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message2);
 
                         imageViewtab5.setImageResource(R.drawable.me);
@@ -156,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community);
+
                         //imageViewtab3.setImageResource(R.drawable.add);
 
                         imageViewtab4.setImageResource(R.drawable.message);

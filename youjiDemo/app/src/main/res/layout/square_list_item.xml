@@ -71,14 +71,13 @@
 
     <!--三.图片-->
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
+        android:layout_width="375dp"
+        android:layout_height="180dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_signatures"
         android:scaleType="fitXY"
         android:src="@drawable/item"
-        android:id="@+id/iv_contentimage"
-        />
+        android:id="@+id/iv_contentimage" />
     <!--四.收藏，评论，点赞-->
     <RelativeLayout
         android:layout_width="match_parent"
