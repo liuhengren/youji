@@ -11,7 +11,6 @@
         android:layout_marginLeft="15dp"
         >
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_headphoto"
             android:layout_width="60dp"
