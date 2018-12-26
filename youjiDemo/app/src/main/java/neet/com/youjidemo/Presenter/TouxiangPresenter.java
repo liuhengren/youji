@@ -9,25 +9,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.CursorLoader;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.UploadUtil;
-import neet.com.youjidemo.view.ShareActivity;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 import top.zibin.luban.OnRenameListener;
 
-public class ImagePresenter extends FragmentActivity {
+public class TouxiangPresenter {
     private static int SELECT_PHOTO=200;
 
 
@@ -76,11 +71,11 @@ public class ImagePresenter extends FragmentActivity {
                 .ignoreBy(100)
                 .setTargetDir("/storage/emulated/0").
                 setRenameListener(new OnRenameListener() {
-            @Override
-            public String rename(String filePath) {
-                return "123456.jpg";
-            }
-        })
+                    @Override
+                    public String rename(String filePath) {
+                        return "123456.jpg";
+                    }
+                })
                 .setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
@@ -90,20 +85,20 @@ public class ImagePresenter extends FragmentActivity {
                     @Override
                     public void onSuccess(final File file) {
                         Log.e("onSuccess","1");
-                                final String uploadurl = Url.mURL+ "AddDynamicInmageServlet";
-                                Log.e("img",uploadurl);
-                                try {
-                                    Log.e("fileLength",file.length()+"");
-                                    new Thread(){
-                                        @Override
-                                        public void run() {
-                                            b[0] = UploadUtil.uploadImage(file, uploadurl,dynamic_id);
-                                        }
-                                    }.start();
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                        final String uploadurl = Url.mURL+ "Add";
+                        Log.e("img",uploadurl);
+                        try {
+                            Log.e("fileLength",file.length()+"");
+                            new Thread(){
+                                @Override
+                                public void run() {
+                                    b[0] = UploadUtil.uploadImage(file, uploadurl,dynamic_id);
                                 }
+                            }.start();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     @Override
                     public void onError(Throwable e) {

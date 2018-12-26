@@ -20,8 +20,8 @@ public class PerDateEditPresenter {
     }
     public void update(String tag,String msg){
         Tag tag1 = new Tag(tag, msg);
-        //User_id=perDateEditorView.getmUserId();
-        User_id=3;
+        User_id=perDateEditorView.getmUserId();
+        //User_id=3;
         PerDateEditAsyTask perDateEditAsyTask = new PerDateEditAsyTask();
         perDateEditAsyTask.execute(tag1);
     }
@@ -42,6 +42,7 @@ public class PerDateEditPresenter {
                     break;
                 case"birthday":
                     //result=userDetailEdit.updateUserBirthday(User_id,tag.msg);
+                    result=true;
                     break;
                 case"hometown":
                     result=userDetailEdit.updateUserHometown(User_id,tag.msg);

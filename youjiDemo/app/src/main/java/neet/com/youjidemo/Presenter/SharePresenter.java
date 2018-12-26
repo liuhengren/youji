@@ -39,8 +39,8 @@ public class SharePresenter {
 
             @Override
             protected void onPostExecute(Object o) {
-             shareView.showMessage("发表成功");
-             shareView.toManinActivity();
+                shareView.showMessage("发表成功");
+                shareView.toManinActivity();
             }
 
         }.execute();

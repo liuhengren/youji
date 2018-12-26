@@ -16,6 +16,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.User;
 import neet.com.youjidemo.view.Fragment.FansFragment;
 
@@ -38,7 +39,7 @@ public class FansPagerAdapter extends RecyclerView.Adapter <FansPagerAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        Glide.with(fansFragment).load(mDataSet.get(i).getUser_touxiang_url()).into(viewHolder.touxiang);
+        Glide.with(fansFragment).load(Url.MIMAGEURL+mDataSet.get(i).getUser_touxiang_url()).into(viewHolder.touxiang);
         viewHolder.username.setText(mDataSet.get(i).getUser_name());
         viewHolder.intr.setText(mDataSet.get(i).getUser_introduction());
         viewHolder.btn.setOnClickListener(new View.OnClickListener() {

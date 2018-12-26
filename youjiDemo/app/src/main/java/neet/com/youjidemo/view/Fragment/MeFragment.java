@@ -1,6 +1,7 @@
 package neet.com.youjidemo.view.Fragment;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +16,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.User;
 import neet.com.youjidemo.bean.UserDateApplication;
+import neet.com.youjidemo.biz.UserDetailbiz;
 import neet.com.youjidemo.view.LoginActivity;
 import neet.com.youjidemo.view.MyLoveActivity;
 import neet.com.youjidemo.view.PersonalCenterActivity;
@@ -39,12 +46,35 @@ public class MeFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_me, container, false);
         }
+        if(getActivity().getIntent().getStringExtra("touxiang")!=null){
+            final UserDetailbiz userDetailbiz = new UserDetailbiz();
+            new AsyncTask(){
 
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    userDateApplication.setUser(userDetailbiz.getUserById(userDateApplication.getUser().getUser_id()));
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Object o) {
+                    User user=userDateApplication.getUser();
+                    RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
+                    options.circleCrop();
+                    Glide.with(MeFragment.this.getContext()).applyDefaultRequestOptions(options).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
+                    super.onPostExecute(o);
+                }
+            }.execute();
+
+        }
         findViews();
         userDateApplication=(UserDateApplication)getActivity().getApplication();
         if(userDateApplication.isLogin()){
             User user=userDateApplication.getUser();
-            Glide.with(MeFragment.this.getContext()).load(user.getUser_touxiang_url()).into(headsculpture);
+            Log.e("imt",Url.MIMAGEURL+user.getUser_touxiang_url());
+            RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
+            options.circleCrop();
+            Glide.with(MeFragment.this.getContext()).applyDefaultRequestOptions(options).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
             login.setText(user.getUser_name());
         }
         login.setOnClickListener(new View.OnClickListener() {

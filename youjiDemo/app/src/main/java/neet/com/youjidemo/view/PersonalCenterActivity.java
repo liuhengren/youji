@@ -27,6 +27,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.Presenter.GetUserPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.adapter.ProductionFragmentPagerAdapter;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.User;
 import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.Fragment.AttentionFragment;
@@ -65,7 +66,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         touxiang=findViewById(R.id.image_personal_center_head);
         user_name=findViewById(R.id.PCAname);
-        background=findViewById(R.id.user_background);
+        //background=findViewById(R.id.user_background);
         ViewPager mViewPager = findViewById(R.id.viewpager);
         pc_btn=findViewById(R.id.pc_btn);
         List<Fragment> list = new ArrayList();
@@ -140,12 +141,12 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
     }
     @Override
     public void setUserMessage(){
-        Glide.with(this).load(user.getUser_touxiang_url()).into(touxiang);
+        Glide.with(this).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(touxiang);
         user_name.setText(user.getUser_name());
         if(user.getUser_background_url().length()>20){
             RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
-            options.centerCrop();
-            Glide.with(this).applyDefaultRequestOptions(options).load(user.getUser_background_url()).into(background);
+            options.circleCrop();
+            //Glide.with(this).applyDefaultRequestOptions(options).load(user.getUser_background_url()).into(background);
         }
     }
 

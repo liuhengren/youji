@@ -84,7 +84,7 @@ public class UserDetailbiz implements IUserDetailEdit{
     }
 
     @Override
-    public boolean updateUserBirthday(int user_id, Date userBirthday) {
+    public boolean updateUserBirthday(int user_id, String userBirthday) {
         String msg="user_birthday";
         String url=UserUrl+"?message="+msg+"&id="+user_id+"&birthday="+userBirthday;
         boolean b = PostJson.PostByUrl(url);

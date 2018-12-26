@@ -59,21 +59,16 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
 
         }
         dynamicOptionPresenter =new DynamicOptionPresenter(this);
-        dynamicOptionPresenter.getList("all",0);
 
+
+        if(getActivity().getIntent().getStringExtra("flag")!=null){
+                dynamicOptionPresenter.getList("all",0);
+                Log.e("123","1531351");
+        }else{
+            dynamicOptionPresenter.getList("all",0);
+        }
         return view;
     }
-    private BroadcastReceiver b=new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.e("广播","1");
-            dynamicOptionPresenter.getList("all",0);
-            if("MY_BROID".equals(intent.getAction())){
-                indexRecommendRecycleItemAdapter.reget();
-                dynamicOptionPresenter.getList("all",0);
-            }
-        }
-    };
     private void findViews() {
         recyclerView = view.findViewById(R.id.rl_index_recommend);
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);
@@ -162,6 +157,7 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
 
     @Override
     public void setListByTag(List<ShowDynamicInAll> list) {
+        this.list.clear();
         this.list=new ArrayList<>();
         this.list.addAll(list);
     }
@@ -236,7 +232,9 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
     }
 
     public void change(){
+        indexRecommendRecycleItemAdapter.reget();
         indexRecommendRecycleItemAdapter.updataList(this.list);
+        mySwipeRefreshLayout.setRefreshing(false);
     }
 
 }

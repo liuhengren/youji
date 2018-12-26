@@ -29,6 +29,7 @@ import neet.com.youjidemo.bean.Dynamic;
 
 import neet.com.youjidemo.bean.ShowCommentBean;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.biz.Dynamicbiz;
 
@@ -79,7 +80,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         //options.error(R.drawable.img_holder_error_style1);
         viewHolder.name.setText(list.get(i).getUsername());
         viewHolder.location.setText(list.get(i).getAddress());
-        Glide.with(context).load(list.get(i).getUser_touxiang()).apply(options).into(viewHolder.headPhoto);
+        Glide.with(context).load(Url.MIMAGEURL+list.get(i).getUser_touxiang()).apply(options).into(viewHolder.headPhoto);
         viewHolder.description.setText(list.get(i).getDynamic_text());
         Glide.with(context).load(list.get(i).getDynamicImg_url()).apply(options).into(viewHolder.contentImage);
         viewHolder.collectNum.setText(list.get(i).getCollection_num()+"");
@@ -143,9 +144,9 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         viewHolder.judgeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DetailActivity.class);
-                intent.putExtra("dynamicDeta",list.get(i));
-                context.startActivity(intent);
+//                Intent intent = new Intent(context,DetailActivity.class);
+//                intent.putExtra("dynamicDeta",list.get(i));
+//                context.startActivity(intent);
             }
         });
 
@@ -176,6 +177,10 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
                 context.startActivity(intent);
             }
         });
+
+        /**item的点击事件*/
+
+
     }
     public Object getmItem(int i){
         return list.get(i);
@@ -231,7 +236,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
             headPhoto = itemView.findViewById(R.id.iv_headphoto);
             contentImage = itemView.findViewById(R.id.iv_contentimage);
             goodButton = itemView.findViewById(R.id.ib_good);
-            judgeButton = itemView.findViewById(R.id.ib_judge);
+            judgeButton = itemView.findViewById(R.id.ib_judges);
             collectButton = itemView.findViewById(R.id.ib_collect);
         }
     }
@@ -244,7 +249,8 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
     }
     public void updataList(List<ShowDynamicInAll> list){
         this.list=new ArrayList<>();
-        this.list.addAll(list);
+        this.list=list;
+        Log.e("size",list.size()+"");
         notifyDataSetChanged();
     }
     public void reget(){
