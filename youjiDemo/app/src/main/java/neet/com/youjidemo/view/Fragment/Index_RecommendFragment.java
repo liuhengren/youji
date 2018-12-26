@@ -62,8 +62,12 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
 
 
         if(getActivity().getIntent().getStringExtra("flag")!=null){
+            try {
+                Thread.sleep(2000);
                 dynamicOptionPresenter.getList("all",0);
-                Log.e("123","1531351");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }else{
             dynamicOptionPresenter.getList("all",0);
         }
