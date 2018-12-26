@@ -35,7 +35,7 @@ import neet.com.youjidemo.view.PersonalDataEditorActivity;
 
 public class MeFragment extends Fragment {
     private View view;
-    private ImageView headsculpture;
+    private CircleImageView headsculpture;
     private TextView login;
     private ImageButton collection;
     private Button btnPersonalCenter,btnLove,btnFootPrint;
@@ -59,9 +59,7 @@ public class MeFragment extends Fragment {
                 @Override
                 protected void onPostExecute(Object o) {
                     User user=userDateApplication.getUser();
-                    RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
-                    options.circleCrop();
-                    Glide.with(MeFragment.this.getContext()).applyDefaultRequestOptions(options).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
+                    Glide.with(MeFragment.this.getContext()).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
                     super.onPostExecute(o);
                 }
             }.execute();
@@ -72,9 +70,7 @@ public class MeFragment extends Fragment {
         if(userDateApplication.isLogin()){
             User user=userDateApplication.getUser();
             Log.e("imt",Url.MIMAGEURL+user.getUser_touxiang_url());
-            RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
-            options.circleCrop();
-            Glide.with(MeFragment.this.getContext()).applyDefaultRequestOptions(options).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
+            Glide.with(MeFragment.this.getContext()).load(Url.MIMAGEURL+user.getUser_touxiang_url()).into(headsculpture);
             login.setText(user.getUser_name());
         }
         login.setOnClickListener(new View.OnClickListener() {

@@ -75,7 +75,7 @@ public class IndexRecommendRecycleItemAdapter extends RecyclerView.Adapter<Index
         //String url="http://cn.bing.com/az/hprichbg/rb/Dongdaemun_ZH-CN10736487148_1920x1080.jpg";
         RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
         //图片加载时的占位图片
-        //options.placeholder(R.drawable.ic_what_is_vip);
+        options.placeholder(R.drawable.image_loarding);
         //图片加载失败是占位图片
         //options.error(R.drawable.img_holder_error_style1);
         viewHolder.name.setText(list.get(i).getUsername());

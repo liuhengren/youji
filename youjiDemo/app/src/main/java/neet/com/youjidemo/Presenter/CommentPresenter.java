@@ -33,6 +33,7 @@ public class CommentPresenter {
         this.commentOption=commentOption;
     }
     public void getCommentList(final int dynamic_id){
+        commentBeanList.clear();
         new AsyncTask(){
             List<Comment> commentByDynamicId;
             @Override

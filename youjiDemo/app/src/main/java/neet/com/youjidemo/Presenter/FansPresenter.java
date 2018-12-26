@@ -24,6 +24,7 @@ public class FansPresenter {
         this.fanView = fanView;
     }
     public void getList(final int user_id){
+        list.clear();
         new AsyncTask(){
 
             @Override

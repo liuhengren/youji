@@ -267,6 +267,6 @@ public class Food_RecommendFragment extends Fragment implements IDynamicOption {
     @Override
     public void change() {
         squareItemAdapter.updateList(this.list);
-        mySwipeRefreshLayout.setEnabled(false);
+        mySwipeRefreshLayout.setRefreshing(false);
     }
 }
