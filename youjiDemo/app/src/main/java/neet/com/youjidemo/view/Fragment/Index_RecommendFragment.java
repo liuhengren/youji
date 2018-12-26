@@ -60,20 +60,13 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
         }
         dynamicOptionPresenter =new DynamicOptionPresenter(this);
         dynamicOptionPresenter.getList("all",0);
-
-        return view;
-    }
-    private BroadcastReceiver b=new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.e("广播","1");
-            dynamicOptionPresenter.getList("all",0);
-            if("MY_BROID".equals(intent.getAction())){
+        if(getActivity().getIntent().getStringExtra("flag")!=null){
+            Log.e("1","flag");
                 indexRecommendRecycleItemAdapter.reget();
                 dynamicOptionPresenter.getList("all",0);
-            }
         }
-    };
+        return view;
+    }
     private void findViews() {
         recyclerView = view.findViewById(R.id.rl_index_recommend);
         mySwipeRefreshLayout = view.findViewById(R.id.srl_downrefresh);

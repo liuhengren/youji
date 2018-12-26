@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.command.UploadUtil;
 import neet.com.youjidemo.view.ShareActivity;
 import top.zibin.luban.Luban;
@@ -89,7 +90,7 @@ public class ImagePresenter extends FragmentActivity {
                     @Override
                     public void onSuccess(final File file) {
                         Log.e("onSuccess","1");
-                                final String uploadurl = "http://10.7.89.200:8080/youjiServer/AddDynamicInmageServlet";
+                                final String uploadurl = Url.mURL+ "AddDynamicInmageServlet";
                                 Log.e("img",uploadurl);
                                 try {
                                     Log.e("fileLength",file.length()+"");
