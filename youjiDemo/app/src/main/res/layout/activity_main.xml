@@ -22,9 +22,9 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/white"/>
+            android:background="#5FE6ECEC"/>
 
         <ImageButton
             android:id="@+id/new_add"
@@ -32,7 +32,8 @@
             android:layout_height="70dp"
             android:src="@drawable/jia"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:background="#FCF75F"/>
     </RelativeLayout>
 
 </android.support.v4.app.FragmentTabHost>
