@@ -60,11 +60,13 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
         }
         dynamicOptionPresenter =new DynamicOptionPresenter(this);
 
-        dynamicOptionPresenter.getList("all",0);
-//        if(getActivity().getIntent().getStringExtra("flag")!=null){
-//                dynamicOptionPresenter.getList("all",0);
-//                Log.e("123","1531351");
-//        }
+
+        if(getActivity().getIntent().getStringExtra("flag")!=null){
+                dynamicOptionPresenter.getList("all",0);
+                Log.e("123","1531351");
+        }else{
+            dynamicOptionPresenter.getList("all",0);
+        }
         return view;
     }
     private void findViews() {
@@ -97,7 +99,6 @@ public class Index_RecommendFragment extends Fragment implements IDynamicOption 
             @Override
             public void onRefresh(){
                 isLoading = false;
-                Log.e("fresh","gr");
                 dynamicOptionPresenter.getList("all",0);
                 //  footView.setVisibility(View.GONE);
             }
