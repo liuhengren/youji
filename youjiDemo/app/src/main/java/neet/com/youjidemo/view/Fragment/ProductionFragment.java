@@ -46,6 +46,7 @@ public class ProductionFragment extends Fragment implements IDynamicOption {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         adapter = new ProductionPagerAdapter(list,this);
+
         recyclerView.setAdapter(adapter);
         userDateApplication=(UserDateApplication)getActivity().getApplication();
         user_id=getActivity().getIntent().getIntExtra("user_id",userDateApplication.getUser().getUser_id());

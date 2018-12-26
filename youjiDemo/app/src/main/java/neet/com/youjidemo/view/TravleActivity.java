@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 
@@ -35,6 +36,10 @@ public class TravleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fourpart_activity);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.tb_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);//主键按钮能否可点击
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         findViews();
         setFragment();
 
@@ -67,6 +72,17 @@ public class TravleActivity extends AppCompatActivity {
         viewPager.setAdapter(new SquareAdapter(getSupportFragmentManager(), fragmentList));
         tabLayout.setupWithViewPager(viewPager);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.tb_personal_center:
+                finish();
+                break;
+        }
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 }
 

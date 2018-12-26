@@ -15,7 +15,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import neet.com.youjidemo.customWidget.CustomVideoView;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLoginPresenter;
 import neet.com.youjidemo.R;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private UserLoginPresenter userLoginPresenter;
     private ProgressBar progressBar;
     private UserDateApplication userDateApplication;
+    private CustomVideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,18 +41,27 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         initview();
         initListener();
     }
-    private void initview(){
-        mEtUserPhone=findViewById(R.id.et_userPhone);
-        mEtPassword=findViewById(R.id.et_user_password);
-        mBtnLogin=findViewById(R.id.btn_login);
-        mTvLogup=findViewById(R.id.tv_logup);
-        mTvFindPassword=findViewById(R.id.tv_find_password);
-        mIBCancel=findViewById(R.id.btn_cancel);
-        mIbLogByqq=findViewById(R.id.btn_login_qq);
-        mIBLogbyWxChat=findViewById(R.id.btn_login_wechat);
-        userLoginPresenter=new UserLoginPresenter(LoginActivity.this);
-        progressBar=findViewById(R.id.spin_kit);
-        userDateApplication=(UserDateApplication)getApplication();
+    private void initview() {
+        mEtUserPhone = findViewById(R.id.et_userPhone);
+        mEtPassword = findViewById(R.id.et_user_password);
+        mBtnLogin = findViewById(R.id.btn_login);
+        mTvLogup = findViewById(R.id.tv_logup);
+        mTvFindPassword = findViewById(R.id.tv_find_password);
+        mIBCancel = findViewById(R.id.btn_cancel);
+        mIbLogByqq = findViewById(R.id.btn_login_qq);
+        mIBLogbyWxChat = findViewById(R.id.btn_login_wechat);
+        userLoginPresenter = new UserLoginPresenter(LoginActivity.this);
+        progressBar = findViewById(R.id.spin_kit);
+        userDateApplication = (UserDateApplication) getApplication();
+        videoView = findViewById(R.id.videoview_login);
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.wallpaper));
+        videoView.start();
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                videoView.start();
+            }
+
+        });
     }
     private void initListener(){
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -184,5 +196,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initview();
     }
 }

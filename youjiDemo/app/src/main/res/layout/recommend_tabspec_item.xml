@@ -6,15 +6,16 @@
     android:layout_marginBottom="10dp">
     <!--用户信息-->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="385dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         >
 
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_headphoto"
-            android:layout_width="41dp"
-            android:layout_height="41dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="21dp"
             android:src="@drawable/head"/>
 
@@ -26,9 +27,10 @@
             android:layout_marginLeft="13dp"
             android:layout_marginTop="21dp"
             android:text="中华熊猫饲养员"
+            android:textSize="18dp"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@+id/iv_headphoto"
-            android:maxHeight="21dp" />
+            />
 
         <!--用户的位置信息-->
         <TextView
@@ -43,51 +45,52 @@
         <!--关注按钮-->
         <Button
             android:id="@+id/btn_care"
-            android:layout_width="66dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="35dp"
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:elevation="50dp"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="14dp"
-            android:layout_toRightOf="@+id/tv_name"
+            android:layout_centerVertical="true"
             android:text="关注"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
     </RelativeLayout>
 
     <!--正文部分-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="19dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="15dp"
         android:orientation="vertical">
 
         <View
             android:id="@+id/gray_line"
             android:layout_width="match_parent"
+            android:layout_marginStart="15dp"
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
             android:background="@android:color/darker_gray" />
 
         <TextView
+            android:textColor="@android:color/black"
+            android:paddingVertical="7dp"
             android:id="@+id/tv_description"
             android:layout_width="329dp"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/gray_line"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:textAlignment="inherit"
             android:text="阿来得及foe就哦啊接发来得及发垃圾额覅绝地反击阿尔山。。。"
             android:textSize="14dp" />
 
         <ImageView
             android:id="@+id/iv_contentimage"
-            android:layout_width="316dp"
-            android:layout_height="75dp"
-
+            android:layout_width="375dp"
+            android:layout_height="125dp"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/tv_description"
-            android:layout_alignEnd="@id/tv_description"
-
            android:layout_marginTop="0dp"
-            android:layout_marginEnd="8dp"
             android:maxHeight="244dp"
             android:scaleType="fitXY"
             android:src="@drawable/scenery" />
@@ -97,15 +100,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="14dp"
-        android:layout_marginLeft="19dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@android:color/darker_gray"/>
 
     <!--评论、点赞、收藏-->
     <RelativeLayout
-        android:layout_width="325dp"
+        android:layout_gravity="center"
+        android:layout_width="375dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp">
         <!--收藏-->
         <LinearLayout

@@ -1,5 +1,6 @@
 package neet.com.youjidemo.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
+import neet.com.youjidemo.view.DetailActivity;
 import neet.com.youjidemo.view.Fragment.ProductionFragment;
 
 /**
@@ -42,7 +44,7 @@ public class ProductionPagerAdapter extends RecyclerView.Adapter <ProductionPage
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Glide.with(productionFragment).load(mDataSet.get(i).getUser_touxiang()).into(viewHolder.head);
         viewHolder.user_name.setText(mDataSet.get(i).getUsername());
         viewHolder.address.setText(mDataSet.get(i).getAddress());
@@ -51,7 +53,16 @@ public class ProductionPagerAdapter extends RecyclerView.Adapter <ProductionPage
         viewHolder.comment_num.setText(mDataSet.get(i).getComment_num()+"");
         viewHolder.time.setText(mDataSet.get(i).getTime());
         Glide.with(productionFragment).load(mDataSet.get(i).getDynamicImg_url()).into(viewHolder.img);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(productionFragment.getActivity(),DetailActivity.class);
+                intent.putExtra("dynamicDeta",mDataSet.get(i));
+                productionFragment.getActivity().startActivity(intent);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
