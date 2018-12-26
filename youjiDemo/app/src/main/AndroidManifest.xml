@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="neet.com.youjidemo">
 
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".bean.UserDateApplication"
@@ -37,10 +37,6 @@
         <activity android:name=".view.PersonalCenterActivity" />
         <activity android:name=".view.MyLoveActivity" />
         <activity android:name=".view.TravleActivity" />
-
-
-        </activity>
-
 
     </application>
 

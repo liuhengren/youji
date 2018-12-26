@@ -84,7 +84,6 @@ public class DetailViewAdapter extends RecyclerView.Adapter<DetailViewAdapter.Vi
             super(itemView);
             user_hander=itemView.findViewById(R.id.image_review_user_header);
             user_name=itemView.findViewById(R.id.tv_review_username);
-            like=itemView.findViewById(R.id.ib_review_like);
             like_num=itemView.findViewById(R.id.tv_like_count);
             comment_text=itemView.findViewById(R.id.tv_review);
             time=itemView.findViewById(R.id.time);

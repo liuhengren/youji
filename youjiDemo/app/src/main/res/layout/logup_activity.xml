@@ -118,7 +118,7 @@
             android:textSize="10dp"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-  <RelativeLayout
+    <RelativeLayout
         android:layout_width="219dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/rl_inputvrfy"
@@ -128,17 +128,17 @@
             android:layout_width="33dp"
             android:layout_height="33dp"
             android:src="@drawable/ic_login_password_on" />
-         <EditText
+        <EditText
             android:id="@+id/et_logup_password"
             android:layout_width="186dp"
             android:layout_height="38dp"
             android:hint="请输入至少六位密码"
             android:inputType="textPassword"
             android:textSize="14dp"
-             android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <Button
-        android:id="@+idn_logup"
+        android:id="@+id/btn_logup"
         android:layout_width="215dp"
         android:layout_height="38dp"
         android:layout_centerHorizontal="true"
@@ -150,24 +150,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@idn_logup"
+        android:layout_below="@+id/btn_logup"
         android:layout_marginTop="25dp">
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="55dp"
-        android:text="用户登录"
-        android:textSize="14dp" />
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:text="用户登录"
+            android:textSize="14dp" />
 
-    <TextView
-        android:id="@+id/tv_logup_find_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="55dp"
-        android:text="忘记密码"
-        android:textSize="14dp" />
+        <TextView
+            android:id="@+id/tv_logup_find_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="55dp"
+            android:text="忘记密码"
+            android:textSize="14dp" />
     </RelativeLayout>
 
     <View
@@ -184,7 +184,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="用户协议"
-        android:textColor="@android:colorack"
+        android:textColor="@android:color/black"
         android:textSize="14dp" />
 
     <com.github.ybq.android.spinkit.SpinKitView
