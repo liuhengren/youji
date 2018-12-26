@@ -8,8 +8,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-8dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_marginLeft="15dp"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_headphoto"
