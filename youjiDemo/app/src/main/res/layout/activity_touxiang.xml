@@ -52,11 +52,11 @@
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="182dp"
             android:background="#00000000"
             android:onClick="photoUpload"
             android:scaleType="fitXY"
-            android:src="@drawable/scenery" />
+            android:src="@drawable/scenery" /
 
         <TextView
             android:layout_width="wrap_content"

@@ -23,11 +23,10 @@
             android:id="@+id/tv_name"
             android:layout_width="168dp"
             android:layout_height="21dp"
-            android:layout_marginLeft="13dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="21dp"
             android:text="中华熊猫饲养员"
             android:textSize="18dp"
-            android:textColor="@android:color/black"
             android:layout_toRightOf="@+id/iv_headphoto"
             />
 
@@ -37,9 +36,10 @@
             android:layout_width="91dp"
             android:layout_height="21dp"
             android:layout_below="@+id/tv_name"
-            android:layout_marginLeft="13dp"
+            android:layout_marginLeft="23dp"
             android:text="beijing/北京"
-            android:layout_toRightOf="@+id/iv_headphoto" />
+            android:layout_toRightOf="@+id/iv_headphoto"
+            android:layout_marginTop="15dp"/>
 
         <!--关注按钮-->
         <Button
@@ -71,7 +71,6 @@
             android:background="@android:color/darker_gray" />
 
         <TextView
-            android:textColor="@android:color/black"
             android:paddingVertical="7dp"
             android:id="@+id/tv_description"
             android:layout_width="329dp"
@@ -107,7 +106,7 @@
     <RelativeLayout
         android:layout_gravity="center"
         android:layout_width="375dp"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp">
         <!--收藏-->
         <LinearLayout
@@ -120,7 +119,7 @@
                 android:id="@+id/ib_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:src="@drawable/collect"
+                android:src="@drawable/at_collection"
                 android:background="#00000000"/>
 
             <TextView
@@ -128,9 +127,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="15dp"
-                android:textColor="@color/smssdk_black"
                 android:text="收藏"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
 
@@ -144,8 +143,9 @@
             <ImageButton
                 android:id="@+id/ib_judges"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:src="@drawable/comment"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/at_comment"
                 android:background="#00000000"/>
 
             <TextView
@@ -153,9 +153,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="15dp"
-                android:textColor="@color/smssdk_black"
                 android:text="评论"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
 
@@ -170,7 +170,7 @@
                 android:id="@+id/ib_good"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:src="@drawable/like"
+                android:src="@drawable/at_good"
                 android:background="#00000000"/>
 
             <TextView
@@ -178,9 +178,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="15dp"
-                android:textColor="@color/smssdk_black"
                 android:text="点赞"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:layout_marginLeft="10dp"/>
         </LinearLayout>
     </RelativeLayout>
 
