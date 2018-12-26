@@ -325,7 +325,6 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
                         addCollection(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setCollection_num(showDynamicInAll.getCollection_num()+1);
                         showDynamicInAll.setCollection(true);
-                        sendMessage();
                     }
                     break;
                 case R.id.image_detail_comment:
@@ -346,19 +345,16 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
                         cancelLike(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
                         showDynamicInAll.setLike(false);
-                        sendMessage();
                     }else{
                         imageLike.setImageResource(R.drawable.havelike);
                         likeTheDynamic(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
                         showDynamicInAll.setLike(true);
-                        sendMessage();
                     }
 
                     break;
                 case R.id.comment_send:
                     sendComment();
-                    sendMessage();
                     break;
                 case R.id.hide_down:
                     // 隐藏评论框
@@ -438,14 +434,14 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
             Toast.makeText(getApplicationContext(), "评论失败！", Toast.LENGTH_SHORT).show();
         }
     }
-    public void sendMessage(){
-        Intent intent = new Intent("MY_BROID");
-        sendBroadcast(intent);
-    }
 
     @Override
     public void finish() {
-        sendMessage();
         super.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

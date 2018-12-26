@@ -64,6 +64,7 @@
             android:layout_height="150dp"
             android:src="@drawable/item3"
             android:layout_centerInParent="true"
+            android:id="@+id/civ_map"
             />
 
     </RelativeLayout>
