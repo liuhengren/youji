@@ -73,7 +73,8 @@
                     android:id="@+id/tv_detail_username"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="13dp"
                     android:layout_toRightOf="@+id/cImage_detail_head"
                     android:maxLength="15"
@@ -87,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_detail_username"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:layout_toRightOf="@+id/cImage_detail_head"
                     android:text="发表了："
@@ -105,14 +106,6 @@
                     android:src="@drawable/befans"
                     android:visibility="gone" />
             </RelativeLayout>
-
-            <View
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:background="@color/lightgray"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
 
             <TextView
                 android:id="@+id/tv_detail_description"
@@ -166,10 +159,6 @@
                 android:text="2018/12/24"
                 android:textSize="20dp"
                 app:layout_scrollFlags="scroll|enterAlways" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/lightgray"/>
         </android.support.design.widget.AppBarLayout>
 
 
