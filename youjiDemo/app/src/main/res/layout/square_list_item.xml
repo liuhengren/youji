@@ -75,13 +75,13 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_signatures"
-
+        android:scaleType="fitXY"
         android:src="@drawable/item"
         android:id="@+id/iv_contentimage"
         />
     <!--四.收藏，评论，点赞-->
     <RelativeLayout
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_contentimage"
         android:layout_centerHorizontal="true"
@@ -99,7 +99,9 @@
             <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:background="@color/trans"
                 android:src="@drawable/collect2"
+                android:scaleType="centerInside"
                 android:id="@+id/ib_collect"
                 />
             //被收藏数量
@@ -125,6 +127,8 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/message"
+                android:background="@color/trans"
+                android:scaleType="fitXY"
                 android:id="@+id/ib_judge"/>
             //被评论数量
             <TextView
@@ -144,12 +148,16 @@
             android:orientation="horizontal"
             android:layout_alignParentRight="true"
             android:gravity="center_vertical">
+
             //点赞图片
             <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/like"
+                android:scaleType="fitXY"
+                android:background="@color/trans"
                 android:id="@+id/ib_good"/>
+
             //被点赞数量
             <TextView
                 android:layout_width="wrap_content"

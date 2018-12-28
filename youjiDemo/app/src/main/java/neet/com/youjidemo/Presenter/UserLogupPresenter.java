@@ -1,5 +1,6 @@
 package neet.com.youjidemo.Presenter;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -9,7 +10,10 @@ import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.biz.IUserDetailEdit;
 import neet.com.youjidemo.biz.IUserLog;
+import neet.com.youjidemo.biz.UserDetailbiz;
 import neet.com.youjidemo.biz.Userbiz;
 import neet.com.youjidemo.view.IView.ILogUpView;
 
@@ -20,9 +24,11 @@ public class UserLogupPresenter {
     private static final int SUBMIT_SUCCESS = 2;//验证成功
     private static final int CHECK_FAILE = 3;//检查失败
     private Boolean logupResulet;
+    private IUserDetailEdit userDateBiz;
     public UserLogupPresenter(ILogUpView logUpView){
         this.logUpView=logUpView;
         userBiz=new Userbiz();
+        userDateBiz=new UserDetailbiz();
         initSMSSDK();
     }
     public void sendSmsCode(){
@@ -82,10 +88,9 @@ public class UserLogupPresenter {
                     logUpView.showFailedError("获取验证码成功");
                     break;
                 case SUBMIT_SUCCESS ://验证成功处理
-                    // Logger.d("验证成功");
                     Log.e("验证成功","成功");
-                    logupResulet = userBiz.logup(logUpView.getUserPhone(), logUpView.getUserPassword());
-                    checkLogupResulet();
+                    LogupAsyTask logupAsyTask = new LogupAsyTask();
+                    logupAsyTask.execute();
                     break;
                 case CHECK_FAILE://服务器返回错误处理
                     Throwable data = (Throwable) msg.obj;
@@ -110,9 +115,27 @@ public class UserLogupPresenter {
             logUpView.fishTimedown();
             logUpView.clearUser();
             logUpView.toMainActivity();
+
         }
         else{
             logUpView.showFailedError("失败了,你可以再试一试");
+        }
+    }
+    private class LogupAsyTask extends AsyncTask{
+        private boolean tmp;
+        private User user;
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            tmp=userBiz.logup(logUpView.getUserPhone(), logUpView.getUserPassword());
+            user=userDateBiz.getUserDetail(logUpView.getUserPhone());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            logupResulet=tmp;
+            checkLogupResulet();
+            logUpView.setUserApp(user);
         }
     }
 }

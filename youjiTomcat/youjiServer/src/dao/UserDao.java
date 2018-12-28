@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,17 +16,33 @@ import jdk.nashorn.api.scripting.JSObject;
 
 public class UserDao {
 
-	// 1.Í¨¹ıÊÖ»úºÅ×¢²á
+	// 1.Í¨æ³¨å†Œ
 	public static boolean logup(String userphone, String password) {
 		Connection connection = DataBase.getConnection();
 
-		String sql = "insert into user(user_phone,user_password)values(?,?)";
+		String sql = "insert into user("
+				+ "user_phone,user_password,user_name,user_birthday,"
+				+ "user_funnum,user_collection_num,"
+				+ "user_touxiang_url,user_background_url,"
+				+ "user_introduction)values(?,?,?,?,?,?,?,?,?)";
+		String instruction="è¿˜æ²¡æƒ³å¥½æ€ä¹ˆä»‹ç»è‡ªå·±";
+		String touxingUrl="upload/a.jpg";
+		String backgroundUrl="upload/b.jpg";
+		 Timestamp timestamp=new Timestamp(System.currentTimeMillis());
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
 			prepareStatement.setString(1, userphone);
 			prepareStatement.setString(2, password);
+			prepareStatement.setString(3, userphone);
+			prepareStatement.setTimestamp(4, timestamp);
+			prepareStatement.setInt(5, 0);
+			prepareStatement.setInt(6, 0);
+			prepareStatement.setString(7, touxingUrl);
+			prepareStatement.setString(8, backgroundUrl);
+			prepareStatement.setString(9, instruction);
+			
 			prepareStatement.execute();
-			System.out.println("ÊÖ»úºÅ×¢²á³É¹¦£¡");
+			
 			connection.close();
 			return true;
 		} catch (SQLException e) {
@@ -35,16 +52,16 @@ public class UserDao {
 		return false;
 	}
 
-	// 2.Í¨¹ıÊÖ»úºÅµÇÂ¼
+	// 2.Í¨ç™»å½•
 	public static boolean login(String userphone, String password) {
 		
 		Connection connection = DataBase.getConnection();
-		String sql = "select * from user where user_phone=?,user_password=?";
+		String sql = "select * from user where user_phone=? and user_password=?";
 		boolean judge=false;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(0, userphone);
-			preparedStatement.setString(1, password);
+			preparedStatement.setString(1, userphone);
+			preparedStatement.setString(2, password);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
 				judge=true;
@@ -54,26 +71,33 @@ public class UserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("ÊÖ»úºÅµÇÂ¼£º"+judge);
+		System.out.println("ï¿½Ö»ï¿½ï¿½Åµï¿½Â¼ï¿½ï¿½"+judge);
 		return judge;
 
 	}
 
-	// 3.Í¨¹ıÓÃ»§Id»ñµÃÓÃ»§
-	public static User getUserById(int user_id) {
+	// 3.Í¨ï¿½ï¿½ï¿½Ã»ï¿½Idï¿½ï¿½ï¿½ï¿½Ã»ï¿½
+	public static JSONObject getUserById(int user_id) {
 		Connection connection = DataBase.getConnection();
 		String sql = "select * from user where user_id=?";
-		User user = null;
+		JSONObject object=new JSONObject();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, user_id);
 			ResultSet result = preparedStatement.executeQuery();
 			while (result.next()) {
-				user = new User(result.getInt("user_id"), result.getString("user_phone"), "",
-						result.getString("user_name"), result.getString("user_sex"), result.getDate("user_birthday"),
-						result.getString("user_address"), result.getInt("user_funnum"),
-						result.getInt("user_collection_num"), result.getString("user_touxiang_url"),
-						result.getString("user_background_url"), result.getString("user_introduction"));
+				object.put("user_id", result.getInt("user_id"));
+				object.put("user_phone", result.getString("user_phone")); 
+				object.put("user_name",result.getString("user_name")); 
+				object.put("user_sex", result.getString("user_sex")); 
+				object.put("user_birthday", result.getDate("user_birthday")); 
+				object.put("user_address", result.getString("user_address")); 
+				object.put("user_funnum", result.getInt("user_funnum")); 
+				object.put("user_collection_num", result.getInt("user_collection_num")); 
+				object.put("user_touxiang_url", result.getString("user_touxiang_url"));
+				object.put("user_background_url", result.getString("user_background_url")); 
+				object.put("user_introduction", result.getString("user_introduction"));
+				object.put("user_password", ""); 
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -81,10 +105,10 @@ public class UserDao {
 			e.printStackTrace();
 		}
 
-		return user;
+		return object;
 	}
 	
-	//4.ĞŞ¸ÄÓÃ»§Ãû
+	//4.ï¿½Ş¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 	  public static boolean updateUsername(int user_id,String username) {
 		  Connection connection=DataBase.getConnection();
 			String sql="update user set user_name=? where user_id=?";
@@ -95,7 +119,7 @@ public class UserDao {
 				preparedStatement.setInt(2, user_id);
 				preparedStatement.executeUpdate();
 				connection.close();
-				System.out.println("ĞŞ¸ÄÓÃ»§Ãû³É¹¦£¡");
+				System.out.println("ï¿½Ş¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -104,11 +128,11 @@ public class UserDao {
 			return false;
 	  }
 	  
-	  //5.ĞŞ¸ÄÍ·Ïñ
+	  //5.ï¿½Ş¸ï¿½Í·ï¿½ï¿½
 	  public static void updateUsertouxiang(int user_id,String img){
 		 
 	    }
-	    //6.ĞŞ¸ÄĞÔ±ğ
+	    //6.ï¿½Ş¸ï¿½ï¿½Ô±ï¿½
 	  public static boolean updateUserSex(int user_id,String userSex)
 	    {
 		  Connection connection=DataBase.getConnection();
@@ -120,7 +144,7 @@ public class UserDao {
 				preparedStatement.setInt(2, user_id);
 				preparedStatement.executeUpdate();
 				connection.close();
-				System.out.println("ĞŞ¸ÄĞÔ±ğ³É¹¦£¡");
+				System.out.println("ï¿½Ş¸ï¿½ï¿½Ô±ï¿½É¹ï¿½ï¿½ï¿½");
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -128,7 +152,7 @@ public class UserDao {
 			}  
 			return false;
 	    }
-	    //7.ĞŞ¸Ä¼ò½é
+	    //7.ï¿½Ş¸Ä¼ï¿½ï¿½
 	  public  static boolean updateUserIntroduction(int user_id,String userIntroduction)
 	    {
 		  Connection connection=DataBase.getConnection();
@@ -141,7 +165,7 @@ public class UserDao {
 				preparedStatement.setInt(2, user_id);
 				preparedStatement.executeUpdate();
 				connection.close();
-				System.out.println("ĞŞ¸Ä¼ò½é³É¹¦£¡");
+				System.out.println("ï¿½Ş¸Ä¼ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -149,7 +173,7 @@ public class UserDao {
 			}  
 			return false;
 	    }
-	    //8.ĞŞ¸ÄÉúÈÕ
+	    //8.ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	  public static boolean updateUserBirthday(int user_id,Date userBirthday)
 	    {
 
@@ -163,7 +187,7 @@ public class UserDao {
 				preparedStatement.setInt(2, user_id);
 				preparedStatement.executeUpdate();
 				connection.close();
-				System.out.println("ĞŞ¸ÄÉúÈÕ³É¹¦£¡");
+				System.out.println("ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½Õ³É¹ï¿½ï¿½ï¿½");
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -171,7 +195,7 @@ public class UserDao {
 			}  
 			return false;
 	    }
-	    //9.ĞŞ¸Ä¼ÒÏç
+	    //9.æ›´æ–°å®¶ä¹¡
 	  public static boolean updateUserHometown(int user_id,String userHometown) 
 	    {
 		  Connection connection=DataBase.getConnection();
@@ -184,7 +208,7 @@ public class UserDao {
 				preparedStatement.setInt(2, user_id);
 				preparedStatement.executeUpdate();
 				connection.close();
-				System.out.println("ĞŞ¸Ä¼ÒÏç³É¹¦£¡");
+				System.out.println("ï¿½Ş¸Ä¼ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -192,7 +216,7 @@ public class UserDao {
 			}  
 			return false;
 	    }
-	  //10.Í¨¹ıÓÃ»§ÊÖ»úºÅ²éÑ¯ÓÃ»§ËùÓĞĞÅÏ¢
+	  //10.Í¨è·å¾—ç”¨æˆ·çš„è¯¦ç»†ä¿¡æ¯
 	  public static JSONObject getUserDetail(String userphone)
 	  {
 		  Connection connection = DataBase.getConnection();
@@ -217,8 +241,6 @@ public class UserDao {
 					object.put("user_background_url", result.getString("user_background_url")); 
 					object.put("user_introduction", result.getString("user_introduction"));
 					object.put("user_password", ""); 
-							
-					
 				}
 				connection.close();
 			} catch (SQLException e) {
@@ -229,6 +251,25 @@ public class UserDao {
 			return object;
 		  
 	  }
-
+	//11.æ›´æ–°èƒŒæ™¯
+	  public static boolean updateUserBackground(int user_id,String img) {
+		  Connection connection=DataBase.getConnection();
+			String sql="update user set user_background_url=? where user_id=?";
+			try {
+				PreparedStatement preparedStatement=connection.prepareStatement(sql);
+				
+				preparedStatement.setString(1, img);
+				preparedStatement.setInt(2, user_id);
+				preparedStatement.executeUpdate();
+				connection.close();
+				System.out.println("ï¿½Ş¸Ä±ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+			return false;
+	  }
+	  
 
 }

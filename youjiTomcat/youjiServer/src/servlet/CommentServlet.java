@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dao.CommentDao;
@@ -36,30 +37,30 @@ public class CommentServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		PrintWriter out=response.getWriter();
-		//1.��ȡ�ö�̬����������
+		//1.根据动态Id获得所有的评论
 		if("comment_ByDynamicId".equals(message)) {
 			String id=request.getParameter("dynamic_id");
 			int dynamic_id=Integer.parseInt(id);
-			List list=CommentDao.getCommentByDynamicId(dynamic_id);
-			JSONObject object=new JSONObject();
-					object.put("list", list);
-			out.write(object.toString());
+			JSONArray array=CommentDao.getCommentByDynamicId(dynamic_id);
+			out.write(array.toString());
 		}
-//		 //2.����һ������
-//		else if("comment_addComment".equals(message)) {
-//			CommentDao.addComment(comment);
-//			
-//			
-//		}
-		 //3.�������۵���+1
+	
+		 //2.给用户的评论点赞+1
 		else if("comment_likeComment".equals(message)) {
-			
 			String id=request.getParameter("id");
 			int comment_id=Integer.parseInt(id);
-			boolean result = CommentDao.likeComment(comment_id);
+			boolean result = CommentDao.addOnelikeToComment(comment_id);
 			JSONObject object = new  JSONObject();
 			object.put("res", result);
 			out.write(object.toString());
+		}
+		//3.通过动态ID获得所有的评论
+		else if ("comment_getCommentByDynamicID".equals(message)) {
+			String id=request.getParameter("dynamic_id");
+			int dynamic_id=Integer.parseInt(id);
+			JSONArray array = CommentDao.getCommentByUserId(dynamic_id);
+		
+			out.write(array.toString());
 		}
 	}
 

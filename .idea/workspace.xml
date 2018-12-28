@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9452ef6-5804-4878-a003-e1c79ad8e944" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/youjiTomcat/youjiServer/src/servlet/PartitionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/youjiTomcat/youjiServer/src/servlet/PartitionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -62,6 +62,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
@@ -203,6 +204,12 @@
           <select />
         </subPane>
       </pane>
+=======
+      <pane id="AndroidView" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+>>>>>>> master
     </panes>
   </component>
   <component name="PropertiesComponent">

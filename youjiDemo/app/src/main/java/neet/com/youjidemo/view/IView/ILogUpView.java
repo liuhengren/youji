@@ -2,6 +2,8 @@ package neet.com.youjidemo.view.IView;
 
 import android.widget.Button;
 
+import neet.com.youjidemo.bean.User;
+
 public interface ILogUpView {
     String getUserPhone();
     String getRequestCode();
@@ -15,4 +17,5 @@ public interface ILogUpView {
     void toMainActivity();
     void showTimedown();
     void fishTimedown();
+    void setUserApp(User user);
 }

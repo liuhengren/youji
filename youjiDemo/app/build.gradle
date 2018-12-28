@@ -9,6 +9,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    sourceSets{
+
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
     }
     buildTypes {
         release {
@@ -16,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 MobSDK {
     appKey "28de74ee0cf2a"

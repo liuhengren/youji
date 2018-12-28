@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.view.FoodActivity;
 import neet.com.youjidemo.view.TravleActivity;
@@ -23,6 +24,7 @@ import neet.com.youjidemo.view.TravleActivity;
 public class Recommend_Fragment extends Fragment {
     private ImageButton btnImageFood, btnImageTravel, btnImagePlay, btnImageHappy;
     private View view;
+    private CircleImageView circleImageView;
 
 
     @Nullable
@@ -67,7 +69,15 @@ public class Recommend_Fragment extends Fragment {
 
             }
         });
+        /*中间图点击事件*/
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return view;
+
 
     }
 
@@ -76,6 +86,7 @@ public class Recommend_Fragment extends Fragment {
         btnImageTravel = view.findViewById(R.id.image_btn_travel);
         btnImagePlay = view.findViewById(R.id.image_btn_play);
         btnImageHappy = view.findViewById(R.id.image_btn_note);
+        circleImageView=view.findViewById(R.id.civ_map);
     }
 
 }

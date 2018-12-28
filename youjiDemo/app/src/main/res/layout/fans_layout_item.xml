@@ -34,7 +34,7 @@
             android:layout_marginTop="2dp"
             android:id="@+id/tv_attention_sign"
             android:layout_width="150dp"
-            android:layout_height="25dp"
+            android:layout_height="20dp"
             android:layout_below="@+id/tv_attention_username"
             android:layout_toRightOf="@+id/cImage_attention_head"
             android:text="一壶清酒，一身尘灰" />

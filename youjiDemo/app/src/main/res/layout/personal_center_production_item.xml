@@ -57,19 +57,35 @@
         android:textColor="@color/smssdk_black" />
 
     <ImageView
+<<<<<<< HEAD
         android:layout_marginLeft="8dp"
         android:layout_width="390dp"
         android:layout_height="94dp"
         android:layout_gravity="center_horizontal"
+=======
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/dynamic_img"
+        android:layout_width="390dp"
+        android:layout_height="94dp"
+        android:layout_marginLeft="8dp"
+>>>>>>> master
         android:layout_marginTop="10dp"
         android:scaleType="fitXY"
         android:src="@drawable/scenery" />
 
     <RelativeLayout
+<<<<<<< HEAD
         android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp">
+=======
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+>>>>>>> master
 
         <!--收藏-->
         <ImageButton
@@ -83,6 +99,10 @@
         <TextView
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/iv_collection"
+<<<<<<< HEAD
+=======
+            android:id="@+id/collect_num"
+>>>>>>> master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -102,6 +122,10 @@
         <TextView
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/iv_comment"
+<<<<<<< HEAD
+=======
+            android:id="@+id/comment_num"
+>>>>>>> master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -111,6 +135,7 @@
         <!--发表时间-->
         <TextView
             android:layout_alignParentRight="true"
+<<<<<<< HEAD
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2018/11/25" />
@@ -118,4 +143,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="5dp"></LinearLayout>
+=======
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018/11/25" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"></LinearLayout>
+    </RelativeLayout>
+>>>>>>> master
 </LinearLayout>

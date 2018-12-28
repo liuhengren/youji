@@ -14,6 +14,24 @@ public class User {
     private String user_background_url;
     private String user_introduction;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                ", user_psssword='" + user_psssword + '\'' +
+                ", user_sex='" + user_sex + '\'' +
+                ", user_birthday='" + user_birthday + '\'' +
+                ", user_address='" + user_address + '\'' +
+                ", user_funnum=" + user_funnum +
+                ", user_collection_num=" + user_collection_num +
+                ", user_touxiang_url='" + user_touxiang_url + '\'' +
+                ", user_background_url='" + user_background_url + '\'' +
+                ", user_introduction='" + user_introduction + '\'' +
+                '}';
+    }
+
     public int getUser_id() {
         return user_id;
     }

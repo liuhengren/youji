@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import neet.com.youjidemo.customWidget.CustomVideoView;
 
 import com.mob.MobSDK;
 
@@ -23,6 +26,8 @@ import cn.smssdk.SMSSDK;
 import neet.com.youjidemo.MainActivity;
 import neet.com.youjidemo.Presenter.UserLogupPresenter;
 import neet.com.youjidemo.R;
+import neet.com.youjidemo.bean.User;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.ILogUpView;
 
 public class LogupActivity extends AppCompatActivity implements ILogUpView {
@@ -32,6 +37,8 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
     private UserLogupPresenter userLogupPresenter;
     private ProgressBar progressBar;
     private ImageButton lpIbcancel;
+    private UserDateApplication userDateApplication;
+    private CustomVideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,7 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
         MobSDK.init(this);
         initview();
         initClickListenrt();
+        userDateApplication=(UserDateApplication)getApplication();
     }
 
     private void initview(){
@@ -52,6 +60,15 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
         userLogupPresenter=new UserLogupPresenter(LogupActivity.this);
         progressBar=findViewById(R.id.logup_spin_kit);
         lpIbcancel=findViewById(R.id.btn_logup_cancel);
+        videoView =  findViewById(R.id.videoview);
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.wallpaper));
+        videoView.start();
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                videoView.start();
+            }
+        });
     }
     private void initClickListenrt(){
         mBtgetCode.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +154,12 @@ public class LogupActivity extends AppCompatActivity implements ILogUpView {
     @Override
     public void fishTimedown() {
         mTimer.cancel();
+    }
+
+    @Override
+    public void setUserApp(User user) {
+        userDateApplication.setUser(user);
+        userDateApplication.setLogin(true);
     }
 
     /**

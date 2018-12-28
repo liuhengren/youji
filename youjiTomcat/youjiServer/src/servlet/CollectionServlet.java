@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dao.CollectionDao;
@@ -36,17 +37,17 @@ public class CollectionServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String message=request.getParameter("message");
 		PrintWriter out=response.getWriter();
-		// 1.Í¨¹ıÓÃ»§Id»ñµÃ¸ÃÓÃ»§µÄËùÓĞÊÕ²Ø
+		// 1.Í¨ï¿½ï¿½ï¿½Ã»ï¿½Idï¿½ï¿½Ã¸ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½
 		if("collection_ByUserId".equals(message)) {
 			
 			String id=request.getParameter("user_id");
 			int user_id=Integer.parseInt(id);
-			List list=CollectionDao.getCollectionByUserId(user_id);
-			JSONObject object=new JSONObject();
-			out.write(object.toString());
-			System.out.println("ÊÕ²ØÊı£º"+list.size());
+			JSONArray array=CollectionDao.getCollectionByUserId(user_id);
+			
+			out.write(array.toString());
+			
 		}
-		// 2.Ìí¼ÓÒ»ÌõÊÕ²Ø
+		// 2.ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Õ²ï¿½
 		else if("collection_addCollection".equals(message)) {
 			
 			String id=request.getParameter("user_id");
@@ -60,11 +61,16 @@ public class CollectionServlet extends HttpServlet {
 			out.write(object.toString());
 		
 		}
-		//3.É¾³ıÒ»ÌõÊÕ²Ø
+		//3.åˆ é™¤æ”¶è—
 		else if("collection_deleteCollection".equals(message)) {
-			String fid=request.getParameter("id");
-			int collection_id=Integer.parseInt(fid);
-			boolean result = CollectionDao.deleteCollection(collection_id);
+			
+			String id=request.getParameter("user_id");
+			String fid=request.getParameter("dynamic_id");
+			
+			int user_id=Integer.parseInt(id);
+			int dynamic_id=Integer.parseInt(fid);
+			
+			boolean result = CollectionDao.deleteCollection(user_id, dynamic_id);
 			JSONObject object = new  JSONObject();
 			object.put("res", result);
 			out.write(object.toString());

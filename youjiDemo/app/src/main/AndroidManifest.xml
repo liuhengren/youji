@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="neet.com.youjidemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".bean.UserDateApplication"
         android:allowBackup="true"
@@ -10,12 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.PersonalDataEditorActivity"></activity>
+
+        <activity android:name=".view.PersonalDataEditorActivity" />
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.LogupActivity"></activity>
-        <activity android:name=".view.ShareActivity"></activity>
-        <activity android:name=".view.OthersActivity"></activity>
-        <activity android:name=".view.DetailActivity"></activity>
+        <activity android:name=".view.LogupActivity" />
+        <activity android:name=".view.ShareActivity" />
+        <activity android:name=".view.OthersActivity" />
+        <activity android:name=".view.DetailActivity"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="MY_BROID"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.FoodActivity"></activity>
-        <activity android:name=".view.PersonalCenterActivity"></activity>
-        <activity android:name=".view.MyLoveActivity"></activity>
-        <activity android:name=".view.TravleActivity"></activity>
+        <activity android:name=".view.FoodActivity" />
+        <activity android:name=".view.PersonalCenterActivity" />
+        <activity android:name=".view.MyLoveActivity" />
+        <activity android:name=".view.TravleActivity" />
+
     </application>
+
 </manifest>
