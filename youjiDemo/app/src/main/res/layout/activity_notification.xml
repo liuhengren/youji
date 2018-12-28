@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity"
+    android:background="@color/view_background">
+    <RelativeLayout
+        android:elevation="10dp"
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="111dp">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Notification"
+            android:textSize="30dp"
+            android:textColor="@android:color/black"/>
+        <View
+            android:layout_width="180dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/black"/>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="75dp"
+            app:tabBackground="@color/view_background"
+            app:tabTextAppearance="@android:style/TextAppearance.Holo.Medium"
+            app:tabSelectedTextColor="@android:color/holo_orange_light"
+            app:tabTextColor="@color/colorPrimary"
+            app:tabIndicatorColor="@android:color/holo_orange_light" />
+    </RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_title"/>
+
+</RelativeLayout>

@@ -37,6 +37,7 @@
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:background="@color/trans"
+                android:visibility="gone"
                 android:src="@drawable/collect" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
@@ -81,7 +82,7 @@
 
                 <!--发表时间-->
                 <TextView
-                    android:id="@+id/tv_detail_time"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_detail_username"
@@ -132,6 +133,7 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 />
             <TextView
+                android:id="@+id/tv_detail_time"
                 android:layout_width="375dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"
@@ -167,6 +169,7 @@
             android:layout_weight="1"
             android:scaleType="center"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:src="@drawable/collect" />
 
         <View
@@ -197,6 +200,7 @@
             android:layout_margin="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/like"
+            android:visibility="gone"
             android:layout_gravity="center"/>
     </LinearLayout>
 

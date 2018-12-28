@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="375dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="20dp"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_marginLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <!--作品头像-->
         <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginLeft="10dp"
             android:id="@+id/image_production_head"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
             android:src="@drawable/head" />
 
         <!--用户名-->
         <TextView
+            android:textSize="15sp"
             android:id="@+id/tv_productions_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="18dp"
             android:layout_toRightOf="@+id/image_production_head"
             android:text="一个胖子"
             android:textColor="@color/personal_username"
@@ -34,11 +33,13 @@
 
         <!--发表了-->
         <TextView
+            android:textSize="13sp"
+            android:layout_marginTop="3dp"
             android:id="@+id/tv_publish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_productions_username"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="3dp"
             android:layout_toRightOf="@+id/image_production_head"
             android:text="主公上马新不爽" />
 
@@ -47,40 +48,44 @@
     <!--发表内容-->
     <TextView
         android:id="@+id/tv_productions_description"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:maxLines="30"
         android:text="测试测试测试测试"
         android:textColor="@color/smssdk_black" />
 
     <ImageView
+
         android:id="@+id/dynamic_img"
-        android:layout_width="336dp"
+        android:layout_width="390dp"
         android:layout_height="94dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
         android:scaleType="fitXY"
         android:src="@drawable/scenery" />
 
-    <LinearLayout
-        android:layout_width="336dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="40dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        >
 
         <!--收藏-->
         <ImageButton
+            android:id="@+id/iv_collection"
             android:background="@color/trans"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:scaleType="centerInside"
             android:src="@drawable/havecollect" />
 
         <!--收藏数量-->
         <TextView
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/iv_collection"
             android:id="@+id/collect_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,14 +95,17 @@
 
         <!--评论-->
         <ImageButton
+            android:id="@+id/iv_comment"
             android:background="@color/trans"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="120dp"
             android:src="@drawable/message" />
 
         <!--评论数量-->
         <TextView
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/iv_comment"
             android:id="@+id/comment_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,10 +115,14 @@
 
         <!--发表时间-->
         <TextView
+            android:layout_alignParentRight="true"
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2018/11/25"
-            android:layout_marginLeft="147dp"/>
-    </LinearLayout>
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"></LinearLayout>
 </LinearLayout>

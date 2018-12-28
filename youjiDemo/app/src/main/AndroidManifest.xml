@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-
     <application
         android:name=".bean.UserDateApplication"
         android:allowBackup="true"
@@ -40,7 +38,6 @@
         <activity android:name=".view.PersonalCenterActivity" />
         <activity android:name=".view.MyLoveActivity" />
         <activity android:name=".view.TravleActivity" />
-
 
     </application>
 

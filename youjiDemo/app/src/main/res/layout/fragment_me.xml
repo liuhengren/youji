@@ -41,13 +41,13 @@
        <Button
            android:id="@+id/btn_footprint"
            android:layout_marginLeft="256dp"
-           android:layout_marginTop="165dp"
+           android:layout_marginTop="156dp"
            android:background="#00000000"
            android:drawableLeft="@drawable/me_foot_print"
            android:text="足迹"
-           android:layout_marginBottom="15dp"
+           android:layout_marginBottom="5dp"
            android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+           android:layout_height="100dp" />
     </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"

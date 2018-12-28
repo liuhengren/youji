@@ -1,4 +1,4 @@
-package neet.com.youjidemo;
+ package neet.com.youjidemo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -106,44 +106,56 @@ public class MainActivity extends AppCompatActivity {
                 Set<String> keys = tabSpecMap.keySet();
                 for (String s:keys){
                     if (tabId.equals("tab1")){
-                        imageViewtab1.setImageResource(R.drawable.fivestar_choosed);
-                        imageViewtab2.setImageResource(R.drawable.home);
+
+                        imageViewtab1.setImageResource(R.drawable.home2);
+                        imageViewtab2.setImageResource(R.drawable.community);
+                        //imageViewtab3.setImageResource(R.drawable.add);
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
-                        textViewtab1.setTextColor(getResources().getColor(android.R.color.black));
+                        textViewtab1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                         textViewtab2.setTextColor(getResources().getColor(R.color.lightgray));
-                        textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
-                        textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
+                        textViewtab4.setTextColor(getResources().getColor(R.color.lightgray));
+                        textViewtab5.setTextColor(getResources().getColor(R.color.lightgray));
                     }
                     if (tabId.equals("tab2")){
-                        imageViewtab1.setImageResource(R.drawable.fivestar);
-                        imageViewtab2.setImageResource(R.drawable.home_choosed);
-                        imageViewtab4.setImageResource(R.drawable.message);
+
+                        imageViewtab1.setImageResource(R.drawable.home);
+                        imageViewtab2.setImageResource(R.drawable.community2);
+                        //imageViewtab3.setImageResource(R.drawable.add);
+					    imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
-                        textViewtab2.setTextColor(getResources().getColor(R.color.smssdk_black));
+                        textViewtab2.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                         textViewtab4.setTextColor(getResources().getColor(R.color.lightgray));
                         textViewtab5.setTextColor(getResources().getColor(R.color.lightgray));
                     }
                     if (tabId.equals("tab4")){
-                        imageViewtab1.setImageResource(R.drawable.fivestar);
-                        imageViewtab2.setImageResource(R.drawable.home);
-                        imageViewtab4.setImageResource(R.drawable.message_choosed);
+
+
+                        imageViewtab1.setImageResource(R.drawable.home);
+                        imageViewtab2.setImageResource(R.drawable.community);
+                        //imageViewtab3.setImageResource(R.drawable.add);
+                        imageViewtab4.setImageResource(R.drawable.message2);
+
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
                         textViewtab2.setTextColor(getResources().getColor(R.color.lightgray));
-                        textViewtab4.setTextColor(getResources().getColor(R.color.smssdk_black));
+                        textViewtab4.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                         textViewtab5.setTextColor(getResources().getColor(R.color.lightgray));
                     }
                     if (tabId.equals("tab5")){
-                        imageViewtab1.setImageResource(R.drawable.fivestar);
-                        imageViewtab2.setImageResource(R.drawable.home);
+
+
+                        imageViewtab1.setImageResource(R.drawable.home);
+                        imageViewtab2.setImageResource(R.drawable.community);
+                        //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me_choosed);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
                         textViewtab2.setTextColor(getResources().getColor(R.color.lightgray));
                         textViewtab4.setTextColor(getResources().getColor(R.color.lightgray));
-                        textViewtab5.setTextColor(getResources().getColor(R.color.smssdk_black));
+                        textViewtab5.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                     }
                 }
             }
@@ -155,13 +167,13 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
         //初始化选项卡
         TabHost.TabSpec tabSpec1 = fragmentTabHost.newTabSpec("tab1")
-                .setIndicator(getTabSpec(R.drawable.fivestar,"首页","tab1"));
+                .setIndicator(getTabSpec(R.drawable.home,"首页","tab1"));
         //添加选项卡
         fragmentTabHost.addTab(tabSpec1,Index_Fragment.class,null);
 
         //初始化选项卡
         TabHost.TabSpec tabSpec2 = fragmentTabHost.newTabSpec("tab2")
-                .setIndicator(getTabSpec(R.drawable.home,"社区","tab2"));
+                .setIndicator(getTabSpec(R.drawable.community,"社区","tab2"));
         //添加选项卡(后来补充)
         fragmentTabHost.addTab(tabSpec2,Recommend_Fragment.class,null);
 
@@ -190,9 +202,9 @@ public class MainActivity extends AppCompatActivity {
         //设置默认选中的选项卡
         fragmentTabHost.setCurrentTab(0);
         ImageView imageView = imageViewMap.get("tab1");
-        imageView.setImageResource(R.drawable.fivestar_choosed);
+        imageView.setImageResource(R.drawable.home2);
         final TextView textView = tagNameMap.get("tab1");
-        textView.setTextColor(getResources().getColor(android.R.color.black));
+        textView.setTextColor(getResources().getColor(android.R.color.holo_green_light));
     }
 
 }

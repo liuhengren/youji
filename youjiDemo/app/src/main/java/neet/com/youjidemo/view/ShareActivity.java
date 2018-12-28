@@ -157,6 +157,7 @@ public class ShareActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void toManinActivity() {
         Intent intent = new Intent(ShareActivity.this, MainActivity.class);
+        intent.putExtra("flag","flush");
         startActivity(intent);
     }
 }

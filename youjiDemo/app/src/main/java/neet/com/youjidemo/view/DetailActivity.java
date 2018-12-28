@@ -67,7 +67,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
 
     private ImageView imageCollect; //底部收藏图片
 
-    private ImageView imageComment; //底部评论图片
+    private TextView imageComment; //底部评论图片
 
     private ImageView imageLike; //底部点赞图片
 
@@ -108,7 +108,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
     private Button comment_send;
 
     private TextView comment_content;
-
+    private TextView local;
     private Toolbar toolbar;
     private CommentPresenter commentPresenter;
     private UserDateApplication userDateApplication;
@@ -172,6 +172,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
         comment_content.setOnClickListener(mClickListener);
         comment_send.setOnClickListener(mClickListener);
         hide_down.setOnClickListener(mClickListener);
+
     }
 
     /***初始化控件*/
@@ -199,6 +200,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
         hide_down = findViewById(R.id.hide_down);
         comment_send = findViewById(R.id.comment_send);
         comment_content = findViewById(R.id.comment_content);
+        local=findViewById(R.id.tv_detail_local);
     }
 
     @Override
@@ -325,7 +327,6 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
                         addCollection(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setCollection_num(showDynamicInAll.getCollection_num()+1);
                         showDynamicInAll.setCollection(true);
-                        sendMessage();
                     }
                     break;
                 case R.id.image_detail_comment:
@@ -346,19 +347,16 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
                         cancelLike(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
                         showDynamicInAll.setLike(false);
-                        sendMessage();
                     }else{
                         imageLike.setImageResource(R.drawable.havelike);
                         likeTheDynamic(showDynamicInAll.getDyanmic_id());
                         showDynamicInAll.setLike_num(showDynamicInAll.getLike_num()-1);
                         showDynamicInAll.setLike(true);
-                        sendMessage();
                     }
 
                     break;
                 case R.id.comment_send:
                     sendComment();
-                    sendMessage();
                     break;
                 case R.id.hide_down:
                     // 隐藏评论框
@@ -391,6 +389,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
         Glide.with(DetailActivity.this).load(showDynamicInAll.getUser_touxiang()).into(btnImageHead);
         tvDetaDes.setText(showDynamicInAll.getDynamic_text());
         tvDetaTime.setText(showDynamicInAll.getTime());
+        local.setText(showDynamicInAll.getAddress());
         Glide.with(this).load(showDynamicInAll.getDynamicImg_url()).into(iVDetaPic);
         if(!showDynamicInAll.isCollection()){
             imageCollect.setImageResource(R.drawable.collect);
@@ -438,14 +437,14 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
             Toast.makeText(getApplicationContext(), "评论失败！", Toast.LENGTH_SHORT).show();
         }
     }
-    public void sendMessage(){
-        Intent intent = new Intent("MY_BROID");
-        sendBroadcast(intent);
-    }
 
     @Override
     public void finish() {
-        sendMessage();
         super.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

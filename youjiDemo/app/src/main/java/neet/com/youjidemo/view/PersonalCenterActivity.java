@@ -65,7 +65,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//显示返回图标
         touxiang=findViewById(R.id.image_personal_center_head);
         user_name=findViewById(R.id.PCAname);
-        background=findViewById(R.id.user_background);
+        //background=findViewById(R.id.user_background);
         ViewPager mViewPager = findViewById(R.id.viewpager);
         pc_btn=findViewById(R.id.pc_btn);
         List<Fragment> list = new ArrayList();
@@ -118,7 +118,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
 * */
     private  void setDownRefresh(){
         swipeRefreshLayout.setProgressViewOffset(true, 50, 200);
-        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
         swipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -145,7 +145,7 @@ public class PersonalCenterActivity extends AppCompatActivity implements IPerson
         if(user.getUser_background_url().length()>20){
             RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
             options.centerCrop();
-            Glide.with(this).applyDefaultRequestOptions(options).load(user.getUser_background_url()).into(background);
+            //Glide.with(this).applyDefaultRequestOptions(options).load(user.getUser_background_url()).into(background);
         }
     }
 

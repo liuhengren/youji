@@ -1,6 +1,14 @@
 package neet.com.youjidemo.view.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -123,4 +131,5 @@ public class MeFragment extends Fragment {
         Intent intent = new Intent(getContext(), PersonalDataEditorActivity.class);
         startActivity(intent);
     }
+
 }
