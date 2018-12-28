@@ -41,6 +41,7 @@ public class DynamicOptionPresenter {
         this.index_recommendFragment=index_recommendFragment;
     }
     public void getList(String tag,int id){
+        showDynamicInAllList.clear();
         Tag tag1 = new Tag(tag, id);
         DynamicTask dynamicTask = new DynamicTask();
         dynamicTask.execute(tag1);

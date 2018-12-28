@@ -17,11 +17,13 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.Fragment.Index_Fragment;
 import neet.com.youjidemo.view.Fragment.MeFragment;
 import neet.com.youjidemo.view.Fragment.MessageFragment;
@@ -37,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTabHost fragmentTabHost;
     private DisplayMetrics dm;
     private ImageButton newAdd;
+    private UserDateApplication userDateApplication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        userDateApplication=(UserDateApplication)getApplication();
         fragmentTabHost = findViewById(android.R.id.tabhost);
         fragmentTabHost.setup(this,getSupportFragmentManager(),android.R.id.tabcontent);
 
@@ -51,8 +54,13 @@ public class MainActivity extends AppCompatActivity {
         newAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(userDateApplication.isLogin()){
                 Intent intent = new Intent(MainActivity.this,ShareActivity.class);
                 startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"请登录后操作",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         //初始化z
@@ -109,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home2);
                         imageViewtab2.setImageResource(R.drawable.community);
+
+                        //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(android.R.color.holo_green_light));
@@ -120,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community2);
+
+                        //imageViewtab3.setImageResource(R.drawable.add);
+
 					    imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));
@@ -132,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community);
+
+                        //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message2);
 
                         imageViewtab5.setImageResource(R.drawable.me);
@@ -145,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
 
                         imageViewtab1.setImageResource(R.drawable.home);
                         imageViewtab2.setImageResource(R.drawable.community);
+
+                        //imageViewtab3.setImageResource(R.drawable.add);
+
                         imageViewtab4.setImageResource(R.drawable.message);
                         imageViewtab5.setImageResource(R.drawable.me_choosed);
                         textViewtab1.setTextColor(getResources().getColor(R.color.lightgray));

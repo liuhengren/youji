@@ -25,9 +25,7 @@
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/image_review_user_header"
             android:maxWidth="40dp"
-            android:text="保温杯里泡枸杞"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:text="保温杯里泡枸杞" />
 
         <TextView
             android:id="@+id/tv_like_count"
@@ -37,6 +35,17 @@
             android:layout_alignBottom="@+id/tv_review_username"
             android:layout_toRightOf="@+id/tv_review_username"
             android:text="2018/12/27" />
+
+
+
+
+        <TextView
+            android:id="@+id/tv_like_count"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/tv_review_username"
+            android:layout_alignParentRight="true"
+            android:text=" " />
 
         <TextView
             android:id="@+id/tv_review"

@@ -41,6 +41,7 @@ import neet.com.youjidemo.adapter.DetailViewAdapter;
 import neet.com.youjidemo.bean.ShowCommentBean;
 import neet.com.youjidemo.bean.ShowDynamicInAll;
 import neet.com.youjidemo.bean.Comment;
+import neet.com.youjidemo.bean.Url;
 import neet.com.youjidemo.bean.UserDateApplication;
 import neet.com.youjidemo.view.IView.ICommentOption;
 import neet.com.youjidemo.view.IView.IDynamicOption;
@@ -108,7 +109,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
     private Button comment_send;
 
     private TextView comment_content;
-
+    private TextView local;
     private Toolbar toolbar;
     private CommentPresenter commentPresenter;
     private UserDateApplication userDateApplication;
@@ -172,6 +173,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
         comment_content.setOnClickListener(mClickListener);
         comment_send.setOnClickListener(mClickListener);
         hide_down.setOnClickListener(mClickListener);
+
     }
 
     /***初始化控件*/
@@ -199,6 +201,7 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
         hide_down = findViewById(R.id.hide_down);
         comment_send = findViewById(R.id.comment_send);
         comment_content = findViewById(R.id.comment_content);
+        local=findViewById(R.id.tv_detail_local);
     }
 
     @Override
@@ -384,9 +387,10 @@ public class DetailActivity extends AppCompatActivity implements ICommentOption 
     private void setDynamic(ShowDynamicInAll showDynamicInAll){
         tvUserName.setText(showDynamicInAll.getUsername());
         RequestOptions options=RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE);
-        Glide.with(DetailActivity.this).load(showDynamicInAll.getUser_touxiang()).into(btnImageHead);
+        Glide.with(DetailActivity.this).load(Url.MIMAGEURL+showDynamicInAll.getUser_touxiang()).into(btnImageHead);
         tvDetaDes.setText(showDynamicInAll.getDynamic_text());
         tvDetaTime.setText(showDynamicInAll.getTime());
+        local.setText(showDynamicInAll.getAddress());
         Glide.with(this).load(showDynamicInAll.getDynamicImg_url()).into(iVDetaPic);
         if(!showDynamicInAll.isCollection()){
             imageCollect.setImageResource(R.drawable.collect);

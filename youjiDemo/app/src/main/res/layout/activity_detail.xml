@@ -84,7 +84,7 @@
 
                 <!--发表时间-->
                 <TextView
-                    android:id="@+id/tv_detail_time"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_detail_username"
@@ -120,7 +120,10 @@
             <ImageView
                 android:id="@+id/image_detail_picture"
                 android:layout_width="375dp"
-                android:layout_height="195dp"
+                android:layout_height="175dp"
+                android:src="@drawable/scenery"
+                android:scaleType="fitXY"
+
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
                 android:src="@drawable/scenery"
@@ -151,6 +154,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_detail_time"
                 android:layout_width="375dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_horizontal"

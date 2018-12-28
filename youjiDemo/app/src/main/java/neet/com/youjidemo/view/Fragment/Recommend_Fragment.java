@@ -45,38 +45,31 @@ public class Recommend_Fragment extends Fragment {
             }
         });
 
-//        /**右上角图的点击事件*/
-//        btnImageTravel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        /**右上角图的点击事件*/
+        btnImageTravel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                Intent intent = new Intent(getContext(), TravleActivity.class);
 //                startActivity(intent);
-//            }
-//        });
-//
-//        /**左下角图的点击事件*/
-//        btnImagePlay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//        /**右下角图的点击事件*/
-//        btnImageHappy.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-        /*中间图点击事件*/
-//        circleImageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent=new Intent(getContext(),ShowMapActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+            }
+        });
+
+        /**左下角图的点击事件*/
+        btnImagePlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /**右下角图的点击事件*/
+        btnImageHappy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
 
 

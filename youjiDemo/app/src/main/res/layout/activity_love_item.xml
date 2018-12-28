@@ -7,10 +7,10 @@
         android:id="@+id/rl_content"
         android:layout_width="match_parent"
         android:layout_height="220dp">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="20dp"
             android:layout_marginLeft="13dp"
-            android:id="@+id/iv_sculpture"
+            android:id="@+id/iv_sculptures"
             android:src="@drawable/module_message_at"
             android:layout_width="50dp"
             android:layout_height="50dp" />
@@ -18,7 +18,7 @@
             android:id="@+id/tv_name"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/iv_sculpture"
+            android:layout_toRightOf="@+id/iv_sculptures"
             android:textStyle="bold"
             android:textSize="15sp"
             android:text="我嘞个去"
@@ -28,7 +28,7 @@
             android:layout_marginLeft="5dp"
             android:textSize="15sp"
             android:layout_marginTop="50dp"
-            android:layout_toRightOf="@+id/iv_sculpture"
+            android:layout_toRightOf="@+id/iv_sculptures"
             android:text="分享："
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

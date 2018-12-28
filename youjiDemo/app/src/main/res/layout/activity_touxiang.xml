@@ -56,7 +56,7 @@
             android:background="#00000000"
             android:onClick="photoUpload"
             android:scaleType="fitXY"
-            android:src="@drawable/scenery" />
+            android:src="@drawable/scenery" /
 
         <TextView
             android:layout_width="wrap_content"

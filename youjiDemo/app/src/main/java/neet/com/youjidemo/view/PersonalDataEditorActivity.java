@@ -2,6 +2,7 @@ package neet.com.youjidemo.view;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -42,6 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import neet.com.youjidemo.Presenter.ImagePresenter;
 import neet.com.youjidemo.Presenter.PerDateEditPresenter;
 import neet.com.youjidemo.R;
 import neet.com.youjidemo.bean.JsonBean;
@@ -122,6 +124,13 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
         });
         mEtIntroduction.setOnFocusChangeListener(mOnFocusChangeListener);
         mEtName.setOnFocusChangeListener(mOnFocusChangeListener);
+        mLltouxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonalDataEditorActivity.this, TouxiangActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     /**
 
@@ -133,6 +142,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
             public void onTimeSelect(Date date, View v) {
                 perDateEditPresenter.update("birthday",getTime(date));
                 setUserBirthday(getTime(date));
+                mTvBirthday.setText(getTime(date));
             }
         }).build();
         mTvBirthday.setOnClickListener(new View.OnClickListener() {
@@ -347,7 +357,7 @@ public class PersonalDataEditorActivity extends AppCompatActivity implements IPe
 
     @Override
     public void setUserBirthday(String userBirthday) {
-        mTvBirthday.setText(userBirthday);
+        //mTvBirthday.setText(userBirthday);
     }
 
     @Override
