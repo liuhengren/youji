@@ -54,10 +54,10 @@ public class NotificationMessageFragment extends Fragment {
     private  void setList(){
         //at人的ListView
         List<AtMessage> atOnes = new ArrayList<>();
-        AtMessage atMessage1 = new AtMessage(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
-        AtMessage atMessage2 = new AtMessage(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
-        AtMessage atMessage3 = new AtMessage(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
-        AtMessage atMessage4 = new AtMessage(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
+        AtMessage atMessage1 = new AtMessage(R.drawable.head, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
+        AtMessage atMessage2 = new AtMessage(R.drawable.head, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
+        AtMessage atMessage3 = new AtMessage(R.drawable.head, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
+        AtMessage atMessage4 = new AtMessage(R.drawable.head, "任时光匆匆流去我只在乎你", "11-13 11:00", "我嘞个去", "你这该死的温柔，让我心在痛泪在留。");
         atOnes.add(atMessage1);
         atOnes.add(atMessage2);
         atOnes.add(atMessage3);
@@ -80,17 +80,17 @@ public class NotificationMessageFragment extends Fragment {
         commentListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getContext(),DetailActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
 
         //收藏的listview
         List<GoodMessage> goodOnes = new ArrayList<>();
-        GoodMessage goodMessage1 = new GoodMessage(R.drawable.module_message_at, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
-        GoodMessage goodMessage2 = new GoodMessage(R.drawable.module_message_at, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
-        GoodMessage goodMessage3 = new GoodMessage(R.drawable.module_message_at, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
-        GoodMessage goodMessage4 = new GoodMessage(R.drawable.module_message_at, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
+        GoodMessage goodMessage1 = new GoodMessage(R.drawable.head_show_one, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
+        GoodMessage goodMessage2 = new GoodMessage(R.drawable.head_show_two, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
+        GoodMessage goodMessage3 = new GoodMessage(R.drawable.head_show_three, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
+        GoodMessage goodMessage4 = new GoodMessage(R.drawable.head_show_four, "Arthur", R.drawable.collection_picture, "我们之间的距离好像忽远又忽进。");
         goodOnes.add(goodMessage1);
         goodOnes.add(goodMessage2);
         goodOnes.add(goodMessage3);
@@ -103,8 +103,8 @@ public class NotificationMessageFragment extends Fragment {
         goodListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getContext(),DetailActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
 

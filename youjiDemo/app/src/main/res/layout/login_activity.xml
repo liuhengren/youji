@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:background="@drawable/login_background"
     >
 
-    <neet.com.youjidemo.customWidget.CustomVideoView
-        android:id="@+id/videoview_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"

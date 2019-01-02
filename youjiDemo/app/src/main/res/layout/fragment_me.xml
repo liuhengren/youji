@@ -11,7 +11,7 @@
             android:id="@+id/iv_head_sculpture"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/module_message_at"
+            android:src="@drawable/headsculpture"
             android:layout_width="66dp"
             android:layout_height="66dp" />
         <TextView
@@ -38,16 +38,16 @@
             android:layout_centerHorizontal="true"
             android:layout_width="1dp"
             android:layout_height="35dp"/>
-       <Button
-           android:id="@+id/btn_footprint"
-           android:layout_marginLeft="256dp"
-           android:layout_marginTop="165dp"
-           android:background="#00000000"
-           android:drawableLeft="@drawable/me_foot_print"
-           android:text="足迹"
-           android:layout_marginBottom="15dp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_footprint"
+            android:layout_marginLeft="256dp"
+            android:layout_marginTop="156dp"
+            android:background="#00000000"
+            android:drawableLeft="@drawable/me_foot_print"
+            android:text="足迹"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp" />
     </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"

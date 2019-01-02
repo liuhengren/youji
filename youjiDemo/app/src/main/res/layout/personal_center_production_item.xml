@@ -101,7 +101,7 @@
             android:layout_height="24dp"
             android:layout_marginLeft="120dp"
             android:scaleType="fitXY"
-            android:src="@drawable/message" />
+            android:src="@drawable/at_comment" />
 
         <!--评论数量-->
         <TextView
