@@ -54,11 +54,11 @@ public class CommentServlet extends HttpServlet {
 			object.put("res", result);
 			out.write(object.toString());
 		}
-		//3.通过动态ID获得所有的评论
-		else if ("comment_getCommentByDynamicID".equals(message)) {
-			String id=request.getParameter("dynamic_id");
-			int dynamic_id=Integer.parseInt(id);
-			JSONArray array = CommentDao.getCommentByUserId(dynamic_id);
+		//3.通过用户ID获得所有的评论
+		else if ("comment_getCommentByUserID".equals(message)) {
+			String id=request.getParameter("user_id");
+			int user_id=Integer.parseInt(id);
+			JSONArray array = CommentDao.getCommentByUserId(user_id);
 		
 			out.write(array.toString());
 		}

@@ -14,7 +14,6 @@ import java.util.TimeZone;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
 import bean.Dynamic;
 
 public class DynamicDao {
@@ -25,7 +24,7 @@ public class DynamicDao {
 		
 		Connection connection=DataBase.getConnection();
 		JSONArray array=new JSONArray();
-		String sql="select * from dynamic";
+		String sql="select * from dynamic order by dynamic_id desc";
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			ResultSet result=preparedStatement.executeQuery();
@@ -58,10 +57,12 @@ public class DynamicDao {
 	
 	//2.插入动态内容（文字）
 		public static int addDynamic(Dynamic dynamic) {
-	Connection connection=DataBase.getConnection();
+			Connection connection=DataBase.getConnection();
 			
 			int id=0;
 			Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+		
+			System.out.println(timestamp);
 			String sql="insert into dynamic("
 					+ "dynamic_user_id,dynamic_text,"
 					+ "dynamic_collection_num,dynamic_like_num,dynamic_comment_num,"
@@ -79,11 +80,18 @@ public class DynamicDao {
 				prepareStatement.setTimestamp(7, timestamp);
 				prepareStatement.setInt(8, dynamic.getPartition_id());
 				prepareStatement.executeUpdate();
-				
-			ResultSet keys=prepareStatement.getGeneratedKeys();
-			keys.next();
-			id=keys.getInt(1);
+				ResultSet keys = prepareStatement.getGeneratedKeys();
+				keys.next();
+				id=keys.getInt(1);
+//				PreparedStatement prepareStatement2 = connection.prepareStatement(sql2);
+//				prepareStatement2.setTimestamp(1, timestamp);
+//				 prepareStatement2.executeQuery();
+//				 ResultSet result=prepareStatement2.executeQuery();
+//					while(result.next()) {
+//						id=result.getInt("dynamic_id");
+//					}
 				connection.close();
+				
 				return id;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -96,7 +104,7 @@ public class DynamicDao {
 		//3.插入动态图片
 		public  static boolean insertDynamicImage(int id,String img) {
 			Connection connection=DataBase.getConnection();
-			String sql="insert into dynamic(dynamic_img) values(?) where dynamic_id=?";
+			String sql="update dynamic set dynamic_img =?  where dynamic_id=?";
 			PreparedStatement prepareStatement;
 			try {
 				prepareStatement = connection.prepareStatement(sql);

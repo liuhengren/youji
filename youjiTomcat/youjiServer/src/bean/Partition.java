@@ -2,14 +2,8 @@
 package bean;
 
 public class Partition {
-	
-	
 	private int id;
 	private String text;
-	
-	
-	
-	
 	public Partition(int id, String text) {
 		super();
 		this.id = id;

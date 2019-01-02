@@ -36,9 +36,7 @@ public class AddDynamicImageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-
+		doPost(request, response);
 	}
 
 	/**
@@ -49,8 +47,8 @@ public class AddDynamicImageServlet extends HttpServlet {
 		String sid=request.getHeader("id");
 		int id=Integer.parseInt(sid);
 		InputStream input = request.getInputStream();
-		double name=Math.random()*1000;
-		String path="upload\\"name+".jpg";
+		double patha=Math.random()*1000;
+		String path="upload\\"+patha+".jpg";
 		File file = new File(request.getSession().getServletContext().getRealPath("/")+path);
 		if (!file.exists()) {
 			file.createNewFile();
@@ -70,8 +68,8 @@ public class AddDynamicImageServlet extends HttpServlet {
 		ServletOutputStream outputStream = response.getOutputStream();
 		outputStream.write("1".getBytes());
 		outputStream.close();
-		DynamicDao.insertDynamicImage(id, name+".jpg");
-		doGet(request, response);
+		DynamicDao.insertDynamicImage(id, patha+".jpg");
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package bean;
 
-
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Dynamic {
@@ -27,18 +27,6 @@ public class Dynamic {
 		this.user_id = user_id;
 		this.text = text;
 		this.img = img;
-		this.collection_num = collection_num;
-		this.like_num = like_num;
-		this.comment_num = comment_num;
-		this.address = address;
-		this.time = time;
-		this.partition_id = partition_id;
-	}
-	public Dynamic(int user_id, String text, int collection_num, int like_num, int comment_num, String address,
-			Timestamp time, int partition_id) {
-		super();
-		this.user_id = user_id;
-		this.text = text;
 		this.collection_num = collection_num;
 		this.like_num = like_num;
 		this.comment_num = comment_num;

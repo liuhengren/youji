@@ -69,6 +69,7 @@ public class AddDynamicText extends HttpServlet {
 		int id = DynamicDao.addDynamic(dynamic);
 		JSONObject object = new JSONObject();
 		object.put("id", id);
+		System.out.println(id);
 		out.append(object.toString());
 		doGet(request, response);
 	}

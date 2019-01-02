@@ -26,8 +26,8 @@ public class UserDao {
 				+ "user_touxiang_url,user_background_url,"
 				+ "user_introduction)values(?,?,?,?,?,?,?,?,?)";
 		String instruction="还没想好怎么介绍自己";
-		String touxingUrl="upload/a.jpg";
-		String backgroundUrl="upload/b.jpg";
+		String touxingUrl="a.jpg";
+		String backgroundUrl="b.jpg";
 		 Timestamp timestamp=new Timestamp(System.currentTimeMillis());
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
@@ -129,8 +129,22 @@ public class UserDao {
 	  }
 	  
 	  //5.�޸�ͷ��
-	  public static void updateUsertouxiang(int user_id,String img){
-		 
+	  public static boolean updateUsertouxiang(int user_id,String img){
+		  Connection connection=DataBase.getConnection();
+			String sql="update user set user_touxiang_url = ? where user_id=?";
+			PreparedStatement prepareStatement;
+			try {
+				prepareStatement = connection.prepareStatement(sql);
+				prepareStatement.setString(1, img);
+				prepareStatement.setInt(2, user_id);
+				 prepareStatement.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return false;
 	    }
 	    //6.�޸��Ա�
 	  public static boolean updateUserSex(int user_id,String userSex)

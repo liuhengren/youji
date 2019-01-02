@@ -8,18 +8,18 @@ import java.sql.SQLException;
 public class DataBase {
 	
 	/*
-	 * »ñÈ¡¶ÔÊý¾Ý¿âµÄÁ¬½Ó
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static Connection getConnection() {
 		Connection conn=null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			//Class.forName("com.mysql.jdbc.Driver")
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/youjidatabase?"
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:2333/youjidatabase?"
 					+ "serverTimezone=GMT"
 					+ "&useUnicode=true"
 					+ "&characterEncoding=utf-8"
-					+ "&useSSL=false","root","");
+					+ "&useSSL=false","root","959783");
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

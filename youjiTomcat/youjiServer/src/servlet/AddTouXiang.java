@@ -35,7 +35,7 @@ public class AddTouXiang extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class AddTouXiang extends HttpServlet {
 		outputStream.write("1".getBytes());
 		outputStream.close();
 		UserDao.updateUsertouxiang(id, name+".jpg");
-		doGet(request, response);
+		
 	}
 
 }
