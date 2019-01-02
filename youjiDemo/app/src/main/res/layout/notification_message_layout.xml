@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,7 +22,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="17dp"
-                    android:src="@drawable/att" />
+                    android:src="@drawable/at" />
 
                 <TextView
                     android:id="@+id/tv_at_text"
@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="16dp"
-                    android:text="@的消息"
+                    android:text=" @的消息"
                     android:textSize="16sp" />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="17dp"
-                    android:src="@drawable/judee" />
+                    android:src="@drawable/message_comment" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="17dp"
-                    android:src="@drawable/goodd" />
+                    android:src="@drawable/good" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -142,5 +142,5 @@
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
         </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </LinearLayout>

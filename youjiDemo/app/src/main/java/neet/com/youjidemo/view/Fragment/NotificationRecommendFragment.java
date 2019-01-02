@@ -52,10 +52,10 @@ public class NotificationRecommendFragment extends Fragment {
     private void setListView() {
         //推送的ListView
         List<Message> messages = new ArrayList<>();
-        Message message1 = new Message(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
-        Message message2 = new Message(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
-        Message message3 = new Message(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
-        Message message4 = new Message(R.drawable.module_message_at, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
+        Message message1 = new Message(R.drawable.head_show_three, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
+        Message message2 = new Message(R.drawable.head_show_three, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
+        Message message3 = new Message(R.drawable.head_show_two, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
+        Message message4 = new Message(R.drawable.head_show_one, "任时光匆匆流去我只在乎你", "世界这么大你想去看看。", "11/27 8:00");
         messages.add(message1);
         messages.add(message2);
         messages.add(message3);
@@ -66,8 +66,8 @@ public class NotificationRecommendFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getContext(),DetailActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getContext(),DetailActivity.class);
+                startActivity(intent);
             }
         });
 

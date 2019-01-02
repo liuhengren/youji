@@ -20,7 +20,7 @@
                 android:id="@+id/rl_banner"
                 android:layout_width="match_parent"
                 android:layout_height="204dp"
-                android:background="@drawable/banner"
+                android:background="@drawable/food_cc"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.9">
                 <!--//1.返回图标-->
@@ -43,7 +43,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="美食"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="28dp" />
                 <!--//3.“唯美食与爱不可辜负”字体-->
 
@@ -54,7 +54,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:text="唯美食与爱不可辜负"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="16dp"
                     android:id="@+id/tv_instruction"/>
             </RelativeLayout>

@@ -65,14 +65,14 @@ public class TouxiangActivity extends AppCompatActivity implements View.OnClickL
             case R.id.select_image:
                 /*** 这个是调用android内置的intent，来过滤图片文件 ，同时也可以过滤其他的 */
 
-                ImagePresenter.selectImage(TouxiangActivity.this);
+                //ImagePresenter.selectImage(TouxiangActivity.this);
                 TouxiangPresenter.selectImage(TouxiangActivity.this);
                 break;
             case R.id.btn_share_upload:
                 if (img_src == null) {
                     Toast.makeText(TouxiangActivity.this, "请选择图片！", Toast.LENGTH_LONG).show();
                 } else {
-                    sharePresenter.snedText();
+                    //sharePresenter.snedText();
                     new AsyncTask(){
 
                         @Override

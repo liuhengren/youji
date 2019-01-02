@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private UserLoginPresenter userLoginPresenter;
     private ProgressBar progressBar;
     private UserDateApplication userDateApplication;
-    private CustomVideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +52,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         userLoginPresenter = new UserLoginPresenter(LoginActivity.this);
         progressBar = findViewById(R.id.spin_kit);
         userDateApplication = (UserDateApplication) getApplication();
-        videoView = findViewById(R.id.videoview_login);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.wallpaper));
-        videoView.start();
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                videoView.start();
-            }
 
-        });
     }
     private void initListener(){
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +189,5 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initview();
-    }
+
 }

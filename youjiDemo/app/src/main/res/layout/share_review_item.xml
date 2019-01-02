@@ -7,14 +7,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_review_user_header"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/head" />
 
         <TextView
@@ -25,11 +26,18 @@
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/image_review_user_header"
             android:maxWidth="40dp"
-            android:textSize="18dp"
             android:text="保温杯里泡枸杞"
-            android:textColor="@android:color/black" />
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignBottom="@+id/tv_review_username"
+            android:layout_toRightOf="@+id/tv_review_username"
+            android:text="2018/12/27" />
+
 
 
 
@@ -46,24 +54,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_review_user_header"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="20dp"
-            android:textSize="15dp"
             android:layout_toRightOf="@+id/image_review_user_header"
-            android:layout_marginBottom="15dp"
             android:text="卡路里卡路里李卡路里，燃烧我的卡路里" />
 
 
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="81dp"
-            android:layout_height="18dp"
-            android:layout_toRightOf="@+id/tv_review_username"
-            android:text="2018/05/06"
-            android:layout_alignBottom="@id/tv_review_username"
-            android:layout_marginStart="25dp"
-            android:textColor="@android:color/black" />
     </RelativeLayout>
 
     <View
